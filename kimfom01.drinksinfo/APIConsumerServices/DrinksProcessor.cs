@@ -16,8 +16,6 @@ public class DrinksProcessor
 
     public async Task<List<Category>> GetCategoriesListAsync()
     {
-        ApiClientHelper.InitializeClient();
-
         List<Category> categoryList = new List<Category>();
 
         using (var stream = await _client.GetStreamAsync("https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list"))
@@ -32,8 +30,6 @@ public class DrinksProcessor
 
     public async Task<List<Drink>> GetDrinksListAsync(string category)
     {
-        ApiClientHelper.InitializeClient();
-
         List<Drink> drinkList = new List<Drink>();
 
         using (var stream = await _client.GetStreamAsync($"https://www.thecocktaildb.com/api/json/v1/1/filter.php?c={category}"))
@@ -48,8 +44,6 @@ public class DrinksProcessor
 
     public async Task<List<DrinkDetail>> GetDrinksDetailsAsync(string id)
     {
-        ApiClientHelper.InitializeClient();
-
         List<DrinkDetail> drinkDetailList = new List<DrinkDetail>();
 
         using (var stream = await _client.GetStreamAsync($"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={id}"))
