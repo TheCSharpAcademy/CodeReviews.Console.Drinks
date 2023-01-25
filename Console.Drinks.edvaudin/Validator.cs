@@ -38,6 +38,6 @@ internal class Validator
 
     internal static bool IsValidOption(string? option)
     {
-        throw new NotImplementedException();
+        return option == "0" || option == "1";
     }
 }
