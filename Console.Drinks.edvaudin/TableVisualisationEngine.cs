@@ -13,7 +13,10 @@ internal class TableVisualisationEngine
             tableName = string.Empty;
         }
         Console.WriteLine("\n\n");
-        ConsoleTableBuilder.From(tableData).WithColumn(tableName).WithFormat(ConsoleTableBuilderFormat.Alternative).ExportAndWriteLine(TableAligntment.Center);
+        ConsoleTableBuilder.From(tableData)
+                           .WithColumn(tableName)
+                           .WithFormat(ConsoleTableBuilderFormat.Alternative)
+                           .ExportAndWriteLine(TableAligntment.Center);
         Console.Write("\n\n");
     }
 }
