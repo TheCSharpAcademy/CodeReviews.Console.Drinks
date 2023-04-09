@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Net.Http.Json;
+
 
 namespace Drinks.jwhitt3r
 {
@@ -13,34 +8,55 @@ namespace Drinks.jwhitt3r
     /// </summary>
     class RetrieveData
     {
+        /// <summary>
+        /// The API URL that is provided by the creator
+        /// </summary>
         public string ApiUrl { get; set; }
-        public List<Program.DataRecord> items;
+        /// <summary>
+        /// The object structure that is used to place the returned data
+        /// </summary>
+        public Rootobject items;
+
+        /// <summary>
+        /// Default constructor for the creation of the object.
+        /// </summary>
+        /// <param name="apiUrl">The API URL that is defined by the creator of the object</param>
         public RetrieveData(string apiUrl) 
         {
             this.ApiUrl = apiUrl;
-            this.items = new List<Program.DataRecord>();
-            
+            this.items = new Rootobject();
         }
 
-        public async Task<List<Program.DataRecord>> ProcessApiDataAsync(HttpClient client, string id = "")
+        /// <summary>
+        /// ProcessAPIDataAsync deserializes the data returned from the API and places it into a 
+        /// list constructed of the data that is defined by the user
+        /// </summary>
+        /// <param name="client">The HTTP Client that is defined by GetDataAsync</param>
+        /// <param name="id">The ID of the object if provided by the user, this is empty by default</param>
+        /// <returns>A task is returned to ensure that the program waits for the data to be returned</returns>
+        public async Task<Rootobject> ProcessApiDataAsync(HttpClient client, string id = "")
         {
-            await using Stream stream =
-                await client.GetStreamAsync($"{this.ApiUrl}/{id}");
-            var items =
-                await JsonSerializer.DeserializeAsync<List<Program.DataRecord>>(stream);
-            return items ?? new();
+            Console.WriteLine("We are at the Deserialization");
+            return await client.GetFromJsonAsync<Rootobject>($"{this.ApiUrl}/{id}") ?? new();
         }
 
+        /// <summary>
+        /// Creates a connection with the appropriate headers to be used to send to the server
+        /// </summary>
+        /// <param name="userInput">an ID reference used for identifying an item from the API. It is null by default</param>
+        /// <returns>Returns an Async task to ensure that the program waits for the data to be returned</returns>
         public async Task GetDataAsync(string userInput = "")
         {
             using HttpClient client = new();
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
-
+            Console.WriteLine("We are at the HTTP Client");
             this.items = await ProcessApiDataAsync(client, userInput);
         }
 
+        /// <summary>
+        /// Allows the user search by ID for an object that is returned by the API
+        /// </summary>
+        /// <param name="userInput">The users ID input</param>
+        /// <returns>A task is returned to ensure that the program waits for the data to be returned</returns>
         internal async Task SearchByID(string userInput)
         {
             await GetDataAsync(userInput);
