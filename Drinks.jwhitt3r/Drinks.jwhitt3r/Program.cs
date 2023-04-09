@@ -24,21 +24,7 @@ namespace Drinks.jwhitt3r {
                 Console.WriteLine($"Name: {item.DataTwo}");
                 Console.WriteLine($"Tagline: {item.DataThree}");
                 var dat = item.DataFour.ToList();
-                foreach(var d in dat)
-                {
-                    Console.WriteLine($"{d.Key}");
-                    if(d.Value.GetType() == typeof(JsonArray))
-                    {
-                        foreach(var e in d.Value.AsArray())
-                        {
-                            Console.Write($"\t{e["name"]} - {e["amount"]["value"]} in {e["amount"]["unit"]}\n");
-                        }
-                        
-                    } else
-                    {
-                        Console.Write($"\t{d.Value}");
-                    }
-                }
+
                 Console.WriteLine();
             }
 
@@ -49,7 +35,6 @@ namespace Drinks.jwhitt3r {
             {
                 Console.WriteLine($"ID: {item.DataOne}");
                 Console.WriteLine($"Name: {item.DataTwo}");
-                Console.WriteLine($"Tagline: {item.DataThree}");
                 var dat = item.DataFour.ToList();
                 foreach (var d in dat)
                 {
