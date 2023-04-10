@@ -15,7 +15,7 @@ namespace Drinks.jwhitt3r
         /// <summary>
         /// The object structure that is used to place the returned data
         /// </summary>
-        public Rootobject items;
+        public List<Class1> items;
 
         /// <summary>
         /// Default constructor for the creation of the object.
@@ -24,7 +24,7 @@ namespace Drinks.jwhitt3r
         public RetrieveData(string apiUrl) 
         {
             this.ApiUrl = apiUrl;
-            this.items = new Rootobject();
+            this.items = new List<Class1>();
         }
 
         /// <summary>
@@ -34,10 +34,10 @@ namespace Drinks.jwhitt3r
         /// <param name="client">The HTTP Client that is defined by GetDataAsync</param>
         /// <param name="id">The ID of the object if provided by the user, this is empty by default</param>
         /// <returns>A task is returned to ensure that the program waits for the data to be returned</returns>
-        public async Task<Rootobject> ProcessApiDataAsync(HttpClient client, string id = "")
+        public async Task<List<Class1>> ProcessApiDataAsync(HttpClient client, string id = "")
         {
             Console.WriteLine("We are at the Deserialization");
-            return await client.GetFromJsonAsync<Rootobject>($"{this.ApiUrl}/{id}") ?? new();
+            return await client.GetFromJsonAsync<List<Class1>>($"{this.ApiUrl}/{id}") ?? new();
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ public class Class1
     public Boil_Volume? boil_volume { get; set; }
     public Method? method { get; set; }
     public Ingredients? ingredients { get; set; }
-    public string[]? food_pairing { get; set; }
+    public string[] food_pairing { get; set; }
     public string? brewers_tips { get; set; }
     public string? contributed_by { get; set; }
 }
