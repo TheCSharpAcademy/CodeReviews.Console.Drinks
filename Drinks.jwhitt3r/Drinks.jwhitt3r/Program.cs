@@ -22,7 +22,7 @@
 
                     foreach (var item in myData.items)
                     {
-                        Console.WriteLine($"{item.id} - {item.name}");
+                        Console.WriteLine($"{item.Id} - {item.Name}");
                     }
                 }
 
@@ -35,20 +35,20 @@
                     foreach (var item in myData.items)
                     {
 
-                        Console.WriteLine($"Beer Name: {item.name}");
-                        Console.WriteLine($"Beer Tagline: {item.tagline}");
-                        Console.WriteLine($"Beer Description: {item.description}");
-                        Console.WriteLine($"\t Yeast \n\t\t -> {item.ingredients?.yeast}");
+                        Console.WriteLine($"Beer Name: {item.Name}");
+                        Console.WriteLine($"Beer Tagline: {item.Tagline}");
+                        Console.WriteLine($"Beer Description: {item.Description}");
+                        Console.WriteLine($"\t Yeast \n\t\t -> {item.Ingredients?.Yeast}");
                         Console.WriteLine("\t Malts");
-                        for (int i = 0; i < item.ingredients.malt.Length; i++)
+                        for (int i = 0; i < item.Ingredients?.Malt?.Length; i++)
                         {
                             
-                            Console.WriteLine($"\t\t -> {item.ingredients.malt[i].name} - {item.ingredients.malt[i].amount} ");
+                            Console.WriteLine($"\t\t -> {item.Ingredients.Malt[i].Name} - {item.Ingredients.Malt[i].Amount} ");
                         }
                         Console.WriteLine("\t Hops");
-                        for (int i = 0; i < item.ingredients.hops.Length; i++)
+                        for (int i = 0; i < item.Ingredients?.Hops?.Length; i++)
                         {
-                            Console.WriteLine($"\t\t -> {item.ingredients.hops[i].name} - {item.ingredients.hops[i].amount?.value} {item.ingredients.hops[i].amount?.unit} ");
+                            Console.WriteLine($"\t\t -> {item.Ingredients.Hops[i].Name} - {item.Ingredients.Hops[i].Amount?.Value} {item.Ingredients.Hops[i].Amount?.Unit} ");
                         }
                     }
 

@@ -6,100 +6,100 @@ public class Rootobject
 
 public class Class1
 {
-    public int? id { get; set; }
-    public string? name { get; set; }
-    public string? tagline { get; set; }
-    public string? first_brewed { get; set; }
-    public string? description { get; set; }
-    public string? image_url { get; set; }
-    public float? abv { get; set; }
-    public float? ibu { get; set; }
-    public int? target_fg { get; set; }
-    public float? target_og { get; set; }
-    public int? ebc { get; set; }
-    public float? srm { get; set; }
-    public float? ph { get; set; }
-    public float? attenuation_level { get; set; }
-    public Volume? volume { get; set; }
-    public Boil_Volume? boil_volume { get; set; }
-    public Method? method { get; set; }
-    public Ingredients? ingredients { get; set; }
-    public string[] food_pairing { get; set; }
-    public string? brewers_tips { get; set; }
-    public string? contributed_by { get; set; }
+    public int? Id { get; set; }
+    public string? Name { get; set; }
+    public string? Tagline { get; set; }
+    public string? FirstBrewed { get; set; }
+    public string? Description { get; set; }
+    public string? ImageUrl { get; set; }
+    public float? Abv { get; set; }
+    public float? Ibu { get; set; }
+    public int? TargetFg { get; set; }
+    public float? TargetOg { get; set; }
+    public int? Ebc { get; set; }
+    public float? Srm { get; set; }
+    public float? Ph { get; set; }
+    public float? AttenuationLevel { get; set; }
+    public Volume? Volume { get; set; }
+    public BoilVolume? BoilVolume { get; set; }
+    public Method? Method { get; set; }
+    public Ingredients? Ingredients { get; set; }
+    public string[]? FoodPairing { get; set; }
+    public string? BrewersTips { get; set; }
+    public string? ContributedBy { get; set; }
 }
 
 public class Volume
 {
-    public int? value { get; set; }
-    public string? unit { get; set; }
+    public int? Value { get; set; }
+    public string? Unit { get; set; }
 }
 
-public class Boil_Volume
+public class BoilVolume
 {
-    public int? value { get; set; }
-    public string? unit { get; set; }
+    public int? Value { get; set; }
+    public string? Unit { get; set; }
 }
 
 public class Method
 {
-    public Mash_Temp[]? mash_temp { get; set; }
-    public Fermentation? fermentation { get; set; }
-    public string? twist { get; set; }
+    public MashTemp[]? MashTemp { get; set; }
+    public Fermentation? Fermentation { get; set; }
+    public string? Twist { get; set; }
 }
 
 public class Fermentation
 {
-    public Temp? temp { get; set; }
+    public Temp? Temp { get; set; }
 }
 
 public class Temp
 {
-    public int? value { get; set; }
-    public string? unit { get; set; }
+    public int? Value { get; set; }
+    public string? Unit { get; set; }
 }
 
-public class Mash_Temp
+public class MashTemp
 {
-    public Temp1? temp { get; set; }
-    public int? duration { get; set; }
+    public Temp1? Temp { get; set; }
+    public int? Duration { get; set; }
 }
 
 public class Temp1
 {
-    public int? value { get; set; }
-    public string? unit { get; set; }
+    public int? Value { get; set; }
+    public string? Unit { get; set; }
 }
 
 public class Ingredients
 {
-    public Malt[]? malt { get; set; }
-    public Hop[]? hops { get; set; }
-    public string? yeast { get; set; }
+    public Malt[]? Malt { get; set; }
+    public Hop[]? Hops { get; set; }
+    public string? Yeast { get; set; }
 }
 
 public class Malt
 {
-    public string? name { get; set; }
-    public Amount? amount { get; set; }
+    public string? Name { get; set; }
+    public Amount? Amount { get; set; }
 }
 
 public class Amount
 {
-    public float? value { get; set; }
-    public string? unit { get; set; }
+    public float? Value { get; set; }
+    public string? Unit { get; set; }
 }
 
 public class Hop
 {
-    public string? name { get; set; }
-    public Amount1? amount { get; set; }
-    public string? add { get; set; }
-    public string? attribute { get; set; }
+    public string? Name { get; set; }
+    public Amount1? Amount { get; set; }
+    public string? Add { get; set; }
+    public string? Attribute { get; set; }
 }
 
 public class Amount1
 {
-    public float? value { get; set; }
-    public string? unit { get; set; }
+    public float? Value { get; set; }
+    public string? Unit { get; set; }
 }
