@@ -36,7 +36,6 @@ namespace Drinks.jwhitt3r
         /// <returns>A task is returned to ensure that the program waits for the data to be returned</returns>
         public async Task<List<Class1>> ProcessApiDataAsync(HttpClient client, string id = "")
         {
-            Console.WriteLine("We are at the Deserialization");
             return await client.GetFromJsonAsync<List<Class1>>($"{this.ApiUrl}/{id}") ?? new();
         }
 
@@ -48,7 +47,6 @@ namespace Drinks.jwhitt3r
         public async Task GetDataAsync(string userInput = "")
         {
             using HttpClient client = new();
-            Console.WriteLine("We are at the HTTP Client");
             this.items = await ProcessApiDataAsync(client, userInput);
         }
 
