@@ -16,7 +16,7 @@ public static class DataValidation
 
             foreach (var category in categories)
             {
-                if (category.id == idInput)
+                if (category.Id == idInput)
                 {
                     idIsValid = true;
                     return idInput;

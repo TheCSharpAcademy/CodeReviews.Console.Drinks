@@ -1,7 +1,7 @@
 ﻿using static DrinksInfos.Helpers;
 using ConsoleTableExt;
 using static DrinksInfos.DataValidation;
-using static DrinksInfos.APIManager;
+using static DrinksInfos.ApiManager;
 
 namespace DrinksInfos;
 
@@ -26,7 +26,7 @@ public static class Menu
 
         foreach (Categories category in categories)
         {
-            if (category.id == choice) chosenCategory = category;
+            if (category.Id == choice) chosenCategory = category;
         }
 
         DrinksMenu(chosenCategory);

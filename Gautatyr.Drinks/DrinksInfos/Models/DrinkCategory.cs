@@ -5,6 +5,6 @@ public record class CategoriesRoot(
 
 public record class Categories([property: JsonPropertyName("strCategory")] string CategoryName)
 {
-    public int id { get; set; }
+    public int Id { get; set; }
 }
 

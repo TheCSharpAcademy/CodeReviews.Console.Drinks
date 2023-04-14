@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace DrinksInfos;
 
-public static class APIManager
+public static class ApiManager
 {
     public static Categories[] GetCategoriesAsync()
     {

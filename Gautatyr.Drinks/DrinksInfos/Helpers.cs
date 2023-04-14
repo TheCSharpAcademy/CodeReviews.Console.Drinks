@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata;
-using static DrinksInfos.APIManager;
+﻿using static DrinksInfos.ApiManager;
 
 namespace DrinksInfos;
 
@@ -17,7 +16,7 @@ public static class Helpers
 
         foreach (var category in categories)
         {
-            category.id = id;
+            category.Id = id;
             id++;
         }
 
