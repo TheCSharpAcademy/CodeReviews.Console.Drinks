@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace sadklouds.Drinks
+﻿namespace sadklouds.Drinks
 {
     internal class UserInput
     {
         private DrinksService service = new();
-        public void  GetCategoryInput()
+        public void GetCategoryInput()
         {
             var categories = service.GetCategories();
 
             Console.Write("Please Select a catergory to view drinks: ");
-            
+
             string categoryName = Console.ReadLine();
-            while (Validator.IsStringValid(categoryName) == false) 
+            while (Validator.IsStringValid(categoryName) == false)
             {
                 Console.WriteLine("\nInavlid Category");
                 categoryName = Console.ReadLine();
@@ -41,19 +34,19 @@ namespace sadklouds.Drinks
 
             if (id == "0")
                 GetCategoryInput();
-            
+
             while (Validator.isIdValid(id) == false)
             {
                 Console.WriteLine("\nInavlid Category");
                 id = Console.ReadLine();
             }
-            if(!drinks.Any(x => x.idDrink == id))
+            if (!drinks.Any(x => x.idDrink == id))
             {
                 Console.WriteLine("\n\n Invalid Id");
                 GetDrinkInput(categoryName);
             }
 
-           service.GetDrink(id);
+            service.GetDrink(id);
 
             Console.WriteLine("Press any key to go back to categories menu");
             Console.ReadKey();

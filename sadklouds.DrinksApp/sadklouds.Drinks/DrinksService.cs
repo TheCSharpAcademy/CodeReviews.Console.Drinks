@@ -1,20 +1,6 @@
-﻿using Newtonsoft.Json;
-using sadklouds.Drinks.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
+﻿using sadklouds.Drinks.Models;
 using System.Net.Http.Json;
 using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace sadklouds.Drinks;
@@ -88,7 +74,7 @@ public class DrinksService
             }
 
             VisualEngine.ShowTable(prepList, drinkDetail.strDrink);
-            
+
         }
     }
 
