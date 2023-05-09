@@ -1,5 +1,4 @@
-﻿using System;
-namespace drinks_info;
+﻿namespace drinks_info;
 
 class Program
 {
