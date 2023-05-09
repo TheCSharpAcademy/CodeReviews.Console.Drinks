@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 
+
 namespace drinks_info.Models
 {
     internal class DrinkDetailObject
@@ -14,7 +15,7 @@ namespace drinks_info.Models
         public object StrTags { get; set; }
         public object StrVideo { get; set; }
         public string StrCategory { get; set; }
-        public object StrIBA { get; set; }
+        public object StrIba { get; set; }
         public string StrAlcoholic { get; set; }
         public string StrGlass { get; set; }
         public string StrInstructions { get; set; }
@@ -22,8 +23,8 @@ namespace drinks_info.Models
         public string StrInstructionsDE { get; set; }
         public object StrInstructionsFR { get; set; }
         public string StrInstructionsIT { get; set; }
-        public object StrInstructionsZHHANS { get; set; }
-        public object StrInstructionsZHHANT { get; set; }
+        public object StrInstructionsZhhans { get; set; }
+        public object StrInstructionsZhhant { get; set; }
         public string StrDrinkThumb { get; set; }
         public string StrIngredient1 { get; set; }
         public string StrIngredient2 { get; set; }
