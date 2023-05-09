@@ -18,7 +18,7 @@ public class UserInput
             category = Console.ReadLine();
         }
 
-        if (!categories.Any(x => string.Equals(x.strCategory, category, StringComparison.OrdinalIgnoreCase)))
+        if (!categories.Any(x => string.Equals(x.StrCategory, category, StringComparison.OrdinalIgnoreCase)))
         {
             Console.WriteLine("Category doesn't exist.");
             GetCategoriesInput();
@@ -44,7 +44,7 @@ public class UserInput
             drink = Console.ReadLine();
         }
 
-        if (!drinks.Any(x => x.idDrink == drink))
+        if (!drinks.Any(x => x.IdDrink == drink))
         {
             Console.WriteLine("Drink doesn't exist.");
             GetDrinksInput(category);
