@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
-using System.Configuration;
 
 namespace csm_stough.Drinks.Services
 {
@@ -14,11 +13,11 @@ namespace csm_stough.Drinks.Services
 
         public static void Init()
         {
-            ApiBaseUrl = ConfigurationManager.AppSettings.Get("APIBaseURL");
-            ApiKey = ConfigurationManager.AppSettings.Get("APIKey");
-            ListCategories = ConfigurationManager.AppSettings.Get("ListCategories");
-            FilterByCategory = ConfigurationManager.AppSettings.Get("FilterByCategory");
-            SearchByName = ConfigurationManager.AppSettings.Get("SearchByName");
+            ApiBaseUrl = System.Configuration.ConfigurationManager.AppSettings.Get("APIBaseURL");
+            ApiKey = System.Configuration.ConfigurationManager.AppSettings.Get("APIKey");
+            ListCategories = System.Configuration.ConfigurationManager.AppSettings.Get("ListCategories");
+            FilterByCategory = System.Configuration.ConfigurationManager.AppSettings.Get("FilterByCategory");
+            SearchByName = System.Configuration.ConfigurationManager.AppSettings.Get("SearchByName");
         }
 
         private static Task<RestResponse> ExecuteRequest(string requestStr)
