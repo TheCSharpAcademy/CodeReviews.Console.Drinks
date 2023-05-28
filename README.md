@@ -1,6 +1,8 @@
 # Drinks
 This is a console app using C# designed to allow restaurant employees to view drink data by accessing an external API.
+
 Written by Corey Jordan
+
 Developed for The C# Academy - Drinks Console Exercise
 
 ## REQUIREMENTS
@@ -10,4 +12,5 @@ Developed for The C# Academy - Drinks Console Exercise
 - There should be no empty values in data presentation
 
 This app will reference TheCocktailDB located at https://www.thecocktaildb.com/api.php
+
 As with previous projects, thi sapp will make use of ConsoleTableExt
