@@ -39,7 +39,7 @@ public class DrinksService
             string rawResponse = response.Result.Content!;
             var serialize = JsonConvert.DeserializeObject<DrinksModel>(rawResponse);
 
-            drinks = serialize!.DrinkList;
+            drinks = serialize!.DrinkList!;
         }
         return drinks;
     }
@@ -57,7 +57,7 @@ public class DrinksService
             string rawResponse = response.Result.Content!;
             var serialize = JsonConvert.DeserializeObject<InfoObject>(rawResponse);
 
-            returnedList = serialize!.DrinkInfoList;
+            returnedList = serialize!.DrinkInfoList!;
         }
         return returnedList[0];
     }

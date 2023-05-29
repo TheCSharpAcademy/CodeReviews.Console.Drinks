@@ -36,7 +36,7 @@ public class CategoryController
             choice = Console.ReadLine()!;
         }
 
-        choice = menuList[int.Parse(choice)-1].strCategory;
+        choice = menuList[int.Parse(choice)-1].strCategory!;
         return choice;
     }
 
