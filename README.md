@@ -13,4 +13,11 @@ Developed for The C# Academy - Drinks Console Exercise
 
 This app will reference TheCocktailDB located at https://www.thecocktaildb.com/api.php
 
-As with previous projects, thi sapp will make use of ConsoleTableExt
+As with previous projects, this app will make use of ConsoleTableExt
+
+Additionally, we will use RestSharp and NewtonSoft.
+
+## NOTES
+- Console.Clear() misbehaves occasionally. I'm not sure exactly why but when scrolling up, artifacts of previous tables are left behind.
+- One limitation with ConsoleTableExt is that there seems to be no obvious way to wrap text within a cell. THis can result in some awkward formatting with long entries. This was especially prevalent in the directions column.
+- I'm still not 100% on the api calls. Specifically, why we have to make a list of 1 when we only want the single object.
