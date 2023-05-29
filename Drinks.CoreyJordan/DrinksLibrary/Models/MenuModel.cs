@@ -7,7 +7,7 @@ public class MenuModel
     public MenuModel(int number, DrinkModel drink)
     {
         Number = number;
-        Drink = drink.strDrink;
+        Drink = drink.strDrink!;
     }
 
     public MenuModel(int number, string name)

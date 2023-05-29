@@ -4,5 +4,5 @@ namespace DrinksLibrary.Models;
 public class CategoriesModel
 {
     [JsonProperty("drinks")]
-    public List<CategoryModel> CategoriesList { get; internal set; }
+    public List<CategoryModel> CategoriesList { get; internal set; } = new List<CategoryModel>();
 }

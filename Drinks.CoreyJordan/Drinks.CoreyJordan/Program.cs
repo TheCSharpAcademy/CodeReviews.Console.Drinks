@@ -1,6 +1,5 @@
 ﻿using Drinks.CoreyJordan.Controllers;
 
-// Display that drink
 while (true)
 {
     var categoryController = new CategoryController();

@@ -1,4 +1,6 @@
-﻿public static class Validator
+﻿namespace DrinksLibrary.Data;
+
+public static class Validator
 {
     public static bool IsValidChoice<T>(string choice, List<T> menu) where T : class
     {

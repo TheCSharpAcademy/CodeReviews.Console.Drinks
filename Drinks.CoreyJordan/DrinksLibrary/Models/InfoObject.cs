@@ -4,5 +4,5 @@ namespace DrinksLibrary.Models;
 public class InfoObject
 {
     [JsonProperty("drinks")]
-    public List<RawInfoModel> DrinkInfoList { get; set; }
+    public List<RawInfoModel>? DrinkInfoList { get; set; }
 }

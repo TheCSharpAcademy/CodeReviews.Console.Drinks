@@ -1,7 +1,6 @@
 ﻿using Drinks.CoreyJordan.UI;
 using DrinksLibrary.Data;
 using DrinksLibrary.Models;
-using System.Reflection;
 
 namespace Drinks.CoreyJordan.Controllers;
 public class DrinksController
@@ -53,7 +52,7 @@ public class DrinksController
             choice = Console.ReadLine()!;
         }
 
-        choice = menuList[int.Parse(choice) - 1].idDrink;
+        choice = menuList[int.Parse(choice) - 1].idDrink!;
         return choice;
     }
 }
