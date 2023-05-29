@@ -1,18 +1,18 @@
 ﻿using Drinks.CoreyJordan.Controllers;
 
-var categoryController = new CategoryController();
-var drinksController = new DrinksController();
+
 // Display list of drinks in that category
 // Get a choice
 // Display that drink
-bool quit = false;
-while (quit == false)
+while (true)
 {
-    var categories = categoryController.Menu();
-    string category = categoryController.GetMenuChoice(categories);
-    if (category == "0")
-    {
-        quit = true;
-        break;
-    }
+    var categoryController = new CategoryController();
+    string category = categoryController.ManageCategories();
+    if (category == "QUIT") break;
+
+    var drinksController = new DrinksController(category);
+    string drink = drinksController.ManageDrinks();
+    if (drink == "RETURN") continue;
+
+    Console.WriteLine("hmm");
 }

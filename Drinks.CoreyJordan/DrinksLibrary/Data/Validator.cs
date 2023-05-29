@@ -12,7 +12,7 @@
             return false;
         }
 
-        if (int.Parse(choice) < 0 || int.Parse(choice) > menu.Count - 1)
+        if (int.Parse(choice) <= 0 || int.Parse(choice) > menu.Count)
         {
             return false;
         }

@@ -8,9 +8,15 @@ public class CategoryController
     ConsoleEngine display = new();
     DrinksService drinksService = new();
 
-    public List<DrinkCategory> Menu()
+    public string ManageCategories()
     {
-        List<DrinkCategory> categories = drinksService .GetCategories();
+        var categories = Menu();
+        return GetMenuChoice(categories);
+    }
+
+    private List<DrinkCategoryModel> Menu()
+    {
+        List<DrinkCategoryModel> categories = drinksService.GetCategories();
 
         string[] headers = new string[] { "", "DRINK CATEGORIES" };
         FormatMenu(categories);
@@ -19,7 +25,7 @@ public class CategoryController
         return categories;
     }
 
-    public string GetMenuChoice<T>(List<T> menuList) where T : class
+    private string GetMenuChoice(List<DrinkCategoryModel> menuList)
     {
         string choice = Console.ReadLine()!;
 
@@ -29,19 +35,20 @@ public class CategoryController
             choice = Console.ReadLine()!;
         }
 
+        choice = menuList[int.Parse(choice)-1].strCategory;
         return choice;
     }
 
-    private static void FormatMenu(List<DrinkCategory> categories)
+    private static void FormatMenu(List<DrinkCategoryModel> categories)
     {
-        foreach (DrinkCategory category in categories)
+        foreach (DrinkCategoryModel category in categories)
         {
             category.Number = categories.IndexOf(category) + 1;
         }
 
-        categories.Add(new DrinkCategory
+        categories.Add(new DrinkCategoryModel
         {
-            Number = 0,
+            Number = categories.Count + 1,
             strCategory = "QUIT"
         });
     }
