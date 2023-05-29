@@ -1,9 +1,10 @@
 ﻿using Drinks.CoreyJordan.UI;
 using DrinksLibrary.Data;
 using DrinksLibrary.Models;
+using System.Reflection;
 
 namespace Drinks.CoreyJordan.Controllers;
-internal class DrinksController
+public class DrinksController
 {
     public string Drinks { get; }
     DrinksService drinksService = new();
@@ -14,7 +15,7 @@ internal class DrinksController
         Drinks = drinks;
     }
 
-    internal string ManageDrinks()
+    public string ManageDrinks()
     {
         var drinks = DrinksMenu();
         return GetMenuChoice(drinks);
@@ -23,14 +24,15 @@ internal class DrinksController
     private List<DrinkModel> DrinksMenu()
     {
         List<DrinkModel> drinks = drinksService.GetDrinksByCategory(Drinks);
-        List<DrinkMenuModel> menu = new();
+        List<MenuModel> menu = new();
         foreach (var drink in drinks)
         {
-            menu.Add(new DrinkMenuModel(drinks.IndexOf(drink) + 1, drink));
+            menu.Add(new MenuModel(drinks.IndexOf(drink) + 1, drink));
         }
-        menu.Add(new DrinkMenuModel(menu.Count + 1, "RETURN"));
+        menu.Add(new MenuModel(menu.Count + 1, "RETURN"));
 
         string[] headers = new string[] {"", Drinks.ToUpper()};
+        Console.Clear();
         display.DisplayTable(menu, headers);
 
         return drinks;
@@ -51,7 +53,6 @@ internal class DrinksController
             choice = Console.ReadLine()!;
         }
 
-        
         choice = menuList[int.Parse(choice) - 1].idDrink;
         return choice;
     }

@@ -1,8 +1,5 @@
 ﻿using Drinks.CoreyJordan.Controllers;
 
-
-// Display list of drinks in that category
-// Get a choice
 // Display that drink
 while (true)
 {
@@ -14,5 +11,6 @@ while (true)
     string drink = drinksController.ManageDrinks();
     if (drink == "RETURN") continue;
 
-    Console.WriteLine("hmm");
+    var drinkInfoController = new DrinkInfoController(drink);
+    drinkInfoController.ShowDrink();
 }

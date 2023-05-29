@@ -8,18 +8,18 @@ public class DrinksService
 {
     public string CocktailDbAddress { get; } = "http://www.thecocktaildb.com/api/json/v1/1";
 
-    public List<DrinkCategoryModel> GetCategories()
+    public List<CategoryModel> GetCategories()
     {
         var client = new RestClient(CocktailDbAddress);
         var request = new RestRequest("list.php?c=list");
         var response = client.ExecuteAsync(request);
 
-        List<DrinkCategoryModel> categories = new();
+        List<CategoryModel> categories = new();
 
         if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             string rawResponse = response.Result.Content!;
-            var serialize = JsonConvert.DeserializeObject<DrinkCategoriesModel>(rawResponse);
+            var serialize = JsonConvert.DeserializeObject<CategoriesModel>(rawResponse);
 
             categories = serialize!.CategoriesList;
         }
@@ -42,5 +42,23 @@ public class DrinksService
             drinks = serialize!.DrinkList;
         }
         return drinks;
+    }
+
+    public RawInfoModel GetDrink(string id)
+    {
+        var client = new RestClient(CocktailDbAddress);
+        var request = new RestRequest($"lookup.php?i={id}");
+        var response = client.ExecuteAsync(request);
+
+        List<RawInfoModel> returnedList = new();
+
+        if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            string rawResponse = response.Result.Content!;
+            var serialize = JsonConvert.DeserializeObject<InfoObject>(rawResponse);
+
+            returnedList = serialize!.DrinkInfoList;
+        }
+        return returnedList[0];
     }
 }

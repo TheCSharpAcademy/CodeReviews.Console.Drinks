@@ -14,18 +14,19 @@ public class CategoryController
         return GetMenuChoice(categories);
     }
 
-    private List<DrinkCategoryModel> Menu()
+    private List<CategoryModel> Menu()
     {
-        List<DrinkCategoryModel> categories = drinksService.GetCategories();
+        List<CategoryModel> categories = drinksService.GetCategories();
 
         string[] headers = new string[] { "", "DRINK CATEGORIES" };
         FormatMenu(categories);
+        Console.Clear();
         display.DisplayTable(categories, headers);
 
         return categories;
     }
 
-    private string GetMenuChoice(List<DrinkCategoryModel> menuList)
+    private string GetMenuChoice(List<CategoryModel> menuList)
     {
         string choice = Console.ReadLine()!;
 
@@ -39,14 +40,14 @@ public class CategoryController
         return choice;
     }
 
-    private static void FormatMenu(List<DrinkCategoryModel> categories)
+    private static void FormatMenu(List<CategoryModel> categories)
     {
-        foreach (DrinkCategoryModel category in categories)
+        foreach (CategoryModel category in categories)
         {
             category.Number = categories.IndexOf(category) + 1;
         }
 
-        categories.Add(new DrinkCategoryModel
+        categories.Add(new CategoryModel
         {
             Number = categories.Count + 1,
             strCategory = "QUIT"

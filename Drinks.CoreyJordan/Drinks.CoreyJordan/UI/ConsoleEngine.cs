@@ -14,13 +14,13 @@ internal class ConsoleEngine
             headers = new string[1];
         }
 
-        Console.Clear();
-
+        Console.WriteLine();
         ConsoleTableBuilder
             .From(list)
             .WithColumn(headers)
             .WithFormat(ConsoleTableBuilderFormat.Alternative)
-            .ExportAndWriteLine(TableAligntment.Center);
+            .ExportAndWriteLine(TableAligntment.Left);
+        Console.WriteLine();
     }
 
     internal void PromptInvalid()
