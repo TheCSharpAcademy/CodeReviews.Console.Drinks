@@ -7,7 +7,7 @@
             return String.Format("{0," + ((Console.WindowWidth / 2) + (text.Length / 2)) + "}", text);
         }
 
-        public static string filterString( string text )
+        public static string FilterString( string text )
         {
             return text.Remove(0, 4);
         }

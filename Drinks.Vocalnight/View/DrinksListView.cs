@@ -62,7 +62,7 @@ namespace DrinksInfo.View
                         ConsoleKey.NumPad9 => separatedDrinks[index][8].GetName(),
                     };
 
-                    DrinkView.GetDrink(HelperMethods.filterString(choosenDrink), category);
+                    DrinkView.GetDrink(HelperMethods.FilterString(choosenDrink), category);
                 }
             }
         }

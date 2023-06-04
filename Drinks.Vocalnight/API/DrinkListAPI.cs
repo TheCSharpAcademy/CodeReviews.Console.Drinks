@@ -5,7 +5,7 @@ namespace DrinksInfo.API
 {
     internal static class DrinkListAPI
     {
-        internal static List<Drink> getDrinksList( string category )
+        internal static List<Drink> GetDrinksList( string category )
         {
             var jsonClient = new RestClient("https://www.thecocktaildb.com/api/json/v1/1/");
             var request = new RestRequest($"filter.php?c={category}");

@@ -4,16 +4,16 @@ namespace DrinksInfo.Models
 {
     public class Category : IDrinksJson
     {
-        public string strCategory { get; set; }
+        public string StrCategory { get; set; }
 
         public string GetName()
         {
-            return strCategory;
+            return StrCategory;
         }
 
         public void ChangeName(string name)
         {
-            strCategory = name;
+            StrCategory = name;
         }
     }
 

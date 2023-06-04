@@ -4,13 +4,13 @@ namespace DrinksInfo
 {
     public class DrinkModel
     {
-        public string strDrink { get; set; }
+        public string StrDrink { get; set; }
 
-        public string strAlcoholic { get; set; }
+        public string StrAlcoholic { get; set; }
 
-        public string strGlass { get; set; }
+        public string StrGlass { get; set; }
 
-        public string strInstructions { get; set; }
+        public string StrInstructions { get; set; }
 
     }
 
