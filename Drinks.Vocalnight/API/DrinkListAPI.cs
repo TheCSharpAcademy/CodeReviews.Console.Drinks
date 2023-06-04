@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace DrinksInfo.API
 {
-    internal static class DrinkListAPI
+    internal static class DrinkListApi
     {
         internal static List<Drink> GetDrinksList( string category )
         {

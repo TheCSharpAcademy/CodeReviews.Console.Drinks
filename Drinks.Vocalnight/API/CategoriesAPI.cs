@@ -5,7 +5,7 @@ using RestSharp;
 
 namespace DrinksInfo.API
 {
-    public static class CategoriesAPI
+    public static class CategoriesApi
     {
         public static List<Category> GetDrinkCategories()
         {
