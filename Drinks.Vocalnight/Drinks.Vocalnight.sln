@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drinks.Vocalnight", "Drinks.Vocalnight.csproj", "{A9183830-CA20-4CA6-8A79-E3603248E0EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "..\ClassLibrary\ClassLibrary.csproj", "{94175DE3-6286-4D66-B740-971219BCD8C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9183830-CA20-4CA6-8A79-E3603248E0EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9183830-CA20-4CA6-8A79-E3603248E0EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9183830-CA20-4CA6-8A79-E3603248E0EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9183830-CA20-4CA6-8A79-E3603248E0EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94175DE3-6286-4D66-B740-971219BCD8C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94175DE3-6286-4D66-B740-971219BCD8C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94175DE3-6286-4D66-B740-971219BCD8C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94175DE3-6286-4D66-B740-971219BCD8C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2096A9CA-90E9-4538-BD4A-22851AC204C6}
+	EndGlobalSection
+EndGlobal
