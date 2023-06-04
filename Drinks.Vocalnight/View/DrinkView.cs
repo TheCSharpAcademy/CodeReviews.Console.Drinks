@@ -21,9 +21,9 @@ namespace DrinksInfo.View
 
                 List<DrinkModel> drinkDisplay = serialize.DrinkModel;
 
-                string drinkName = drinkDisplay[0].strDrink;
-                string isAlchoholic = drinkDisplay[0].strAlcoholic;
-                string howToPrepare = drinkDisplay[0].strInstructions;
+                string drinkName = drinkDisplay[0].StrDrink;
+                string isAlchoholic = drinkDisplay[0].StrAlcoholic;
+                string howToPrepare = drinkDisplay[0].StrInstructions;
 
                 Console.WriteLine(HelperMethods.CenterConsoleString(drinkName));
                 Console.WriteLine(HelperMethods.CenterConsoleString("-----"));

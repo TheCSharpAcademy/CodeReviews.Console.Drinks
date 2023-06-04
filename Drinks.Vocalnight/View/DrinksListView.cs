@@ -10,7 +10,7 @@ namespace DrinksInfo.View
         {
             int index = 0;
 
-            List<Drink> drinksList = DrinkListAPI.getDrinksList(category);
+            List<Drink> drinksList = DrinkListAPI.GetDrinksList(category);
             List<List<Drink>> separatedDrinks = HelperMethods.Split(drinksList);
 
             //Give each chunk of drinks a separated enumeration from 1 to 9 so the user can select with the numpad no matter the page he is viewing.
