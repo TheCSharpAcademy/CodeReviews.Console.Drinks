@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace LucianoNicolasArrieta.Drinks.Models
+namespace LucianoNicolasArrieta.DrinksApp.Models
 {
     public class Category
     {

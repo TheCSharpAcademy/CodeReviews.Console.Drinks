@@ -1,7 +1,7 @@
 ﻿using ConsoleTableExt;
 using System.Diagnostics.CodeAnalysis;
 
-namespace LucianoNicolasArrieta.Drinks
+namespace LucianoNicolasArrieta.DrinksApp
 {
     public class TableVisualizationEngine
     {

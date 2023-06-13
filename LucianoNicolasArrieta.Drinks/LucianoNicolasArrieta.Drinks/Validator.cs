@@ -1,6 +1,6 @@
-﻿using LucianoNicolasArrieta.Drinks.Models;
+﻿using LucianoNicolasArrieta.DrinksApp.Models;
 
-namespace LucianoNicolasArrieta.Drinks
+namespace LucianoNicolasArrieta.DrinksApp
 {
     public class Validator
     {
@@ -11,6 +11,18 @@ namespace LucianoNicolasArrieta.Drinks
             if (valid == false)
             {
                 valid = categories.Any(c => c.strCategory.Equals(user_input, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return valid;
+        }
+
+        public bool ValidateDrink(List<Drink> drinks, string user_input)
+        {
+            bool valid = user_input.Equals("0");
+
+            if (valid == false)
+            {
+                valid = drinks.Any(c => c.idDrink.Equals(user_input, StringComparison.OrdinalIgnoreCase));
             }
 
             return valid;

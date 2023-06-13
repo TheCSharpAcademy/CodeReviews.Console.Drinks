@@ -1,4 +1,4 @@
-﻿using LucianoNicolasArrieta.Drinks;
+﻿using LucianoNicolasArrieta.DrinksApp;
 
 namespace drinks_info
 {
