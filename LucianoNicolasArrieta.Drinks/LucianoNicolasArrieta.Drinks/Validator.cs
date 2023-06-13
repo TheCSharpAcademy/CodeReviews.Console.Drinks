@@ -10,7 +10,7 @@ namespace LucianoNicolasArrieta.DrinksApp
 
             if (valid == false)
             {
-                valid = categories.Any(c => c.strCategory.Equals(user_input, StringComparison.OrdinalIgnoreCase));
+                valid = categories.Any(c => c.StrCategory.Equals(user_input, StringComparison.OrdinalIgnoreCase));
             }
 
             return valid;
@@ -22,7 +22,7 @@ namespace LucianoNicolasArrieta.DrinksApp
 
             if (valid == false)
             {
-                valid = drinks.Any(c => c.idDrink.Equals(user_input, StringComparison.OrdinalIgnoreCase));
+                valid = drinks.Any(c => c.IdDrink.Equals(user_input, StringComparison.OrdinalIgnoreCase));
             }
 
             return valid;

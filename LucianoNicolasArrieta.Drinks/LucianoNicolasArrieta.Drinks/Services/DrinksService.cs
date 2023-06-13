@@ -77,7 +77,7 @@ namespace LucianoNicolasArrieta.DrinksApp.Services
                 foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
                 {
 
-                    if (prop.Name.Contains("str"))
+                    if (prop.Name.Contains("Str"))
                     {
                         formattedName = prop.Name.Substring(3);
                     }
@@ -92,7 +92,7 @@ namespace LucianoNicolasArrieta.DrinksApp.Services
                     }
                 }
 
-                tableVisualizationEngine.ShowTable(prepList, drinkDetail.strDrink);
+                tableVisualizationEngine.ShowTable(prepList, drinkDetail.StrDrink);
             }
 
             return list;
