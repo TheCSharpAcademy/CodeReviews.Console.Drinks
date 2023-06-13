@@ -15,7 +15,7 @@ namespace LucianoNicolasArrieta.DrinksApp.Models
         public object StrTags { get; set; }
         public object StrVideo { get; set; }
         public string StrCategory { get; set; }
-        public object StrIBA { get; set; }
+        public object StrIba { get; set; }
         public string StrAlcoholic { get; set; }
         public string StrGlass { get; set; }
         public string StrInstructions { get; set; }
@@ -23,8 +23,8 @@ namespace LucianoNicolasArrieta.DrinksApp.Models
         public string StrInstructionsDE { get; set; }
         public object StrInstructionsFR { get; set; }
         public string StrInstructionsIT { get; set; }
-        public object StrInstructionsZHHANS { get; set; }
-        public object StrInstructionsZHHANT { get; set; }
+        public object StrInstructionsZhhans { get; set; }
+        public object StrInstructionsZhhant { get; set; }
         public string StrDrinkThumb { get; set; }
         public string StrIngredient1 { get; set; }
         public string StrIngredient2 { get; set; }
@@ -60,57 +60,5 @@ namespace LucianoNicolasArrieta.DrinksApp.Models
         public object StrImageAttribution { get; set; }
         public string StrCreativeCommonsConfirmed { get; set; }
         public string SateModified { get; set; }
-        /*
-        public string strDrink;
-        public object strDrinkAlternate;
-        public object strTags;
-        public object strVideo;
-        public string strCategory;
-        public object strIBA;
-        public string strAlcoholic;
-        public string strGlass;
-        public string strInstructions;
-        public object strInstructionsES;
-        public string strInstructionsDE;
-        public object strInstructionsFR;
-        public string strInstructionsIT;
-        public object strInstructionsZHHANS;
-        public object strInstructionsZHHANT;
-        public string strDrinkThumb;
-        public string strIngredient1;
-        public string strIngredient2;
-        public string strIngredient3;
-        public string strIngredient4;
-        public object strIngredient5;
-        public object strIngredient6;
-        public object strIngredient7;
-        public object strIngredient8;
-        public object strIngredient9;
-        public object strIngredient10;
-        public object strIngredient11;
-        public object strIngredient12;
-        public object strIngredient13;
-        public object strIngredient14;
-        public object strIngredient15;
-        public string strMeasure1;
-        public string strMeasure2;
-        public string strMeasure3;
-        public string strMeasure4;
-        public object strMeasure5;
-        public object strMeasure6;
-        public object strMeasure7;
-        public object strMeasure8;
-        public object strMeasure9;
-        public object strMeasure10;
-        public object strMeasure11;
-        public object strMeasure12;
-        public object strMeasure13;
-        public object strMeasure14;
-        public object strMeasure15;
-        public object strImageSource;
-        public object strImageAttribution;
-        public string strCreativeCommonsConfirmed;
-        public string sateModified;
-        */
     }
 }
