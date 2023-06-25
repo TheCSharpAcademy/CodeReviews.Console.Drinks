@@ -3,7 +3,6 @@ using LONCHANICK.DrinksApp.Request;
 
 while (true)
 {
-	//Console.Clear();
 	Console.WriteLine("");
 	Console.WriteLine("\tDrinks Menu");
 	Console.WriteLine(" 1) Drinks Category List");
@@ -15,7 +14,6 @@ while (true)
 	string? op = Console.ReadLine();
 	op = op.Trim();
 
-	//get all categories
 	ListOfCategories drinkcategories = await DrinksRequest.GetDrinkCategories();
 
 

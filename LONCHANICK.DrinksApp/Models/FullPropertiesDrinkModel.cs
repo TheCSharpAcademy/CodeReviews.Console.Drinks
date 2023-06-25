@@ -33,9 +33,6 @@ namespace LONCHANICK.DrinksApp.Models
 		public string strAlcoholic { get; set; }
 		public string strGlass { get; set; }
 		public string strInstructions { get; set; }
-
-
-		//returns all fields even nulls
 		public override string ToString()
 		{
 			string aux =
@@ -53,13 +50,11 @@ namespace LONCHANICK.DrinksApp.Models
 			return aux;
 		}
 
-
-		//return only not null fields in the object
 		public string ToString(bool notEmptyFields)
 		{
 			StringBuilder sb = new StringBuilder();
 			if (idDrink != null)
-				sb.Append("idDrink: "+idDrink+"\n");
+				sb.Append("idDrink: " + idDrink + "\n");
 
 			if (strDrink != null)
 				sb.Append("strDrink: " + strDrink + "\n");
@@ -98,8 +93,6 @@ namespace LONCHANICK.DrinksApp.Models
 
 			return sb.ToString();
 		}
-
-
 
 	}
 }
