@@ -1,57 +1,65 @@
-﻿using LONCHANICK.DrinksApp.Request;
-
-
+﻿using LONCHANICK.DrinksApp.Models;
+using LONCHANICK.DrinksApp.Request;
 
 while (true)
 {
+	//Console.Clear();
+	Console.WriteLine("");
+	Console.WriteLine("\tDrinks Menu");
+	Console.WriteLine(" 1) Drinks Category List");
+	Console.WriteLine(" 2) Drinks By Category");
+	Console.WriteLine(" 3) Drinks By Id");
+	Console.WriteLine(" C) Clear Screen");
+	Console.WriteLine(" 4) Exit");
+	Console.Write("Type a valid option: ");
+	string? op = Console.ReadLine();
+	op = op.Trim();
 
-    var drinkCategories = await DrinksRequest.GetDrinkCategories();
+	//get all categories
+	ListOfCategories drinkcategories = await DrinksRequest.GetDrinkCategories();
 
-    Console.Clear();
-    Console.WriteLine("\t--- DRINK CATEGORIES ---");
-    
-    Console.WriteLine("Enter your choice: ");
-    Console.WriteLine(" 0)Exit ");
-    Console.WriteLine(drinkCategories);
-    Console.Write("Enter any valid option ");
-    string input = Console.ReadLine();
 
-    switch (input)
-    {
-        case "1":
-            Console.Clear();
-            var aux = await DrinksRequest.GetDrinksByCategory("Cocktail");
-            Console.WriteLine(aux);
-            break;
-        case "2":
-            Console.Clear();
-            break;
-        case "3":
-            Console.Clear();
-            break;
-        case "4":
-            break;
-        case "5":
-            break;
-        case "6":
-            break;
-        case "7":
-            break;
-        case "8":
-            break;
-        case "9":
-            break;
-        case "10":
-            break;
-        case "11":
-            break;
-        case "0":
-            return;
-        default:
-            Console.Clear();
-            Console.WriteLine("Invalid input.");
-            Console.WriteLine("Press Enter to continue...");
-            Console.ReadLine();
-            break;
-    }
+	switch (op)
+	{
+		case "1":
+			Console.WriteLine("\n\tDrinks Categories");
+			Console.WriteLine(drinkcategories);
+			break;
+
+		case "2":
+			Console.Write("\nType any valid category: ");
+			string category = Console.ReadLine();
+			if (drinkcategories.Contains(category))
+			{
+				Console.WriteLine("\n\t Drinks Category: " + category.ToUpper() + "\n");
+				var drinksByCategories = await DrinksRequest.GetDrinksByCategory(category);
+				Console.WriteLine(drinksByCategories);
+			}
+			else
+			{
+				Console.WriteLine("Category does not exist MMW!");
+			}
+			break;
+
+		case "3":
+			Console.Write("\nType any valid Id Drink: ");
+			string id = Console.ReadLine();
+
+			Console.WriteLine("\n\t Drinks Id: " + id + "\n");
+			var drinksById = await DrinksRequest.GetDrinksById(id);
+			Console.WriteLine(drinksById);
+			break;
+
+		case "c":
+			Console.Clear();
+			break;
+
+
+		case "4":
+			return;
+
+		default:
+			Console.WriteLine("Invalid Option");
+			break;
+	}
 }
