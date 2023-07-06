@@ -21,7 +21,7 @@ public class DrinkDetail
     [JsonProperty("strCategory")]
     public string StrCategory { get; set; }
     [JsonProperty("strIBA")]
-    public object StrIBA { get; set; }
+    public object StrIba { get; set; }
     [JsonProperty("strAlcoholic")]
     public string StrAlcoholic { get; set; }
     [JsonProperty("strGlass")]
@@ -37,9 +37,9 @@ public class DrinkDetail
     [JsonProperty("strInstructionsIT")]
     public string StrInstructionsIT { get; set; }
     [JsonProperty("strInstructionsZH-HANS")]
-    public object StrInstructionsZHHANS { get; set; }
+    public object StrInstructionsZhhans { get; set; }
     [JsonProperty("strInstructionsZH-HANT")]
-    public object StrInstructionsZHHANT { get; set; }
+    public object StrInstructionsZhhant { get; set; }
     [JsonProperty("strDrinkThumb")]
     public string StrDrinkThumb { get; set; }
     [JsonProperty("strIngredient1")]
@@ -109,5 +109,5 @@ public class DrinkDetail
     [JsonProperty("strCreativeCommonsConfirmed")]
     public string StrCreativeCommonsConfirmed { get; set; }
     [JsonProperty("dateModified")]
-    public string dateModified { get; set; }
+    public string DateModified { get; set; }
 }
