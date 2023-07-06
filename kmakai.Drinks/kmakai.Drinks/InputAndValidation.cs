@@ -5,26 +5,34 @@ public class InputAndValidation
 {
     public static string GetCategoryInput()
     {
-        Console.WriteLine("Please enter a category name: ");
+        Console.WriteLine("Please enter a category name or x to exit: ");
         string? input = Console.ReadLine();
-        while (!IsValidCategoryInput(input))
+
+        while (!IsValidCategoryInput(input) && input != "x")
         {
-            Console.WriteLine("Please enter a valid category name: ");
+            
+            Console.WriteLine("Please enter a valid category name or x to exit: ");
             input = Console.ReadLine();
         }
+
+
 
         return input;
     }
 
     public static string GetDrinkInput()
     {
-        Console.WriteLine("Please enter a drink Id: ");
+        Console.WriteLine("Please enter a drink Id or x to return: ");
         string? input = Console.ReadLine();
-        while (!IsValidDrinkInput(input))
+
+
+
+        while (!IsValidDrinkInput(input) && input != "x")
         {
-            Console.WriteLine("Please enter a valid drink Id: ");
+            Console.WriteLine("Please enter a valid drink Id or x to return: ");
             input = Console.ReadLine();
         }
+
 
         return input;
     }
