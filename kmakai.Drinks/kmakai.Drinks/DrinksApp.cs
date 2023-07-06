@@ -38,7 +38,7 @@ public class DrinksApp
             TableEngine.PrintTable(Drinks, "Drinks");
             string drinkInput = InputAndValidation.GetDrinkInput();
 
-            while(Drinks.Find(d => d.idDrink == drinkInput) == null)
+            while(Drinks.Find(d => d.IdDrink == drinkInput) == null)
             {
                 Console.WriteLine("Please enter a valid drink Id: ");
                 drinkInput = Console.ReadLine();
@@ -60,7 +60,7 @@ public class DrinksApp
     public async Task<List<Drink>> GetDrinksByCategory(string category)
     {
         var response = await Client.GetStringAsync($"https://www.thecocktaildb.com/api/json/v1/1/filter.php?c={category}");
-        var drinks = JsonConvert.DeserializeObject<DrinksList>(response)?.drinks;
+        var drinks = JsonConvert.DeserializeObject<DrinksList>(response)?.Drinks;
         return drinks;
     }
 
@@ -70,7 +70,7 @@ public class DrinksApp
         var detailList = JsonConvert.DeserializeObject<DrinkDetailObject>(response)?.DrinkDetailList;
         DrinkDetail drinkDetailUnformatted = detailList[0];
 
-        var drinkDetail = Helpers.formatDrinkDetails(drinkDetailUnformatted);
+        var drinkDetail = Helpers.FormatDrinkDetails(drinkDetailUnformatted);
 
         TableEngine.PrintTable(drinkDetail, "Drink Details");
     }

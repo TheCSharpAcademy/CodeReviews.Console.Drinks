@@ -5,12 +5,15 @@ namespace kmakai.Drinks.Models;
 
 public class Drink
 {
-    public string idDrink { get; set; }
-    public string strDrink { get; set; }
+    [JsonProperty("idDrink")]
+    public string IdDrink { get; set; }
+
+    [JsonProperty("strDrink")]
+    public string StrDrink { get; set; }
 }
 
 public class DrinksList
 {
     [JsonProperty("drinks")]
-    public List<Drink> drinks { get; set; }
+    public List<Drink> Drinks { get; set; }
 }

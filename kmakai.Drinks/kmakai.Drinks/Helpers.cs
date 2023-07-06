@@ -6,7 +6,7 @@ namespace kmakai.Drinks;
 
 public static class Helpers
 {
-    public static List<object> formatDrinkDetails(DrinkDetail drinkDetail)
+    public static List<object> FormatDrinkDetails(DrinkDetail drinkDetail)
     {
         List<object> formattedDrinkDetail = new();
         string formattedName = "";
