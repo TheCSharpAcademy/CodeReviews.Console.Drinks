@@ -61,7 +61,7 @@ public class InputAndValidation
         }
         foreach (char c in categoryInput)
         {
-            if (!char.IsLetter(c))
+            if (!char.IsLetter(c) && c != '/')
             {
                 return false;
             }
