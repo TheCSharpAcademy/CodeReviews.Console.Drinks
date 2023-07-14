@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Drinks_Info;
+
+UserInput userInput = new();
+userInput.GetCategoriesInput();
