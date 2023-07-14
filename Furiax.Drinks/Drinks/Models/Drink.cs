@@ -12,7 +12,7 @@ namespace Drinks_Info.Models
         public string idDrink { get; set; }
         public string strDrink { get; set; }
     }
-	internal class DrinkS
+	internal class Drinkss
 	{
         [JsonProperty("drinks")]
         public List<Drink>DrinksList { get; set; }

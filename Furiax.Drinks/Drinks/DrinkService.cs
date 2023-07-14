@@ -43,7 +43,7 @@ namespace Drinks_Info
 			{
 				string rawResponse = response.Result.Content;
 
-				var serialize = JsonConvert.DeserializeObject<DrinkS>(rawResponse);
+				var serialize = JsonConvert.DeserializeObject<Drinkss>(rawResponse);
 
 				drinks = serialize.DrinksList;
 
