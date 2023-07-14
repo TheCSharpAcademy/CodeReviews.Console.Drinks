@@ -29,7 +29,6 @@ namespace Drinks_Info
 
 			return categories;
 		}
-
 		internal List<Drink> GetDrinksByCategory(string category)
 		{
 			var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
@@ -56,7 +55,6 @@ namespace Drinks_Info
 			return drinks;
 
 		}
-
 		internal void GetDrink(string drink)
 		{
 			var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");

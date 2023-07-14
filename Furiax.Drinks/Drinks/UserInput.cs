@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Drinks_Info
+﻿namespace Drinks_Info
 {
 	internal class UserInput
 	{
