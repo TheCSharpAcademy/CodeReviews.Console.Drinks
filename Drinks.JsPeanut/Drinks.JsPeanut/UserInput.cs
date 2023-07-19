@@ -6,9 +6,14 @@
         {
             var categories = DrinksService.GetCategoriesList();
 
-            Console.WriteLine("Select a category.");
+            Console.WriteLine("Welcome to Drinks App! Select a category. \n\nType 0 if you want exit the app.");
 
             var category = Console.ReadLine();
+
+            if (category == "0")
+            {
+                Program.exit = true;
+            }
 
             while (!Validator.IsStringValid(category))
             {

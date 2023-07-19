@@ -23,7 +23,6 @@ namespace Drinks.JsPeanut
 
                 categories = deserializedResponse.CategoriesList;
                 TableVisualizationEngine.ShowTable(categories, "CategoriesMenu");
-                Console.WriteLine(rawResponse);
 
                 return categories;
             }
