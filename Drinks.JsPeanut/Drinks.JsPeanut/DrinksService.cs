@@ -91,7 +91,7 @@ namespace Drinks.JsPeanut
                     }
                 }
 
-                TableVisualizationEngine.ShowTable(prepList, drinkDetail.strDrink);
+                TableVisualizationEngine.ShowTable(prepList, drinkDetail.StrDrink);
             }
         }
     }

@@ -12,7 +12,7 @@
 
             if (category == "0")
             {
-                Program.exit = true;
+                Program.exitApp = true;
             }
 
             while (!Validator.IsStringValid(category))
@@ -21,7 +21,7 @@
                 category = Console.ReadLine();
             }
 
-            if (!categories.Any(x => x.strCategory == category))
+            if (!categories.Any(x => x.StrCategory == category))
             {
                 Console.WriteLine("Category doesn't exist.");
                 GetCategoriesInput();
