@@ -4,13 +4,13 @@ namespace Drinks.JsPeanut
 {
     class Drink
     {
-        public string idDrink { get; set; }
-        public string strDrink { get; set; }
+        public string IdDrink { get; set; }
+        public string StrDrink { get; set; }
     }
 
     class Drinks
     {
         [JsonProperty("drinks")]
-        public List<Drink> drinkList { get; set;}
+        public List<Drink> DrinkList { get; set;}
     }
 }
