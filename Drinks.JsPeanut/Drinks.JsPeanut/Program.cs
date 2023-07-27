@@ -1,10 +1,10 @@
 ﻿namespace Drinks.JsPeanut;
 class Program
 {
-    public static bool exitApp;
+    public static bool exitApp = false;
     public static void Main(string[] args)
     {
-        while (exitApp)
+        while (exitApp == false)
         {
             UserInput.GetCategoriesInput();
         }

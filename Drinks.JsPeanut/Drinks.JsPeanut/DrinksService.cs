@@ -44,7 +44,7 @@ namespace Drinks.JsPeanut
 
                 var deserializedResponse = JsonConvert.DeserializeObject<Drinks>(rawResponse);
 
-                drinks = deserializedResponse.drinkList;
+                drinks = deserializedResponse.DrinkList;
 
                 TableVisualizationEngine.ShowTable(drinks, "Drinks");
 
