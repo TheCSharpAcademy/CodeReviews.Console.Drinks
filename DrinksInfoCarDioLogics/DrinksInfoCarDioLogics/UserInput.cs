@@ -3,7 +3,7 @@
 public class UserInput
 {
     Validation validation = new Validation();
-    drinkService drinkService = new drinkService();
+    DrinkService drinkService = new DrinkService();
 
     public void GetCategoriesInput()
     {

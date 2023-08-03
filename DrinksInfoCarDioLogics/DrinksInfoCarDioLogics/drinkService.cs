@@ -6,7 +6,7 @@ using System.Web;
 
 namespace DrinksInfoCarDioLogics;
 
-public class drinkService
+public class DrinkService
 {
     tableDisplay td = new tableDisplay();
 
@@ -88,7 +88,7 @@ public class drinkService
                     }
                 }
 
-                td.ShowTable(prepList, drinkDetail.strDrink);
+                td.ShowTable(prepList, drinkDetail.StrDrink);
                 return false;
             }
             else if (returnedList == null)

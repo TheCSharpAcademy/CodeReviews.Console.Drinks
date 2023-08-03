@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace DrinksInfoCarDioLogics;
 
-public class tableDisplay
+public class TableDisplay
 {
     public void ShowTable<T>(List<T> tableData, [AllowNull] string tableName) where T : class
     {

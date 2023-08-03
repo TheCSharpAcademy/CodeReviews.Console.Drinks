@@ -1,10 +1,5 @@
-﻿using ConsoleTableExt;
-using DrinksInfoCarDioLogics;
-using DrinksInfoCarDioLogics.Models;
-using Newtonsoft.Json;
-using RestSharp;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
+﻿using DrinksInfoCarDioLogics;
+
 
 UserInput userInput = new UserInput();
 
