@@ -8,9 +8,7 @@ namespace DrinksInfoCarDioLogics;
 
 public class DrinkService
 {
-    tableDisplay td = new tableDisplay();
-
-    public void GetCategories()
+    public void ShowCategories()
     {
         var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
         var request = new RestRequest("list.php?c=list");
@@ -21,11 +19,12 @@ public class DrinkService
             string rawResponse = response.Result.Content;
             var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
             List<Category> returnedList = serialize.CategoriesList;
-            td.ShowTable(returnedList, "Categories Menu");
+
+            TableDisplay.ShowTable(returnedList, "Categories Menu");
         }
     }
 
-    public bool GetDrinksByCategories(string categoryChosen)
+    public void ShowDrinksByCategory(string categoryChosen)
     {
         var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
         var request = new RestRequest($"filter.php?c={HttpUtility.UrlEncode(categoryChosen)}");
@@ -36,68 +35,51 @@ public class DrinkService
             string rawResponse = response.Result.Content;
             var serialize = JsonConvert.DeserializeObject<Drinks>(rawResponse);
 
-            if (serialize != null)
-            {
-                List<Drink> returnedList = serialize.DrinksList;
-                td.ShowTable(returnedList, "Drinks Menu");
-                return false;
-            }
-            else if (serialize == null)
-            {
-                Console.WriteLine("Invalid category!");
-                Console.ReadLine();
-                return true;
-            }
+            List<Drink> returnedList = serialize.DrinksList;
+            TableDisplay.ShowTable(returnedList, "Drinks Menu");
         }
-
-        return true;
     }
 
-    public bool GetDrinks(string drink)
+    public void ShowDrinkDetails(string drinkChosen)
     {
         var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
-        var request = new RestRequest($"lookup.php?i={drink}");
+        var request = new RestRequest($"lookup.php?i={drinkChosen}");
         var response = client.ExecuteAsync(request);
 
         if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             string rawResponse = response.Result.Content;
+
             var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse);
+
             List<DrinkDetail> returnedList = serialize.DrinkDetailList;
 
-            if (returnedList != null)
+            DrinkDetail drinkDetail = returnedList[0];
+
+            List<object> prepList = new();
+
+            string formattedName = "";
+
+            foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
             {
-                DrinkDetail drinkDetail = returnedList[0];
-                List<object> prepList = new();
-                string formattedName = "";
 
-                foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
+                if (prop.Name.Contains("str"))
                 {
-                    if (prop.Name.Contains("str"))
-                    {
-                        formattedName = prop.Name.Substring(3);
-                    }
-
-                    if (!string.IsNullOrEmpty(prop.GetValue(drinkDetail)?.ToString()))
-                    {
-                        prepList.Add(new
-                        {
-                            Key = formattedName,
-                            Value = prop.GetValue(drinkDetail)
-                        });
-                    }
+                    formattedName = prop.Name.Substring(3);
                 }
 
-                td.ShowTable(prepList, drinkDetail.StrDrink);
-                return false;
+                if (!string.IsNullOrEmpty(prop.GetValue(drinkDetail)?.ToString()))
+                {
+                    prepList.Add(new
+                    {
+                        Key = formattedName,
+                        Value = prop.GetValue(drinkDetail)
+                    });
+                }
             }
-            else if (returnedList == null)
-            {
-                Console.WriteLine("Invalid drink name!");
-                Console.ReadLine();
-                return true;
-            }
+
+            TableDisplay.ShowTable(prepList, drinkDetail.strDrink);
+
         }
-        return true;
-    } 
+    }
 }

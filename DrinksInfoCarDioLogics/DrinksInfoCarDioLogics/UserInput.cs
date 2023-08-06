@@ -7,48 +7,51 @@ public class UserInput
 
     public void GetCategoriesInput()
     {
-        bool isNull;
+        bool isCategoryValid = true;
         string categoryChosen;
 
         do
         {
-            drinkService.GetCategories();
-            Console.WriteLine("Choose a category:");
-            categoryChosen = Console.ReadLine();
-
-            while (!validation.IsStringValid(categoryChosen))
+            do
             {
-                Console.Write("Invalid category! Type a valid category:");
+                drinkService.ShowCategories();
+                Console.WriteLine("Choose a category or press 0 to exit App:");
                 categoryChosen = Console.ReadLine();
+
+                if(categoryChosen != "0")
+                {
+                    isCategoryValid = validation.IsCategoryValid(categoryChosen);
+                }
+            } while (isCategoryValid == false);
+
+            if(categoryChosen != "0")
+            {
+                GetDrinksInput(categoryChosen);
             }
-
-            isNull = drinkService.GetDrinksByCategories(categoryChosen);
-        } while (isNull == true);
-
-        GetDrinksInput(categoryChosen);
+        } while (categoryChosen != "0");
     }
 
     public void GetDrinksInput(string categoryChosen)
     {
         Console.Clear();
-        bool isNull;
+        bool isDrinkValid;
+        string drinkChosen;
 
         do
         {
-            drinkService.GetDrinksByCategories(categoryChosen);
+            drinkService.ShowDrinksByCategory(categoryChosen);
             Console.WriteLine("Choose a drink or go to category menu by typing 0:");
-            string drink = Console.ReadLine();
+            drinkChosen = Console.ReadLine();
 
-            if (drink == " 0")
+            if (drinkChosen == "0")
                 GetCategoriesInput();
 
-            while (!validation.IsIdValid(drink))
-            {
-                Console.Write("Invalid drink! Choose a valid drink ID:");
-                drink = Console.ReadLine();
-            }
+            isDrinkValid = validation.IsDrinkValid(drinkChosen);
+        } while (isDrinkValid == false);
 
-            isNull = drinkService.GetDrinks(drink);
-        } while (isNull = true);
+        drinkService.ShowDrinkDetails(drinkChosen);
+
+        Console.WriteLine("Press any key to continue!");
+        Console.ReadLine();
     }
 }

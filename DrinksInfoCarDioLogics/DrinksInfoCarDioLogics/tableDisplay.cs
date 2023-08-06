@@ -5,7 +5,7 @@ namespace DrinksInfoCarDioLogics;
 
 public class TableDisplay
 {
-    public void ShowTable<T>(List<T> tableData, [AllowNull] string tableName) where T : class
+    public static void ShowTable<T>(List<T> tableData, [AllowNull] string tableName) where T : class
     {
         Console.Clear();
 
@@ -21,3 +21,5 @@ public class TableDisplay
         Console.WriteLine("\n\n");
     }
 }
+
+
