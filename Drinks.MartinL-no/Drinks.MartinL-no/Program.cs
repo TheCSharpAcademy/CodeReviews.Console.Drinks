@@ -11,7 +11,7 @@ class Program
         BaseAddress = new Uri("http://www.thecocktaildb.com/api/json/v1/1/")
     };
 
-    static async Task Main(string[] args)
+    static async Task Main()
     {
         var repo = new DrinksDataAccess(sharedClient);
         var controller = new DrinksController(repo);
