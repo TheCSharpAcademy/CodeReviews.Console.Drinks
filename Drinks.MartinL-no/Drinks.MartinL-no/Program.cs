@@ -14,10 +14,8 @@ class Program
     {
         var repo = new DrinksDataAccess(sharedClient);
         var controller = new DrinksController(repo);
+        var app = new UserInput(controller);
 
-        var categories = (await controller.GetCategories()).ToList();
-        var drinks = (await controller.GetDrinks(categories[0])).ToList();
-        var drinkDetails = await controller.GetDrinkDetails(drinks[0].Id);
-        Console.WriteLine();
+        app.Run()
     }
 }
