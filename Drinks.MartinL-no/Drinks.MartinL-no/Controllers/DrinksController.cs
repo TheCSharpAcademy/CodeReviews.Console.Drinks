@@ -26,8 +26,6 @@ internal class DrinksController
 
     public async Task<DrinkDetails> GetDrinkDetails(int drinkId)
     {
-        var drinkDetails = await _repo.GetDrinkDetails(drinkId);
-
-        return drinkDetails;
+        return await _repo.GetDrinkDetails(drinkId);
     }
 }

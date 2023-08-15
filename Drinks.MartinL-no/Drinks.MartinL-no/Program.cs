@@ -1,5 +1,6 @@
-﻿using Drinks.MartinL_no.Controllers;
-using Drinks.MartinL_no.DAL;
+﻿using Drinks.MartinL_no.DAL;
+using Drinks.MartinL_no.Controllers;
+using Drinks.MartinL_no.UserInterface;
 
 namespace Drinks.MartinL_no;
 
@@ -16,6 +17,6 @@ class Program
         var controller = new DrinksController(repo);
         var app = new UserInput(controller);
 
-        app.Run()
+        await app.Run();
     }
 }
