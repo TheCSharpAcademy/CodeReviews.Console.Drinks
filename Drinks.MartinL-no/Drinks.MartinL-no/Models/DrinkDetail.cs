@@ -1,14 +1,23 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Drinks.MartinL_no.Models;
 
-internal record class DrinkDetails(
-    [property: JsonPropertyName("strDrink")] string Name,
-    [property: JsonPropertyName("strCategory")] string Category,
-    [property: JsonPropertyName("strAlcoholic")] string Alcoholic,
-    [property: JsonPropertyName("strGlass")] string Glass,
-    [property: JsonPropertyName("strInstructions")] string Instructions
-    );
+internal class DrinkDetails
+{
+    [JsonPropertyName("strDrink")]
+    public string Name { get; set; }
+    [JsonPropertyName("strCategory")]
+    public string Category { get; set; }
+    [JsonPropertyName("strAlcoholic")]
+    public string Alcoholic { get; set; }
+    [JsonPropertyName("strGlass")]
+    public string Glass { get; set; }
+    [JsonPropertyName("strInstructions")]
+    public string Instructions { get; set; }
+    [JsonExtensionData]
+    public Dictionary<string, JsonElement>? RemainingJsonFields { get; set; }
+}
 
 internal record class DrinkDetailsResponse
 {

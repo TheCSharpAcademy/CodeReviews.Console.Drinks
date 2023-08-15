@@ -1,4 +1,5 @@
 ﻿using Drinks.MartinL_no.Controllers;
+using Drinks.MartinL_no.Models;
 
 namespace Drinks.MartinL_no.UserInterface;
 
@@ -58,9 +59,21 @@ internal class UserInput
 
     private async Task ShowDrinkDetails(int drinkId)
     {
-        var drinkDetails = await _controller.GetDrinkDetails(drinkId);
+        var drink = await _controller.GetDrinkDetails(drinkId);
 
-        // Table to be added
+        Console.Clear();
+        Console.WriteLine($"""
+            Name:           {drink.Name} ({drink.Alcoholic})
+            Category:       {drink.Category}
+
+            Glass:          {drink.Glass}
+
+            """);
+        TableVisualizationEngine.ShowIngredientsTable(drink.Ingredients);
+        Console.WriteLine($"""
+            Instructions:   {drink.Instructions}
+
+            """);
 
         Helpers.Ask("Press any key to return to main menu");
     }
