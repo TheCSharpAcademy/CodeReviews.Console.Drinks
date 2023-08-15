@@ -1,5 +1,4 @@
 ﻿using Drinks.MartinL_no.Controllers;
-using Drinks.MartinL_no.Models;
 
 namespace Drinks.MartinL_no.UserInterface;
 
@@ -22,7 +21,12 @@ internal class UserInput
 
             TableVisualizationEngine.ShowCategories(categories);
 
-            var category = Helpers.Ask("Choose category: ");
+            var category = Helpers.Ask("Choose category (0 to exit): ");
+            if (category == "0")
+            {
+                Helpers.ShowMessage("Program ended");
+                return;
+            }
 
             if (categories.Exists(c => c.ToLower() == category.ToLower()))
             {
@@ -78,4 +82,3 @@ internal class UserInput
         Helpers.Ask("Press any key to return to main menu");
     }
 }
-
