@@ -20,4 +20,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="User Interface\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ConsoleTableExt" Version="3.2.0" />
+  </ItemGroup>
 </Project>
