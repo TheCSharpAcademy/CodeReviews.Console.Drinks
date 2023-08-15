@@ -21,5 +21,5 @@ internal class DrinkDetails
 
 internal record class DrinkDetailsResponse
 {
-    public IEnumerable<DrinkDetails> drinks { get; set; }
+    public IEnumerable<DrinkDetails> Drinks { get; set; }
 }

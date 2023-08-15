@@ -32,6 +32,6 @@ internal class DrinksDataAccess : IDrinksDataAccess
     {
         var response = await _client.GetFromJsonAsync<DrinkDetailsResponse>($"lookup.php?i={drinkId}");
 
-        return response.drinks.ToList()[0];
+        return response.Drinks.ToList()[0];
     }
 }
