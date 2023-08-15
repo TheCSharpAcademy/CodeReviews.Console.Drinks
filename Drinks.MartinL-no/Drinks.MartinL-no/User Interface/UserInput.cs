@@ -40,24 +40,29 @@ internal class UserInput
         {
             Console.Clear();
 
-            // Add table
+            // Table to be added
 
             Console.Write("Choose drink: ");
-            var drink = Console.ReadLine();
-            var exists = drinks.Exists(d => d.Name.ToLower() == drink.ToLower());
+            var drinkName = Console.ReadLine();
+            var drink = drinks.FirstOrDefault(d => d.Name.ToLower() == drinkName.ToLower());
 
-            if (drinks.Exists(d => d.Name.ToLower() == drink.ToLower()))
+            if (drink != null)
             {
-                ShowDrinkDetails(drink);
+                await ShowDrinkDetails(drink.Id);
+                break;
             }
 
             else Helpers.ShowMessage("Invalid input, please try again");
         }
     }
 
-    private void ShowDrinkDetails(string drink)
+    private async Task ShowDrinkDetails(int drinkId)
     {
-        throw new NotImplementedException();
+        var drinkDetails = await _controller.GetDrinkDetails(drinkId);
+
+        // Table to be added
+
+        Helpers.Ask("Press any key to return to main menu");
     }
 }
 
