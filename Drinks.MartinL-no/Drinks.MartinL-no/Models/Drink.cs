@@ -8,5 +8,5 @@ internal record class Drink(
     );
 
 internal record class DrinksResponse(
-    [property: JsonPropertyName("drinks")] List<Drink> drinks
+    [property: JsonPropertyName("drinks")] IEnumerable<Drink> drinks
     );
