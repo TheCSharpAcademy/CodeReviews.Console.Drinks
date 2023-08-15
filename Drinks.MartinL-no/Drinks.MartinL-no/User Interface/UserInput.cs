@@ -40,7 +40,7 @@ internal class UserInput
         {
             Console.Clear();
 
-            // Table to be added
+            TableVisualizationEngine.ShowDrinks(drinks);
 
             Console.Write("Choose drink: ");
             var drinkName = Console.ReadLine();
