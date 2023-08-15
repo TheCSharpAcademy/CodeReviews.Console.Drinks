@@ -3,7 +3,7 @@
 internal class DrinkDetailsDto
 {
     public string Name { get; set; }
-    public bool Alcoholic { get; set; }
+    public string Alcoholic { get; set; }
     public string Category { get; set; }
     public string Glass { get; set; }
     public string Instructions { get; set; }
