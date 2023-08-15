@@ -4,7 +4,7 @@ using Drinks.MartinL_no.Models;
 
 namespace Drinks.MartinL_no.DAL;
 
-internal class DrinksDataAccess
+internal class DrinksDataAccess : IDrinksDataAccess
 {
 	private readonly HttpClient _client;
 
