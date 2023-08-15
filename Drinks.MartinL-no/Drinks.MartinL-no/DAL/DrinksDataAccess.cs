@@ -13,14 +13,14 @@ internal class DrinksDataAccess
         _client = client;
     }
 
-    public async Task<List<Category>> GetCategories()
+    public async Task<IEnumerable<Category>> GetCategories()
     {
         var response = await _client.GetFromJsonAsync<CategoryResponse>("list.php?c=list");
 
         return response.Categories;
     }
 
-    public async Task<List<Drink>> GetDrinks(string categoryName)
+    public async Task<IEnumerable<Drink>> GetDrinks(string categoryName)
     {
         var categoryNameUrlString = categoryName.Replace(" ", "_");
         var response = await _client.GetFromJsonAsync<DrinksResponse>($"filter.php?c={categoryNameUrlString}");
@@ -28,11 +28,11 @@ internal class DrinksDataAccess
         return response.drinks;
     }
 
-    public async Task<DrinkDetail> GetDrinkDetails(int drinkId)
+    public async Task<DrinkDetails> GetDrinkDetails(int drinkId)
     {
         var response = await _client.GetFromJsonAsync<DrinkDetailsResponse>($"lookup.php?i={drinkId}");
 
-        return response.drinks[0];
+        return response.drinks.ToList()[0];
     }
 }
 

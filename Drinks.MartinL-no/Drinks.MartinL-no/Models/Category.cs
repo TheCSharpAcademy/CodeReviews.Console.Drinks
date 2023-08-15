@@ -6,5 +6,5 @@ internal record class Category(
     [property: JsonPropertyName("strCategory")] string Name);
 
 internal record class CategoryResponse(
-    [property: JsonPropertyName("drinks")] List<Category> Categories
+    [property: JsonPropertyName("drinks")] IEnumerable<Category> Categories
     );

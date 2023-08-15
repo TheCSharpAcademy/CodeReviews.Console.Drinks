@@ -1,4 +1,5 @@
-﻿using Drinks.MartinL_no.DAL;
+﻿using Drinks.MartinL_no.Controllers;
+using Drinks.MartinL_no.DAL;
 
 namespace Drinks.MartinL_no;
 
@@ -12,10 +13,11 @@ class Program
     static async Task Main(string[] args)
     {
         var repo = new DrinksDataAccess(sharedClient);
+        var controller = new DrinksController(repo);
 
-        var categories = await repo.GetCategories();
-        var drinks = await repo.GetDrinks(categories[0].Name);
-        var drinkDetails = await repo.GetDrinkDetails(drinks[0].Id);
+        var categories = (await controller.GetCategories()).ToList();
+        var drinks = (await controller.GetDrinks(categories[0])).ToList();
+        var drinkDetails = await controller.GetDrinkDetails(drinks[0].Id);
         Console.WriteLine();
     }
 }
