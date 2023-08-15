@@ -19,7 +19,7 @@ internal class UserInput
         {
             Console.Clear();
 
-            // Table to be added
+            TableVisualizationEngine.ShowCategories(categories);
 
             var category = Helpers.Ask("Choose category: ");
 
