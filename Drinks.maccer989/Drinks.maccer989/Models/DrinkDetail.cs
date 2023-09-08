@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Drinks.maccer989
 {
+
     internal class DrinkDetailObject
     {
         [JsonProperty("drinks")]

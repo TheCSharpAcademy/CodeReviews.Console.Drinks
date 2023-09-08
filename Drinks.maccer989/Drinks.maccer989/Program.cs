@@ -8,7 +8,11 @@ namespace Drinks.maccer989
         {
             UserInput userInput = new();
             userInput.GetCategoriesInput();
+
+
+
         }
+
     }
 }
 
