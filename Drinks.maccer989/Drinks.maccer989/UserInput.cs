@@ -1,20 +1,26 @@
-﻿namespace Drinks.Ramseis
+﻿using System;
+using System.Linq;
+
+namespace Drinks.maccer989
 {
     public class UserInput
     {
-        DrinksService drinksService = new();
+        DrinkCategories drinksCategories = new();
+        DrinkByCategories drinksByCategories = new();
+        DrinkGet drinksGet = new();
 
         internal void GetCategoriesInput()
         {
-            List<Category> categories = drinksService.GetCategories();
+            var categories = drinksCategories.GetCategories();
 
-            Console.WriteLine("Choose a category:");
-            string category = (Console.ReadLine() ?? "").Trim();
+            Console.WriteLine("Choose category:");
+
+            string category = Console.ReadLine();
 
             while (!Validator.IsStringValid(category))
             {
                 Console.WriteLine("\nInvalid category");
-                category = (Console.ReadLine() ?? "").Trim();
+                category = Console.ReadLine();
             }
 
             if (!categories.Any(x => x.strCategory == category))
@@ -28,17 +34,18 @@
 
         private void GetDrinksInput(string category)
         {
-            List<Drink> drinks = drinksService.GetDrinksByCategory(category);
+            var drinks = drinksByCategories.GetDrinksByCategory(category);
 
             Console.WriteLine("Choose a drink or go back to category menu by typing 0:");
-            string drink = (Console.ReadLine() ?? "").Trim();
 
-            if (drink == "0") { GetCategoriesInput(); }
+            string drink = Console.ReadLine();
+
+            if (drink == "0") GetCategoriesInput();
 
             while (!Validator.IsIdValid(drink))
             {
                 Console.WriteLine("\nInvalid drink");
-                category = (Console.ReadLine() ?? "").Trim();
+                drink = Console.ReadLine();
             }
 
             if (!drinks.Any(x => x.idDrink == drink))
@@ -48,11 +55,12 @@
             }
 
 
-            drinksService.GetDrink(drink);
+            drinksGet.GetDrink(drink);
 
             Console.WriteLine("Press any key to go back to categories menu");
             Console.ReadKey();
             if (!Console.KeyAvailable) GetCategoriesInput();
+
         }
     }
 }
