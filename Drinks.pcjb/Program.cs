@@ -45,7 +45,7 @@ class Program
                     {
                         Console.WriteLine(drink.Name);
                     }
-                    Console.WriteLine("Press enter to select a differnet category.");
+                    Console.WriteLine("Press enter to select a different category.");
                     Console.ReadLine();
                 }
             }
