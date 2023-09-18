@@ -43,10 +43,25 @@ class Program
                     Console.WriteLine($"Drinks in category '{selectedCategory.Name}':");
                     foreach (var drink in drinks)
                     {
-                        Console.WriteLine(drink.Name);
+                        Console.WriteLine($"{drink.Id} - {drink.Name}");
                     }
-                    Console.WriteLine("Press enter to select a different category.");
-                    Console.ReadLine();
+                    Console.WriteLine("Enter the ID of a drink and press enter to see the details. Press enter alone to select a different category.");
+                    input = Console.ReadLine() ?? "";
+                    if (!String.IsNullOrEmpty(input) && int.TryParse(input, out int selectedDrinkId))
+                    {
+                        var drink = await apiClient.GetDrinkByIdAsync(selectedDrinkId);
+                        if (drink != null)
+                        {
+                            Console.WriteLine("Drink Details");
+                            Console.WriteLine($"{drink.Name}");
+                            Console.WriteLine($"{drink.Instructions}");
+                            Console.ReadLine();
+                        }
+                        else
+                        {
+                          Console.WriteLine("No Drink Details found for this ID.");  
+                        }
+                    }
                 }
             }
         } while (!exit);

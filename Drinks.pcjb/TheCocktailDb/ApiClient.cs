@@ -39,6 +39,19 @@ class ApiClient
         return response.Drinks;
     }
 
+    public async Task<DrinkDetail?> GetDrinkByIdAsync(int drinkId)
+    {
+        using HttpClient client = prepareHttpClient();
+        var requestUri = new Uri(baseUri, "lookup.php?i=" + drinkId);
+        using Stream stream = await client.GetStreamAsync(requestUri);
+        var response = await JsonSerializer.DeserializeAsync<LookupDrinksResponse>(stream);
+        if (response == null || response.Drinks == null)
+        {
+            return null;
+        }
+        return response.Drinks[0];
+    }
+
     private HttpClient prepareHttpClient()
     {
         HttpClient client = new();
