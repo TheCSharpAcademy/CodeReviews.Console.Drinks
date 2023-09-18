@@ -45,7 +45,7 @@ internal class UserInput
             Console.Clear();
             await GetCategoriesInput();
             return;
-        };
+        }
 
         while (!Validator.IsIdValid(drink))
         {
