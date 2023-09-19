@@ -4,6 +4,11 @@ class DrinkDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public string? Alcoholic { get; set; }
+    public string? Category { get; set; }
+    public string? Alternate { get; set; }
+    public string? Iba { get; set; }
+    public string? Glass { get; set; }
     public string? Instructions { get; set; }
     public List<IngredientDto> Ingredients { get; set; }
 
@@ -20,6 +25,6 @@ class DrinkDto
         {
             return;
         }
-        Ingredients.Add(new IngredientDto(measure, name));
+        Ingredients.Add(new IngredientDto(measure.Trim(), name.Trim()));
     }
 }
