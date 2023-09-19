@@ -22,11 +22,9 @@ class ApiClient
         var response = await JsonSerializer.DeserializeAsync<GetCategoriesResponse>(stream);
         if (response != null && response.Categories != null)
         {
-            int id = 0;
             foreach (Category category in response.Categories)
             {
-                id++;
-                categoryDtos.Add(new CategoryDto(id, category.Name));
+                categoryDtos.Add(new CategoryDto(category.Name));
             }
         }
         return categoryDtos;

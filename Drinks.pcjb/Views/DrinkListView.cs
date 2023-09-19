@@ -5,6 +5,7 @@ class DrinkListView : BaseView
     private MainController controller;
     private CategoryDto category;
     private IList<DrinkDto> drinks;
+    private int pointer;
 
     public DrinkListView(MainController controller, CategoryDto category, IList<DrinkDto> drinks)
     {
@@ -15,30 +16,65 @@ class DrinkListView : BaseView
 
     public override void Body()
     {
-        Console.WriteLine($"Drinks in category '{category.Name}'");
+        Console.WriteLine($"Category: '{category.Name}'");
         if (drinks != null && drinks.Count > 0)
         {
             Console.WriteLine($"{drinks.Count} drinks found:");
-            foreach (var drink in drinks)
+
+            if (pointer == drinks.Count - 1)
             {
-                Console.WriteLine($"{drink.Id} - {drink.Name}");
+                Console.WriteLine($"   {drinks[pointer - 2].Name}");
             }
-            
+            if (pointer > 0)
+            {
+                Console.WriteLine($"   {drinks[pointer - 1].Name}");
+            }
+            Console.WriteLine($"-> {drinks[pointer].Name}");
+            if (pointer < drinks.Count - 1)
+            {
+                Console.WriteLine($"   {drinks[pointer + 1].Name}");
+            }
+            if (pointer == 0)
+            {
+                Console.WriteLine($"   {drinks[pointer + 2].Name}");
+            }
+
             Console.WriteLine("---");
-            Console.WriteLine("Enter the ID of a drink and press enter to see the details.");
-            Console.WriteLine("Press enter alone to select a different category.");
-            var input = Console.ReadLine() ?? "";
-            if (String.IsNullOrEmpty(input))
+            Console.WriteLine("Press arrow-up/-down to scroll through the list of drinks.");
+            Console.WriteLine("Press arrow-right to view the details of the drink marked with '->'.");
+            Console.WriteLine("Press arrow-left to change the drink category.");
+            Console.WriteLine("Press 'x' to exit.");
+
+            switch (Console.ReadKey().Key)
             {
-                controller.ShowDrinkCategories();
-            }
-            else if (int.TryParse(input, out int selectedDrinkId))
-            {
-                controller.ShowDrinkDetails(category, selectedDrinkId);
-            }
-            else
-            {
-                controller.ShowDrinksOfCategory(category);
+                case ConsoleKey.DownArrow:
+                    pointer++;
+                    if (pointer > drinks.Count - 1)
+                    {
+                        pointer = drinks.Count - 1;
+                    }
+                    Show();
+                    break;
+                case ConsoleKey.UpArrow:
+                    pointer--;
+                    if (pointer < 0)
+                    {
+                        pointer = 0;
+                    }
+                    Show();
+                    break;
+                case ConsoleKey.RightArrow:
+                    controller.ShowDrinkDetails(category, drinks[pointer].Id);
+                    break;
+                case ConsoleKey.LeftArrow:
+                    controller.ShowDrinkCategories();
+                    break;
+                case ConsoleKey.X:
+                    MainController.ShowExit();
+                    break;
+                default:
+                    Show();
+                    break;
             }
         }
         else

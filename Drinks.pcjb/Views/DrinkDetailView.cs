@@ -44,9 +44,20 @@ class DrinkDetailView : BaseView
         }
 
         Console.WriteLine("---");
-        Console.WriteLine("Press enter to select a different drink.");
-        Console.ReadLine();
-        controller.ShowDrinksOfCategory(category);
+        Console.WriteLine("Press arrow-left to select a different drink.");
+        Console.WriteLine("Press 'x' to exit.");
+        switch (Console.ReadKey().Key)
+        {
+            case ConsoleKey.LeftArrow:
+                controller.ShowDrinksOfCategory(category);
+                break;
+            case ConsoleKey.X:
+                MainController.ShowExit();
+                break;
+            default:
+                Show();
+                break;
+        }
     }
 
     private void WriteLineIfNotEmpty(string label, string? text)
