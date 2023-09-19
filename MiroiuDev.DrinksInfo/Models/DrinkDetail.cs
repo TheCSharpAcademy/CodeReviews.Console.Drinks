@@ -1,6 +1,6 @@
 ﻿namespace MiroiuDev.DrinksInfo.Models;
 
-internal class DrinkDetail
+public class DrinkDetail
 {
-    internal string Name { get; set; }
+    public string Name { get; set; }
 }

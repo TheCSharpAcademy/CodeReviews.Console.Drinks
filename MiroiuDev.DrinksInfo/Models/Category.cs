@@ -2,8 +2,8 @@
 
 namespace MiroiuDev.DrinksInfo.Models;
 
-internal class Category
+public class Category
 {
     [JsonProperty("strCategory")]
-    internal string Name { get; set; } = "";
+    public string Name { get; set; } = "";
 }

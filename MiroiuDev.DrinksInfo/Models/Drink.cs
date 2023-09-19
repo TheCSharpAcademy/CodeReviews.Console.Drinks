@@ -1,20 +1,20 @@
 ﻿using Newtonsoft.Json;
 
 namespace MiroiuDev.DrinksInfo.Models;
-internal class Drink
+public class Drink
 {
     [JsonProperty("idDrink")]
-    internal string Id { get; set; } = "";
+    public string Id { get; set; } = "";
 
     [JsonProperty("strDrink")]
-    internal string Name { get; set; } = "";
+    public string Name { get; set; } = "";
 
     [JsonProperty("strCategory")]
-    internal string Category { get; set; } = "";
+    public string Category { get; set; } = "";
 
     [JsonProperty("strAlcoholic")]
-    internal string Alcoholic { get; set; } = "";
+    public string Alcoholic { get; set; } = "";
 
     [JsonProperty("strInstructions")]
-    internal string Instructions { get; set; } = "";
+    public string Instructions { get; set; } = "";
 }

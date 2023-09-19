@@ -2,8 +2,8 @@
 
 namespace MiroiuDev.DrinksInfo.Models;
 
-internal class DrinkDetails
+public class DrinkDetails
 {
     [JsonProperty("drinks")]
-    internal List<DrinkDetail> DrinkDetailsList { get; set; } = new();
+    public List<DrinkDetail> DrinkDetailsList { get; set; } = new();
 }
