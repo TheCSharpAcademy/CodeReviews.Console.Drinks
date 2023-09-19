@@ -7,7 +7,7 @@ internal static class TableVisualisationEngine
     {
         Console.WriteLine("\n\n");
 
-        ConsoleTableBuilder.From(tableData).WithColumn(tableName).WithFormat(ConsoleTableBuilderFormat.Alternative).ExportAndWriteLine();
+        ConsoleTableBuilder.From(tableData).WithFormat(ConsoleTableBuilderFormat.Alternative).ExportAndWriteLine();
 
         Console.WriteLine("\n\n");
     }

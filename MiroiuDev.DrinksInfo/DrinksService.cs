@@ -46,7 +46,7 @@ internal class DrinksService
 
             var serialized = JsonConvert.DeserializeObject<DrinkDetails>(rawResponse) ?? throw new SerializationException("Invalid serialization.");
 
-            DrinkDetail drinkDetails = serialized.DrinkDetailsList.FirstOrDefault() ?? throw new InvalidDataException("No drink found");
+            Drink drinkDetails = serialized.DrinkDetailsList.FirstOrDefault() ?? throw new InvalidDataException("No drink found");
 
             Type type = drinkDetails.GetType();
 
