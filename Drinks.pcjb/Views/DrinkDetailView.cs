@@ -22,12 +22,14 @@ class DrinkDetailView : BaseView
             Console.WriteLine($"Drink Details for '{drink.Name}'");
             Console.WriteLine("Instructions:");
             Console.WriteLine($"{drink.Instructions}");
-            Console.WriteLine("Press enter to select a different drink.");
         }
         else
         {
             Console.WriteLine("No Drink Details found for this ID.");
         }
+        
+        Console.WriteLine("---");
+        Console.WriteLine("Press enter to select a different drink.");
         Console.ReadLine();
         controller.ShowDrinksOfCategory(category);
     }

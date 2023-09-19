@@ -25,12 +25,22 @@ class DrinkListView : BaseView
             {
                 Console.WriteLine($"{drink.Id} - {drink.Name}");
             }
+            
+            Console.WriteLine("---");
             Console.WriteLine("Enter the ID of a drink and press enter to see the details.");
             Console.WriteLine("Press enter alone to select a different category.");
             var input = Console.ReadLine() ?? "";
-            if (!String.IsNullOrEmpty(input) && int.TryParse(input, out int selectedDrinkId))
+            if (String.IsNullOrEmpty(input))
+            {
+                controller.ShowDrinkCategories();
+            }
+            else if (int.TryParse(input, out int selectedDrinkId))
             {
                 controller.ShowDrinkDetails(category, selectedDrinkId);
+            }
+            else
+            {
+                controller.ShowDrinksOfCategory(category);
             }
         }
         else

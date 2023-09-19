@@ -11,25 +11,31 @@ class MainController
         this.apiClient = apiClient;
     }
 
-    public async void ShowDrinkCategories()
+    public void ShowDrinkCategories()
     {
-        var categories = await apiClient.GetCategoriesAsync();
+        var categories = apiClient.GetCategoriesAsync().Result;
         var view = new DrinkCategoriesView(this, categories);
         view.Show();
     }
 
-    public async void ShowDrinksOfCategory(Category category)
+    public void ShowDrinksOfCategory(Category category)
     {
-        var drinks = await apiClient.GetDrinksByCategoryAsync(category.Name);
+        var drinks = apiClient.GetDrinksByCategoryAsync(category.Name).Result;
         var view = new DrinkListView(this, category, drinks);
         view.Show();
                    
     }
 
-    public async void ShowDrinkDetails(Category category, int drinkId)
+    public void ShowDrinkDetails(Category category, int drinkId)
     {
-        var drink = await apiClient.GetDrinkByIdAsync(drinkId);
+        var drink = apiClient.GetDrinkByIdAsync(drinkId).Result;
         var view = new DrinkDetailView(this, category, drink);
+        view.Show();
+    }
+
+    public void ShowExit()
+    {
+        var view = new ExitView();
         view.Show();
     }
 }

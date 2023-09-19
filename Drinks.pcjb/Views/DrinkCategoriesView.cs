@@ -23,30 +23,25 @@ class DrinkCategoriesView : BaseView
             Console.WriteLine($"{line} - {category.Name}");
         }
 
-        Console.WriteLine("Enter the ID of a category and press enter to list the drinks. Press only enter to exit.");
-
-        Category? selectedCategory = null;
-        bool exit = false;
-        do
+        Console.WriteLine("---");
+        Console.WriteLine("Enter the ID of a category and press enter to list the drinks.");
+        Console.WriteLine("Press only enter to exit.");
+        var input = Console.ReadLine() ?? "";
+        if (String.IsNullOrEmpty(input))
         {
-            var input = Console.ReadLine() ?? "";
-            if (String.IsNullOrEmpty(input))
-            {
-                exit = true;
-            }
-            else if (int.TryParse(input, out int selectedLine))
-            {
-                var idx = selectedLine - 1;
-                if (idx >= 0 && idx < categories.Count)
-                {
-                    selectedCategory = categories[idx];
-                }
-            }
-        } while (!exit && selectedCategory == null);
-
-        if (selectedCategory != null)
+            controller.ShowExit();
+        }
+        else if (int.TryParse(input, out int selectedLine))
         {
-            controller.ShowDrinksOfCategory(selectedCategory);
+            var idx = selectedLine - 1;
+            if (idx >= 0 && idx < categories.Count)
+            {
+                controller.ShowDrinksOfCategory(categories[idx]);
+            }
+            else
+            {
+                controller.ShowDrinkCategories();
+            }
         }
     }
 }
