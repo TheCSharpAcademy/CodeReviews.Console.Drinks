@@ -1,7 +1,5 @@
 namespace Drinks;
 
-using TheCocktailDb;
-
 class DrinkCategoriesView : BaseView
 {
     private MainController controller;
@@ -27,7 +25,7 @@ class DrinkCategoriesView : BaseView
         var input = Console.ReadLine() ?? "";
         if (String.IsNullOrEmpty(input))
         {
-            controller.ShowExit();
+            MainController.ShowExit();
         }
         else if (int.TryParse(input, out int selectedId))
         {

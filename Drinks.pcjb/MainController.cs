@@ -4,7 +4,7 @@ using TheCocktailDb;
 
 class MainController
 {
-    private ApiClient apiClient; 
+    private readonly ApiClient apiClient; 
 
     public MainController(ApiClient apiClient)
     {
@@ -33,7 +33,7 @@ class MainController
         view.Show();
     }
 
-    public void ShowExit()
+    public static void ShowExit()
     {
         var view = new ExitView();
         view.Show();
