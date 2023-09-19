@@ -5,9 +5,9 @@ using TheCocktailDb;
 class DrinkCategoriesView : BaseView
 {
     private MainController controller;
-    private IList<Category> categories;
+    private IList<CategoryDto> categories;
 
-    public DrinkCategoriesView(MainController controller, IList<Category> categories)
+    public DrinkCategoriesView(MainController controller, IList<CategoryDto> categories)
     {
         this.controller = controller;
         this.categories = categories;
@@ -16,11 +16,9 @@ class DrinkCategoriesView : BaseView
     public override void Body()
     {
         Console.WriteLine("Categories:");
-        int line = 0;
         foreach (var category in categories)
         {
-            line++;
-            Console.WriteLine($"{line} - {category.Name}");
+            Console.WriteLine($"{category.Id} - {category.Name}");
         }
 
         Console.WriteLine("---");
@@ -31,17 +29,26 @@ class DrinkCategoriesView : BaseView
         {
             controller.ShowExit();
         }
-        else if (int.TryParse(input, out int selectedLine))
+        else if (int.TryParse(input, out int selectedId))
         {
-            var idx = selectedLine - 1;
-            if (idx >= 0 && idx < categories.Count)
+            CategoryDto? selectedCategory = null;
+            foreach (var category in categories)
             {
-                controller.ShowDrinksOfCategory(categories[idx]);
+                if (category.Id == selectedId)
+                {
+                    selectedCategory = category;
+                    break;
+                }
             }
-            else
+
+            if (selectedCategory != null)
             {
-                controller.ShowDrinkCategories();
+                controller.ShowDrinksOfCategory(selectedCategory);
             }
+        }
+        else
+        {
+            controller.ShowDrinkCategories();
         }
     }
 }

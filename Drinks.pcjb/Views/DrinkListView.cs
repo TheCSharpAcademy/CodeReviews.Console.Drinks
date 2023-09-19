@@ -1,14 +1,12 @@
 namespace Drinks;
 
-using TheCocktailDb;
-
 class DrinkListView : BaseView
 {
     private MainController controller;
-    private Category category;
-    private IList<Drink> drinks;
+    private CategoryDto category;
+    private IList<DrinkDto> drinks;
 
-    public DrinkListView(MainController controller, Category category, IList<Drink> drinks)
+    public DrinkListView(MainController controller, CategoryDto category, IList<DrinkDto> drinks)
     {
         this.controller = controller;
         this.category = category;

@@ -1,6 +1,6 @@
 namespace TheCocktailDb;
 
-using System.Net;
+using Drinks;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -13,33 +13,43 @@ class ApiClient
         this.baseUri = baseUri;
     }
 
-    public async Task<IList<Category>> GetCategoriesAsync()
+    public async Task<IList<CategoryDto>> GetCategoriesAsync()
     {
+        var categoryDtos = new List<CategoryDto>();
         using HttpClient client = prepareHttpClient();
         var requestUri = new Uri(baseUri, "list.php?c=list");
         using Stream stream = await client.GetStreamAsync(requestUri);
         var response = await JsonSerializer.DeserializeAsync<GetCategoriesResponse>(stream);
-        if (response == null || response.Categories == null)
+        if (response != null && response.Categories != null)
         {
-            return new List<Category>();
+            int id = 0;
+            foreach (Category category in response.Categories)
+            {
+                id++;
+                categoryDtos.Add(new CategoryDto(id, category.Name));
+            }
         }
-        return response.Categories;
+        return categoryDtos;
     }
 
-    public async Task<IList<Drink>> GetDrinksByCategoryAsync(string categoryName)
+    public async Task<IList<DrinkDto>> GetDrinksByCategoryAsync(string categoryName)
     {
+        var drinkDtos = new List<DrinkDto>();
         using HttpClient client = prepareHttpClient();
         var requestUri = new Uri(baseUri, "filter.php?c=" + categoryName.Replace(" ", "_"));
         using Stream stream = await client.GetStreamAsync(requestUri);
         var response = await JsonSerializer.DeserializeAsync<GetDrinksByCategoryResponse>(stream);
-        if (response == null || response.Drinks == null)
+        if (response != null && response.Drinks != null)
         {
-            return new List<Drink>();
+            foreach (Drink drink in response.Drinks)
+            {
+                drinkDtos.Add(new DrinkDto(int.Parse(drink.Id), drink.Name));
+            }
         }
-        return response.Drinks;
+        return drinkDtos;
     }
 
-    public async Task<DrinkDetail?> GetDrinkByIdAsync(int drinkId)
+    public async Task<DrinkDto?> GetDrinkByIdAsync(int drinkId)
     {
         using HttpClient client = prepareHttpClient();
         var requestUri = new Uri(baseUri, "lookup.php?i=" + drinkId);
@@ -49,7 +59,25 @@ class ApiClient
         {
             return null;
         }
-        return response.Drinks[0];
+        var drink = response.Drinks[0];
+        var drinkDto = new DrinkDto(int.Parse(drink.Id), drink.Name);
+        drinkDto.Instructions = drink.Instructions;
+        drinkDto.AddIngredient(drink.Measure1, drink.Ingredient1);
+        drinkDto.AddIngredient(drink.Measure2, drink.Ingredient2);
+        drinkDto.AddIngredient(drink.Measure3, drink.Ingredient3);
+        drinkDto.AddIngredient(drink.Measure4, drink.Ingredient4);
+        drinkDto.AddIngredient(drink.Measure5, drink.Ingredient5);
+        drinkDto.AddIngredient(drink.Measure6, drink.Ingredient6);
+        drinkDto.AddIngredient(drink.Measure7, drink.Ingredient7);
+        drinkDto.AddIngredient(drink.Measure8, drink.Ingredient8);
+        drinkDto.AddIngredient(drink.Measure9, drink.Ingredient9);
+        drinkDto.AddIngredient(drink.Measure10, drink.Ingredient10);
+        drinkDto.AddIngredient(drink.Measure11, drink.Ingredient11);
+        drinkDto.AddIngredient(drink.Measure12, drink.Ingredient12);
+        drinkDto.AddIngredient(drink.Measure13, drink.Ingredient13);
+        drinkDto.AddIngredient(drink.Measure14, drink.Ingredient14);
+        drinkDto.AddIngredient(drink.Measure15, drink.Ingredient15);
+        return drinkDto;
     }
 
     private HttpClient prepareHttpClient()

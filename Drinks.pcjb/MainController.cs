@@ -18,7 +18,7 @@ class MainController
         view.Show();
     }
 
-    public void ShowDrinksOfCategory(Category category)
+    public void ShowDrinksOfCategory(CategoryDto category)
     {
         var drinks = apiClient.GetDrinksByCategoryAsync(category.Name).Result;
         var view = new DrinkListView(this, category, drinks);
@@ -26,7 +26,7 @@ class MainController
                    
     }
 
-    public void ShowDrinkDetails(Category category, int drinkId)
+    public void ShowDrinkDetails(CategoryDto category, int drinkId)
     {
         var drink = apiClient.GetDrinkByIdAsync(drinkId).Result;
         var view = new DrinkDetailView(this, category, drink);
