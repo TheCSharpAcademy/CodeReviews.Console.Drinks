@@ -6,18 +6,44 @@ using System.Text.Json;
 
 class ApiClient
 {
-    private Uri baseUri;
+    private readonly Uri baseUri;
+    private readonly string categoriesEndpoint;
+    private readonly string drinksByCategoryEndpoint;
+    private readonly string drinkByIdEndpoint;
 
-    public ApiClient(Uri baseUri)
+
+    public ApiClient(Configuration config)
     {
-        this.baseUri = baseUri;
+        if (config.TheCocktailDbBaseUri == null)
+        {
+            throw new InvalidOperationException("Configuration.TheCocktailDbBaseUri is null.");
+        }
+        baseUri = new Uri(config.TheCocktailDbBaseUri);
+
+        if (config.TheCocktailDbCategories == null)
+        {
+            throw new InvalidOperationException("onfiguration.TheCocktailDbCategories is null.");
+        }
+        categoriesEndpoint = config.TheCocktailDbCategories;
+
+        if (config.TheCocktailDbDrinksByCategory == null)
+        {
+            throw new InvalidOperationException("onfiguration.TheCocktailDbDrinksByCategory is null.");
+        }
+        drinksByCategoryEndpoint = config.TheCocktailDbDrinksByCategory;
+
+        if (config.TheCocktailDbDrinkById == null)
+        {
+            throw new InvalidOperationException("onfiguration.TheCocktailDbDrinkById is null.");
+        }
+        drinkByIdEndpoint = config.TheCocktailDbDrinkById;
     }
 
     public async Task<IList<CategoryDto>> GetCategoriesAsync()
     {
         var categoryDtos = new List<CategoryDto>();
         using HttpClient client = PrepareHttpClient();
-        var requestUri = new Uri(baseUri, "list.php?c=list");
+        var requestUri = new Uri(baseUri, categoriesEndpoint);
         using Stream stream = await client.GetStreamAsync(requestUri);
         var response = await JsonSerializer.DeserializeAsync<GetCategoriesResponse>(stream);
         if (response != null && response.Categories != null)
@@ -34,7 +60,9 @@ class ApiClient
     {
         var drinkDtos = new List<DrinkDto>();
         using HttpClient client = PrepareHttpClient();
-        var requestUri = new Uri(baseUri, "filter.php?c=" + categoryName.Replace(" ", "_"));
+        var categoryNameAsUriParam = categoryName.Replace(" ", "_");
+        var endpoint = drinksByCategoryEndpoint.Replace("{CategoryName}", categoryNameAsUriParam);
+        var requestUri = new Uri(baseUri, endpoint);
         using Stream stream = await client.GetStreamAsync(requestUri);
         var response = await JsonSerializer.DeserializeAsync<GetDrinksByCategoryResponse>(stream);
         if (response != null && response.Drinks != null)
@@ -50,7 +78,7 @@ class ApiClient
     public async Task<DrinkDto?> GetDrinkByIdAsync(int drinkId)
     {
         using HttpClient client = PrepareHttpClient();
-        var requestUri = new Uri(baseUri, "lookup.php?i=" + drinkId);
+        var requestUri = new Uri(baseUri, drinkByIdEndpoint.Replace("{DrinkId}", drinkId.ToString()));
         using Stream stream = await client.GetStreamAsync(requestUri);
         var response = await JsonSerializer.DeserializeAsync<LookupDrinksResponse>(stream);
         if (response == null || response.Drinks == null)
