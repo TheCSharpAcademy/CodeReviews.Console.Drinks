@@ -1,8 +1,8 @@
-using DrinksMenu.Models;
+using Drinks.j_nas.Models;
 using Spectre.Console;
-using static DrinksMenu.Enums;
+using static Drinks.j_nas.Enums;
 
-namespace DrinksMenu;
+namespace Drinks.j_nas;
 
 internal static class UserInterface
 {
@@ -44,7 +44,7 @@ internal static class UserInterface
         Console.Clear();
         var isCategoryMenuRunning = true;
         var categories = DrinkService.GetCategories();
-        var categoriesList = categories.Select(x => x.strCategory).ToList();
+        var categoriesList = categories.Select(x => x.StrCategory).ToList();
         categoriesList.Add("Back");
         while (isCategoryMenuRunning)
         {
@@ -70,7 +70,7 @@ internal static class UserInterface
         Console.Clear();
         var isDrinkMenuRunning = true;
         
-        var drinkList = drinks.Select(x => x.strDrink).ToList();
+        var drinkList = drinks.Select(x => x.StrDrink).ToList();
         drinkList.Add("Back");
         while (isDrinkMenuRunning)
         {
@@ -82,7 +82,7 @@ internal static class UserInterface
                 );
             if (selection != "Back")
             {
-                var drinkId = drinks.FirstOrDefault(x => x.strDrink == selection).idDrink;
+                var drinkId = drinks.FirstOrDefault(x => x.StrDrink == selection).IdDrink;
                 var drink = DrinkService.GetDrinkById(drinkId);
                 
                 TableVisualizationEngine.RenderTable(drink);

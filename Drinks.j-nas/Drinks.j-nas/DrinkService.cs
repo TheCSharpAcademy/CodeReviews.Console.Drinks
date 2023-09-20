@@ -1,9 +1,9 @@
 ﻿using System.Web;
-using RestSharp;
+using Drinks.j_nas.Models;
 using Newtonsoft.Json;
-using DrinksMenu.Models;
+using RestSharp;
 
-namespace DrinksMenu
+namespace Drinks.j_nas
 {
     internal static class DrinkService
     {
@@ -45,9 +45,9 @@ namespace DrinksMenu
             if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 string rawResponse = response.Result.Content;
-                var serialize = JsonConvert.DeserializeObject<Drinks>(rawResponse);
+                var serialize = JsonConvert.DeserializeObject<DrinkList>(rawResponse);
 
-                drinks = serialize.drinks;
+                drinks = serialize.Drinks;
                 return drinks;
             }
 
@@ -89,9 +89,9 @@ namespace DrinksMenu
                        if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
                        {
                            string rawResponse = response.Result.Content;
-                           var serialize = JsonConvert.DeserializeObject<Drinks>(rawResponse);
+                           var serialize = JsonConvert.DeserializeObject<DrinkList>(rawResponse);
            
-                           drinks = serialize.drinks;
+                           drinks = serialize.Drinks;
                            return drinks;
                        }
            

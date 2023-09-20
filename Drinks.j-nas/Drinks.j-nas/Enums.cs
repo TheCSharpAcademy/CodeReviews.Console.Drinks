@@ -1,4 +1,4 @@
-namespace DrinksMenu;
+namespace Drinks.j_nas;
 
 internal class Enums
 {
