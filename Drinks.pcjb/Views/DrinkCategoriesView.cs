@@ -17,22 +17,27 @@ class DrinkCategoriesView : BaseView
         Console.WriteLine("Drink Categories");
         Console.WriteLine($"{categories.Count} categories found:");
 
-        if (pointer == categories.Count - 1)
+        int itemsAfterPointer = categories.Count - 1 - pointer;
+        int maxVisibleItemsBeforeAfter = 3;
+        int first = pointer - Math.Min(maxVisibleItemsBeforeAfter, pointer);
+        int last = pointer + Math.Min(maxVisibleItemsBeforeAfter, itemsAfterPointer);
+        if (pointer - first < maxVisibleItemsBeforeAfter)
         {
-            Console.WriteLine($"   {categories[pointer-2].Name}");
+            last += Math.Min(maxVisibleItemsBeforeAfter - (pointer - first), itemsAfterPointer);
         }
-        if (pointer > 0)
+        if (last - pointer < maxVisibleItemsBeforeAfter)
         {
-            Console.WriteLine($"   {categories[pointer-1].Name}");
+            first -= Math.Min(maxVisibleItemsBeforeAfter - (last - pointer), pointer);
         }
-        Console.WriteLine($"-> {categories[pointer].Name}");
-        if (pointer < categories.Count - 1)
+        if (first < 0) first = 0;
+        if (first >= categories.Count) first = categories.Count - 1;
+        if (last < 0) last = 0;
+        if (last >= categories.Count) last = categories.Count - 1;
+
+        for (int i = first; i <= last; i++)
         {
-            Console.WriteLine($"   {categories[pointer+1].Name}");
-        }
-        if (pointer == 0)
-        {
-            Console.WriteLine($"   {categories[pointer+2].Name}");
+            var pointerSymbol = (i == pointer) ? "->" : "  ";
+            Console.WriteLine($"{pointerSymbol} {categories[i].Name}");
         }
 
         Console.WriteLine("---");

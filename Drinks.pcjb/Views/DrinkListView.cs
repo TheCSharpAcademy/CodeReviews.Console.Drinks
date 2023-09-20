@@ -21,22 +21,27 @@ class DrinkListView : BaseView
         {
             Console.WriteLine($"{drinks.Count} drinks found:");
 
-            if (pointer == drinks.Count - 1)
+            int itemsAfterPointer = drinks.Count - 1 - pointer;
+            int maxVisibleItemsBeforeAfter = 3;
+            int first = pointer - Math.Min(maxVisibleItemsBeforeAfter, pointer);
+            int last = pointer + Math.Min(maxVisibleItemsBeforeAfter, itemsAfterPointer);
+            if (pointer - first < maxVisibleItemsBeforeAfter)
             {
-                Console.WriteLine($"   {drinks[pointer - 2].Name}");
+                last += Math.Min(maxVisibleItemsBeforeAfter - (pointer - first), itemsAfterPointer);
             }
-            if (pointer > 0)
+            if (last - pointer < maxVisibleItemsBeforeAfter)
             {
-                Console.WriteLine($"   {drinks[pointer - 1].Name}");
+                first -= Math.Min(maxVisibleItemsBeforeAfter - (last - pointer), pointer);
             }
-            Console.WriteLine($"-> {drinks[pointer].Name}");
-            if (pointer < drinks.Count - 1)
+            if (first < 0) first = 0;
+            if (first >= drinks.Count) first = drinks.Count - 1;
+            if (last < 0) last = 0;
+            if (last >= drinks.Count) last = drinks.Count - 1;
+
+            for (int i = first; i <= last; i++)
             {
-                Console.WriteLine($"   {drinks[pointer + 1].Name}");
-            }
-            if (pointer == 0)
-            {
-                Console.WriteLine($"   {drinks[pointer + 2].Name}");
+                var pointerSymbol = (i == pointer) ? "->" : "  ";
+                Console.WriteLine($"{pointerSymbol} {drinks[i].Name}");
             }
 
             Console.WriteLine("---");
