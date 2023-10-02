@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-internal class UserInterface
+﻿internal class UserInterface
 {
     private DrinksController _controller;
 
