@@ -1,3 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Drinks.wkktoria;
 
-Console.WriteLine("Hello, World!");
+var userInput = new UserInput();
+userInput.GetCategoriesInput();
