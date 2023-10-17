@@ -5,7 +5,7 @@ namespace Drinks.wkktoria.Models;
 internal class Drink
 {
     public string? IdDrink { get; set; }
-    public string? StrDrink { get; set; }
+    public string StrDrink { get; set; } = null!;
 }
 
 internal class Drinks

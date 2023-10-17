@@ -4,7 +4,7 @@ namespace Drinks.wkktoria.Models;
 
 internal class Category
 {
-    public string? StrCategory { get; set; }
+    public string StrCategory { get; set; } = null!;
 }
 
 internal class Categories

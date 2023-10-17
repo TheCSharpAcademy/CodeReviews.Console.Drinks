@@ -1,4 +1,5 @@
 using Drinks.wkktoria.Services;
+using Spectre.Console;
 
 namespace Drinks.wkktoria;
 
@@ -8,54 +9,32 @@ internal class UserInput
     {
         var categories = DrinksService.GetCategories();
 
-        Console.Write("Choose category: ");
+        if (categories == null) return;
 
-        var category = Console.ReadLine();
+        var category = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Choose category:")
+                .AddChoices(categories.Select(category => category.StrCategory).ToList()));
 
-        while (!Validator.IsStringValid(category))
-        {
-            Console.WriteLine("Invalid category.");
-            category = Console.ReadLine();
-        }
-
-        if (categories != null && !categories.Any(c =>
-                c.StrCategory != null && c.StrCategory.Equals(category, StringComparison.InvariantCultureIgnoreCase)))
-        {
-            Console.WriteLine("Category doesn't exist.");
-            Console.WriteLine("Press any key to return to categories menu...");
-            Console.ReadKey();
-            if (!Console.KeyAvailable) GetCategoriesInput();
-        }
-
-        if (category != null) GetDrinksInput(category);
+        GetDrinksInput(category);
     }
 
     private void GetDrinksInput(string category)
     {
         var drinks = DrinksService.GetDrinksByCategory(category);
 
-        Console.Write("Choose a drink by choosing id or go back by entering '0': ");
+        if (drinks == null) return;
 
-        var id = Console.ReadLine();
+        var drinkName = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Choose drink:")
+                .AddChoices(drinks.Select(drink => drink.StrDrink).ToList())
+        );
 
-        if (id == "0") GetCategoriesInput();
+        var selectedDrink =
+            drinks.Find(drink => drink.StrDrink.Equals(drinkName, StringComparison.InvariantCultureIgnoreCase));
 
-        while (!Validator.IsIdValid(id))
-        {
-            Console.Write("Invalid drink. Enter valid id: ");
-            id = Console.ReadLine();
-        }
-
-        if (drinks != null && !drinks.Any(d =>
-                d.IdDrink != null && d.IdDrink.Equals(id, StringComparison.InvariantCultureIgnoreCase)))
-        {
-            Console.WriteLine("Drink doesn't exist.");
-            Console.WriteLine("Press any key to return to drinks menu...");
-            Console.ReadKey();
-            if (!Console.KeyAvailable) GetDrinksInput(category);
-        }
-
-        if (id != null) DrinksService.GetDrink(id);
+        DrinksService.GetDrink(selectedDrink!.IdDrink!);
 
         Console.WriteLine("Press any key to return to categories menu...");
         Console.ReadKey();

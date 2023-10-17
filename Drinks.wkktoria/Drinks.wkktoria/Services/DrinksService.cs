@@ -6,7 +6,7 @@ using RestSharp;
 
 namespace Drinks.wkktoria.Services;
 
-internal class DrinksService
+internal static class DrinksService
 {
     internal static List<Category>? GetCategories()
     {
@@ -24,7 +24,6 @@ internal class DrinksService
         var deserialized = JsonConvert.DeserializeObject<Categories>(rawResponse);
         categories = deserialized?.CategoriesList;
 
-        if (categories != null) TableVisualisationEngine.ShowTable(categories, "Categories Menu");
         return categories;
     }
 
@@ -44,7 +43,6 @@ internal class DrinksService
         var deserialized = JsonConvert.DeserializeObject<Models.Drinks>(rawResponse);
         drinks = deserialized?.DrinksList;
 
-        if (drinks != null) TableVisualisationEngine.ShowTable(drinks, "Drinks Menu");
         return drinks;
     }
 
