@@ -1,5 +1,7 @@
 ﻿using System.Configuration;
 using Drinks.wkktoria;
+using Drinks.wkktoria.Services;
+using Drinks.wkktoria.UserInterface;
 
 var databaseName = ConfigurationManager.AppSettings.Get("DatabaseName");
 var databasePassword = ConfigurationManager.AppSettings.Get("DatabasePassword");
@@ -8,5 +10,7 @@ var connectionString = $"Server=localhost,1433;User Id=sa;Password={databasePass
 var databaseManager = new DatabaseManager(connectionString, databaseName!);
 databaseManager.Initialize();
 
-// var userInput = new UserInput();
-// userInput.GetCategoriesInput();
+var favoritesService = new FavoritesService(connectionString, databaseName!);
+
+var userInput = new UserInput(favoritesService);
+userInput.Run();

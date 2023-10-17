@@ -1,6 +1,6 @@
 using ConsoleTableExt;
 
-namespace Drinks.wkktoria;
+namespace Drinks.wkktoria.UserInterface;
 
 internal static class TableVisualisationEngine
 {
