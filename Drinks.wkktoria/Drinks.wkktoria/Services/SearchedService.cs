@@ -4,20 +4,20 @@ using Microsoft.Data.SqlClient;
 
 namespace Drinks.wkktoria.Services;
 
-internal class FavoritesService
+internal class SearchedService
 {
     private readonly SqlConnection _connection;
     private readonly string _databaseName;
 
-    internal FavoritesService(string connectionString, string databaseName)
+    internal SearchedService(string connectionString, string databaseName)
     {
         _connection = new SqlConnection(connectionString);
         _databaseName = databaseName;
     }
 
-    internal List<FavoriteDto> GetAll()
+    internal List<SearchedDto> GetAll()
     {
-        var favorites = new List<FavoriteDto>();
+        var searched = new List<SearchedDto>();
 
         try
         {
@@ -26,35 +26,34 @@ internal class FavoritesService
             var query = $"""
                          USE {_databaseName}
 
-                         Select Name, Category FROM Favorites
+                         Select Name, Category, Count FROM Searched
                          """;
             var command = new SqlCommand(query, _connection);
             var reader = command.ExecuteReader();
 
             if (reader.HasRows)
                 while (reader.Read())
-                    favorites.Add(new FavoriteDto
+                    searched.Add(new SearchedDto
                     {
                         Name = reader.GetString(0),
-                        Category = reader.GetString(1)
+                        Category = reader.GetString(1),
+                        Count = reader.GetInt32(2)
                     });
         }
         catch (Exception)
         {
-            Console.WriteLine("Failed to get favorites.");
+            Console.WriteLine("Failed to get searched drinks.");
         }
         finally
         {
             if (_connection.State == ConnectionState.Open) _connection.Close();
         }
 
-        return favorites;
+        return searched;
     }
 
-    internal bool Add(FavoriteDto drink)
+    internal void Add(SearchedDto searched)
     {
-        var added = false;
-
         try
         {
             _connection.Open();
@@ -62,30 +61,26 @@ internal class FavoritesService
             var query = $"""
                          USE {_databaseName}
 
-                         INSERT INTO Favorites(Name, Category) VALUES(@name, @category)
+                         INSERT INTO Searched(Name, Category, Count) VALUES(@name, @category, 1)
                          """;
             var command = new SqlCommand(query, _connection);
-            command.Parameters.AddWithValue("@name", drink.Name);
-            command.Parameters.AddWithValue("@category", drink.Category);
+            command.Parameters.AddWithValue("@name", searched.Name);
+            command.Parameters.AddWithValue("@category", searched.Category);
 
-            added = command.ExecuteNonQuery() == 1;
+            command.ExecuteNonQuery();
         }
         catch (Exception)
         {
-            Console.WriteLine("Failed to add drink to favorites.");
+            Console.WriteLine("Failed to add drink to searched.");
         }
         finally
         {
             if (_connection.State == ConnectionState.Open) _connection.Close();
         }
-
-        return added;
     }
 
-    internal bool Delete(FavoriteDto drink)
+    internal void Update(SearchedDto searched)
     {
-        var deleted = false;
-
         try
         {
             _connection.Open();
@@ -93,23 +88,22 @@ internal class FavoritesService
             var query = $"""
                          USE {_databaseName}
 
-                         DELETE FROM Favorites WHERE Name = @name AND Category = @category
+                         UPDATE Searched SET Count = @count WHERE Name = @name AND Category = @category
                          """;
             var command = new SqlCommand(query, _connection);
-            command.Parameters.AddWithValue("@name", drink.Name);
-            command.Parameters.AddWithValue("@category", drink.Category);
+            command.Parameters.AddWithValue("@count", searched.Count);
+            command.Parameters.AddWithValue("@name", searched.Name);
+            command.Parameters.AddWithValue("@category", searched.Category);
 
-            deleted = command.ExecuteNonQuery() == 1;
+            command.ExecuteNonQuery();
         }
         catch (Exception)
         {
-            Console.WriteLine("Failed to delete drink from favorites.");
+            Console.WriteLine("Failed to update searched.");
         }
         finally
         {
             if (_connection.State == ConnectionState.Open) _connection.Close();
         }
-
-        return deleted;
     }
 }

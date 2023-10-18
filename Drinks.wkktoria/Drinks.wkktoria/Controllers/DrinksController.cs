@@ -1,11 +1,19 @@
 using Drinks.wkktoria.Models;
+using Drinks.wkktoria.Models.Dtos;
 using Drinks.wkktoria.Services;
 using Drinks.wkktoria.UserInterface;
 
 namespace Drinks.wkktoria.Controllers;
 
-internal static class DrinksController
+internal class DrinksController
 {
+    private readonly SearchedService _searchedService;
+
+    internal DrinksController(SearchedService searchedService)
+    {
+        _searchedService = searchedService;
+    }
+
     internal static string GetCategories()
     {
         Console.Clear();
@@ -36,7 +44,7 @@ internal static class DrinksController
         return selectedDrink;
     }
 
-    internal static void GetDrinkInfo()
+    internal void GetDrinkInfo()
     {
         Console.Clear();
 
@@ -44,6 +52,32 @@ internal static class DrinksController
         var drink = GetDrinks(category);
 
         DrinksService.GetDrink(drink!.IdDrink!);
+
+        var allSearched = _searchedService.GetAll();
+        if (!allSearched.Any(searched =>
+                searched.Name.Equals(drink.StrDrink, StringComparison.InvariantCultureIgnoreCase) &&
+                searched.Category.Equals(category, StringComparison.InvariantCultureIgnoreCase)))
+        {
+            _searchedService.Add(new SearchedDto
+            {
+                Name = drink.StrDrink,
+                Category = category
+            });
+        }
+        else
+        {
+            var toUpdate = allSearched.Find(searched =>
+                searched.Name.Equals(drink.StrDrink, StringComparison.InvariantCultureIgnoreCase) &&
+                searched.Category.Equals(category, StringComparison.InvariantCultureIgnoreCase));
+
+            if (toUpdate != null)
+                _searchedService.Update(new SearchedDto
+                {
+                    Name = toUpdate.Name,
+                    Category = toUpdate.Category,
+                    Count = ++toUpdate.Count
+                });
+        }
 
         Helpers.PressAnyKeyToContinue();
     }

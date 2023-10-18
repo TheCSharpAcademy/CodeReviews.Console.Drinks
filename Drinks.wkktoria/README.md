@@ -11,4 +11,4 @@
 ## Challenges
 
 - [X] Favorite drinks.
-- [ ] Counting the most searched drinks.
+- [X] Counting the most searched drinks.

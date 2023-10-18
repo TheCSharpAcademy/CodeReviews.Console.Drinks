@@ -11,6 +11,7 @@ var databaseManager = new DatabaseManager(connectionString, databaseName!);
 databaseManager.Initialize();
 
 var favoritesService = new FavoritesService(connectionString, databaseName!);
+var searchedService = new SearchedService(connectionString, databaseName!);
 
-var userInput = new UserInput(favoritesService);
+var userInput = new UserInput(favoritesService, searchedService);
 userInput.Run();

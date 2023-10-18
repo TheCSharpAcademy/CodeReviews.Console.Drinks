@@ -36,6 +36,16 @@ internal class DatabaseManager
                                 Category NVARCHAR(50) NOT NULL
                             )
                          END
+
+                         IF OBJECT_ID('Searched', 'U') IS NULL
+                         BEGIN
+                            CREATE TABLE Searched(
+                                Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+                                Name NVARCHAR(100) NOT NULL,
+                                Category NVARCHAR(50) NOT NULL,
+                                Count INT NOT NULL
+                            )
+                         END
                          """;
             var command = new SqlCommand(query, _connection);
             command.Parameters.AddWithValue("@databaseName", _databaseName);
