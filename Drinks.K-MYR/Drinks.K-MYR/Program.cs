@@ -1,0 +1,21 @@
+﻿using BenchmarkDotNet.Running;
+using Drinks.K_MYR;
+
+class Program
+{
+    private static HttpClient apiClient = new()
+    {
+        BaseAddress = new Uri("http://www.thecocktaildb.com/api/json/v1/1/")
+    };
+
+    static async Task Main()
+    {
+        var apiRepo = new ApiAccess(apiClient);
+        var controller = new DrinksController(apiRepo);
+        var userInterface = new UserInterface(controller);
+        await userInterface.RunApp();
+    }
+}
+
+
+
