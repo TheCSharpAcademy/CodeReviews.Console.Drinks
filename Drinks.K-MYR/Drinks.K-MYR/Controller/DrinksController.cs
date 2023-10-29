@@ -6,9 +6,26 @@ internal class DrinksController
 {
     private readonly ApiAccess _apiRepo;
 
-    public DrinksController(ApiAccess apiRepo)
+    private readonly SqlAcess _sqlRepo;
+
+    public DrinksController(ApiAccess apiRepo, SqlAcess sqlRepo)
     {
         _apiRepo = apiRepo;
+        _sqlRepo = sqlRepo;
+    }
+
+    public IEnumerable<Drink> GetDrinksByLastSearched()
+    {
+        var drinks = _sqlRepo.GetDrinksByLastSearched();
+
+        return drinks;
+    }
+
+    public IEnumerable<Drink> GetDrinksByFavourite()
+    {
+        var drinks = _sqlRepo.GetDrinksByFavourite();
+
+        return drinks;
     }
 
     public async Task<IEnumerable<string>> GetCategories()
@@ -25,9 +42,19 @@ internal class DrinksController
         return drinks;
     }
 
-    internal async Task<DrinkDetailDto> GetDrinkByIdAsync(int drink)
+    internal async Task<DrinkDetailDto> GetDrinkByIdAsync(int drinkId)
     {
-        var drinkDetails = await _apiRepo.GetDrinkById(drink);
+        var drinkDetails = await _apiRepo.GetDrinkById(drinkId);
+
+        if (!_sqlRepo.DrinkRecordExists(drinkId))
+        {
+            _sqlRepo.InsertDrinkIntoDb(drinkId, drinkDetails.Drink, DateTime.Now);
+        }
+
+        else
+        {
+            _sqlRepo.UpdateDrinkById(drinkId, DateTime.Now.ToString("yyyy/MM/dd hh\\:mm\\:ss"));
+        }
 
         return new DrinkDetailDto()
         {
@@ -61,5 +88,10 @@ internal class DrinksController
         }
 
         return ingredients;
+    }
+
+    internal void SaveDrinkAsFavourite(int drinkId)
+    {
+        _sqlRepo.UpdateDrinkById(drinkId, "saved = TRUE");
     }
 }

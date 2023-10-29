@@ -1,5 +1,4 @@
-﻿using BenchmarkDotNet.Running;
-using Drinks.K_MYR;
+﻿using Drinks.K_MYR;
 
 class Program
 {
@@ -11,7 +10,8 @@ class Program
     static async Task Main()
     {
         var apiRepo = new ApiAccess(apiClient);
-        var controller = new DrinksController(apiRepo);
+        var sqlRepo = new SqlAcess();
+        var controller = new DrinksController(apiRepo, sqlRepo);
         var userInterface = new UserInterface(controller);
         await userInterface.RunApp();
     }
