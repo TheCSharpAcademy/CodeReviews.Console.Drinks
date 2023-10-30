@@ -15,7 +15,7 @@ internal class ApiAccess : IApiAccess
     public async Task<IEnumerable<Category>> GetCategories()
     {
         var response = await _apiClient.GetFromJsonAsync<CategoryResponse>("list.php?c=list");
-
+        
         return response.Categories;
     }
 

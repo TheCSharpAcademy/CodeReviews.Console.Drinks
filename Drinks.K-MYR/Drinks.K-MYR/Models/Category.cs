@@ -11,7 +11,7 @@ internal record class CategoryResponse
 internal record class Category
 {
     [property: JsonPropertyName("strCategory")]
-    public string Name {  get; set; }
+    public string Name {  get; set; } = string.Empty;
 }
 
 

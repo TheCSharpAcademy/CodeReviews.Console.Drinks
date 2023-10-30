@@ -23,7 +23,7 @@ internal class SqlAcess
                                                                     api_id INTEGER UNIQUE,                                                        
                                                                     name TEXT ,                                                                                                                                    
                                                                     last_searched TEXT,
-                                                                    saved BOOL
+                                                                    saved INTEGER
                                                                   )";                            
         command.ExecuteNonQuery(); 
     }    
@@ -31,8 +31,9 @@ internal class SqlAcess
     public IEnumerable<Drink> GetDrinksByLastSearched()
     {
         using SqliteConnection connection = new(_connectionString);
+        connection.Open();
         var command = connection.CreateCommand();
-        command.CommandText = @"SELECT TOP 10 * FROM (SELECT * FROM drink ORDER BY DESC last_searched)";
+        command.CommandText = @"SELECT * FROM (SELECT * FROM drink ORDER BY drink.last_searched DESC) LIMIT 20";
 
         var reader = command.ExecuteReader();
 
@@ -54,7 +55,7 @@ internal class SqlAcess
         using SqliteConnection connection = new(_connectionString);
         connection.Open();
         var command = connection.CreateCommand();
-        command.CommandText = "SELECT *  FROM drink WHERE saved = true";
+        command.CommandText = "SELECT *  FROM drink WHERE saved = 1";
 
         var reader = command.ExecuteReader();
 
@@ -71,23 +72,33 @@ internal class SqlAcess
         return drinks;
     }
 
-
     public bool DrinkRecordExists(int drinkId)
     {
         using SqliteConnection connection = new(_connectionString);
         connection.Open();
         var command = connection.CreateCommand();
-        command.CommandText = $"EXISTS(SELECT 1 FROM drink WHERE drink.api = {drinkId})";
+        command.CommandText = $"SELECT EXISTS (SELECT 1 FROM drink WHERE api_id = {drinkId})";
 
-        return(Convert.ToInt32(command.ExecuteScalar()) == 1 ? true : false);
+        return Convert.ToInt32(command.ExecuteScalar()) == 1;
     }    
+
+    public bool DrinkIsFavourite(int drinkId)
+    {
+        using SqliteConnection connection = new(_connectionString);
+        connection.Open();
+        var command = connection.CreateCommand();
+
+        command.CommandText = $"SELECT EXISTS (SELECT * FROM drink WHERE drink.api_id = {drinkId} AND saved = 1 LIMIT 1)";
+
+        return Convert.ToInt32(command.ExecuteScalar()) == 1;
+    }
 
     public void InsertDrinkIntoDb(int drinkId, string drinkName, DateTime searchDate)
     {
         using SqliteConnection connection = new(_connectionString);
         connection.Open();
         var command = connection.CreateCommand();
-        command.CommandText = $"INSERT INTO drink (api_id, name, last_search, saved) VALUES ({drinkId}, '{drinkName}', '{searchDate.ToString("yyyy/MM/dd hh\\:mm\\:ss")}', FALSE)";
+        command.CommandText = $"INSERT INTO drink (api_id, name, last_searched, saved) VALUES ({drinkId}, '{drinkName}', '{searchDate:yyyy/MM/dd hh\\:mm\\:ss}', 0)";
 
         command.ExecuteNonQuery();
     }
@@ -97,7 +108,7 @@ internal class SqlAcess
         using SqliteConnection connection = new(_connectionString);
         connection.Open();
         var command = connection.CreateCommand();
-        command.CommandText = $"UPDATE drink SET {args} WHERE drink.id = {drinkId}";
+        command.CommandText = $"UPDATE drink SET {args} WHERE drink.api_id = {drinkId}";
 
         command.ExecuteNonQuery();
     }    

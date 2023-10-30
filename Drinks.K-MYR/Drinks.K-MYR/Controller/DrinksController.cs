@@ -53,7 +53,7 @@ internal class DrinksController
 
         else
         {
-            _sqlRepo.UpdateDrinkById(drinkId, DateTime.Now.ToString("yyyy/MM/dd hh\\:mm\\:ss"));
+            _sqlRepo.UpdateDrinkById(drinkId, $"last_searched = '{DateTime.Now:yyyy/MM/dd hh\\:mm\\:ss}'");
         }
 
         return new DrinkDetailDto()
@@ -68,21 +68,25 @@ internal class DrinksController
         };
     }
 
-    private static List<Ingredient> GenerateIngredients(Dictionary<string, JsonElement>? additionalInformation)
+    private static List<Ingredient> GenerateIngredients(Dictionary<string, JsonElement> additionalInformation)
     {
         List<Ingredient> ingredients = new();
 
-        foreach (var key in additionalInformation.Keys)
+        if (additionalInformation != null)
         {
-            if (key.StartsWith("strIngredient"))
+            foreach (var key in additionalInformation.Keys)
             {
-                if (!string.IsNullOrEmpty(additionalInformation[key].GetString()))
+                if (key.StartsWith("strIngredient"))
                 {
-                    string measureString = "strMeasure" + key[13..];
-                    string measure = additionalInformation[measureString].GetString() ?? "";
-                    string ingredient = additionalInformation[key].GetString();
+                    string? ingredient = additionalInformation[key].GetString();
 
-                    ingredients.Add(new Ingredient(ingredient, measure));
+                    if (!string.IsNullOrEmpty(ingredient))
+                    {
+                        string measureString = "strMeasure" + key[13..];
+                        string measure = additionalInformation[measureString].GetString() ?? "";
+
+                        ingredients.Add(new Ingredient(ingredient, measure));
+                    }
                 }
             }
         }
@@ -90,8 +94,13 @@ internal class DrinksController
         return ingredients;
     }
 
-    internal void SaveDrinkAsFavourite(int drinkId)
+    internal void ToggleDrinkIsFavourite(int drinkId, bool state)
     {
-        _sqlRepo.UpdateDrinkById(drinkId, "saved = TRUE");
+        _sqlRepo.UpdateDrinkById(drinkId, $"saved = {Convert.ToInt32(!state)}");
+    }    
+
+    internal bool DrinkIsFavourite(int drinkId)
+    {
+        return _sqlRepo.DrinkIsFavourite(drinkId);
     }
 }

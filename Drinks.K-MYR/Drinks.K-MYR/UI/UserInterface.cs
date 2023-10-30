@@ -1,4 +1,6 @@
-﻿namespace Drinks.K_MYR.UI;
+﻿using Spectre.Console.Rendering;
+
+namespace Drinks.K_MYR.UI;
 
 internal class UserInterface
 {
@@ -18,23 +20,35 @@ internal class UserInterface
 
             var selection = AnsiConsole.Prompt(new SelectionPrompt<string>()
                                                         .Title("[underline paleturquoise1]Main Menu[/]")
-                                                        .PageSize(4)
-                                                        .AddChoices("Browse Drinks", "Saved Drinks", "Last Searched For", "Exit"));
-            switch(selection)
+                                                        .AddChoices("Browse Drinks", "Favourite Drinks", "Last Searched For", "Exit"));
+            try
             {
-                case "Browse Drinks":
-                    GetCategoryInputAsync();
-                    break;
-                case "Saved Drinks":
-                    GetDrinksInputFromSqlFavouriteAsync();
-                    break;
-                case "Last Searched For":
-                    GetDrinksInputFromSqlLastSearchedAsync();
-                    break;
-                case "Exit":
-                    Environment.Exit(0);
-                    break;
+                switch (selection)
+                {
+                    case "Browse Drinks":
+                        await GetCategoryInputAsync();
+                        break;
+                    case "Favourite Drinks":
+                        await GetDrinksInputFromSqlFavouriteAsync();
+                        break;
+                    case "Last Searched For":
+                        await GetDrinksInputFromSqlLastSearchedAsync();
+                        break;
+                    case "Exit":
+                        Environment.Exit(0);
+                        break;
+                }
             }
+            
+            catch (HttpRequestException)
+            {
+                AnsiConsole.Clear();
+                AnsiConsole.Write(new Panel($"A Problem Occured: Bad Internet Connection"));
+                AnsiConsole.Write(new Panel($"Press Any Key To Return To The Main Menu"));
+                Console.ReadKey();
+            }
+
+            
         }        
     }
 
@@ -51,7 +65,7 @@ internal class UserInterface
 
             var selection = AnsiConsole.Prompt(new SelectionPrompt<string>()
                                                     .Title("[underline paleturquoise1]Choose A Drink:[/]")
-                                                    .PageSize(drinksList.Count + 1)
+                                                    .PageSize(15)
                                                     .AddChoices(drinksList)
                                                     .AddChoices("Exit"));
 
@@ -75,7 +89,7 @@ internal class UserInterface
 
             var selection = AnsiConsole.Prompt(new SelectionPrompt<string>()
                                                     .Title("[underline paleturquoise1]Choose A Drink:[/]")
-                                                    .PageSize(drinksList.Count + 1)
+                                                    .PageSize(15)
                                                     .AddChoices(drinksList)
                                                     .AddChoices("Exit"));
 
@@ -97,7 +111,7 @@ internal class UserInterface
 
             var category = AnsiConsole.Prompt(new SelectionPrompt<string>()
                                                     .Title("[underline paleturquoise1]Choose A Category:[/]")
-                                                    .PageSize(categories.Count + 1)
+                                                    .PageSize(15)
                                                     .AddChoices(categories)
                                                     .AddChoices("Exit"));
 
@@ -120,7 +134,7 @@ internal class UserInterface
 
             var selection = AnsiConsole.Prompt(new SelectionPrompt<string>()
                                                     .Title("[underline paleturquoise1]Choose A Drink:[/]")
-                                                    .PageSize(drinksList.Count + 1)
+                                                    .PageSize(15)
                                                     .AddChoices(drinksList)
                                                     .AddChoices("Exit"));
 
@@ -133,45 +147,61 @@ internal class UserInterface
 
     private async Task ShowDrinkDetails(int drinkId)
     {
-        AnsiConsole.Clear();
-        Helpers.RenderTitle("[darkorange]Drinks Information Service[/]");
-
         DrinkDetailDto drink = await _drinksController.GetDrinkByIdAsync(drinkId);
+        bool returnToMainMenu = false;
 
-        var drinkInfo = new Table()
-                            .Title($"[seagreen2]{drink.Drink}[/]");
-
-        drinkInfo.AddColumn("[darkorange]Category[/]");
-        drinkInfo.AddColumn("[darkorange]Alcoholic?[/]");
-        drinkInfo.AddColumn("[darkorange]Glass[/]");
-        drinkInfo.AddColumn("[darkorange]Tags[/]");
-        drinkInfo.AddRow(drink.Category, drink.Alcohlic, drink.Glass, drink.Tags ??= "");
-        drinkInfo.Expand();
-
-        var drinkInstructions = new Table();
-
-        drinkInstructions.AddColumn("[darkorange]Measure[/]");
-        drinkInstructions.AddColumn("[darkorange]Ingredient[/]");
-
-        foreach (var ingredient in drink.Ingredients)
+        while (!returnToMainMenu)
         {
-            drinkInstructions.AddRow(ingredient.Measure, ingredient.Name);
-        }
+            AnsiConsole.Clear();
+            Helpers.RenderTitle("[darkorange]Drinks Information Service[/]");            
 
-        drinkInstructions.Expand();
+            var drinkInfo = new Table()
+                                .Title($"[seagreen2]{drink.Drink}[/]");
 
-        var instructionPanel = new Panel(drink.Instructions)
-                                      .Header("[darkorange]Instructions[/]")
-                                      .Expand();
+            drinkInfo.AddColumn("[darkorange]Category[/]");
+            drinkInfo.AddColumn("[darkorange]Alcoholic?[/]");
+            drinkInfo.AddColumn("[darkorange]Glass[/]");
+            drinkInfo.AddColumn("[darkorange]Tags[/]");
+            drinkInfo.AddRow(drink.Category, drink.Alcohlic, drink.Glass, drink.Tags ??= "");
+            drinkInfo.Expand();
+
+            var drinkInstructions = new Table();
+
+            drinkInstructions.AddColumn("[darkorange]Measure[/]");
+            drinkInstructions.AddColumn("[darkorange]Ingredient[/]");
+
+            foreach (var ingredient in drink.Ingredients)
+            {
+                drinkInstructions.AddRow(ingredient.Measure, ingredient.Name);
+            }
+
+            drinkInstructions.Expand();
+
+            var instructionPanel = new Panel(drink.Instructions)
+                                          .Header("[darkorange]Instructions[/]")
+                                          .Expand();
 
 
-        var panel = new Panel(new Rows(drinkInfo, drinkInstructions, instructionPanel)).Expand();
+            var panel = new Panel(new Rows(drinkInfo, drinkInstructions, instructionPanel)).Expand();
 
-        AnsiConsole.Write(panel);
-        AnsiConsole.Write(new Panel("Press S To Save This Drink"));
-        AnsiConsole.Write(new Panel("Press any key to return main menu"));
+            AnsiConsole.Write(panel);
 
-        if (Console.ReadKey(true).Key == ConsoleKey.S)
-            _drinksController.SaveDrinkAsFavourite(drinkId);
+            bool drinkIsFavourite = _drinksController.DrinkIsFavourite(drinkId);
+
+            if (drinkIsFavourite)
+                AnsiConsole.Write(new Panel("S - Remove Drink From Your Favourites | Esc - Return To The Menu"));
+            else
+                AnsiConsole.Write(new Panel("S - Add Drink To Your Favourites | Esc - Return To The Menu"));
+
+            switch (Console.ReadKey(true).Key)
+            {
+                case ConsoleKey.S:
+                    _drinksController.ToggleDrinkIsFavourite(drinkId, drinkIsFavourite);
+                    break;
+                case ConsoleKey.Escape:
+                    returnToMainMenu = true;
+                    break;
+            }
+        }       
     }
 }
