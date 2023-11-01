@@ -1,6 +1,4 @@
-﻿using Spectre.Console.Rendering;
-
-namespace Drinks.K_MYR.UI;
+﻿namespace Drinks.K_MYR.UI;
 
 internal class UserInterface
 {
@@ -12,9 +10,9 @@ internal class UserInterface
     }
 
     internal async Task RunApp()
-    { 
-        while(true)
-        {   
+    {
+        while (true)
+        {
             AnsiConsole.Clear();
             Helpers.RenderTitle("[darkorange]Drinks Information Service[/]");
 
@@ -39,28 +37,23 @@ internal class UserInterface
                         break;
                 }
             }
-            
-            catch (HttpRequestException)
+            catch (Exception ex)
             {
-                AnsiConsole.Clear();
-                AnsiConsole.Write(new Panel($"A Problem Occured: Bad Internet Connection"));
-                AnsiConsole.Write(new Panel($"Press Any Key To Return To The Main Menu"));
+                AnsiConsole.Write(new Panel($"{ex.Message} | Press Any Key To Return"));
                 Console.ReadKey();
             }
-
-            
-        }        
+        }
     }
 
     private async Task GetDrinksInputFromSqlLastSearchedAsync()
     {
-         while (true)
+        while (true)
         {
             AnsiConsole.Clear();
             Helpers.RenderTitle("[darkorange]Drinks Information Service[/]");
 
             var drinks = _drinksController.GetDrinksByLastSearched();
-            
+
             var drinksList = drinks.Select(d => d.Name).ToList();
 
             var selection = AnsiConsole.Prompt(new SelectionPrompt<string>()
@@ -72,19 +65,27 @@ internal class UserInterface
             if (selection == "Exit")
                 break;
 
-            await ShowDrinkDetails(drinks.First(d => d.Name == selection).Id);        
+            try
+            {
+                await ShowDrinkDetails(drinks.First(d => d.Name == selection).Id);
+            }
+            catch (Exception ex)
+            {
+                AnsiConsole.Write(new Panel($"{ex.Message} | Press Any Key To Return"));
+                Console.ReadKey();
+            }
         }
     }
 
     private async Task GetDrinksInputFromSqlFavouriteAsync()
     {
-         while (true)
+        while (true)
         {
             AnsiConsole.Clear();
             Helpers.RenderTitle("[darkorange]Drinks Information Service[/]");
 
             var drinks = _drinksController.GetDrinksByFavourite();
-            
+
             var drinksList = drinks.Select(d => d.Name).ToList();
 
             var selection = AnsiConsole.Prompt(new SelectionPrompt<string>()
@@ -96,7 +97,15 @@ internal class UserInterface
             if (selection == "Exit")
                 break;
 
-            await ShowDrinkDetails(drinks.First(d => d.Name == selection).Id);
+            try
+            {
+                await ShowDrinkDetails(drinks.First(d => d.Name == selection).Id);
+            }
+            catch (Exception ex)
+            {
+                AnsiConsole.Write(new Panel($"{ex.Message} | Press Any Key To Return"));
+                Console.ReadKey();
+            }
         }
     }
 
@@ -118,7 +127,15 @@ internal class UserInterface
             if (category == "Exit")
                 break;
 
-            await GetDrinksInputAsync(category);
+            try
+            {
+                await GetDrinksInputAsync(category);
+            }
+            catch (Exception ex)
+            {
+                AnsiConsole.Write(new Panel($"{ex.Message} | Press Any Key To Return"));
+                Console.ReadKey();
+            }
         }
     }
 
@@ -139,21 +156,37 @@ internal class UserInterface
                                                     .AddChoices("Exit"));
 
             if (selection == "Exit")
-                break;            
-            
-            await ShowDrinkDetails(drinks.First(d => d.Name == selection).Id);            
+                break;
+
+            try
+            {
+                await ShowDrinkDetails(drinks.First(d => d.Name == selection).Id);
+            }
+            catch (Exception ex)
+            {
+                AnsiConsole.Write(new Panel($"{ex.Message} | Press Any Key To Return"));
+                Console.ReadKey();
+            }
         }
     }
 
     private async Task ShowDrinkDetails(int drinkId)
     {
-        DrinkDetailDto drink = await _drinksController.GetDrinkByIdAsync(drinkId);
+        DrinkDetailDto? drink = await _drinksController.GetDrinkByIdAsync(drinkId);
+
+        if (drink is null)
+        {
+            AnsiConsole.Write(new Panel("An Error Occured Fetching The Requested Drink. Press Any Key To Return"));
+            Console.ReadKey();
+            return;
+        }
+
         bool returnToMainMenu = false;
 
         while (!returnToMainMenu)
         {
             AnsiConsole.Clear();
-            Helpers.RenderTitle("[darkorange]Drinks Information Service[/]");            
+            Helpers.RenderTitle("[darkorange]Drinks Information Service[/]");
 
             var drinkInfo = new Table()
                                 .Title($"[seagreen2]{drink.Drink}[/]");
@@ -162,11 +195,10 @@ internal class UserInterface
             drinkInfo.AddColumn("[darkorange]Alcoholic?[/]");
             drinkInfo.AddColumn("[darkorange]Glass[/]");
             drinkInfo.AddColumn("[darkorange]Tags[/]");
-            drinkInfo.AddRow(drink.Category, drink.Alcohlic, drink.Glass, drink.Tags ??= "");
+            drinkInfo.AddRow(drink.Category ??= "", drink.Alcohlic ??= "", drink.Glass ??= "", drink.Tags ??= "");
             drinkInfo.Expand();
 
             var drinkInstructions = new Table();
-
             drinkInstructions.AddColumn("[darkorange]Measure[/]");
             drinkInstructions.AddColumn("[darkorange]Ingredient[/]");
 
@@ -177,13 +209,12 @@ internal class UserInterface
 
             drinkInstructions.Expand();
 
-            var instructionPanel = new Panel(drink.Instructions)
+            var instructionPanel = new Panel(drink.Instructions ??= "")
                                           .Header("[darkorange]Instructions[/]")
                                           .Expand();
 
 
             var panel = new Panel(new Rows(drinkInfo, drinkInstructions, instructionPanel)).Expand();
-
             AnsiConsole.Write(panel);
 
             bool drinkIsFavourite = _drinksController.DrinkIsFavourite(drinkId);
@@ -192,6 +223,8 @@ internal class UserInterface
                 AnsiConsole.Write(new Panel("S - Remove Drink From Your Favourites | Esc - Return To The Menu"));
             else
                 AnsiConsole.Write(new Panel("S - Add Drink To Your Favourites | Esc - Return To The Menu"));
+
+            _drinksController.InsertOrUpdateDrinkRecord(drinkId, drink.Drink);
 
             switch (Console.ReadKey(true).Key)
             {
@@ -202,6 +235,6 @@ internal class UserInterface
                     returnToMainMenu = true;
                     break;
             }
-        }       
+        }
     }
 }

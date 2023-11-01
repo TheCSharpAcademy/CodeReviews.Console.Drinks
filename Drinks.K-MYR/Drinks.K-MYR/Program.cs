@@ -2,7 +2,7 @@
 
 class Program
 {
-    private static HttpClient apiClient = new()
+    private static readonly HttpClient apiClient = new()
     {
         BaseAddress = new Uri("http://www.thecocktaildb.com/api/json/v1/1/")
     };
@@ -16,6 +16,3 @@ class Program
         await userInterface.RunApp();
     }
 }
-
-
-

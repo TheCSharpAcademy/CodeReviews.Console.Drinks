@@ -12,24 +12,42 @@ internal class ApiAccess : IApiAccess
         _apiClient = apiClient;
     }
 
-    public async Task<IEnumerable<Category>> GetCategories()
+    public async Task<IEnumerable<Category>?> GetCategories()
     {
-        var response = await _apiClient.GetFromJsonAsync<CategoryResponse>("list.php?c=list");
-        
-        return response.Categories;
+        try
+        {
+            var response = await _apiClient.GetFromJsonAsync<CategoryResponse>("list.php?c=list");
+            return response?.Categories;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"An Error Occured Calling The API: {ex.Message}");
+        }
     }
 
-    public async Task<IEnumerable<Drink>> GetDrinksByCategory(string category)
+    public async Task<IEnumerable<Drink>?> GetDrinksByCategory(string category)
     {
-        var response = await _apiClient.GetFromJsonAsync<DrinkResponse>($"filter.php?c={HttpUtility.UrlEncode(category)}");
-
-        return response.Drinks;
+        try
+        {
+            var response = await _apiClient.GetFromJsonAsync<DrinkResponse>($"filter.php?c={HttpUtility.UrlEncode(category)}");
+            return response?.Drinks;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"An Error Occured Calling The API: {ex.Message}");
+        }
     }
 
-    public async Task<DrinkDetail> GetDrinkById(int drinkId)
+    public async Task<DrinkDetail?> GetDrinkById(int drinkId)
     {
-        var response = await _apiClient.GetFromJsonAsync<DrinkDetailResponse>($"lookup.php?i={drinkId}");
-
-        return response.DrinkDetails.ToList()[0];
+        try
+        {
+            var response = await _apiClient.GetFromJsonAsync<DrinkDetailResponse>($"lookup.php?i={drinkId}");
+            return response?.DrinkDetails.ToList()[0];
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"An Error Occured Calling The API: {ex.Message}");
+        }
     }
 }

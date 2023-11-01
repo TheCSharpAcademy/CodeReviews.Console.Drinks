@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Drinks.K_MYR.Models;
+using System.Text.Json;
 
 namespace Drinks.K_MYR;
 
@@ -8,20 +9,20 @@ internal class DrinksController
 
     private readonly SqlAcess _sqlRepo;
 
-    public DrinksController(ApiAccess apiRepo, SqlAcess sqlRepo)
+    internal DrinksController(ApiAccess apiRepo, SqlAcess sqlRepo)
     {
         _apiRepo = apiRepo;
         _sqlRepo = sqlRepo;
     }
 
-    public IEnumerable<Drink> GetDrinksByLastSearched()
+    internal IEnumerable<Drink> GetDrinksByLastSearched()
     {
         var drinks = _sqlRepo.GetDrinksByLastSearched();
 
         return drinks;
     }
 
-    public IEnumerable<Drink> GetDrinksByFavourite()
+   internal IEnumerable<Drink> GetDrinksByFavourite()
     {
         var drinks = _sqlRepo.GetDrinksByFavourite();
 
@@ -32,6 +33,9 @@ internal class DrinksController
     {
         var categories = await _apiRepo.GetCategories();
 
+        if(categories is null)
+            return Enumerable.Empty<string>();
+
         return categories.Select(c => c.Name).OrderBy(c => c);
     }
 
@@ -39,22 +43,18 @@ internal class DrinksController
     {
         var drinks = await _apiRepo.GetDrinksByCategory(category);
 
+        if (drinks is null)
+            return Enumerable.Empty<Drink>();
+
         return drinks;
     }
 
-    internal async Task<DrinkDetailDto> GetDrinkByIdAsync(int drinkId)
+    internal async Task<DrinkDetailDto?> GetDrinkByIdAsync(int drinkId)
     {
         var drinkDetails = await _apiRepo.GetDrinkById(drinkId);
 
-        if (!_sqlRepo.DrinkRecordExists(drinkId))
-        {
-            _sqlRepo.InsertDrinkIntoDb(drinkId, drinkDetails.Drink, DateTime.Now);
-        }
-
-        else
-        {
-            _sqlRepo.UpdateDrinkById(drinkId, $"last_searched = '{DateTime.Now:yyyy/MM/dd hh\\:mm\\:ss}'");
-        }
+        if (drinkDetails is null)
+            return null;
 
         return new DrinkDetailDto()
         {
@@ -72,7 +72,7 @@ internal class DrinksController
     {
         List<Ingredient> ingredients = new();
 
-        if (additionalInformation != null)
+        if (additionalInformation is not null)
         {
             foreach (var key in additionalInformation.Keys)
             {
@@ -90,8 +90,19 @@ internal class DrinksController
                 }
             }
         }
-
         return ingredients;
+    }
+
+    internal void InsertOrUpdateDrinkRecord(int drinkId, string drinkName)
+    {
+        if (!_sqlRepo.DrinkRecordExists(drinkId))
+        {
+            _sqlRepo.InsertDrinkIntoDb(drinkId, drinkName, DateTime.Now);
+        }
+        else
+        {
+            _sqlRepo.UpdateDrinkById(drinkId, $"last_searched = '{DateTime.Now:yyyy/MM/dd hh\\:mm\\:ss}'");
+        }
     }
 
     internal void ToggleDrinkIsFavourite(int drinkId, bool state)
