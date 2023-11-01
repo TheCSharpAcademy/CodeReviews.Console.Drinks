@@ -44,4 +44,3 @@ internal class DrinkDetailDto
 
     public List<Ingredient> Ingredients { get; set; } = new();
 }
-
