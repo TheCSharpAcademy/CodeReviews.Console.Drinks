@@ -1,61 +1,59 @@
-﻿namespace Drinks.barakisbrown;
+﻿using Drinks.barakisbrown.Models;
+using Spectre.Console;
+
+namespace Drinks.barakisbrown;
 
 public class UserInput
 {
-    private static string? CategoryNameInput = "Please Select a category from the list above? |> ";
+    private static string? CategoryNameInput = "Please Select a category from the list.";
     private static string? PressAnyKeyInput = "Press any key to return to the main menu.";
-
-    DrinksService _service = new();
 
 	public UserInput()
 	{
 	}
-
-    public static bool GetYesNo(string? prompt)
+    
+    public Category PickCategory()
     {
-        bool retValue = false;
-        bool exit = true;
-        Console.Write(prompt);
-        while(exit)
+        AnsiConsole.Clear();
+        AnsiConsole.WriteLine();
+        AnsiConsole.WriteLine("Drink Info App.");
+        
+        var prompt = new SelectionPrompt<Category>
         {
-            ConsoleKeyInfo input = Console.ReadKey(true);
-            if (input.Key == ConsoleKey.Y)
-            {
-                exit = false;
-                retValue = true;
-                break;
-            }
-            else if (input.Key == ConsoleKey.N)
-            {
-                exit = false;
-                retValue = false;
-            }
+            PageSize = 10,
+            Title = CategoryNameInput,
+        };
+
+        var categories = DrinksService.GetCategories();
+
+        foreach (var category in categories)
+        {
+            prompt.AddChoice(category);
         }
-        return retValue;
+
+        var catChoice = AnsiConsole.Prompt(prompt);
+        return catChoice;
     }
 
-    public static void ReturnMainMenu()
+    public Drink PickDrink(Category category)
     {
-        Console.Write(PressAnyKeyInput);
-        Console.ReadKey(true);
-        Thread.Sleep(800);
-        Console.Clear();
-    }
+        AnsiConsole.Clear();
+        AnsiConsole.WriteLine();
 
-    public static bool IsStringValid(string stringInput)
-    {
-        if (string.IsNullOrEmpty(stringInput))
+        var prompt = new SelectionPrompt<Drink> 
+        { 
+            PageSize=10,
+            Title = $"Pick a drink from the category {category.strCategory}"
+        };
+
+        var drinks = DrinksService.GetDrinkList(category);
+
+        foreach (var drink in drinks) 
         {
-            return false;
+            prompt.AddChoice(drink);
         }
 
-        foreach (char c in stringInput)
-        {
-            if (!Char.IsLetter(c) && c != '/' && c != ' ')
-                return false;
-        }
-
-        return true;
+        return AnsiConsole.Prompt(prompt);
     }
 }
 
