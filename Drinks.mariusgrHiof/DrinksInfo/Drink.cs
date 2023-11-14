@@ -24,7 +24,7 @@ public class Drink
     public string? StrCategory { get; set; }
 
     [JsonPropertyName("strIBA")]
-    public string? StrIBA { get; set; }
+    public string? StrIba { get; set; }
 
     [JsonPropertyName("strAlcoholic")]
     public string? StrAlcoholic { get; set; }
@@ -48,10 +48,10 @@ public class Drink
     public string? StrInstructionsIT { get; set; }
 
     [JsonPropertyName("strInstructionsZH-HANS")]
-    public object? StrInstructionsZHHANS { get; set; }
+    public object? StrInstructionsZhhans { get; set; }
 
     [JsonPropertyName("strInstructionsZH-HANT")]
-    public object? StrInstructionsZHHANT { get; set; }
+    public object? StrInstructionsZhhant { get; set; }
 
     [JsonPropertyName("strDrinkThumb")]
     public string? StrDrinkThumb { get; set; }
