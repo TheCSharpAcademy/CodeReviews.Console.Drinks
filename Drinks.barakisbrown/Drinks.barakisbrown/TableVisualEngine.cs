@@ -1,18 +1,26 @@
-﻿using Drinks.barakisbrown.Models;
-using Spectre.Console;
+﻿using ConsoleTableExt;
+using Drinks.barakisbrown.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Drinks.barakisbrown;
 
 public static class TableVisualEngine
 {
-	public static void ShowDrinkInfo(List<DrinkDetail> detail, string drinkName)
+	public static void ShowDrinkInfo<T>(List<T> detail, [AllowNull]string drinkName) where T : class
 	{
-		AnsiConsole.Clear();
-		AnsiConsole.MarkupLineInterpolated($"[white blink]Currently there are {detail.Count} of Drink {drinkName}[/]");
+		Console.Clear();
 
-		AnsiConsole.WriteLine("Press any key");
+		drinkName ??= string.Empty;
+
+		Console.WriteLine("\n\n");
+
+		ConsoleTableBuilder
+			.From(detail)
+			.WithColumn(drinkName)
+			.WithFormat(ConsoleTableBuilderFormat.Minimal)
+			.ExportAndWriteLine(TableAligntment.Center);
+
+		Console.WriteLine("Press any key to return to chose another drink.");
 		Console.ReadKey(true);
-
 	}
 }
-
