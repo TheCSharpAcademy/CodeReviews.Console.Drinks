@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Reflection;
 using Drinks.barakisbrown.Models;
 using Newtonsoft.Json;
 using RestSharp;
@@ -24,7 +25,7 @@ namespace Drinks.barakisbrown
             return Enumerable.Empty<Category>();
         }
 
-        public static IEnumerable<Drink> GetDrinkList(Category category)
+        public static IEnumerable<Drink> GetDrinkByCategory(Category category)
         {
             var requestStr = $"filter.php?c={category.strCategory}";
 
@@ -42,7 +43,7 @@ namespace Drinks.barakisbrown
             return Enumerable.Empty<Drink>();
         }
 
-        public static IEnumerable<DrinkDetail> GetDrink(Drink drink)
+        public static List<Object> GetDrink(Drink drink)
         {
             var client = new RestClient(clientStr);
             var request = new RestRequest($"search.php?s={drink.StrDrink}");
@@ -52,10 +53,33 @@ namespace Drinks.barakisbrown
             {
                 var rawResponse = response.Result.Content;
                 var serialize = JsonConvert.DeserializeObject<Models.DrinkDetailList>(rawResponse);
-                return serialize.DrinksDetail;
+                List<DrinkDetail> returnList = serialize.DrinksDetail;
+
+                DrinkDetail detail = returnList[0];
+                List<Object> prepList = new();
+                string formattedName = "";
+
+                foreach (PropertyInfo prop in detail.GetType().GetProperties())
+                { 
+                    if (prop.Name.Contains("str"))
+                    {
+                        formattedName = prop.Name.Substring(3);
+                    }
+
+                    if (!string.IsNullOrEmpty(prop.GetValue(detail)?.ToString())) 
+                    {
+                        prepList.Add(new
+                        {
+                            Key = formattedName,
+                            Value = prop.GetValue(detail)
+                        });
+                    }
+                }
+
+                return prepList;
             }
 
-            return Enumerable.Empty<DrinkDetail>();
+            return Enumerable.Empty<Object>().ToList();
         }
     }
 }
