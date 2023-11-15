@@ -10,6 +10,7 @@ public class DrinkDetailList
 
 public class DrinkDetail
 {
+#pragma warning disable IDE1006 // Naming Styles
     public string idDrink { get; set; }
     public string strDrink { get; set; }
     public object strDrinkAlternate { get; set; }
@@ -55,4 +56,5 @@ public class DrinkDetail
     public string strImageAttribution { get; set; }
     public string strCreativeCommonsConfirmed { get; set; }
     public string dateModified { get; set; }
+#pragma warning restore IDE1006 // Naming Styles
 }

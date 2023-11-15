@@ -8,7 +8,10 @@ public class Category
 	{
 	}
 
-    public string ?strCategory { get; set; }
+
+#pragma warning disable IDE1006 // Naming Styles
+    public string? strCategory { get; set; }
+#pragma warning restore IDE1006 // Naming Styles
 
     public override string ToString()
     {
