@@ -1,10 +1,10 @@
 ﻿namespace Drinks.barakisbrown;
 
-using System.Net;
-using System.Reflection;
 using Drinks.barakisbrown.Models;
 using Newtonsoft.Json;
 using RestSharp;
+using System.Net;
+using System.Reflection;
 
 
 public static class DrinksService
@@ -61,13 +61,13 @@ public static class DrinksService
             string formattedName = "";
 
             foreach (PropertyInfo prop in detail.GetType().GetProperties())
-            { 
+            {
                 if (prop.Name.Contains("str"))
                 {
                     formattedName = prop.Name.Substring(3);
                 }
 
-                if (!string.IsNullOrEmpty(prop.GetValue(detail)?.ToString())) 
+                if (!string.IsNullOrEmpty(prop.GetValue(detail)?.ToString()))
                 {
                     prepList.Add(new
                     {
