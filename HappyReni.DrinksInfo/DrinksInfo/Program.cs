@@ -1,0 +1,3 @@
+﻿using DrinksInfo;
+
+new Manager();
