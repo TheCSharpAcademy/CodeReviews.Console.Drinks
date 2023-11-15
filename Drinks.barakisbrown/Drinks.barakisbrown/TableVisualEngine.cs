@@ -1,8 +1,7 @@
-﻿using ConsoleTableExt;
-using Drinks.barakisbrown.Models;
-using System.Diagnostics.CodeAnalysis;
+﻿namespace Drinks.barakisbrown;
 
-namespace Drinks.barakisbrown;
+using ConsoleTableExt;
+using System.Diagnostics.CodeAnalysis;
 
 public static class TableVisualEngine
 {
