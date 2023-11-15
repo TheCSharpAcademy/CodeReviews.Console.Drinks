@@ -20,7 +20,7 @@ public class UserInput
         
         var prompt = new SelectionPrompt<Category>
         {
-            PageSize = 10,
+            PageSize = 11,
             Title = CategoryNameInput,
         };
 
@@ -42,11 +42,11 @@ public class UserInput
 
         var prompt = new SelectionPrompt<Drink> 
         { 
-            PageSize=10,
+            PageSize=25,
             Title = $"Pick a drink from the category {category.strCategory}"
         };
 
-        var drinks = DrinksService.GetDrinkList(category);
+        var drinks = DrinksService.GetDrinkByCategory(category);
 
         foreach (var drink in drinks) 
         {
