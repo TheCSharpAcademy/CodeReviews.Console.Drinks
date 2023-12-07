@@ -105,7 +105,7 @@ internal class UserInteface
         DrinkDetailDto selectedDrink = await _drinksController.GetDrinkInfoById(chosenDrinkId);
         var infoTable = CreateInfoTable(selectedDrink);
         var instructionsTable = CreateInstructionsTable(selectedDrink);
-        var layout = new Panel(new Rows(infoTable, new Rule("[grey]Instructions[/]").Centered(), new Text(selectedDrink.Instructions), instructionsTable))
+        var layout = new Panel(new Rows(infoTable, new Rule("[grey]Instructions[/]").Centered(), new Text(selectedDrink.Instructions).Centered(), instructionsTable))
             .Expand();
         AnsiConsole.Write(layout);
 
@@ -130,7 +130,7 @@ internal class UserInteface
     private Table CreateInstructionsTable(DrinkDetailDto selectedDrink)
     {
         var instructionsTable = new Table()
-            .Title("Ingredients & Measurements")
+            .Title("\n[grey]Ingredients & Measurements[/]")
             .AddColumn(new TableColumn("Ingredient").Centered())
             .AddColumn(new TableColumn("Measurement").Centered())
             .Border(TableBorder.Rounded)
@@ -139,8 +139,8 @@ internal class UserInteface
 
         foreach (var ingredient in selectedDrink.Ingredients)
         {
-            var ingredientName = ingredient.Name;
-            var measurement = ingredient.Measurement;
+            string ingredientName = ingredient.Name ?? "N/A";
+            string measurement = ingredient.Measurement ?? "N/A";
             instructionsTable.AddRow(ingredientName, measurement);
         }
 
