@@ -1,60 +1,89 @@
-﻿using ConsoleTableExt;
+﻿using System.Text.RegularExpressions;
+using Spectre.Console;
 
 namespace Drinks.UgniusFalze;
+
+enum MenuOptions
+{ 
+    ViewCategories,
+    Exit
+}
 
 public class Display
 {
     private DrinksService Api { get; set; } = new();
 
-    public bool DisplayCategories()
+    public void start()
     {
         var exit = false;
-        var categories = Api.GetDrinkCategories();
-        ConsoleTableBuilder
-            .From(categories.DrinkCategories)
-            .WithTitle("Categories Menu")
-            .WithColumn("Category")
-            .ExportAndWriteLine();
         do
         {
-            var input = GetUserInput("Please enter which category's drink would you like to choose or 0 to exit");
-            var category = categories.DrinkCategories.Find(x => x.StrCategory == input);
-            if (category != null)
+            AnsiConsole.Clear();
+            var selectionPrompt = new SelectionPrompt<MenuOptions>()
+                .Title("What would you like to do?")
+                .AddChoices(
+                    MenuOptions.ViewCategories,
+                    MenuOptions.Exit);
+            selectionPrompt.Converter = options => Regex.Replace(options.ToString(), "(\\B[A-Z])",
+                " $1");
+            
+            var option = AnsiConsole.Prompt(selectionPrompt);
+            switch (option)
             {
-                exit = DisplayDrinks(category);
-                break;
-            }else if (input == "0")
-            {
-                exit = true;
-                break;
+                case MenuOptions.ViewCategories:
+                    DisplayCategories();
+                    break;
+                case MenuOptions.Exit:
+                    exit = true;
+                    break;
             }
-            else{
-                Console.WriteLine("Category not found.");
-            }
-        } while (true);
+        } while (!exit);
 
-        return exit;
+    }
+    private void DisplayCategories()
+    {
+        var categories = Api.GetDrinkCategories();
+        
+        if (categories.DrinkCategories.Count < 1)
+        {
+            Console.WriteLine("Drink categories is empty.");
+            Console.ReadKey();
+            return;
+        }
+
+        var selectionPrompt = new SelectionPrompt<Category>()
+            .Title("Select which category's drink would you like to choose");
+        selectionPrompt.Converter = category => category.StrCategory;
+        foreach (var category in categories.DrinkCategories)
+        {
+            selectionPrompt.AddChoice(category);
+        }
+
+        var selectedCategory = AnsiConsole.Prompt(selectionPrompt);
+        DisplayDrinks(selectedCategory);
     }
 
-    private bool DisplayDrinks(Category category)
+    private void DisplayDrinks(Category category)
     {
         var drinks = Api.GetDrinksRecord(category);
-        ConsoleTableBuilder
-            .From(drinks.Drinks)
-            .WithTitle(category.StrCategory + " drinks")
-            .WithColumn("Drink", "Drink Image", "Id")
-            .ExportAndWriteLine();
+        var table = new Table();
+        table.AddColumns("Drink", "Drink Image", "Id");
+        foreach (var drinkRecords in drinks.Drinks)
+        {
+            table.AddRow(drinkRecords.StrDrink, drinkRecords.StrDrinkThumb.ToString(), drinkRecords.IdDrink.ToString());
+        }
+        AnsiConsole.Write(table);
         Drink drink;
         do
         {
-            var input = GetUserInput("Please enter which drink details would like to see or 0 to exit");
+            var input = GetUserInput("Please enter which drink (by id or name) details would like to see or 0 to exit");
 
             var isNumeric = int.TryParse(input, out var drinkId);
             if (isNumeric)
             {
                 if (drinkId == 0)
                 {
-                    return true;
+                    return;
                 }
                 drink = drinks.Drinks.Find(x => x.IdDrink == drinkId);
             }
@@ -73,31 +102,25 @@ public class Display
             }
         } while (true);
 
-        return DisplayDrinkDetails(drink);
+        DisplayDrinkDetails(drink);
     }
 
-    private bool DisplayDrinkDetails(Drink drink)
+    private void DisplayDrinkDetails(Drink drink)
     {
+        AnsiConsole.Clear();
         var drinkDetailsRecord = Api.GetDrinkDetailsRecord(drink);
         var drinkDetail = drinkDetailsRecord.DrinkDetailsList.First();
-        ConsoleTableBuilder
-            .From(drinkDetail.ConvertToList())
-            .WithColumn("Detail", "Value")
-            .ExportAndWriteLine();
-        do
-        { 
-            var input = GetUserInput("Would you like to search for a drink again? (type yes or no)");
-            switch (input)
-            {
-                case "yes":
-                    return false;
-                case "no":
-                    return true;
-                default:
-                    Console.WriteLine("Invalid choice");
-                    break;
-            }
-        } while (true);
+        
+        var table = new Table();
+        table.AddColumns("Detail", "Value");
+        foreach (var drinkRecord in drinkDetail.ConvertToList())
+        {
+            table.AddRow(drinkRecord[0].ToString(), drinkRecord[1].ToString());
+        }
+
+        AnsiConsole.Write(table);
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
     }
     
     private static string GetUserInput(string message)
