@@ -76,7 +76,7 @@ public class Display
         Drink drink;
         do
         {
-            var input = GetUserInput("Please enter which drink (by id or name) details would like to see or 0 to exit");
+            var input = AnsiConsole.Ask<string>("Please enter which drink (by id or name) details would like to see or 0 to exit: ");
 
             var isNumeric = int.TryParse(input, out var drinkId);
             if (isNumeric)
@@ -118,25 +118,5 @@ public class Display
         AnsiConsole.Write(table);
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
-    }
-    
-    private static string GetUserInput(string message)
-    {
-        string? userInput;
-        do
-        {
-            Console.WriteLine(message);
-            userInput = Console.ReadLine();
-            if (userInput != null)
-            {
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Input shouldn't be null");
-            }
-        } while (true);
-
-        return userInput;
     }
 }
