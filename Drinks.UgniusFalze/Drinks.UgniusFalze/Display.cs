@@ -13,7 +13,7 @@ public class Display
 {
     private DrinksService Api { get; set; } = new();
 
-    public void start()
+    public void Start()
     {
         var exit = false;
         do
@@ -96,10 +96,7 @@ public class Display
             {
                 break;
             }
-
-            {
-                Console.WriteLine("Drink not found.");
-            }
+            Console.WriteLine("Drink not found.");
         } while (true);
 
         DisplayDrinkDetails(drink);

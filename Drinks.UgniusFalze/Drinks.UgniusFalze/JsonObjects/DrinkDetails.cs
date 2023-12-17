@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 
 namespace Drinks.UgniusFalze;
 
@@ -117,15 +118,17 @@ public record DrinkDetails(
             object? value;
             if ((value = propertyInfo.GetValue(this)) != null)
             {
+                string name =Regex.Replace(propertyInfo.Name, "(\\B[A-Z])",
+                    " $1");
                 if (propertyInfo.PropertyType == typeof(string))
                 {
-                    property.Add(propertyInfo.Name);
+                    property.Add(name);
                     string? cleaned = (value as string)?.Trim();
                     property.Add(cleaned);
                 }
                 else
                 {
-                    property.Add(propertyInfo.Name);
+                    property.Add(name);
                     property.Add(value);
                 }
                 result.Add(property);
