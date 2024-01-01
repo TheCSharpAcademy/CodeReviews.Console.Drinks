@@ -24,14 +24,15 @@ public class DataController
         var categoriesTask = RequestService.ProcessCategoriesAsync();
         
         UI.WelcomeMessage();
-        CategoriesJSON? categories = categoriesTask.Result;
+        var categories = categoriesTask.Result;
  
-        List<List<object>> categoriesUI = RemoveNullValues(categories?.Categories);       
         do
         {
-            TableUI.PrintTable(categoriesUI,"Categories",["Category ID", "Category Name"]);
+            Helpers.ClearConsole();
+            TableUI.PrintTable(categories?.Categories,"Categories");
             UI.MainMenu(errorMessage);
             input = Console.ReadLine() ?? "";
+            errorMessage = InputValidation.ValidateCategoryName(categories, input);
 
             if(input.Equals("0"))
             {
@@ -40,7 +41,7 @@ public class DataController
             else if(errorMessage == null) //input validation
             {
                 RunDrinksCategory = true;
-                DrinkCategoryController(input);
+                DrinkCategoryController(input.Replace(" ","_"));
             }
         }
         while(RunDrinksProgram);
@@ -53,51 +54,69 @@ public class DataController
         string input;
         string? errorMessage = null;
         var drinksTask = RequestService.ProcessDrinksByCategoryAsync(category);
-        DrinksJSON? drinks = drinksTask.Result;
-        List<List<object>> drinksUI = RemoveNullValues(drinks?.Drinks);
+        var drinks = drinksTask.Result;
+        int rangeStart = 0;
+        int rangeCount;
+        if(drinks.Drinks.Count>=10)
+            rangeCount = 10;
+        else
+            rangeCount = drinks.Drinks.Count;
+
         do
         {
-            TableUI.PrintTable(drinksUI, "Drinks", ["test", "test"]);
+            Helpers.ClearConsole();
+            TableUI.PrintTable(drinks?.Drinks.GetRange(rangeStart, rangeCount), category);
+            UI.DrinksByCategory(errorMessage);
             input = Console.ReadLine() ?? "";
+            errorMessage = InputValidation.ValidateDrinkID(drinks, input);
             
-            if(input.Equals("0"))
+            switch(input)
             {
-                RunDrinksCategory = false;
+                case("0"):
+                    RunDrinksCategory = false;    
+                    break;
+                case("N"):
+                    // if(rangeCount+rang )
+                    // rangeStart += rangeCount;
+
+                    break;
+                case("P"):
+                
+                    break;
             }
-            else if(errorMessage == null) //input validation
+
+            if(errorMessage == null) //input validation
             {
                 RunDrinkDetail = true;
+                DrinkDetailController(input);
             }
         }
         while(RunDrinksCategory);
     
     }
 
-
-
-    public static List<List<object>> RemoveNullValues<T>(List<T>? list) where T : class
+    public void DrinkDetailController(string idDrink)
     {
-        List<List<object>> listNotNullValues = [];
-        
-        if(list != null)
+        string input;
+        var drinkTask = RequestService.ProcessDrinksByIDAsync(idDrink);
+        var drink = drinkTask.Result;
+        var drinkUI = RemoveNullValues(drink?.Drinks[0]);
+        do
         {
-            for(int i = 0; i< list.Count; i++)
+            Helpers.ClearConsole();
+            TableUI.PrintTable(drinkUI, "Drink Detail");
+            input = Console.ReadLine() ?? "";
+            if(input.Equals("0"))
             {
-                foreach(PropertyInfo property in list[i].GetType().GetProperties())
-                {
-                    if(property.GetValue(list[i]) != null)
-                    {
-                        listNotNullValues.Add([property.Name, property.GetValue(list[i]) ?? ""]);
-                    }
-                }
+                RunDrinkDetail = false;
             }
         }
-        return listNotNullValues;
+        while(RunDrinkDetail);
     }
 
-    public static List<List<object>> RemoveNullValuesTest<T>(T? list) where T : class //remove
+    public static List<object> RemoveNullValues<T>(T? list) where T : class //remove
     {
-        List<List<object>> listNotNullValues = [];
+        List<object> listNotNullValues = [];
         
         if(list != null)
         {
@@ -105,7 +124,11 @@ public class DataController
                 {
                     if(property.GetValue(list) != null)
                     {
-                        listNotNullValues.Add([property.Name, property.GetValue(list) ?? ""]);
+                        listNotNullValues.Add(new 
+                        {
+                            property.Name, 
+                            Value = property.GetValue(list) ?? ""
+                        });
                     }
                 }
             

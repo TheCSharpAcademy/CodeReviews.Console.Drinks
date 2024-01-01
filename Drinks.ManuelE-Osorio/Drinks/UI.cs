@@ -22,6 +22,13 @@ public class UI
             "Please write the name of the category:"); //make it fancier
     }
 
+    public static void DrinksByCategory(string? errorMessage)
+    {
+        if (errorMessage != null)
+            Console.WriteLine("Error:" + errorMessage + "\n");
+
+        Console.WriteLine("Enter a drink ID to see the details or 0 to return:\n");
+    }
     public static void ExitMessage()
     {
         Helpers.ClearConsole();

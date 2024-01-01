@@ -4,12 +4,11 @@ namespace DrinksProgram;
 
 public class TableUI
 {
-    public static void PrintTable(List<List<object>> tableToUI,string title, string[] columns)
+    public static void PrintTable<T>(List<T>? tableToUI, string title) where T: class
     {
         ConsoleTableBuilder
         .From(tableToUI)
         .WithTitle(title)
-        .WithColumn(columns)
         .WithCharMapDefinition(
                     CharMapDefinition.FramePipDefinition,
                     new Dictionary<HeaderCharMapPositions, char> {

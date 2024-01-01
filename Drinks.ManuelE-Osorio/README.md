@@ -7,3 +7,4 @@
 5) https://stackoverflow.com/questions/15705092/do-httpclient-and-httpclienthandler-have-to-be-disposed-between-requests
 6) https://stackoverflow.com/questions/1712975/how-to-get-a-sublist-in-c-sharp
 7) https://json2csharp.com/#
+8) https://www.youtube.com/watch?v=fc7peZ-FHs4

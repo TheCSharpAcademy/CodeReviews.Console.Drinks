@@ -28,12 +28,12 @@ public class DrinksRequestService
         return categories;
     }
 
-    public async Task<DrinksJSON?> ProcessDrinksByCategoryAsync(string category)
+    public async Task<DrinksByCategoryJSON?> ProcessDrinksByCategoryAsync(string category)
     {
         await using Stream stream =
             await Client.GetStreamAsync($"filter.php?c={category}");
         var drinks =
-            await JsonSerializer.DeserializeAsync<DrinksJSON>(stream);
+            await JsonSerializer.DeserializeAsync<DrinksByCategoryJSON>(stream);
         return drinks;
     }
 
