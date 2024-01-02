@@ -12,7 +12,8 @@ public class DrinksRequestService
     {
         Client = new()
         {
-            BaseAddress = DrinksBaseAdress
+            BaseAddress = DrinksBaseAdress,
+            Timeout = new TimeSpan(0, 0, 10)
         };
         Client.DefaultRequestHeaders.Accept.Clear();
         Client.DefaultRequestHeaders.Accept.Add(
@@ -24,7 +25,7 @@ public class DrinksRequestService
         await using Stream stream =
             await Client.GetStreamAsync("list.php?c=list");
         var categories =
-            await JsonSerializer.DeserializeAsync<CategoriesJSON>(stream);
+            await JsonSerializer.DeserializeAsync<CategoriesJSON>(stream);      
         return categories;
     }
 
@@ -34,6 +35,7 @@ public class DrinksRequestService
             await Client.GetStreamAsync($"filter.php?c={category}");
         var drinks =
             await JsonSerializer.DeserializeAsync<DrinksByCategoryJSON>(stream);
+    
         return drinks;
     }
 

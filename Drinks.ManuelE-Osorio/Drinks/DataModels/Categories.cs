@@ -1,8 +1,13 @@
 using System.Text.Json.Serialization;
 
 namespace DrinksProgram;
-public record CategoriesJSON(
-    [property:JsonPropertyName("drinks")] List<Categories> Categories);
+public class CategoriesJSON
+{
+    [JsonPropertyName("drinks")] public List<Categories> Categories {get; set;} = [];
+}
 
-public record class Categories(
-    [property: JsonPropertyName("strCategory")] string Category);
+public class Categories
+{
+    public string Selected {get; set;} = "";
+    [JsonPropertyName("strCategory")] public string Category {get; set;} = "";
+}
