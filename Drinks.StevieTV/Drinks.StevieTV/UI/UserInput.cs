@@ -17,6 +17,7 @@ internal class UserInput
         categorySelector.Title("Select the category you wish to view");
         categorySelector.AddChoices(availableCategories);
         categorySelector.UseConverter(category => category.strCategory);
+        categorySelector.PageSize(25);
 
         var categorySelected = AnsiConsole.Prompt(categorySelector);
         
@@ -31,6 +32,7 @@ internal class UserInput
         drinkSelector.Title("Select the drink you wish to view");
         drinkSelector.AddChoices(availableDrinks);
         drinkSelector.UseConverter(drink => drink.strDrink);
+        drinkSelector.PageSize(25);
 
         ShowDrink(AnsiConsole.Prompt(drinkSelector));
     }
@@ -39,7 +41,7 @@ internal class UserInput
     {
         var drinkSelected = DrinksService.GetDrink(drink);
         var thumbnail = new CanvasImage(GetDrinkThumbnail.SavedThumbnail(drink.strDrinkThumb));
-        thumbnail.MaxWidth(16);
+        thumbnail.MaxWidth(28);
 
         Table details = TableVisualisation.ShowTable(drinkSelected);
         
@@ -47,11 +49,11 @@ internal class UserInput
             .SplitColumns(
                 new Layout("Left")
                     .SplitRows(
-                        new Layout("Top"),
-                        new Layout("Bottom"))
-                    .Ratio(1),
+                        new Layout("Top").Ratio(1),
+                        new Layout("Bottom").Ratio(5))
+                    .Ratio(4),
                 new Layout("Right")
-                    .Ratio((2)));
+                    .Ratio((5)));
 
         layout["Bottom"].Update(
             new Panel(
@@ -66,7 +68,7 @@ internal class UserInput
                     Align.Center(
                         new Markup($"[blue]{drink.strDrink}[/]"),
                         VerticalAlignment.Middle))
-                .Collapse());
+                .Expand());
         layout["Right"].Update(details);
         AnsiConsole.Write(layout);
         ExitProgram();
