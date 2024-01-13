@@ -1,5 +1,3 @@
-using System.Net;
-
 namespace DrinksInfo.StevieTV.Helpers;
 
 public static class GetDrinkThumbnail
@@ -8,9 +6,17 @@ public static class GetDrinkThumbnail
     {
         var filename = Path.GetTempPath() + Guid.NewGuid() + ".jpg";
 
-        using var client = new WebClient();
+        using var client = new System.Net.WebClient();
 
-        client.DownloadFile(new Uri(url), filename);
+        try
+        {
+            client.DownloadFile(new Uri(url), filename);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            filename = "";
+        }
 
         return filename;
     }

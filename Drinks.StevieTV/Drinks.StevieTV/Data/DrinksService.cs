@@ -68,12 +68,25 @@ internal class DrinksService
                 if (formattedName.StartsWith("Ingredient"))
                 {
                     var ingredientNumber = Regex.Match(formattedName, @"\d+").Value;
-                    var measure = drinkDetail.GetType().GetProperty($"strMeasure{ingredientNumber}").GetValue(drinkDetail).ToString().Trim();
-                    formattedDrink.Add(new DrinkFormatted
+
+                    try
                     {
-                        Key = formattedName,
-                        Value = $"{measure} {prop.GetValue(drinkDetail)}"
-                    });
+                        var measure = drinkDetail.GetType().GetProperty($"strMeasure{ingredientNumber}").GetValue(drinkDetail).ToString().Trim();
+
+                        formattedDrink.Add(new DrinkFormatted
+                        {
+                            Key = formattedName,
+                            Value = $"{measure} {prop.GetValue(drinkDetail)}"
+                        });
+                    }
+                    catch (NullReferenceException)
+                    {
+                        formattedDrink.Add(new DrinkFormatted
+                        {
+                            Key = formattedName,
+                            Value = $"{prop.GetValue(drinkDetail)}"
+                        });
+                    }
                 }
                 else if (!formattedName.StartsWith("Measure") && !formattedName.StartsWith("DrinkThumb"))
                 {

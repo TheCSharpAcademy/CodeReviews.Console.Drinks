@@ -10,6 +10,7 @@ internal static class DrinksMenu
         while (true)
         {
             AnsiConsole.Clear();
+            AnsiConsole.Write(new FigletText("Drinks Menu"));
             UserInput userInput = new();
             userInput.GetCategoriesInput();
         }

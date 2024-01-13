@@ -7,8 +7,6 @@ namespace DrinksInfo.StevieTV.UI;
 
 internal class UserInput
 {
-    private readonly DrinksService _drinksService = new();
-
     internal void GetCategoriesInput()
     {
         var availableCategories = DrinksService.GetCategories();
@@ -40,10 +38,10 @@ internal class UserInput
     private void ShowDrink(Drink drink)
     {
         var drinkSelected = DrinksService.GetDrink(drink);
-        var thumbnail = new CanvasImage(GetDrinkThumbnail.SavedThumbnail(drink.strDrinkThumb));
-        thumbnail.MaxWidth(28);
 
         Table details = TableVisualisation.ShowTable(drinkSelected);
+
+        var thumbnailFilename = GetDrinkThumbnail.SavedThumbnail(drink.strDrinkThumb);
         
         var layout = new Layout("Root")
             .SplitColumns(
@@ -55,13 +53,27 @@ internal class UserInput
                 new Layout("Right")
                     .Ratio((5)));
 
-        layout["Bottom"].Update(
-            new Panel(
-                Align.Center(
-                    thumbnail, 
-                    VerticalAlignment.Middle
-                    ))
-                .Expand());
+        
+        if (!string.IsNullOrWhiteSpace(thumbnailFilename))
+        {
+            var thumbnail = new CanvasImage(thumbnailFilename);
+            thumbnail.MaxWidth(28);
+            layout["Bottom"].Update(
+                new Panel(
+                        Align.Center(
+                            thumbnail, 
+                            VerticalAlignment.Middle
+                        ))
+                    .Expand());
+        }
+        else
+        {
+            layout["Bottom"].Update(
+                new Panel(
+                    Align.Center(new Text("No Image Available"))
+                        )
+                    .Expand());
+        }
 
         layout["Top"].Update(
             new Panel(
