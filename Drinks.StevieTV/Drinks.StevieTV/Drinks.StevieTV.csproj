@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>DrinksInfo.StevieTV</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+      <PackageReference Include="RestSharp" Version="110.2.0" />
+      <PackageReference Include="Spectre.Console" Version="0.48.1-preview.0.11" />
+      <PackageReference Include="Spectre.Console.ImageSharp" Version="0.48.1-preview.0.11" />
+    </ItemGroup>
+
+</Project>
