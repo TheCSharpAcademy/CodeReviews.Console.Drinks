@@ -1,6 +1,4 @@
-﻿
-
-namespace Drinks.frockett;
+﻿namespace Drinks.frockett;
 
 public class Validator
 {

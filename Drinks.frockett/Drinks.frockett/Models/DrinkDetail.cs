@@ -102,14 +102,9 @@ namespace Drinks.frockett.Models
                     }
                 }
             }
-
-            // Concatenate all pairs with commas
             string result = string.Join(", ", ingredientMeasurePairs);
 
             return result;
         }
     }
-
-
-
 }
