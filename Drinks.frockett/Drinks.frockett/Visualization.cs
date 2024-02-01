@@ -14,7 +14,7 @@ public class Visualization
 
         foreach (var category in categories)
         {
-            table.AddRow(category.strCategory);
+            table.AddRow(category.StrCategory);
         }
 
         AnsiConsole.Write(table);
@@ -29,7 +29,7 @@ public class Visualization
 
         foreach (var drink in drinks)
         {
-            table.AddRow(drink.idDrink, drink.strDrink);
+            table.AddRow(drink.IdDrink, drink.StrDrink);
         }
 
         AnsiConsole.Write(table);

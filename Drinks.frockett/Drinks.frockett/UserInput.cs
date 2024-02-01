@@ -49,7 +49,7 @@ public class UserInput
 
         string? category = AnsiConsole.Ask<string>("Enter category: ");
 
-        while(!validator.IsStringValid(category) || !categories.Any(x => x.strCategory.ToLower() == category.ToLower()))
+        while(!validator.IsStringValid(category) || !categories.Any(x => x.StrCategory.ToLower() == category.ToLower()))
         {
             AnsiConsole.MarkupLine($"[red]{category} is not a valid category![/]");
             category = AnsiConsole.Ask<string>("Enter a valid category: ");
@@ -66,7 +66,7 @@ public class UserInput
 
         string? drinkSelection = AnsiConsole.Ask<string>("Enter Drink Id: ");
 
-        while (!validator.IsIdValid(drinkSelection) || !drinks.Any(x => x.idDrink.ToLower() == drinkSelection.ToLower()))
+        while (!validator.IsIdValid(drinkSelection) || !drinks.Any(x => x.IdDrink.ToLower() == drinkSelection.ToLower()))
         {
             AnsiConsole.MarkupLine($"[red]{drinkSelection} is not a valid drink![/]");
             drinkSelection = AnsiConsole.Ask<string>("Enter a valid drink Id: ");

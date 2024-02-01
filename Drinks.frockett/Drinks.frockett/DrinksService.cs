@@ -13,8 +13,6 @@ public class DrinksService
         var request = new RestRequest("list.php?c=list");
         var response = clinet.ExecuteAsync(request);
 
-        List<Category> categories = new List<Category>();
-
         if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             string rawResponse = response.Result.Content;
