@@ -29,7 +29,7 @@ public class DrinksService
         return null;
     }
 
-    internal List<object> GetDrinkById(string drink)
+    internal DrinkDetail GetDrinkById(string drink)
     {
         var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
         var request = new RestRequest($"lookup.php?i={drink}");
@@ -45,6 +45,9 @@ public class DrinksService
 
             DrinkDetail drinkDetail = returnedList[0];
 
+            return drinkDetail;
+
+            /*
             List<object> prepList = new();
 
             string formattedName = "";
@@ -67,6 +70,7 @@ public class DrinksService
                 }
             }
             return prepList;
+            */
         }
         return null;
     }

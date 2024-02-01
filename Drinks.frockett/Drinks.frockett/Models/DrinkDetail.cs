@@ -67,25 +67,44 @@ namespace Drinks.frockett.Models
         public string DateModified { get; set; }
 
 
-        // credit to mariusgrHiof for the idea to do this and this method to do it https://github.com/frockett/CodeReviews.Console.Drinks/blob/main/Drinks.mariusgrHiof/DrinksInfo/Drink.cs
+        // credit to mariusgrHiof for the idea to do this. I took his code and paired the measurements with ingredients https://github.com/frockett/CodeReviews.Console.Drinks/blob/main/Drinks.mariusgrHiof/DrinksInfo/Drink.cs
         public string ConcatenateIngredients()
         {
             // Get all properties of the class
             PropertyInfo[] properties = GetType().GetProperties();
 
-            // Filter properties that start with "strIngredient"
             var ingredientProperties = properties
                 .Where(p => p.Name.StartsWith("StrIngredient"));
 
+            var measureProperties = properties
+                .Where(p => p.Name.StartsWith("StrMeasure"));
 
-            // Get the values of the filtered properties
-            var ingredientValues = ingredientProperties.Select(p => (string)p.GetValue(this, null));
+            // Prepare a list to hold 'measurement ingredient' strings
+            var ingredientMeasurePairs = new List<string>();
 
-            // Remove null or empty values
-            ingredientValues = ingredientValues.Where(i => !string.IsNullOrEmpty(i));
+            // Iterate through the ingredient properties
+            foreach (var ingredientProperty in ingredientProperties)
+            {
+                // Get the corresponding measure property by replacing "StrIngredient" with "StrMeasure"
+                var measureProperty = measureProperties.FirstOrDefault(p => p.Name.Replace("StrMeasure", "") == ingredientProperty.Name.Replace("StrIngredient", ""));
 
-            // Concatenate values with commas
-            string result = string.Join(", ", ingredientValues);
+                if (measureProperty != null)
+                {
+                    // get value of type obj, cast to string
+                    string ingredient = (string)ingredientProperty.GetValue(this, null);
+                    string measure = (string)measureProperty.GetValue(this, null);
+
+                    // Only add if the ingredient isn't null/empty
+                    if (!string.IsNullOrEmpty(ingredient))
+                    {
+                        string measureIngredientPair = (!string.IsNullOrEmpty(measure) ? measure + " " : "") + ingredient;
+                        ingredientMeasurePairs.Add(measureIngredientPair);
+                    }
+                }
+            }
+
+            // Concatenate all pairs with commas
+            string result = string.Join(", ", ingredientMeasurePairs);
 
             return result;
         }

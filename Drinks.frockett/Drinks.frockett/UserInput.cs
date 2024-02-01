@@ -18,15 +18,21 @@ public class UserInput
 
     public void GetCategoriesInput()
     {
+        AnsiConsole.Clear();
         List<Category> categories = drinksService.GetCategories();
         visualization.PrintTable(categories);
 
-        string? category = AnsiConsole.Ask<string>("Enter category: ");
+        string? category = AnsiConsole.Ask<string>("Enter category or enter 0 to exit: ");
 
-        while(!validator.IsStringValid(category))
+        if (category == "0")
+        {
+            Environment.Exit(0);
+        }
+
+        while(!validator.IsStringValid(category) || !categories.Any(x => x.strCategory.ToLower() == category.ToLower()))
         {
             AnsiConsole.MarkupLine($"[red]{category} is not a valid category![/]");
-            category = AnsiConsole.Ask<string>("Enter a valid category: ");
+            category = AnsiConsole.Ask<string>("Enter a valid category or 0 to exit: ");
         }
 
         GetDrinksInput(category);
@@ -34,18 +40,23 @@ public class UserInput
 
     private void GetDrinksInput(string category)
     {
+        AnsiConsole.Clear();
         List<Drink> drinks = drinksService.GetDrinksByCategory(category);
         visualization.PrintDrinks(drinks);
 
         string? drinkSelection = AnsiConsole.Ask<string>("Enter Drink Id: ");
 
-        while (!validator.IsIdValid(drinkSelection))
+        while (!validator.IsIdValid(drinkSelection) || !drinks.Any(x => x.idDrink.ToLower() == drinkSelection.ToLower()))
         {
             AnsiConsole.MarkupLine($"[red]{drinkSelection} is not a valid drink![/]");
             drinkSelection = AnsiConsole.Ask<string>("Enter a valid drink Id: ");
         }
 
-        visualization.UseOtherLibraryShowTable(drinksService.GetDrinkById(drinkSelection), "");
-        //visualization.PrintDrinkDetails(selectedDrink);
+        AnsiConsole.Clear();
+
+        visualization.PrintDrinkDetails(drinksService.GetDrinkById(drinkSelection));
+        AnsiConsole.WriteLine("\nPress enter to return to categories menu...");
+        Console.ReadLine();
+        GetCategoriesInput();
     }
 }
