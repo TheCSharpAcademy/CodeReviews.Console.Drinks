@@ -46,31 +46,6 @@ public class DrinksService
             DrinkDetail drinkDetail = returnedList[0];
 
             return drinkDetail;
-
-            /*
-            List<object> prepList = new();
-
-            string formattedName = "";
-
-            foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
-            {
-
-                if (prop.Name.Contains("str"))
-                {
-                    formattedName = prop.Name.Substring(3);
-                }
-
-                if (!string.IsNullOrEmpty(prop.GetValue(drinkDetail)?.ToString()))
-                {
-                    prepList.Add(new
-                    {
-                        Key = formattedName,
-                        Value = prop.GetValue(drinkDetail)
-                    });
-                }
-            }
-            return prepList;
-            */
         }
         return null;
     }
@@ -95,5 +70,26 @@ public class DrinksService
             return drinks;
         }
         return drinks;
+    }
+
+    internal DrinkDetail GetRandomDrink()
+    {
+        var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
+        var request = new RestRequest($"random.php");
+        var response = client.ExecuteAsync(request);
+
+        if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            string rawResponse = response.Result.Content;
+
+            var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse);
+
+            List<DrinkDetail> returnedList = serialize.DrinkDetailList;
+
+            DrinkDetail drinkDetail = returnedList[0];
+
+            return drinkDetail;
+        }
+        return null;
     }
 }

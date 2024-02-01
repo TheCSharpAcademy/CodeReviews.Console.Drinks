@@ -9,6 +9,6 @@ internal class Program
         var validator = new Validator();
         var userInput = new UserInput(drinksService, visualization, validator);
 
-        userInput.GetCategoriesInput();
+        userInput.MenuHandler();
     }
 }

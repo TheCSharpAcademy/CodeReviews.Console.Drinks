@@ -16,23 +16,43 @@ public class UserInput
         this.validator = validator;
     }   
 
-    public void GetCategoriesInput()
+    public void MenuHandler()
+    {
+        AnsiConsole.Clear();
+
+        string choice = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                        .Title("Select an option using the arrow keys, then press enter...")
+                        .PageSize(30)
+                        .AddChoices(new string[] { "Drink Search", "Show me a random drink!", "Exit" }));
+
+        switch (choice)
+        {
+            case "Drink Search":
+                GetCategoriesInput();
+                break;
+            case "Show me a random drink!":
+                GetRandomDrink();
+                break;
+            case "Exit":
+                Environment.Exit(0);
+                break;
+        }
+    }
+
+
+    private void GetCategoriesInput()
     {
         AnsiConsole.Clear();
         List<Category> categories = drinksService.GetCategories();
         visualization.PrintTable(categories);
 
-        string? category = AnsiConsole.Ask<string>("Enter category or enter 0 to exit: ");
-
-        if (category == "0")
-        {
-            Environment.Exit(0);
-        }
+        string? category = AnsiConsole.Ask<string>("Enter category: ");
 
         while(!validator.IsStringValid(category) || !categories.Any(x => x.strCategory.ToLower() == category.ToLower()))
         {
             AnsiConsole.MarkupLine($"[red]{category} is not a valid category![/]");
-            category = AnsiConsole.Ask<string>("Enter a valid category or 0 to exit: ");
+            category = AnsiConsole.Ask<string>("Enter a valid category: ");
         }
 
         GetDrinksInput(category);
@@ -55,8 +75,16 @@ public class UserInput
         AnsiConsole.Clear();
 
         visualization.PrintDrinkDetails(drinksService.GetDrinkById(drinkSelection));
-        AnsiConsole.WriteLine("\nPress enter to return to categories menu...");
+        AnsiConsole.WriteLine("\nPress enter to return to menu...");
         Console.ReadLine();
-        GetCategoriesInput();
+        MenuHandler();
+    }
+
+    private void GetRandomDrink()
+    {
+        visualization.PrintDrinkDetails(drinksService.GetRandomDrink());
+        AnsiConsole.WriteLine("\nPress enter to return to menu...");
+        Console.ReadLine();
+        MenuHandler();
     }
 }
