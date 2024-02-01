@@ -4,6 +4,11 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        var drinksService =  new DrinksService();
+        var visualization = new Visualization();
+        var validator = new Validator();
+        var userInput = new UserInput(drinksService, visualization, validator);
+
+        userInput.GetCategoriesInput();
     }
 }
