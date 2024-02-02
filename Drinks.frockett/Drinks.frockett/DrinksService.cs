@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using RestSharp;
 using Drinks.frockett.Models;
 using System.Web;
 
@@ -7,86 +6,109 @@ namespace Drinks.frockett;
 
 public class DrinksService
 {
-    public List<Category> GetCategories()
-    {
-        var clinet = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
-        var request = new RestRequest("list.php?c=list");
-        var response = clinet.ExecuteAsync(request);
+    private readonly HttpClient _httpClient;
 
-        if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
+    public DrinksService(HttpClient client)
+    {
+        _httpClient = client;
+    } 
+
+    public async Task<List<Category>> GetCategories()
+    {
+        List<Category> categories = new();
+
+        string requestUri = "list.php?c=list";
+        HttpResponseMessage response = await _httpClient.GetAsync(requestUri);
+
+        if (response.IsSuccessStatusCode)
         {
-            string rawResponse = response.Result.Content;
+            string rawResponse = await response.Content.ReadAsStringAsync();
             var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
 
-            List<Category> returnedList = serialize.CategoriesList;
+            categories = serialize.CategoriesList;
 
-            // TODO return list either by passing as parameter or as return type
-            return returnedList;
+            return categories;
         }
-        return null;
+        else
+        {
+            return categories;
+        }
     }
 
-    internal DrinkDetail GetDrinkById(string drink)
+    internal async Task<DrinkDetail> GetDrinkById(string drink)
     {
-        var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
-        var request = new RestRequest($"lookup.php?i={drink}");
-        var response = client.ExecuteAsync(request);
+        string requestUri = $"lookup.php?i={HttpUtility.UrlEncode(drink)}";
+        HttpResponseMessage response = await _httpClient.GetAsync(requestUri);
 
-        if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
+        DrinkDetail drinkDetail = new();
+
+        if (response.IsSuccessStatusCode)
         {
-            string rawResponse = response.Result.Content;
+            string rawResponse = await response.Content.ReadAsStringAsync();
 
             var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse);
 
-            List<DrinkDetail> returnedList = serialize.DrinkDetailList;
+            // make sure there is content. If no content, return null so that UserInput can tell the user
+            if (serialize == null) return null;
+            else
+            {
+                List<DrinkDetail> returnedList = serialize.DrinkDetailList;
 
-            DrinkDetail drinkDetail = returnedList[0];
+                drinkDetail = returnedList[0];
 
-            return drinkDetail;
+                return drinkDetail;
+            }
         }
-        return null;
+        else return null;
     }
 
-    internal List<Drink> GetDrinksByCategory(string category)
+    internal async Task<List<Drink>> GetDrinksByCategory(string category)
     {
-        var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
-        var request = new RestRequest($"filter.php?c={HttpUtility.UrlEncode(category)}");
-
-        var response = client.ExecuteAsync(request);
-
         List<Drink> drinks = new();
 
-        if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
-        {
-            string rawResponse = response.Result.Content;
+        string requestUri = $"filter.php?c={HttpUtility.UrlEncode(category)}";
+        HttpResponseMessage response = await _httpClient.GetAsync(requestUri);
 
+        if (response.IsSuccessStatusCode)
+        {
+            string rawResponse = await response.Content.ReadAsStringAsync();
             var serialize = JsonConvert.DeserializeObject<DrinksL>(rawResponse);
 
-            drinks = serialize.DrinksList;
-
-            return drinks;
+            // make sure there is content. If no content, return null so that UserInput can tell the user
+            if (serialize == null) return null;
+            else
+            {
+                //if there is content, return list
+                drinks = serialize.DrinksList;
+                return drinks;
+            }
         }
-        return drinks;
+        else return null;
     }
 
-    internal DrinkDetail GetRandomDrink()
+    internal async Task<DrinkDetail> GetRandomDrink()
     {
-        var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
-        var request = new RestRequest($"random.php");
-        var response = client.ExecuteAsync(request);
+        string requestUri = "random.php";
+        HttpResponseMessage response = await _httpClient.GetAsync(requestUri);
 
-        if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
+        DrinkDetail drinkDetail = new();
+
+        if (response.IsSuccessStatusCode)
         {
-            string rawResponse = response.Result.Content;
+            string rawResponse = await response.Content.ReadAsStringAsync();
 
             var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse);
 
-            List<DrinkDetail> returnedList = serialize.DrinkDetailList;
+            if (serialize == null) return null;
+            else
+            {
+                List<DrinkDetail> returnedList = serialize.DrinkDetailList;
 
-            DrinkDetail drinkDetail = returnedList[0];
+                drinkDetail = returnedList[0];
 
-            return drinkDetail;
+                return drinkDetail;
+            }
         }
-        return null;
+        else return null;
     }
 }
