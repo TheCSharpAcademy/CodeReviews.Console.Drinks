@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="ConsoleTableExt" Version="3.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="RestSharp" Version="110.2.0" />
     <PackageReference Include="Spectre.Console" Version="0.48.0" />

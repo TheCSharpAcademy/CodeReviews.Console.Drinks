@@ -15,7 +15,6 @@ namespace Drinks.frockett.Models
         public object StrTags { get; set; }
         public object StrVideo { get; set; }
         public string StrCategory { get; set; }
-        public object StrIBA { get; set; }
         public string StrAlcoholic { get; set; }
         public string StrGlass { get; set; }
         public string StrInstructions { get; set; }
@@ -23,8 +22,6 @@ namespace Drinks.frockett.Models
         public string StrInstructionsDE { get; set; }
         public object StrInstructionsFR { get; set; }
         public string StrInstructionsIT { get; set; }
-        public object StrInstructionsZHHANS { get; set; }
-        public object StrInstructionsZHHANT { get; set; }
         public string StrDrinkThumb { get; set; }
         public string StrIngredient1 { get; set; }
         public string StrIngredient2 { get; set; }

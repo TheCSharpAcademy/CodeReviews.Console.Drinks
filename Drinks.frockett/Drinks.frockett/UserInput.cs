@@ -16,7 +16,7 @@ public class UserInput
         this.validator = validator;
     }   
 
-    public void MenuHandler()
+    public async Task MenuHandler()
     {
         AnsiConsole.Clear();
 
@@ -29,10 +29,10 @@ public class UserInput
         switch (choice)
         {
             case "Drink Search":
-                GetCategoriesInput();
+                await GetCategoriesInput();
                 break;
             case "Show me a random drink!":
-                GetRandomDrink();
+                await GetRandomDrink();
                 break;
             case "Exit":
                 Environment.Exit(0);
@@ -41,10 +41,19 @@ public class UserInput
     }
 
 
-    private void GetCategoriesInput()
+    private async Task GetCategoriesInput()
     {
         AnsiConsole.Clear();
-        List<Category> categories = drinksService.GetCategories();
+        List<Category> categories = await drinksService.GetCategories();
+
+        if (categories == null || !categories.Any())
+        {
+            AnsiConsole.Markup($"[red]Sorry, an error occurred. The API returned null. Press enter to return to main menu...[/]");
+            Console.ReadLine();
+            await MenuHandler();
+            return;
+        }
+
         visualization.PrintTable(categories);
 
         string? category = AnsiConsole.Ask<string>("Enter category: ");
@@ -55,13 +64,22 @@ public class UserInput
             category = AnsiConsole.Ask<string>("Enter a valid category: ");
         }
 
-        GetDrinksInput(category);
+        await GetDrinksInput(category);
     }
 
-    private void GetDrinksInput(string category)
+    private async Task GetDrinksInput(string category)
     {
         AnsiConsole.Clear();
-        List<Drink> drinks = drinksService.GetDrinksByCategory(category);
+        List<Drink> drinks = await drinksService.GetDrinksByCategory(category);
+
+        if (drinks == null || !drinks.Any())
+        {
+            AnsiConsole.Markup($"[red]Sorry, an error occurred. The API returned null. Press enter to return to main menu...[/]");
+            Console.ReadLine();
+            await MenuHandler();
+            return;
+        }
+
         visualization.PrintDrinks(drinks);
 
         string? drinkSelection = AnsiConsole.Ask<string>("Enter Drink Id: ");
@@ -74,17 +92,28 @@ public class UserInput
 
         AnsiConsole.Clear();
 
-        visualization.PrintDrinkDetails(drinksService.GetDrinkById(drinkSelection));
+        var drinkDetail = await drinksService.GetDrinkById(drinkSelection);
+
+        if (drinkDetail == null)
+        {
+            AnsiConsole.Markup($"[red]Sorry, an error occurred. The API returned null. Press enter to return to main menu...[/]");
+            Console.ReadLine();
+            await MenuHandler();
+            return;
+        }
+
+        visualization.PrintDrinkDetails(drinkDetail);
         AnsiConsole.WriteLine("\nPress enter to return to menu...");
         Console.ReadLine();
-        MenuHandler();
+
+        await MenuHandler();
     }
 
-    private void GetRandomDrink()
+    private async Task GetRandomDrink()
     {
-        visualization.PrintDrinkDetails(drinksService.GetRandomDrink());
+        visualization.PrintDrinkDetails(await drinksService.GetRandomDrink());
         AnsiConsole.WriteLine("\nPress enter to return to menu...");
         Console.ReadLine();
-        MenuHandler();
+        await MenuHandler();
     }
 }

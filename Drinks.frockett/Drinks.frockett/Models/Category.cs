@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 
-
 namespace Drinks.frockett.Models;
 
 public class Category

@@ -1,14 +1,13 @@
-﻿namespace Drinks.frockett;
+﻿using Drinks.frockett;
 
-internal class Program
+HttpClient client = new HttpClient()
 {
-    static void Main(string[] args)
-    {
-        var drinksService =  new DrinksService();
-        var visualization = new Visualization();
-        var validator = new Validator();
-        var userInput = new UserInput(drinksService, visualization, validator);
+    BaseAddress = new Uri("https://www.thecocktaildb.com/api/json/v1/1/")
+};
 
-        userInput.MenuHandler();
-    }
-}
+var drinksService = new DrinksService(client);
+var visualization = new Visualization();
+var validator = new Validator();
+var userInput = new UserInput(drinksService, visualization, validator);
+
+await userInput.MenuHandler();
