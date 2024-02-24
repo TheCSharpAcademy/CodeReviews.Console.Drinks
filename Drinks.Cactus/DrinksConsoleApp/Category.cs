@@ -1,7 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace DrinksConsoleApp;
 
 public record class Category(
-    [property: JsonPropertyName("strCategory")] string Name);
+[JsonProperty(PropertyName = "strCategory")] string Name);
 

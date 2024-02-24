@@ -1,5 +1,5 @@
-﻿using Spectre.Console;
-using System.Text.Json;
+﻿using Newtonsoft.Json.Linq;
+using Spectre.Console;
 
 namespace DrinksConsoleApp;
 
@@ -9,10 +9,10 @@ public class Application
     {
         Console.WriteLine("Getting the drink categories, please wait a few minutes.");
         var drinkCategories = await GetDrinkCategoriesAsync();
-        var id = GetUserInputCateId(drinkCategories.Categories);
+        var id = GetUserInputCateId(drinkCategories);
 
-        var drinks = await GetDrinksAsync(drinkCategories.Categories[id - 1].Name);
-        var drinkId = GetUserInputDrinkId(drinks.DrinkDetails);
+        var drinks = await GetDrinksAsync(drinkCategories[id - 1].Name);
+        var drinkId = GetUserInputDrinkId(drinks);
     }
 
     private int GetUserInputDrinkId(List<Drink> drinks)
@@ -71,23 +71,27 @@ public class Application
         AnsiConsole.Write(table);
     }
 
-    private async Task<DrinkCategories> GetDrinkCategoriesAsync()
+    private async Task<List<Category>> GetDrinkCategoriesAsync()
     {
         using (HttpClient client = new())
         {
-            await using Stream stream = await client.GetStreamAsync(
+            var json = await client.GetStringAsync(
                 "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list");
-            return await JsonSerializer.DeserializeAsync<DrinkCategories>(stream);
+            JObject data = JObject.Parse(json);
+            var categories = data["drinks"].ToObject<List<Category>>();
+            return categories;
         }
     }
 
-    private async Task<Drinks> GetDrinksAsync(string cName)
+    private async Task<List<Drink>> GetDrinksAsync(string cName)
     {
         using (HttpClient client = new())
         {
-            await using Stream stream = await client.GetStreamAsync(
+            var json = await client.GetStringAsync(
                 $"https://www.thecocktaildb.com/api/json/v1/1/filter.php?c={cName}");
-            return await JsonSerializer.DeserializeAsync<Drinks>(stream);
+            JObject data = JObject.Parse(json);
+            var drinks = data["drinks"].ToObject<List<Drink>>();
+            return drinks;
         }
     }
 }

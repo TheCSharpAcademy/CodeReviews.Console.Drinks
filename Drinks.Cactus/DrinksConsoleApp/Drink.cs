@@ -1,8 +1,7 @@
-﻿using System.Text.Json.Serialization;
-
+﻿using Newtonsoft.Json;
 namespace DrinksConsoleApp;
 
 public record class Drink(
-    [property: JsonPropertyName("strDrink")] string Name,
-    [property: JsonPropertyName("idDrink")] string Id);
+    [JsonProperty(PropertyName = "strDrink")] string Name,
+    [JsonProperty(PropertyName = "idDrink")] string Id);
 
