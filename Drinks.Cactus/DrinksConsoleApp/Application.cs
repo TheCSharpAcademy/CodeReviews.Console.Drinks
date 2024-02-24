@@ -12,7 +12,7 @@ public class Application
         var id = GetUserInputCateId(drinkCategories);
     }
 
-    private int GetUserInputCateId(Drinks drinkCategories)
+    private int GetUserInputCateId(DrinkCategory drinkCategories)
     {
         DisplayDrinksMenu(drinkCategories);
 
@@ -25,7 +25,7 @@ public class Application
         return inputId;
     }
 
-    private void DisplayDrinksMenu(Drinks drinkCategories)
+    private void DisplayDrinksMenu(DrinkCategory drinkCategories)
     {
         Console.Clear();
         var table = new Table();
@@ -39,12 +39,12 @@ public class Application
         AnsiConsole.Write(table);
     }
 
-    private async Task<Drinks> GetDrinkCategoriesAsync()
+    private async Task<DrinkCategory> GetDrinkCategoriesAsync()
     {
         using HttpClient client = new();
         await using Stream stream = await client.GetStreamAsync(
             "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list");
-        return await JsonSerializer.DeserializeAsync<Drinks>(stream);
+        return await JsonSerializer.DeserializeAsync<DrinkCategory>(stream);
     }
 }
 

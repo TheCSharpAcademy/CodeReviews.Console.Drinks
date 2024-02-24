@@ -2,6 +2,6 @@
 
 namespace DrinksConsoleApp;
 
-public record class Category(
+public record class CategoryDetail(
     [property: JsonPropertyName("strCategory")] string Name);
 
