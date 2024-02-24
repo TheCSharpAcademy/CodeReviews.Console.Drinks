@@ -13,6 +13,8 @@ public class Application
 
         var drinks = await GetDrinksAsync(drinkCategories[id - 1].Name);
         var drinkId = GetUserInputDrinkId(drinks);
+        var drinkDetail = await GetDrinkDetailAsync(drinks[drinkId - 1].Id);
+        DisplayDrinDetail(drinkDetail);
     }
 
     private int GetUserInputDrinkId(List<Drink> drinks)
@@ -71,6 +73,16 @@ public class Application
         AnsiConsole.Write(table);
     }
 
+    private void DisplayDrinDetail(DrinkDetail detail)
+    {
+        Console.Clear();
+        var table = new Table();
+        table.Title(detail.Name);
+        table.AddColumns("Category", "Instruction");
+        table.AddRow(detail.Category, detail.Instruction);
+        AnsiConsole.Write(table);
+    }
+
     private async Task<List<Category>> GetDrinkCategoriesAsync()
     {
         using (HttpClient client = new())
@@ -92,6 +104,18 @@ public class Application
             JObject data = JObject.Parse(json);
             var drinks = data["drinks"].ToObject<List<Drink>>();
             return drinks;
+        }
+    }
+
+    private async Task<DrinkDetail> GetDrinkDetailAsync(int id)
+    {
+        using (HttpClient client = new())
+        {
+            var json = await client.GetStringAsync(
+                $"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={id}");
+            JObject data = JObject.Parse(json);
+            var drinkDetail = data["drinks"].ToObject<List<DrinkDetail>>()[0];
+            return drinkDetail;
         }
     }
 }
