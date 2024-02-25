@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-namespace DrinksConsoleApp;
+namespace DrinksConsoleApp.DataModel;
 
 public record class DrinkDetail(
     [JsonProperty(PropertyName = "strDrink")] string Name,

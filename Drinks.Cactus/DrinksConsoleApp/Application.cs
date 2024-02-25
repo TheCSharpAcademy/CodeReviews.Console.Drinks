@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using DrinksConsoleApp.DataModel;
 using Spectre.Console;
 
 namespace DrinksConsoleApp;
 
 public class Application
 {
+    #region Running Menu
+
     public async Task Run()
     {
         await RunDrinkCategoryMenu();
@@ -13,7 +15,7 @@ public class Application
     public async Task RunDrinkCategoryMenu()
     {
         Console.WriteLine("Getting the drink categories, please wait a few minutes.");
-        var drinkCategories = await GetDrinkCategoriesAsync();
+        var drinkCategories = await HttpClientHelper.GetDrinkCategoriesAsync();
         var id = GetUserInputCateId(drinkCategories);
         while (id >= 0)
         {
@@ -24,20 +26,26 @@ public class Application
 
     public async Task RunSpecificCateDrinksMenu(string cateName)
     {
-        var drinks = await GetDrinksAsync(cateName);
+        var drinks = await HttpClientHelper.GetDrinksAsync(cateName);
         while (true)
         {
             var drinkId = GetUserInputDrinkId(drinks, cateName);
             if (drinkId == -1) return;
 
-            Console.WriteLine($"Fetch the data detail of {drinks[drinkId].Name} drink, please wait a few miniutes.");
-            var drinkDetail = await GetDrinkDetailAsync(drinks[drinkId - 1].Id);
-            DisplayDrinDetail(drinkDetail);
+            Console.Clear();
+            AnsiConsole.MarkupLine($"Fetch the data detail of [green]{drinks[drinkId].Name}[/] drink, please wait a few miniutes.");
+
+            var drinkDetail = await HttpClientHelper.GetDrinkDetailAsync(drinks[drinkId].Id);
+            DisplayDrinkDetail(drinkDetail);
 
             Console.WriteLine($"Type any key to return the first page of the category {cateName.ToUpper()}.");
             Console.ReadLine();
         }
     }
+
+    #endregion Running Menu
+
+    #region Input Helper
 
     private int GetUserInputDrinkId(List<Drink> drinks, string cateName)
     {
@@ -105,6 +113,10 @@ public class Application
         return inputId;
     }
 
+    #endregion Input Helper
+
+    #region Display
+
     private void DisplaySpecificCateDrinks(List<Drink> drinks, int page, int pageLimit, string cateName)
     {
         Console.Clear();
@@ -137,7 +149,7 @@ public class Application
         AnsiConsole.Write(table);
     }
 
-    private void DisplayDrinDetail(DrinkDetail detail)
+    private void DisplayDrinkDetail(DrinkDetail detail)
     {
         Console.Clear();
         var table = new Table();
@@ -147,40 +159,6 @@ public class Application
         AnsiConsole.Write(table);
     }
 
-    private async Task<List<Category>> GetDrinkCategoriesAsync()
-    {
-        using (HttpClient client = new())
-        {
-            var json = await client.GetStringAsync(
-                "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list");
-            JObject data = JObject.Parse(json);
-            var categories = data["drinks"].ToObject<List<Category>>();
-            return categories;
-        }
-    }
-
-    private async Task<List<Drink>> GetDrinksAsync(string cName)
-    {
-        using (HttpClient client = new())
-        {
-            var json = await client.GetStringAsync(
-                $"https://www.thecocktaildb.com/api/json/v1/1/filter.php?c={cName}");
-            JObject data = JObject.Parse(json);
-            var drinks = data["drinks"].ToObject<List<Drink>>();
-            return drinks;
-        }
-    }
-
-    private async Task<DrinkDetail> GetDrinkDetailAsync(int id)
-    {
-        using (HttpClient client = new())
-        {
-            var json = await client.GetStringAsync(
-                $"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={id}");
-            JObject data = JObject.Parse(json);
-            var drinkDetail = data["drinks"].ToObject<List<DrinkDetail>>()[0];
-            return drinkDetail;
-        }
-    }
+    #endregion Display
 }
 
