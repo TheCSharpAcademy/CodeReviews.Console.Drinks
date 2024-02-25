@@ -5,57 +5,121 @@ namespace DrinksConsoleApp;
 
 public class Application
 {
-    public async Task run()
+    public async Task Run()
+    {
+        await RunDrinkCategoryMenu();
+    }
+
+    public async Task RunDrinkCategoryMenu()
     {
         Console.WriteLine("Getting the drink categories, please wait a few minutes.");
         var drinkCategories = await GetDrinkCategoriesAsync();
         var id = GetUserInputCateId(drinkCategories);
-
-        var drinks = await GetDrinksAsync(drinkCategories[id - 1].Name);
-        var drinkId = GetUserInputDrinkId(drinks);
-        var drinkDetail = await GetDrinkDetailAsync(drinks[drinkId - 1].Id);
-        DisplayDrinDetail(drinkDetail);
+        while (id >= 0)
+        {
+            await RunSpecificCateDrinksMenu(drinkCategories[id].Name);
+            id = GetUserInputCateId(drinkCategories);
+        }
     }
 
-    private int GetUserInputDrinkId(List<Drink> drinks)
+    public async Task RunSpecificCateDrinksMenu(string cateName)
     {
-        DisplaySpecificCateDrinks(drinks);
+        var drinks = await GetDrinksAsync(cateName);
+        while (true)
+        {
+            var drinkId = GetUserInputDrinkId(drinks, cateName);
+            if (drinkId == -1) return;
+
+            Console.WriteLine($"Fetch the data detail of {drinks[drinkId].Name} drink, please wait a few miniutes.");
+            var drinkDetail = await GetDrinkDetailAsync(drinks[drinkId - 1].Id);
+            DisplayDrinDetail(drinkDetail);
+
+            Console.WriteLine($"Type any key to return the first page of the category {cateName.ToUpper()}.");
+            Console.ReadLine();
+        }
+    }
+
+    private int GetUserInputDrinkId(List<Drink> drinks, string cateName)
+    {
+        int pageLimit = 15;
+        int pageCnt = (int)Math.Ceiling(drinks.Count / (double)pageLimit);
+        int pageIdx = 0;
+        DisplaySpecificCateDrinks(drinks, pageIdx, pageLimit, cateName);
         Console.WriteLine();
 
-        return GetValidInputId(drinks.Count);
-    }
+        while (true)
+        {
+            string nextPagePromStr = pageIdx + 1 < pageCnt ? "Next Page: n/N, " : "";
+            string lastPagePromStr = pageIdx - 1 >= 0 ? "Last Page: l/L, " : "";
+            Console.WriteLine($"{lastPagePromStr}{nextPagePromStr}See All Categories: b/B or Input the ID you wish to see.");
+            Console.WriteLine();
 
+            string? op = Console.ReadLine();
+            switch (op)
+            {
+                case "n":
+                case "N":
+                    if (pageIdx + 1 >= pageCnt)
+                    {
+                        Console.WriteLine("INVALID input.");
+                        break;
+                    }
+                    DisplaySpecificCateDrinks(drinks, ++pageIdx, pageLimit, cateName);
+                    break;
+                case "l":
+                case "L":
+                    if (pageIdx - 1 < 0)
+                    {
+                        Console.WriteLine("INVALID input.");
+                        break;
+                    }
+                    DisplaySpecificCateDrinks(drinks, --pageIdx, pageLimit, cateName);
+                    break;
+                case "b":
+                case "B":
+                    return -1;
+                default:
+                    int inputId;
+                    int start = pageIdx * pageLimit;
+                    int end = Math.Min((pageIdx + 1) * pageLimit, drinks.Count) - 1;
+                    if (int.TryParse(op, out inputId) && inputId >= start && inputId <= end)
+                    {
+                        return inputId;
+                    }
+                    Console.WriteLine("INVALID input.");
+                    break;
+            }
+        }
+    }
 
     private int GetUserInputCateId(List<Category> categories)
     {
         DisplayDrinksMenu(categories);
         Console.WriteLine();
 
-        return GetValidInputId(categories.Count);
-    }
-
-    private int GetValidInputId(int count)
-    {
-        int inputId = AnsiConsole.Ask<int>("Please input the [green]id[/] of the item you wish to see: ");
-        while (inputId < 1 || inputId > count)
+        int inputId = AnsiConsole.Ask<int>("Please input the [green]id[/] of the category you wish to see, or -1 to exit: ");
+        while (inputId < -1 || inputId >= categories.Count)
         {
             inputId = AnsiConsole.Ask<int>("Please input the valid ID: ");
         }
         return inputId;
     }
 
-    private void DisplaySpecificCateDrinks(List<Drink> drinks)
+    private void DisplaySpecificCateDrinks(List<Drink> drinks, int page, int pageLimit, string cateName)
     {
         Console.Clear();
 
         var table = new Table();
+        table.Title($"{cateName} drinks PAGE {page}");
         table.AddColumn("Id");
         table.AddColumn("Drink Name");
-        int id = 0;
-        drinks.ForEach(drink =>
-        {
-            table.AddRow((++id).ToString(), drink.Name);
-        });
+        int id = page * pageLimit; // page index starts from 0
+        int cnt = Math.Min(pageLimit, drinks.Count - id);
+        drinks.GetRange(id, cnt)
+            .ForEach(drink =>
+            {
+                table.AddRow((id++).ToString(), drink.Name);
+            });
         AnsiConsole.Write(table);
     }
 
@@ -68,7 +132,7 @@ public class Application
         int id = 0;
         drinkCategories.ForEach(category =>
         {
-            table.AddRow((++id).ToString(), category.Name);
+            table.AddRow((id++).ToString(), category.Name);
         });
         AnsiConsole.Write(table);
     }
