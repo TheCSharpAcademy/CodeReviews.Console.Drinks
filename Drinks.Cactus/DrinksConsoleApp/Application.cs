@@ -15,31 +15,48 @@ public class Application
     public async Task RunDrinkCategoryMenu()
     {
         Console.WriteLine("Getting the drink categories, please wait a few minutes.");
-        var drinkCategories = await HttpClientHelper.GetDrinkCategoriesAsync();
-        var id = GetUserInputCateId(drinkCategories);
-        while (id >= 0)
+        try
         {
-            await RunSpecificCateDrinksMenu(drinkCategories[id].Name);
-            id = GetUserInputCateId(drinkCategories);
+            var drinkCategories = await HttpClientHelper.GetDrinkCategoriesAsync();
+            var id = GetUserInputCateId(drinkCategories);
+            while (id >= 0)
+            {
+                await RunSpecificCateDrinksMenu(drinkCategories[id].Name);
+                id = GetUserInputCateId(drinkCategories);
+            }
+        }
+        catch (HttpRequestException)
+        {
+            Console.WriteLine("Cannot connect to remote server. Please restart app to try again.");
         }
     }
 
     public async Task RunSpecificCateDrinksMenu(string cateName)
     {
-        var drinks = await HttpClientHelper.GetDrinksAsync(cateName);
-        while (true)
+        try
         {
-            var drinkId = GetUserInputDrinkId(drinks, cateName);
-            if (drinkId == -1) return;
-
             Console.Clear();
-            AnsiConsole.MarkupLine($"Fetch the data detail of [green]{drinks[drinkId].Name}[/] drink, please wait a few miniutes.");
+            AnsiConsole.MarkupLine($"Fetch the drinks of category [green]{cateName}[/], please wait a few miniutes.");
+            var drinks = await HttpClientHelper.GetDrinksAsync(cateName);
 
-            var drinkDetail = await HttpClientHelper.GetDrinkDetailAsync(drinks[drinkId].Id);
-            DisplayDrinkDetail(drinkDetail);
+            while (true)
+            {
+                var drinkId = GetUserInputDrinkId(drinks, cateName);
+                if (drinkId == -1) return;
 
-            Console.WriteLine($"Type any key to return the first page of the category {cateName.ToUpper()}.");
-            Console.ReadLine();
+                Console.Clear();
+                AnsiConsole.MarkupLine($"Fetch the data detail of [green]{drinks[drinkId].Name}[/] drink, please wait a few miniutes.");
+
+                var drinkDetail = await HttpClientHelper.GetDrinkDetailAsync(drinks[drinkId].Id);
+                DisplayDrinkDetail(drinkDetail);
+
+                Console.WriteLine($"Type any key to return the first page of the category {cateName.ToUpper()}.");
+                Console.ReadLine();
+            }
+        }
+        catch (HttpRequestException)
+        {
+            Console.WriteLine("Cannot connect to remote server. Please restart app to try again.");
         }
     }
 
