@@ -20,24 +20,24 @@ public class Application
     private int GetUserInputDrinkId(List<Drink> drinks)
     {
         DisplaySpecificCateDrinks(drinks);
-
         Console.WriteLine();
-        int inputId = AnsiConsole.Ask<int>("Please input the [green]id[/] of the drink you wish to see: ");
-        while (inputId < 1 || inputId > drinks.Count)
-        {
-            inputId = AnsiConsole.Ask<int>("Please input the valid ID: ");
-        }
-        return inputId;
+
+        return GetValidInputId(drinks.Count);
     }
 
 
     private int GetUserInputCateId(List<Category> categories)
     {
         DisplayDrinksMenu(categories);
-
         Console.WriteLine();
-        int inputId = AnsiConsole.Ask<int>("Please input the [green]id[/] of the category you wish to see: ");
-        while (inputId < 1 || inputId > categories.Count)
+
+        return GetValidInputId(categories.Count);
+    }
+
+    private int GetValidInputId(int count)
+    {
+        int inputId = AnsiConsole.Ask<int>("Please input the [green]id[/] of the item you wish to see: ");
+        while (inputId < 1 || inputId > count)
         {
             inputId = AnsiConsole.Ask<int>("Please input the valid ID: ");
         }
