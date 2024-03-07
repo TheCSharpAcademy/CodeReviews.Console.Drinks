@@ -80,9 +80,8 @@ internal class UserInterface
         string drinksName = AnsiConsole.Ask<string>("Type the drink you want to search for: ");
         Console.Clear();
         while (string.IsNullOrEmpty(drinksName))
-        {
             drinksName = AnsiConsole.Ask<string>("Name can't be empty\n");
-        };
+        
 
         DataAccess.SearchByName(drinksName);
     }
