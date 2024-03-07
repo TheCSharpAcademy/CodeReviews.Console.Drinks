@@ -18,9 +18,9 @@ internal class DataAccess
             string responseJson = response.Content;
             var serialize = JsonConvert.DeserializeObject<DrinksModel>(responseJson);
 
-            List<drinks> drinkslist = serialize.drinks;
+            List<Drinks> drinkslist = serialize.Drinks;
 
-            var drinkchoice = AnsiConsole.Prompt(new SelectionPrompt<drinks>().Title("select one drink").AddChoices(drinkslist));
+            var drinkchoice = AnsiConsole.Prompt(new SelectionPrompt<Drinks>().Title("select one drink").AddChoices(drinkslist));
 
             GetInfo(drinkchoice.ToString());
 
@@ -38,8 +38,8 @@ internal class DataAccess
             string responseJson = response.Content;
             var serialize = JsonConvert.DeserializeObject<DrinksModel>(responseJson);
 
-            List<drinks> returned = serialize.drinks;
-            drinks selectedDrink = returned.FirstOrDefault();
+            List<Drinks> returned = serialize.Drinks;
+            Drinks selectedDrink = returned.FirstOrDefault();
 
             UserInterface.PrintDrink(selectedDrink);
         }
@@ -56,8 +56,8 @@ internal class DataAccess
             string responseJson = response.Content;
             var serialize = JsonConvert.DeserializeObject<DrinksModel>(responseJson);
 
-            List<drinks> returned = serialize.drinks;
-            drinks returnedRandom = returned.FirstOrDefault();
+            List<Drinks> returned = serialize.Drinks;
+            Drinks returnedRandom = returned.FirstOrDefault();
 
             UserInterface.PrintDrink(returnedRandom);
         }
@@ -74,11 +74,11 @@ internal class DataAccess
             string responseJson = response.Content;
             var serialize = JsonConvert.DeserializeObject<DrinksModel>(responseJson);
 
-            List<drinks> returnedList = serialize.drinks;
+            List<Drinks> returnedList = serialize.Drinks;
 
             if (returnedList != null)
             {
-                var drinkchoice = AnsiConsole.Prompt(new SelectionPrompt<drinks>().Title("select one drink").AddChoices(returnedList));
+                var drinkchoice = AnsiConsole.Prompt(new SelectionPrompt<Drinks>().Title("select one drink").AddChoices(returnedList));
                 GetInfo(drinkchoice.ToString());
             }
             else

@@ -4,11 +4,11 @@ namespace DrinksInfo.Models;
 
 public class DrinksModel
 {
-    public List<drinks> drinks { get; set; }
+    public List<Drinks> Drinks { get; set; }
 }
 
-//mudar essa porcaria de nomes
-public class drinks
+
+public class Drinks
 {
     [JsonProperty("idDrink")]
     public int Id { get; set; }

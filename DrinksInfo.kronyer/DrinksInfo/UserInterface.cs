@@ -87,7 +87,7 @@ internal class UserInterface
         DataAccess.SearchByName(drinksName);
     }
 
-    internal static void PrintDrink(drinks? selectedDrink)
+    internal static void PrintDrink(Drinks? selectedDrink)
     {
         Console.WriteLine($@"Name: {selectedDrink.Name}
 
