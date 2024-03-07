@@ -30,15 +30,15 @@ internal class DataAccess
 
     public static void GetInfo(string name)
     {
-        var client1 = new RestClient("https://www.thecocktaildb.com/api/json/v1/1/");
-        var request1 = new RestRequest($"search.php?s={name}");
-        var response1 = client1.Execute(request1);
-        if (response1.StatusCode == System.Net.HttpStatusCode.OK)
+        var client = new RestClient("https://www.thecocktaildb.com/api/json/v1/1/");
+        var request = new RestRequest($"search.php?s={name}");
+        var response = client.Execute(request);
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
         {
-            string responseJson1 = response1.Content;
-            var serialize1 = JsonConvert.DeserializeObject<DrinksModel>(responseJson1);
+            string responseJson = response.Content;
+            var serialize = JsonConvert.DeserializeObject<DrinksModel>(responseJson);
 
-            List<drinks> returned = serialize1.drinks;
+            List<drinks> returned = serialize.drinks;
             drinks selectedDrink = returned.FirstOrDefault();
 
             UserInterface.PrintDrink(selectedDrink);

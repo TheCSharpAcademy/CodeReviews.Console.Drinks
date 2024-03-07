@@ -1,4 +1,6 @@
-﻿namespace DrinksInfo.Models;
+﻿using Newtonsoft.Json;
+
+namespace DrinksInfo.Models;
 
 public class DrinksModel
 {
@@ -8,19 +10,35 @@ public class DrinksModel
 //mudar essa porcaria de nomes
 public class drinks
 {
-    public int idDrink { get; set; }
-    public string strDrink { get; set; }
-    public string strCategory { get; set; }
-    public string strInstructions { get; set; }
-    public string strIngredient1 { get; set; }
-    public string strIngredient2 { get; set; }
-    public string strIngredient3 { get; set; }
-    public string strIngredient4 { get; set; }
-    public string strIngredient5 { get; set; }
-    public string strIngredient6 { get; set; }
+    [JsonProperty("idDrink")]
+    public int Id { get; set; }
+
+    [JsonProperty("strDrink")]
+    public string Name { get; set; }
+
+    [JsonProperty("strCategory")]
+    public string Category { get; set; }
+
+    [JsonProperty("strInstructions")]
+    public string Instructions { get; set; }
+
+    [JsonProperty("strIngredient1")]
+    public string Ingredient1 { get; set; }
+
+    [JsonProperty("strIngredient2")]
+    public string Ingredient2 { get; set; }
+
+    [JsonProperty("strIngredient3")]
+    public string Ingredient3 { get; set; }
+
+    [JsonProperty("strIngredient4")]
+    public string Ingredient4 { get; set; }
+
+    [JsonProperty("strIngredient5")]
+    public string Ingredient5 { get; set; }
 
     public override string ToString()
     {
-        return strDrink;
+        return Name;
     }
 }

@@ -89,20 +89,19 @@ internal class UserInterface
 
     internal static void PrintDrink(drinks? selectedDrink)
     {
-        Console.WriteLine($@"Name: {selectedDrink.strDrink}
+        Console.WriteLine($@"Name: {selectedDrink.Name}
 
-Category: {selectedDrink.strCategory}
+Category: {selectedDrink.Category}
 
 Ingredients:
-{selectedDrink.strIngredient1}
-{selectedDrink.strIngredient2}
-{selectedDrink.strIngredient3}
-{selectedDrink.strIngredient4}
-{selectedDrink.strIngredient5}
-{selectedDrink.strIngredient6}
+{selectedDrink.Ingredient1}
+{selectedDrink.Ingredient2}
+{selectedDrink.Ingredient3}
+{selectedDrink.Ingredient4}
+{selectedDrink.Ingredient5}
 
 Instructions:
-{selectedDrink.strInstructions}");
+{selectedDrink.Instructions}");
         Console.ReadKey();
     }
 }
