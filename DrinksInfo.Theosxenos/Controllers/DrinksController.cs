@@ -63,8 +63,8 @@ public class DrinksController
         var dto = new DrinkIngredientsDto();
         for (var i = 1; i <= 15; i++) // Assuming up to 15 ingredients
         {
-            var ingredientProp = drink.GetType().GetProperty($"strIngredient{i}");
-            var measureProp = drink.GetType().GetProperty($"strMeasure{i}");
+            var ingredientProp = drink.GetType().GetProperty($"StrIngredient{i}");
+            var measureProp = drink.GetType().GetProperty($"StrMeasure{i}");
 
             var ingredient = ingredientProp?.GetValue(drink) as string;
             var measure = measureProp?.GetValue(drink) as string;
