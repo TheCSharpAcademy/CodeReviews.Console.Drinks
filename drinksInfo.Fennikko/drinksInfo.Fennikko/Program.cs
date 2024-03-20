@@ -1,3 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using drinksInfo.Fennikko;
 
-Console.WriteLine("Hello, World!");
+UserInput userInput = new();
+userInput.GetCategoriesInput();
