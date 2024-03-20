@@ -8,13 +8,20 @@ public class UserInput
     {
         var categories = DrinksService.GetCategories();
 
-        Console.Write("Choose a category: ");
+        Console.Write("Choose a category or type quit to exit: ");
         var category = Console.ReadLine();
 
         while (!Validator.IsStringValid(category))
         {
             Console.Write("Invalid category. Please try again: ");
             category = Console.ReadLine();
+        }
+
+        if (category.ToLower() == "quit")
+        {
+            Console.WriteLine("Thank you for using Drinks Info! Press any key to continue");
+            Console.ReadKey();
+            Environment.Exit(0);
         }
 
         if (categories.All(x => x.StrCategory != category))
