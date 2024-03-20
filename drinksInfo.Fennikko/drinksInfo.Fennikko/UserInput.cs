@@ -2,8 +2,6 @@
 
 public class UserInput
 {
-    private readonly DrinksService _drinksService = new();
-
     public void GetCategoriesInput()
     {
         var categories = DrinksService.GetCategories();
