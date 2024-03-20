@@ -16,32 +16,32 @@ public class DrinkDetail
     public object StrTags { get; set; }
     public object StrVideo { get; set; }
     public string StrCategory { get; set; }
-    public object StrIBA { get; set; }
+    public object StrIba { get; set; }
     public string StrAlcoholic { get; set; }
     public string StrGlass { get; set; }
-    public string StrInStructions { get; set; }
-    public object StrInStructionsES { get; set; }
-    public string StrInStructionsDE { get; set; }
-    public object StrInStructionsFR { get; set; }
-    public string StrInStructionsIT { get; set; }
-    public object StrInStructionsZHHANS { get; set; }
-    public object StrInStructionsZHHANT { get; set; }
+    public string StrInstructions { get; set; }
+    public object StrInstructionsES { get; set; }
+    public string StrInstructionsDE { get; set; }
+    public object StrInstructionsFR { get; set; }
+    public string StrInstructionsIT { get; set; }
+    public object StrInstructionsZhhans { get; set; }
+    public object StrInstructionsZhhant { get; set; }
     public string StrDrinkThumb { get; set; }
-    public string Stringredient1 { get; set; }
-    public string Stringredient2 { get; set; }
-    public string Stringredient3 { get; set; }
-    public string Stringredient4 { get; set; }
-    public object Stringredient5 { get; set; }
-    public object Stringredient6 { get; set; }
-    public object Stringredient7 { get; set; }
-    public object Stringredient8 { get; set; }
-    public object Stringredient9 { get; set; }
-    public object Stringredient10 { get; set; }
-    public object Stringredient11 { get; set; }
-    public object Stringredient12 { get; set; }
-    public object Stringredient13 { get; set; }
-    public object Stringredient14 { get; set; }
-    public object Stringredient15 { get; set; }
+    public string StrIngredient1 { get; set; }
+    public string StrIngredient2 { get; set; }
+    public string StrIngredient3 { get; set; }
+    public string StrIngredient4 { get; set; }
+    public object StrIngredient5 { get; set; }
+    public object StrIngredient6 { get; set; }
+    public object StrIngredient7 { get; set; }
+    public object StrIngredient8 { get; set; }
+    public object StrIngredient9 { get; set; }
+    public object StrIngredient10 { get; set; }
+    public object StrIngredient11 { get; set; }
+    public object StrIngredient12 { get; set; }
+    public object StrIngredient13 { get; set; }
+    public object StrIngredient14 { get; set; }
+    public object StrIngredient15 { get; set; }
     public string StrMeasure1 { get; set; }
     public string StrMeasure2 { get; set; }
     public string StrMeasure3 { get; set; }
