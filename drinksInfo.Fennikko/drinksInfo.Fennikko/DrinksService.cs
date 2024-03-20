@@ -60,7 +60,7 @@ public class DrinksService
 
         foreach (var property in drinkDetail.GetType().GetProperties())
         {
-            if (property.Name.Contains("str"))
+            if (property.Name.Contains("Str"))
             {
                 formattedName = property.Name[3..];
             }
@@ -74,7 +74,7 @@ public class DrinksService
                 });
             }
         }
-        TableVisualizationEngine.ShowTable(prepList, drinkDetail.strDrink);
+        TableVisualizationEngine.ShowTable(prepList, drinkDetail.StrDrink);
     }
 
 

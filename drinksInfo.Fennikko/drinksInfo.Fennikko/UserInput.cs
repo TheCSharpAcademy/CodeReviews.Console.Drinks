@@ -17,7 +17,7 @@ public class UserInput
             category = Console.ReadLine();
         }
 
-        if (categories.All(x => x.strCategory != category))
+        if (categories.All(x => x.StrCategory != category))
         {
             Console.WriteLine("Category does not exist, press any key to continue.");
             Console.ReadKey();
@@ -42,7 +42,7 @@ public class UserInput
             drink = Console.ReadLine();
         }
 
-        if (drinks.All(x => x.idDrink != drink))
+        if (drinks.All(x => x.IdDrink != drink))
         {
             Console.WriteLine("Drink doesn't exist. Press any key to continue.");
             Console.ReadKey();
