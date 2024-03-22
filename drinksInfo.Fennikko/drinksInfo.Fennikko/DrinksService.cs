@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using drinksInfo.Fennikko.Models;
 using Newtonsoft.Json;
 using RestSharp;
@@ -22,6 +23,7 @@ public class DrinksService
         var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
         categories = serialize.CategoriesList;
 
+
         TableVisualizationEngine.ShowTable(categories, "Categories Menu");
 
         return categories;
@@ -39,8 +41,6 @@ public class DrinksService
         var rawResponse = response.Result.Content;
         var serialize = JsonConvert.DeserializeObject<Drinks>(rawResponse);
         drinks = serialize.DrinksList;
-
-        TableVisualizationEngine.ShowTable(drinks, "Drinks Menu");
 
         return drinks;
     }
@@ -76,6 +76,4 @@ public class DrinksService
         }
         TableVisualizationEngine.ShowTable(prepList, drinkDetail.StrDrink);
     }
-
-
 }
