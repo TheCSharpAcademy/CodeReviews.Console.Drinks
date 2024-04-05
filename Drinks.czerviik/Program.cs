@@ -1,2 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+namespace drinks_info;
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+    }
+}
