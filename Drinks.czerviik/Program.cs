@@ -5,5 +5,9 @@ internal class Program
 {
     private static void Main(string[] args)
     {
+        var drinksService = new DrinksService();
+        var menuManager = new MenuManager(drinksService);
+
+        menuManager.DisplayCurrentMenu();
     }
 }
