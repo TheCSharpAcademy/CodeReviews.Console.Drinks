@@ -10,6 +10,9 @@ namespace drinks_info;
 public class DrinkDetail : IModelEntity
 {
     [JsonProperty("strDrink")] public string Name { get; set; }
+    public bool IsFavorite {get; set;}
+
+    public int SearchCount {get; set;}
     [JsonProperty("idDrink")] public string Id { get; set; }
     public object strDrinkAlternate { get; set; }
     public object strTags { get; set; }

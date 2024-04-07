@@ -5,9 +5,21 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        var drinksService = new DrinksService();
-        var menuManager = new MenuManager(drinksService);
+        var configReader = new ConfigReader();
+        try
+        {
+            var drinksService = new DrinksService();
 
-        menuManager.DisplayCurrentMenu();
+            var connectionString = configReader.GetConnectionString();
+            var drinksDb = new DrinksDb(connectionString);
+            var menuManager = new MenuManager(drinksService,drinksDb);
+
+            menuManager.DisplayCurrentMenu();
+        }
+        catch (InvalidOperationException ex)
+        {
+            Console.WriteLine($"Error:{ex.Message}");
+            Environment.Exit(1);
+        }
     }
 }

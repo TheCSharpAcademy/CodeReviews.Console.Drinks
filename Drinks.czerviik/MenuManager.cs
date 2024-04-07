@@ -4,9 +4,9 @@ public class MenuManager
 {
     private readonly Stack<Menu> _menuStack = new Stack<Menu>();
 
-    public MenuManager(DrinksService drinksService)
+    public MenuManager(DrinksService drinksService, DrinksDb drinksDb)
     {
-        _menuStack.Push(new MainMenu(this,drinksService));
+        _menuStack.Push(new MainMenu(this,drinksService,drinksDb));
     }
 
     public void DisplayCurrentMenu()

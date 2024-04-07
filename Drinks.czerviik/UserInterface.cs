@@ -34,11 +34,16 @@ public static class UserInterface
 
     public static void DrinkDetailMenu(DrinkDetail drinkDetail)
     {
+        var favorite = drinkDetail.IsFavorite ? "Remove from favorites" : "Add to favorites";
+        string[] options = ["Go back", "Return to Main menu", favorite];
+
         Header("drink details");
 
         DisplayTable(drinkDetail);
 
-        //přidat funkci add to/delete from favourites (chcecknout jeslti už není ve favourites), funkce COunt the most searched drinks
+        ChooseOptions(options);
+
+        //přidat funkci add to/delete from favourites (chcecknout jeslti už není ve favourites), funkce Count the most searched drinks
     }
 
     private static void Header(string headerText)
@@ -62,7 +67,16 @@ public static class UserInterface
         var drinkType = drinkDetail.GetType();
         PropertyInfo[] properties = drinkType.GetProperties();
 
-        Console.WriteLine($"DRINK: {properties[0].Name}");
+        if (drinkDetail.IsFavorite)
+        {
+            Console.Write($"DRINK: {properties[0].Name} ");
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("*FAVORITE*");
+            Console.ResetColor();
+        }
+        else
+            Console.WriteLine($"DRINK: {properties[0].Name}");
 
         var table = new Table()
         .AddColumns(drinkDetail.Name.ToUpper(), "")
@@ -71,13 +85,25 @@ public static class UserInterface
 
         foreach (var property in properties)
         {
-            var modifiedPropertyName = Operations.ModifyPropertyName(property);
-            if (property.GetValue(drinkDetail) != null)
-                table.AddRow(modifiedPropertyName.ToString(), property.GetValue(drinkDetail).ToString());
+            var modifiedPropertyName = Operations.ModifyPropertyName(property).ToString();
+
+            if (property.GetValue(drinkDetail) != null && modifiedPropertyName != "Name")
+                table.AddRow(modifiedPropertyName, property.GetValue(drinkDetail).ToString());
         }
         table.Columns[0].RightAligned();
         AnsiConsole.Write(table);
 
     }
 
+    public static void DisplayMessage(string message = "", string actionMessage = "continue", bool consoleClear = false)
+    {
+        if (consoleClear) Console.Clear();
+
+        if (message == "")
+            Console.WriteLine($"\nPress any key to {actionMessage}...");
+        else
+            Console.WriteLine($"\n{message} Press any key to {actionMessage}...");
+
+        Console.ReadKey();
+    }
 }
