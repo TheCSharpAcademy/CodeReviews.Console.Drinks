@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace drinks_info;
@@ -10,9 +5,9 @@ namespace drinks_info;
 public class DrinkDetail : IModelEntity
 {
     [JsonProperty("strDrink")] public string Name { get; set; }
-    public bool IsFavorite {get; set;}
+    public bool IsFavorite { get; set; }
 
-    public int SearchCount {get; set;}
+    public int SearchCount { get; set; }
     [JsonProperty("idDrink")] public string Id { get; set; }
     public object strDrinkAlternate { get; set; }
     public object strTags { get; set; }
@@ -61,13 +56,11 @@ public class DrinkDetail : IModelEntity
     public object strMeasure15 { get; set; }
     public object strImageSource { get; set; }
     public object strImageAttribution { get; set; }
-    [JsonProperty("strCreativeCommonsConfirmed")]public string CCConfirmed { get; set; }
+    [JsonProperty("strCreativeCommonsConfirmed")] public string CCConfirmed { get; set; }
     public string dateModified { get; set; }
 }
 
 public class DrinkDetailResponse
 {
-    [JsonProperty("drinks")] public List<DrinkDetail> DrinkDetails{get; set;}
+    [JsonProperty("drinks")] public List<DrinkDetail> DrinkDetails { get; set; }
 }
-
-

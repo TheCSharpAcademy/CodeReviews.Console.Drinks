@@ -5,6 +5,9 @@ project.lock.json
 *.pyc
 nupkg/
 
+# Database file
+*.db
+
 # Visual Studio Code
 .vscode/
 

@@ -11,6 +11,7 @@ public class DrinksDb
         _connectionString = connectionString;
         InitializeDatabase();
     }
+    
     private void InitializeDatabase()
     {
         using (var connection = new SQLiteConnection(_connectionString))

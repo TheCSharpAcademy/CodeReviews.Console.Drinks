@@ -1,5 +1,4 @@
 using System.Reflection;
-using System.Reflection.Metadata;
 using Spectre.Console;
 
 namespace drinks_info;
@@ -42,8 +41,6 @@ public static class UserInterface
         DisplayTable(drinkDetail);
 
         ChooseOptions(options);
-
-        //přidat funkci add to/delete from favourites (chcecknout jeslti už není ve favourites), funkce Count the most searched drinks
     }
 
     private static void Header(string headerText)
@@ -82,7 +79,6 @@ public static class UserInterface
         .AddColumns(drinkDetail.Name.ToUpper(), "")
         .Border(TableBorder.Rounded);
 
-
         foreach (var property in properties)
         {
             var modifiedPropertyName = Operations.ModifyPropertyName(property).ToString();
@@ -92,7 +88,6 @@ public static class UserInterface
         }
         table.Columns[0].RightAligned();
         AnsiConsole.Write(table);
-
     }
 
     public static void DisplayMessage(string message = "", string actionMessage = "continue", bool consoleClear = false)

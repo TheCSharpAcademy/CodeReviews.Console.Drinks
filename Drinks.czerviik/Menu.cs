@@ -1,7 +1,3 @@
-
-
-
-
 namespace drinks_info;
 
 public abstract class Menu
@@ -123,7 +119,7 @@ internal class DrinkDetailMenu : Menu
     public override void Display()
     {
         var drinkDetail = DrinksService.GetDrinkDetail(_userDrink);
-        
+
         UpdateIsFavorite(drinkDetail);
         UpdateSearchCount(drinkDetail);
 
