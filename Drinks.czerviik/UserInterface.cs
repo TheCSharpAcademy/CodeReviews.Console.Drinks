@@ -12,6 +12,7 @@ public static class UserInterface
 
         string[] options = {
                 "Pick a category",
+                "Show favorite drinks",
                 "Exit"};
 
         ChooseOptions(options);
@@ -27,6 +28,13 @@ public static class UserInterface
     public static void DrinksMenu(string[] drinksArray)
     {
         Header("pick a drink");
+
+        ChooseOptions(drinksArray);
+    }
+
+    public static void FavoriteDrinksMenu(string[] drinksArray)
+    {
+        Header("pick a favorite drink");
 
         ChooseOptions(drinksArray);
     }
@@ -61,33 +69,67 @@ public static class UserInterface
 
     private static void DisplayTable(DrinkDetail drinkDetail)
     {
+
+
+        TableHeader(drinkDetail);
+
+        var table = new Table()
+        .AddColumns("details:", "")
+        .Border(TableBorder.Rounded);
+
+        FormatTableData(table,drinkDetail);
+
+        table.Columns[0].RightAligned();
+        AnsiConsole.Write(table);
+    }
+
+    private static void FormatTableData(Table table, DrinkDetail drinkDetail)
+    {
+        var ingredientNumber = 0;
         var drinkType = drinkDetail.GetType();
         PropertyInfo[] properties = drinkType.GetProperties();
 
+        foreach (var property in properties)
+        {
+            var modifiedPropertyName = Operations.ModifyPropertyName(property).ToString();
+
+            if (property.GetValue(drinkDetail) != null &&
+            property.GetValue(drinkDetail) != "" &&
+            modifiedPropertyName != "Name" &&
+            modifiedPropertyName != "IsFavorite" &&
+            modifiedPropertyName != "Id" &&
+            !modifiedPropertyName.StartsWith("Measure"))
+            {
+                if (modifiedPropertyName.StartsWith("Ingredient"))
+                {
+                    ingredientNumber++;
+
+                    var measureProperty = properties.FirstOrDefault(p => p.Name == ("strMeasure" + ingredientNumber.ToString()));
+                    var measurePropertyValue = measureProperty.GetValue(drinkDetail) ?? "";
+
+                    if (measurePropertyValue != "")
+                    {
+                        table.AddRow(modifiedPropertyName, $"{measurePropertyValue} of {property.GetValue(drinkDetail)}");
+                        continue;
+                    }
+                }
+                table.AddRow(modifiedPropertyName, property.GetValue(drinkDetail).ToString());
+            }
+        }
+    }
+
+    private static void TableHeader(DrinkDetail drinkDetail)
+    {
         if (drinkDetail.IsFavorite)
         {
-            Console.Write($"DRINK: {properties[0].Name} ");
+            Console.Write($"DRINK: {drinkDetail.Name} ");
             Console.BackgroundColor = ConsoleColor.Blue;
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("*FAVORITE*");
             Console.ResetColor();
         }
         else
-            Console.WriteLine($"DRINK: {properties[0].Name}");
-
-        var table = new Table()
-        .AddColumns(drinkDetail.Name.ToUpper(), "")
-        .Border(TableBorder.Rounded);
-
-        foreach (var property in properties)
-        {
-            var modifiedPropertyName = Operations.ModifyPropertyName(property).ToString();
-
-            if (property.GetValue(drinkDetail) != null && modifiedPropertyName != "Name")
-                table.AddRow(modifiedPropertyName, property.GetValue(drinkDetail).ToString());
-        }
-        table.Columns[0].RightAligned();
-        AnsiConsole.Write(table);
+            Console.WriteLine($"DRINK: {drinkDetail.Name}");
     }
 
     public static void DisplayMessage(string message = "", string actionMessage = "continue", bool consoleClear = false)

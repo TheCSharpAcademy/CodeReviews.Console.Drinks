@@ -26,10 +26,20 @@ namespace drinks_info
 
         public static string ModifyPropertyName(PropertyInfo property)
         {
+            string modProperty;
+
             if (property.Name.StartsWith("str"))
-                return property.Name[3..];
+                modProperty = property.Name[3..];
             else
-                return property.Name;
+                modProperty = property.Name;
+
+            if (char.IsDigit(property.Name[^1]))
+                if (char.IsDigit(property.Name[^2]))
+                    modProperty = modProperty.Insert(modProperty.Length - 2, " ");
+                else 
+                    modProperty = modProperty.Insert(modProperty.Length - 1, " ");
+            
+            return modProperty;
         }
     }
 }

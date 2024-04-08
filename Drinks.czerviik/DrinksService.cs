@@ -64,6 +64,35 @@ namespace drinks_info
             }
         }
 
+        public List<Drink> GetFavoriteDrinks(string[] favoriteIds)
+        {
+            var favoriteDrinks = new List<Drink>();
+
+            foreach (var id in favoriteIds)
+            {
+                try
+                {
+                    var request = new RestRequest($"lookup.php?i={id}");
+                    var response = client.ExecuteAsync(request);
+
+                    if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var jsonResponse = response.Result.Content;
+                        var drinksResult = JsonConvert.DeserializeObject<Drinks>(jsonResponse);
+
+                        favoriteDrinks.Add(drinksResult.DrinksList[0]);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"error fetching drink ID {id}: {ex.Message}");
+                    return new List<Drink>();
+                }
+            }
+            
+            return favoriteDrinks;
+        }
+
         public DrinkDetail GetDrinkDetail(Drink userDrink)
         {
             var request = new RestRequest($"lookup.php?i={userDrink.Id}");

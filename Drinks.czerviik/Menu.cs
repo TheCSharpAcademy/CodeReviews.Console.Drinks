@@ -32,6 +32,9 @@ public class MainMenu : Menu
             case "Pick a category":
                 MenuManager.NewMenu(new CategoryMenu(MenuManager, DrinksService, DrinksDb));
                 break;
+            case "Show favorite drinks":
+                MenuManager.NewMenu(new FavoritesMenu(MenuManager, DrinksService, DrinksDb, ""));
+                break;
             default:
                 MenuManager.Close();
                 break;
@@ -39,6 +42,24 @@ public class MainMenu : Menu
     }
 }
 
+public class FavoritesMenu : DrinksMenu
+{
+    public FavoritesMenu(MenuManager menuManager, DrinksService drinksService, DrinksDb drinksDb, string optionChoice) : base(menuManager, drinksService, drinksDb, optionChoice) { }
+    public override void Display()
+    {
+        string[] favoriteIds = DrinksDb.GetFavoriteIds();
+
+        if (favoriteIds.Length != 0)
+        {
+            var favoriteDrinksList = DrinksService.GetFavoriteDrinks(favoriteIds);
+            _drinksArray = Operations.ApiListToArray(favoriteDrinksList);
+
+            UserInterface.FavoriteDrinksMenu(_drinksArray);
+
+            HandleUserOptions(favoriteDrinksList);
+        }
+    }
+}
 public class CategoryMenu : Menu
 {
     private string[] _categoriesArray;
@@ -68,13 +89,11 @@ public class CategoryMenu : Menu
     }
 }
 
-internal class DrinksMenu : Menu
+public class DrinksMenu : Menu
 {
-    private readonly MenuManager menuManager;
     private readonly string _userCategory;
 
-    private List<Drink> drinksList;
-    private string[] _drinksArray;
+    protected string[] _drinksArray;
 
     public DrinksMenu(MenuManager menuManager, DrinksService drinksService, DrinksDb drinksDb, string optionChoice) : base(menuManager, drinksService, drinksDb)
 
@@ -83,14 +102,13 @@ internal class DrinksMenu : Menu
     }
     public override void Display()
     {
-        drinksList = DrinksService.GetDrinks(_userCategory);
-
+        var drinksList = DrinksService.GetDrinks(_userCategory);
         _drinksArray = Operations.ApiListToArray(drinksList);
 
         UserInterface.DrinksMenu(_drinksArray);
-        HandleUserOptions();
+        HandleUserOptions(drinksList);
     }
-    private void HandleUserOptions()
+    protected void HandleUserOptions(List<Drink> drinksList)
     {
         switch (UserInterface.OptionChoice)
         {
@@ -107,7 +125,7 @@ internal class DrinksMenu : Menu
     }
 }
 
-internal class DrinkDetailMenu : Menu
+public class DrinkDetailMenu : Menu
 {
     private Drink _userDrink;
 

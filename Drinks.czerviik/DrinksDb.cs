@@ -11,7 +11,7 @@ public class DrinksDb
         _connectionString = connectionString;
         InitializeDatabase();
     }
-    
+
     private void InitializeDatabase()
     {
         using (var connection = new SQLiteConnection(_connectionString))
@@ -59,7 +59,17 @@ public class DrinksDb
     {
         using (var connection = new SQLiteConnection(_connectionString))
         {
-            return connection.QuerySingleOrDefault<int>(command, parameters);
+            return connection.QueryFirstOrDefault<int>(command, parameters); 
+        }
+    }
+
+    private string[] GetStringsCommand(string command, object parameters = null)
+    {
+        using (var connection = new SQLiteConnection(_connectionString))
+        {
+            var result = connection.Query<string>(command, parameters);
+
+            return result.ToArray();
         }
     }
 
@@ -109,5 +119,14 @@ public class DrinksDb
 
         return GetScalarCommand(command, new { id = drinkId });
 
+    }
+
+    public string[] GetFavoriteIds()
+    {
+        var command = @$"
+        SELECT id FROM drinks_db
+        WHERE favorite = 'True'";
+
+        return GetStringsCommand(command);
     }
 }

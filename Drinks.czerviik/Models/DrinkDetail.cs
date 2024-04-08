@@ -23,7 +23,6 @@ public class DrinkDetail : IModelEntity
     public string strInstructionsIT { get; set; }
     public object strInstructionsZHHANS { get; set; }
     public object strInstructionsZHHANT { get; set; }
-    public string strDrinkThumb { get; set; }
     public string strIngredient1 { get; set; }
     public string strIngredient2 { get; set; }
     public string strIngredient3 { get; set; }
@@ -54,10 +53,6 @@ public class DrinkDetail : IModelEntity
     public object strMeasure13 { get; set; }
     public object strMeasure14 { get; set; }
     public object strMeasure15 { get; set; }
-    public object strImageSource { get; set; }
-    public object strImageAttribution { get; set; }
-    [JsonProperty("strCreativeCommonsConfirmed")] public string CCConfirmed { get; set; }
-    public string dateModified { get; set; }
 }
 
 public class DrinkDetailResponse
