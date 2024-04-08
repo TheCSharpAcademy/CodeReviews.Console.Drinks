@@ -41,10 +41,13 @@ namespace Kakurokan.DrinksInfo
                 if (properties[i].GetValue(drink) != null)
                 {
                     string value = properties[i].GetValue(drink).ToString();
-                    table.AddRow(Regex.Replace(properties[i].ToString(), @"^([\S]+)", ""), value).LeftAligned();
+                    string propriety = Regex.Replace(properties[i].ToString(), @"^([\S]+)", "").Trim();
+                    propriety = Regex.Replace(propriety, @"^(^str)+", "");
+                    table.AddRow(propriety, value).LeftAligned();
                 }
 
             }
+            table.Expand();
             AnsiConsole.Write(table);
 
             var choice = AnsiConsole.Prompt(
