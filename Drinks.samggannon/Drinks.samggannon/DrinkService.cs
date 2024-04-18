@@ -85,6 +85,8 @@ public class DrinkService
                     });
                 }
             }
+
+            TableVisualization.ShowTable(prepList, drinkDetail.strDrink);
         }
     }
 }
