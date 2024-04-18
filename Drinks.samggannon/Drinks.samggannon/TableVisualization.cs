@@ -22,7 +22,8 @@ internal class TableVisualization
 		ConsoleTableBuilder
 			.From(tableData)
 			.WithColumn(title)
-			.ExportAndWriteLine();
+			.WithFormat(ConsoleTableBuilderFormat.Alternative)
+			.ExportAndWriteLine(TableAligntment.Center);
 		Console.WriteLine("\n\n");
 
 	}
