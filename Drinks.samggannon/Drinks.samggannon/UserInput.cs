@@ -15,7 +15,7 @@ namespace Drinks.samggannon
         {
             var categories = drinkService.GetCategories();
 
-            Console.WriteLine("Choose category");
+            Console.WriteLine("Choose category: category is case sensitive");
 
             string category = Console.ReadLine();
 
@@ -27,7 +27,8 @@ namespace Drinks.samggannon
 
             if(!categories.Any(x => x.strCategory == category))
             {
-                Console.WriteLine("Category doesn't exist.");
+                Console.WriteLine("Category doesn't exist. Press a key to try again");
+                Console.ReadLine();
                 GetCategoriesINput();
             }
 
@@ -38,7 +39,7 @@ namespace Drinks.samggannon
         {
             var drinks = drinkService.GetDrinksByCategory(category);
 
-            Console.WriteLine("Choose a drink or go back to category meny by typing 0:");
+            Console.WriteLine("Choose a drink by it's ID or go back to category meny by typing 0:");
 
             string drink = Console.ReadLine();
 
@@ -46,7 +47,7 @@ namespace Drinks.samggannon
 
             while (!Validator.IsIdValid(drink))
             {
-                Console.WriteLine("\nInvalid drink");
+                Console.WriteLine("\nInvalid drink ID");
                 drink = Console.ReadLine();
             }
 

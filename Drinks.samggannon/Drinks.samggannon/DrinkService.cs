@@ -62,9 +62,7 @@ public class DrinkService
             var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse);
 
             List<DrinkDetail> returnedList = serialize.DrinkDetailList;
-
             DrinkDetail drinkDetail = returnedList[0];
-
             List<object> prepList = new();
 
             string formattedName = "";
