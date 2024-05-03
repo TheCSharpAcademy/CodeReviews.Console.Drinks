@@ -37,8 +37,6 @@ namespace DrinksInfo
 
         internal static void ShowDrinkDetail(DrinkDetail drinkDetails)
         {
-            UserInput menu = new();
-            DrinkDetail drinkDetail = new();
             Table table = new();
             var name = drinkDetails.strDrink;
             var alcoholic = drinkDetails.strAlcoholic;
