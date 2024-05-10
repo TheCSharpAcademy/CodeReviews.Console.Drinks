@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34616.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drinks.ASV", "Drinks.ASV\Drinks.ASV.csproj", "{0C20A1A4-3666-4614-8D3F-AB75561CE14F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C20A1A4-3666-4614-8D3F-AB75561CE14F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C20A1A4-3666-4614-8D3F-AB75561CE14F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C20A1A4-3666-4614-8D3F-AB75561CE14F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C20A1A4-3666-4614-8D3F-AB75561CE14F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F52B43E-6ABF-4232-B15B-89FE20E15375}
+	EndGlobalSection
+EndGlobal
