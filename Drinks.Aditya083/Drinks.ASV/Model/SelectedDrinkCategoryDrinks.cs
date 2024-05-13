@@ -4,7 +4,7 @@ namespace Drinks.ASV.Model;
 
 internal class SelectedDrinkCategoryDrinks
 {
-    public struct DrinkInfo
+    public struct DrinksInfo
     {
         [JsonPropertyName("idDrink")]
         public string DrinkId { get; set; }
@@ -12,7 +12,6 @@ internal class SelectedDrinkCategoryDrinks
         public string DrinkName { get; set; }
     }
     [JsonPropertyName("drinks")]
-    public List<DrinkInfo> ?Drinks { get; set; }
+    public List<DrinksInfo> ?Drinks { get; set; }
 
 }
-
