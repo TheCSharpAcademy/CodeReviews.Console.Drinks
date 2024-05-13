@@ -14,36 +14,66 @@ internal class DrinkDetails
         public string Glass { get; set; }
         [JsonPropertyName("strInstructions")]
         public string Instructions { get; set; }
-        public string strIngredient1 { get; set; }
-        public string strIngredient2 { get; set; }
-        public string strIngredient3 { get; set; }
-        public string strIngredient4 { get; set; }
-        public string strIngredient5 { get; set; }
-        public string strIngredient6 { get; set; }
-        public string strIngredient7 { get; set; }
-        public string strIngredient8 { get; set; }
-        public string strIngredient9 { get; set; }
-        public string strIngredient10 { get; set; }
-        public string strIngredient11 { get; set; }
-        public string strIngredient12 { get; set; }
-        public string strIngredient13 { get; set; }
-        public string strIngredient14 { get; set; }
-        public string strIngredient15 { get; set; }
-        public string strMeasure1 { get; set; }
-        public string strMeasure2 { get; set; }
-        public string strMeasure3 { get; set; }
-        public string strMeasure4 { get; set; }
-        public string strMeasure5 { get; set; }
-        public string strMeasure6 { get; set; }
-        public string strMeasure7 { get; set; }
-        public string strMeasure8 { get; set; }
-        public string strMeasure9 { get; set; }
-        public string strMeasure10 { get; set; }
-        public string strMeasure11 { get; set; }
-        public string strMeasure12 { get; set; }
-        public string strMeasure13 { get; set; }
-        public string strMeasure14 { get; set; }
-        public string strMeasure15 { get; set; }
+        [JsonPropertyName("strIngredient1")]
+        public string StrIngredient1 { get; set; }
+        [JsonPropertyName("strIngredient2")]
+        public string StrIngredient2 { get; set; }
+        [JsonPropertyName("strIngredient3")]
+        public string StrIngredient3 { get; set; }
+        [JsonPropertyName("strIngredient4")]
+        public string StrIngredient4 { get; set; }
+        [JsonPropertyName("strIngredient5")]
+        public string StrIngredient5 { get; set; }
+        [JsonPropertyName("strIngredient6")]
+        public string StrIngredient6 { get; set; }
+        [JsonPropertyName("strIngredient7")]
+        public string StrIngredient7 { get; set; }
+        [JsonPropertyName("strIngredient8")]
+        public string StrIngredient8 { get; set; }
+        [JsonPropertyName("strIngredient9")]
+        public string StrIngredient9 { get; set; }
+        [JsonPropertyName("strIngredient10")]
+        public string StrIngredient10 { get; set; }
+        [JsonPropertyName("strIngredient11")]
+        public string StrIngredient11 { get; set; }
+        [JsonPropertyName("strIngredient12")]
+        public string StrIngredient12 { get; set; }
+        [JsonPropertyName("strIngredient13")]
+        public string StrIngredient13 { get; set; }
+        [JsonPropertyName("strIngredient14")]
+        public string StrIngredient14 { get; set; }
+        [JsonPropertyName("strIngredient15")]
+        public string StrIngredient15 { get; set; }
+        [JsonPropertyName("strMeasure1")]
+        public string StrMeasure1 { get; set; }
+        [JsonPropertyName("strMeasure2")]
+        public string StrMeasure2 { get; set; }
+        [JsonPropertyName("strMeasure3")]
+        public string StrMeasure3 { get; set; }
+        [JsonPropertyName("strMeasure4")]
+        public string StrMeasure4 { get; set; }
+        [JsonPropertyName("strMeasure5")]
+        public string StrMeasure5 { get; set; }
+        [JsonPropertyName("strMeasure6")]
+        public string StrMeasure6 { get; set; }
+        [JsonPropertyName("strMeasure7")]
+        public string StrMeasure7 { get; set; }
+        [JsonPropertyName("strMeasure8")]
+        public string StrMeasure8 { get; set; }
+        [JsonPropertyName("strMeasure9")]
+        public string StrMeasure9 { get; set; }
+        [JsonPropertyName("strMeasure10")]
+        public string StrMeasure10 { get; set; }
+        [JsonPropertyName("strMeasure11")]
+        public string StrMeasure11 { get; set; }
+        [JsonPropertyName("strMeasure12")]
+        public string StrMeasure12 { get; set; }
+        [JsonPropertyName("strMeasure13")]
+        public string StrMeasure13 { get; set; }
+        [JsonPropertyName("strMeasure14")]
+        public string StrMeasure14 { get; set; }
+        [JsonPropertyName("strMeasure15")]
+        public string StrMeasure15 { get; set; }
     }
     [JsonPropertyName("drinks")]
     public List<DrinkInfo>? Drink { get; set; }
