@@ -66,6 +66,5 @@ internal class App
             Display.ShowDrinkDetails("Drink Details", drink);
             Console.ReadLine();
         }
-        
     }
 }

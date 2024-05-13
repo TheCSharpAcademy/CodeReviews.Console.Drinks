@@ -13,5 +13,4 @@ internal class SelectedDrinkCategoryDrinks
     }
     [JsonPropertyName("drinks")]
     public List<DrinksInfo> ?Drinks { get; set; }
-
 }

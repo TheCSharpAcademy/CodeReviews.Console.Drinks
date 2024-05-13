@@ -7,7 +7,6 @@ internal class Display
 {
     public static string GetSelection(string title, DrinkCategoriesList drinksCategories)
     {
-        
         var choices = drinksCategories.DrinkTypes.Select(category => category.strCategory).ToList();
         choices.Add("Exit Application");
         var selectedCategory = AnsiConsole.Prompt(
@@ -34,7 +33,6 @@ internal class Display
     public static void ShowDrinkDetails(string column, DrinkDetails? drink)
     {
         var mainTable = new Table();
-        //mainTable.AddColumn(new TableColumn(column).Centered());
         mainTable.AddColumn(column).Centered();
         foreach (var detail in drink.Drink)
         {
@@ -42,11 +40,9 @@ internal class Display
             mainTable.AddRow("Is Alcoholic: " + detail.IsAlcoholic);
             mainTable.AddRow("Glass: " + detail.Glass);
             mainTable.AddRow("Instructions: " + detail.Instructions);
-
             var ingredientsTable = new Table();
             ingredientsTable.AddColumn(new TableColumn("Ingredient").Centered());
             ingredientsTable.AddColumn(new TableColumn("Quantity").Centered());
-
             AddIngredientRow(ingredientsTable, detail.strIngredient1, detail.strMeasure1);
             AddIngredientRow(ingredientsTable, detail.strIngredient2, detail.strMeasure2);
             AddIngredientRow(ingredientsTable, detail.strIngredient3, detail.strMeasure3);
@@ -62,10 +58,8 @@ internal class Display
             AddIngredientRow(ingredientsTable, detail.strIngredient13, detail.strMeasure13);
             AddIngredientRow(ingredientsTable, detail.strIngredient14, detail.strMeasure14);
             AddIngredientRow(ingredientsTable, detail.strIngredient15, detail.strMeasure15);
-
             mainTable.AddRow(ingredientsTable);
         }
-
         AnsiConsole.Render(mainTable);
     }
 
@@ -77,4 +71,3 @@ internal class Display
         }
     }
 }
-
