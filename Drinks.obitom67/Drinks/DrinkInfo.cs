@@ -15,7 +15,7 @@ namespace Drinks
 
             DrinksType.Root root = JsonConvert.DeserializeObject<Root>(drinksJson.ToJsonString());
 
-            var drinkType = root.Drinks.GetType();
+            
             foreach(var prop in root.Drinks[0].GetType().GetProperties())
             {
                 
