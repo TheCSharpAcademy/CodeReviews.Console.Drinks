@@ -8,7 +8,8 @@ namespace Drinks
         public List<DrinkCategory> drinks { get; set; }
         public class DrinkCategory()
         {
-            public string strCategory { get; set; }
+            [JsonProperty("strCategory")]
+            public string StrCategory { get; set; }
         }
         public string GetCategories()
         {
@@ -22,7 +23,7 @@ namespace Drinks
             var categoryPrompt = new SelectionPrompt<string>();
             for (int i = 0; i< categoriesDeserial.drinks.Count; i++)
             {
-                categoryPrompt.AddChoice(categoriesDeserial.drinks[i].strCategory);
+                categoryPrompt.AddChoice(categoriesDeserial.drinks[i].StrCategory);
             }
             return AnsiConsole.Prompt(categoryPrompt);
                 
