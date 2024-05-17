@@ -15,14 +15,14 @@ namespace Drinks
 
             DrinksType.Root root = JsonConvert.DeserializeObject<Root>(drinksJson.ToJsonString());
 
-            var drinkType = root.drinks.GetType();
-            foreach(var prop in root.drinks[0].GetType().GetProperties())
+            var drinkType = root.Drinks.GetType();
+            foreach(var prop in root.Drinks[0].GetType().GetProperties())
             {
-                var printName = prop.Name;
-                var printValue = prop.GetValue(root.drinks[0], null);
+                
+                var printValue = prop.GetValue(root.Drinks[0], null);
                 if (printValue != null)
                 {
-                    AnsiConsole.WriteLine($"{prop.Name}:{prop.GetValue(root.drinks[0], null)}");
+                    AnsiConsole.WriteLine($"{prop.Name}:{prop.GetValue(root.Drinks[0], null)}");
                 }
                 
             }

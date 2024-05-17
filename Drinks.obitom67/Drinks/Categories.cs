@@ -4,8 +4,9 @@ using Newtonsoft.Json;
 namespace Drinks
 {
     internal class Categories
-    { 
-        public List<DrinkCategory> drinks { get; set; }
+    {
+        [JsonProperty("drinks")]
+        public List<DrinkCategory> Drinks { get; set; }
         public class DrinkCategory()
         {
             [JsonProperty("strCategory")]
@@ -21,9 +22,9 @@ namespace Drinks
             Categories categoriesDeserial = JsonConvert.DeserializeObject<Categories>(categoryJson.ToJsonString());
 
             var categoryPrompt = new SelectionPrompt<string>();
-            for (int i = 0; i< categoriesDeserial.drinks.Count; i++)
+            for (int i = 0; i< categoriesDeserial.Drinks.Count; i++)
             {
-                categoryPrompt.AddChoice(categoriesDeserial.drinks[i].StrCategory);
+                categoryPrompt.AddChoice(categoriesDeserial.Drinks[i].StrCategory);
             }
             return AnsiConsole.Prompt(categoryPrompt);
                 

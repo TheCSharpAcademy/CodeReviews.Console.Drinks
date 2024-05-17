@@ -27,7 +27,7 @@ namespace Drinks
             public string StrCategory { get; set; }
 
             [JsonProperty("strIBA")]
-            public object StrIBA { get; set; }
+            public object StrIba { get; set; }
 
             [JsonProperty("strAlcoholic")]
             public string StrAlcoholic { get; set; }
@@ -51,10 +51,10 @@ namespace Drinks
             public string StrInstructionsIT { get; set; }
 
             [JsonProperty("strInstructionsZH-HANS")]
-            public object StrInstructionsZHHANS { get; set; }
+            public object StrInstructionsZhhans { get; set; }
 
             [JsonProperty("strInstructionsZH-HANT")]
-            public object StrInstructionsZHHANT { get; set; }
+            public object StrInstructionsZhhant { get; set; }
 
             [JsonProperty("strDrinkThumb")]
             public string StrDrinkThumb { get; set; }
@@ -163,7 +163,7 @@ namespace Drinks
         }
         public class Root
         {
-            public List<Drink> drinks { get; set; }
+            public List<Drink> Drinks { get; set; }
         }
         public string GetDrinks(string category) 
         {
@@ -175,9 +175,9 @@ namespace Drinks
             Root drinksDeserial = JsonConvert.DeserializeObject<Root>(drinksJson.ToJsonString());
             SelectionPrompt<string> drinksPrompt = new();
 
-            for (int i = 0;i< drinksDeserial.drinks.Count; i++)
+            for (int i = 0;i< drinksDeserial.Drinks.Count; i++)
             {
-                drinksPrompt.AddChoice(drinksDeserial.drinks[i].StrDrink);
+                drinksPrompt.AddChoice(drinksDeserial.Drinks[i].StrDrink);
             }
 
             return AnsiConsole.Prompt(drinksPrompt);
