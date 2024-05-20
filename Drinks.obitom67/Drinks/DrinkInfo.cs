@@ -20,14 +20,33 @@ namespace Drinks
             {
                 
                 var printValue = prop.GetValue(root.Drinks[0], null);
+                string cleanValue;
+                
                 if (printValue != null)
                 {
-                    AnsiConsole.WriteLine($"{prop.Name}:{prop.GetValue(root.Drinks[0], null)}");
-                }
-                
+                    if (prop.Name.ToLower().Contains("str"))
+                    {
+                        cleanValue =prop.Name.Remove(0, 3);
+                        if (cleanValue.ToLower().Contains("instructions") && cleanValue.Length != 12)
+                        {
+                            continue;
+                        }                    
+                    }
+                    else if (prop.Name.ToLower().Contains("id"))
+                    {
+                        cleanValue = "ID Drink";
+                       
+                    }
+                    else
+                    {
+                        cleanValue = prop.Name;
+                    }
+                    AnsiConsole.WriteLine($"{cleanValue} : {prop.GetValue(root.Drinks[0], null)}");
+                }                
             }
 
-
+            AnsiConsole.Confirm("Continue with learning about drinks?");
+            AnsiConsole.Clear();
         }
     }
 }
