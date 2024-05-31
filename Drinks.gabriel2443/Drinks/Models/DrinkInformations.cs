@@ -2,12 +2,12 @@
 
 public class DrinkInformationsList
 {
-    public List<DrinksInformation>? drinks { get; set; }
+    public List<DrinksInformation>? Drinks { get; set; }
 }
 
 public class DrinksInformation
 {
-    public string strDrink { get; set; }
-    public string strDrinkThumb { get; set; }
-    public string idDrink { get; set; }
+    public string StrDrink { get; set; }
+    public string StrDrinkThumb { get; set; }
+    public string IdDrink { get; set; }
 }

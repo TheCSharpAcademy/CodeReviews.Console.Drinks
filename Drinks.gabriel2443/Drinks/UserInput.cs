@@ -62,7 +62,7 @@ public class UserInput
 
         var drinkIngredients = await HttpDrinks.GetDrinksIngredients(name);
 
-        foreach (var drink in drinkIngredients.drinks)
+        foreach (var drink in drinkIngredients.Drinks)
         {
             var table = new Table();
 
@@ -114,7 +114,7 @@ public class UserInput
             var filteredIngredients = ingredients.Where(ingredient => !string.IsNullOrEmpty(ingredient)).ToList();
             var filteredQuantities = quantities.Where(quantity => !string.IsNullOrEmpty(quantity)).ToList();
 
-            table.AddRow($"{drink.strDrink}", string.Join(",", filteredIngredients), drink.strAlcoholic, string.Join(",", filteredQuantities), drink.strInstructions, drink.strGlass);
+            table.AddRow($"{drink.StrDrink}", string.Join(",", filteredIngredients), drink.strAlcoholic, string.Join(",", filteredQuantities), drink.StrInstructions, drink.strGlass);
             AnsiConsole.Write(table);
         }
     }

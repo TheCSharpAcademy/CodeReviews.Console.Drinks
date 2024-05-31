@@ -2,5 +2,5 @@
 
 public class DrinkCategoryList
 {
-    public List<DrinkCategory> drinks { get; set; }
+    public List<DrinkCategory> Drinks { get; set; }
 }
