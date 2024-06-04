@@ -2,5 +2,5 @@
 
 public class DrinkCategory
 {
-    public string StrCategory { get; set; }
+    public string strCategory { get; set; }
 }

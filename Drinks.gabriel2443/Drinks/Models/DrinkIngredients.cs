@@ -2,21 +2,21 @@
 
 public class DrinkIngredientList
 {
-    public List<DrinksIngredients> Drinks { get; set; }
+    public List<DrinksIngredients> drinks { get; set; }
 }
 
 public class DrinksIngredients
 {
-    public string IdDrink { get; set; }
-    public string StrDrink { get; set; }
-    public object StrDrinkAlternate { get; set; }
-    public string StrTags { get; set; }
-    public object StrVideo { get; set; }
-    public string StrCategory { get; set; }
-    public string StrIBA { get; set; }
-    public string StrAlcoholic { get; set; }
-    public string StrGlass { get; set; }
-    public string StrInstructions { get; set; }
+    public string idDrink { get; set; }
+    public string strDrink { get; set; }
+    public object strDrinkAlternate { get; set; }
+    public string strTags { get; set; }
+    public object strVideo { get; set; }
+    public string strCategory { get; set; }
+    public string strIBA { get; set; }
+    public string strAlcoholic { get; set; }
+    public string strGlass { get; set; }
+    public string strInstructions { get; set; }
     public string strInstructionsES { get; set; }
     public string strInstructionsDE { get; set; }
     public object strInstructionsFR { get; set; }
