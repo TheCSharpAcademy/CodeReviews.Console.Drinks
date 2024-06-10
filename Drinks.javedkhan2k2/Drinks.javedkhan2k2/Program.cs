@@ -1,8 +1,5 @@
-﻿
-using Drinks;
+﻿using Drinks;
 
 Console.Clear();
-// ActionManager actionManager = new ActionManager();
-// await actionManager.RunApp();
-
-var dbManager = new DbManager();
+ActionManager actionManager = new ActionManager();
+await actionManager.RunApp();

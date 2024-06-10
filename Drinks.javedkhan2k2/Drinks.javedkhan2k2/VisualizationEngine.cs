@@ -60,4 +60,37 @@ internal class VisualizationEngine
         }
         AnsiConsole.Write(table);
     }
+
+    internal static async Task DisplayFavoriteDrinks(IEnumerable<Drink>? favoriteDrinks, [AllowNull] string title)
+    {
+        if (title == null)
+        {
+            title = "";
+        }
+        var table = CreateTable(title, $"Displaying [blue]{favoriteDrinks.Count()}[/] records");
+        table.AddColumns(["Drink Id", "Drink Name"]);
+        foreach(var drink in favoriteDrinks)
+        {
+            table.AddRow(drink.idDrink, drink.strDrink);
+        }
+        AnsiConsole.Write(table);
+    }
+
+    internal static async Task DisplayTopSearchedDrinks(IEnumerable<DrinkCount>? topTenDrinks, [AllowNull] string title)
+    {
+        if (title == null)
+        {
+            title = "";
+        }
+        var table = CreateTable(title, $"Displaying [blue]{topTenDrinks.Count()}[/] records");
+
+        table.AddColumns(["#", "Drink Id", "Drink Name", "Number of time Searched"]);
+        int i = 1;
+        foreach(var drink in topTenDrinks)
+        {
+            table.AddRow(i++.ToString(), drink.idDrink, drink.strDrink, drink.SearchCount.ToString());
+        }
+        AnsiConsole.Write(table);
+    }
+    
 }

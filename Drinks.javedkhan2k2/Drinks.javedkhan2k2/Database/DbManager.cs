@@ -16,12 +16,12 @@ internal class DbManager
     {
         var sql = @$"
             CREATE TABLE IF NOT EXISTS FavoriteDrinks(
-                DrinkId INTEGER Primary Key,
-                DrinkName TEXT NOT NULL
+                idDrink INTEGER Primary Key,
+                strDrink TEXT NOT NULL
             );
             CREATE TABLE IF NOT EXISTS DrinkCounts(
-                DrinkId INTEGER Primary Key,
-                DrinkName TEXT NOT NULL,
+                idDrink INTEGER Primary Key,
+                strDrink TEXT NOT NULL,
                 SearchCount INTEGER NOT NULL
             );
             ";
@@ -34,8 +34,8 @@ internal class DbManager
     internal int AddFavriteDrink(Drink parameters)
     {
         var sql = @"
-                    Insert into FavoriteDrinks (DrinkId, DrinkName)
-                    Values(@DrinkId, @DrinkName)  
+                    Insert into FavoriteDrinks (idDrink, strDrink)
+                    Values(@idDrink, @strDrink)  
                   ";
         using(var connection = GetConnection())
         {
@@ -43,6 +43,15 @@ internal class DbManager
         }
     }
 
+    internal Drink? GetFavoriteDrinkById(int id)
+    {
+        var sql = @"Select * From FavoriteDrinks Where idDrink = @idDrink";
+        using(var connection = GetConnection())
+        {
+            return connection.QueryFirstOrDefault<Drink>(sql, new {idDrink=id});
+        }
+    }
+    
     internal IEnumerable<Drink>? GetAllFavoriteDrinks()
     {
         var sql = @"Select * from FavoriteDrinks";
@@ -55,8 +64,8 @@ internal class DbManager
     internal int AddDrinkCount(DrinkCount parameters)
     {
         var sql = @"
-                    Insert into DrinkCounts (DrinkId, DrinkName, SearchCount)
-                    Values(@DrinkId, @DrinkName, @SearchCount)  
+                    Insert into DrinkCounts (idDrink, strDrink, SearchCount)
+                    Values(@idDrink, @strDrink, @SearchCount)  
                   ";
         using(var connection = GetConnection())
         {
@@ -66,10 +75,10 @@ internal class DbManager
 
     internal DrinkCount? GetDrinkCountById(int id)
     {
-        var sql = @"Select * From DrinkCounts Where DrinkId = @DrinkId";
+        var sql = @"Select * From DrinkCounts Where idDrink = @idDrink";
         using(var connection = GetConnection())
         {
-            return connection.QueryFirstOrDefault<DrinkCount>(sql, new {DrinkId=id});
+            return connection.QueryFirstOrDefault<DrinkCount>(sql, new {idDrink=id});
         }
     }
 
@@ -78,10 +87,10 @@ internal class DbManager
         var sql = @"
                     Update DrinkCounts
                     Set
-                        DrinkName = @DrinkName, 
+                        strDrink = @strDrink, 
                         SearchCount = @SearchCount
                     Where
-                        DrinkId = @DrinkId
+                        idDrink = @idDrink
                   ";
         using(var connection = GetConnection())
         {
