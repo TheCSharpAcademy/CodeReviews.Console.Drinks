@@ -5,19 +5,14 @@ namespace DrinksInfo.kalsson;
 
 public class TableVisualisationEngine
 {
-    /// Displays a table visualisation of the provided data.
-    /// @param <T> The type of data in the table.
-    /// @param tableData The list of data to be displayed in the table.
-    /// @param tableName The name of the table (optional). If not provided, an empty string will be used.
-    /// /
+    /// <summary>
+    /// Displays a table with the given table data.
+    /// </summary>
+    /// <typeparam name="T">The type of the table data.</typeparam>
+    /// <param name="tableData">The list of table data to display.</param>
+    /// <param name="tableName">The name of the table. If null, an empty string will be used.</param>
     public static void ShowTable<T>(List<T> tableData, [AllowNull] string tableName) where T : class
     {
-        ConsoleColor originalBackground = Console.BackgroundColor;
-        ConsoleColor originalForeground = Console.ForegroundColor;
-
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.ForegroundColor = ConsoleColor.White;
-
         Console.Clear();
 
         if (tableName == null)
@@ -28,11 +23,8 @@ public class TableVisualisationEngine
         ConsoleTableBuilder
             .From(tableData)
             .WithColumn(tableName)
-            .ExportAndWrite();
-
+            .WithFormat(ConsoleTableBuilderFormat.Alternative)
+            .ExportAndWriteLine(TableAligntment.Center);
         Console.WriteLine("\n\n");
-
-        Console.BackgroundColor = originalBackground;
-        Console.ForegroundColor = originalForeground;
     }
 }
