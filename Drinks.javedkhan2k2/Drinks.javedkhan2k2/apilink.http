@@ -1,0 +1,10 @@
+#to list the categories
+https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list
+
+###
+#To get the list of a drink category
+https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink
+
+###
+#Details of a drink
+https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11008
