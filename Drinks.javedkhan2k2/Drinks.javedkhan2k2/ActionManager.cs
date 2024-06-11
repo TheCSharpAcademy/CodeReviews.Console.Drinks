@@ -9,7 +9,6 @@ internal class ActionManager
 {
     DrinksService drinksService = new();
     RepositoryManager repositoryManager = new RepositoryManager(new DbManager());
-    UserInput userInput = new();
 
     Menu menu = new();
 
