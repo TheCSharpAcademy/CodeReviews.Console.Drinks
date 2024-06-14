@@ -7,4 +7,21 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Controller\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\JMumm\OneDrive\Documents\Career\Projects\CSharpAcad\DrinksInfo\DrinksInfo\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\JMumm\OneDrive\Documents\Career\Projects\CSharpAcad\DrinksInfo\DrinksInfo\.editorconfig" />
+  </ItemGroup>
+
 </Project>
