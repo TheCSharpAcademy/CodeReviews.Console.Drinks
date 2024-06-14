@@ -1,18 +1,24 @@
-﻿using DrinksInfo.Models;
-using System.Configuration;
-
-public class App
+﻿public class App
 {
-    private DrinksService? _drinksService;
-    private readonly string? _baseUrl = ConfigurationManager.AppSettings["ApiBaseUrl"];
+    private readonly IDrinksService _drinksService;
+    private readonly DrinksController _drinksController;
+    private readonly string _baseUrl;
+
+    public App(string baseUrl)
+    {
+        _baseUrl = baseUrl;
+        _drinksService = new DrinksService(_baseUrl);
+        _drinksController = new DrinksController(_drinksService);
+    }
 
     public async Task RunAsync()
     {
-        _drinksService = new DrinksService(_baseUrl);
-        var categories = await _drinksService.GetAsync<DrinkCategories>("/list.php?c=list");
+        var categories = await _drinksController.GetCategories();
+        var drinksResponse = await _drinksController.GetDrinksByCategory(categories.Categories);
+        
+
 
         Console.ReadKey();
     }
 }
-
 
