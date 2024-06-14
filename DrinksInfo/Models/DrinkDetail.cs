@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 public record DrinkDetail(
-    [property: JsonProperty("idDrink")][property: JsonConverter(typeof(StringToIntConverter))] int Id,
+    [property: JsonProperty("idDrink")][property: JsonConverter(typeof(JsonConverter))] int Id,
     [property: JsonProperty("strDrink", NullValueHandling = NullValueHandling.Ignore)] string Name,
     [property: JsonProperty("strDrinkAlternate", NullValueHandling = NullValueHandling.Ignore)] object AlternateName,
     [property: JsonProperty("strTags", NullValueHandling = NullValueHandling.Ignore)] string Tags,
@@ -51,6 +51,12 @@ public record DrinkDetail(
     [property: JsonProperty("strImageSource", NullValueHandling = NullValueHandling.Ignore)] string ImageSource,
     [property: JsonProperty("strImageAttribution", NullValueHandling = NullValueHandling.Ignore)] string ImageAttribution,
     [property: JsonProperty("strCreativeCommonsConfirmed", NullValueHandling = NullValueHandling.Ignore)] string CreativeCommonsConfirmed,
-    [property: JsonProperty("dateModified", NullValueHandling = NullValueHandling.Ignore)] string DateModified);
+    [property: JsonProperty("dateModified", NullValueHandling = NullValueHandling.Ignore)] string DateModified)
+{
+    public override string ToString()
+    {
+        return Name;
+    }
+}
 
 public record DrinkDetailResponse([property: JsonProperty("drinks", NullValueHandling = NullValueHandling.Ignore)] List<DrinkDetail> Drinks);

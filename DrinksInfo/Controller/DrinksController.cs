@@ -1,6 +1,4 @@
-﻿using DrinksInfo.Models;
-
-public class DrinksController
+﻿public class DrinksController
 {
     private readonly IDrinksService _drinksService;
 
@@ -14,19 +12,17 @@ public class DrinksController
         return await _drinksService.GetAsync<DrinkCategories>("/list.php?c=list");
     }
 
-    public async Task<DrinksResponse> GetDrinksTypeByCategory(List<DrinksCategory> categories)
+    public async Task<DrinksResponse> GetDrinksTypeByCategory(DrinksCategory category)
     {
         var drinksResponse = new DrinksResponse(new List<Drink>());
 
-        foreach (var category in categories)
-        {
-            var categoryDrinksResponse = await _drinksService.GetAsync<DrinksResponse>($"filter.php?c={category.Category}");
+        var categoryDrinksResponse = await _drinksService.GetAsync<DrinksResponse>($"filter.php?c={category.Category}");
 
-            if (categoryDrinksResponse?.Drinks != null)
-            {
-                drinksResponse.Drinks.AddRange(categoryDrinksResponse.Drinks);
-            }
+        if (categoryDrinksResponse?.Drinks != null)
+        {
+            drinksResponse.Drinks.AddRange(categoryDrinksResponse.Drinks);
         }
+
 
         return drinksResponse;
     }

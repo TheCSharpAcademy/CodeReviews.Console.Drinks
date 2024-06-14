@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-public class StringToIntConverter : JsonConverter<int>
+public class JsonConverter : JsonConverter<int>
 {
     public override int ReadJson(JsonReader reader, Type objectType, int existingValue, bool hasExistingValue, JsonSerializer serializer)
     {
