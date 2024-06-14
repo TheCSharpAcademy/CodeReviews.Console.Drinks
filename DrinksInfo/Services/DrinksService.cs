@@ -25,7 +25,7 @@ public class DrinksService : IDrinksService
         }
         else
         {
-            throw new JsonException("Problems getting data");
+            throw new JsonException($"Problems getting data: {response.StatusCode}");
         }
     }
 }
