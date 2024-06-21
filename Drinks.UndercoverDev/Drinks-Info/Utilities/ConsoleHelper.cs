@@ -17,5 +17,10 @@ namespace Drinks_Info.Utilities
             AnsiConsole.Write(table);
             Thread.Sleep(1000);
         }
+
+        public static void ClearScreen()
+        {
+            AnsiConsole.Clear();
+        }
     }
 }
