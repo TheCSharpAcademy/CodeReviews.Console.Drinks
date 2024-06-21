@@ -1,3 +1,4 @@
+using Drinks_Info.Models;
 using Drinks_Info.Services;
 using Drinks_Info.Utilities;
 using Drinks_Info.Views;
@@ -6,22 +7,36 @@ namespace Drinks_Info.Controller
 {
     public class DrinkController
     {
-        private readonly MenuView _menuView;
-        bool endApp = false;
+        private readonly ApiService _apiService;
 
-        public DrinkController(MenuView menuView)
+        public DrinkController(ApiService apiService)
         {
-            _menuView = menuView;
+            _apiService = apiService;
         }
-
+        
         public async Task RunAppAsync()
         {
-            // while (!endApp)
-            // {
-            //     _menuView.ShowMainMenuAsync();
-            // }
             ConsoleHelper.PrintMessage("Welcome to the [blue]Drink Menu[/] Application");
-            await _menuView.ShowMainMenuAsync();
+
+            await MainMenuViewAsync();
+        }
+
+        public async Task MainMenuViewAsync()
+        {
+            var menuView = new MenuView(this, _apiService);
+            await menuView.ShowMainMenuAsync();
+        }
+
+        public async Task DrinksMenuAsync(string categoryName)
+        {
+            var drinksView = new DrinksView(this, _apiService);
+            await drinksView.ShowDrinksMenuAsync(categoryName);
+        }
+
+        internal async Task DrinkDetailsAsync(Task<string> drinkSelected)
+        {
+            var drinkDetailsView = new DrinkDetailsView(this, _apiService);
+            await drinkDetailsView.ShowDrinkDetailsAsync(drinkSelected);
         }
     }
 }
