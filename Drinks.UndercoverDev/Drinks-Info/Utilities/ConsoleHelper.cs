@@ -1,4 +1,3 @@
-using Drinks_Info.Models;
 using Spectre.Console;
 
 namespace Drinks_Info.Utilities
