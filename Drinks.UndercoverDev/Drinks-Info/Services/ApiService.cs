@@ -33,46 +33,47 @@ namespace Drinks_Info.Services
                 return [];
             }
         }
+
+        public async Task<List<Drink>> GetDrinksByCategoryAsync(string category)
+        {
+            try
+            {
+                var response = await _client.GetStringAsync($"http://www.thecocktaildb.com/api/json/v1/1/filter.php?c={category}");
+                var drinks = JsonConvert.DeserializeObject<Drinks>(response);
+
+                return drinks?.DrinkList?? [];
+            }
+            catch (HttpRequestException ex) when (ex.StatusCode == HttpStatusCode.Forbidden)
+            {
+                Console.WriteLine($"API access forbidden: {ex.Message}");
+                return [];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting drinks in category: {ex.Message}");
+                return [];
+            }
+        }
+
+        public async Task<DrinkDetails> GetDrinkDetailsAsync(string drinkName)
+        {
+            try
+            {
+                var response = await _client.GetStringAsync($"http://www.thecocktaildb.com/api/json/v1/1/search.php?s={drinkName}");
+                var drinkDetailsObject = JsonConvert.DeserializeObject<DrinkDetailsObject>(response);
+
+                return drinkDetailsObject?.DrinkDetailsList?.FirstOrDefault() ?? new DrinkDetails();
+            }
+            catch (HttpRequestException ex) when (ex.StatusCode == HttpStatusCode.Forbidden)
+            {
+                Console.WriteLine($"API access forbidden: {ex.Message}");
+                return new DrinkDetails();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting drink details: {ex.Message}");
+                return new DrinkDetails();
+            }
+        }
     }
 }
-
-//         public async Task<List<Category>> GetCategoriesAsync()
-// {
-//     try
-//     {
-//         Console.WriteLine("Sending request to API...");
-//         var response = await _client.GetStringAsync("http://www.thecocktaildb.com/api/json/v1/1/list.php?c=list");
-//         Console.WriteLine("Response received from API.");
-        
-//         var drinksCategory = JsonConvert.DeserializeObject<Categories>(response);
-//         Console.WriteLine("Deserialization complete.");
-
-//         if (drinksCategory?.CategoriesList != null)
-//         {
-//             Console.WriteLine($"Deserialized {drinksCategory.CategoriesList.Count} categories.");
-//         }
-//         else
-//         {
-//             Console.WriteLine("No categories found.");
-//         }
-
-//         return drinksCategory?.CategoriesList ?? [];
-//     }
-//     catch (HttpRequestException ex)
-//     {
-//         Console.WriteLine($"HttpRequestException occurred: {ex.Message}");
-//         if (ex.StatusCode.HasValue)
-//         {
-//             Console.WriteLine($"Status code: {ex.StatusCode}");
-//         }
-//         return [];
-//     }
-//     catch (Exception ex)
-//     {
-//         Console.WriteLine($"Error getting categories: {ex.Message}");
-//         return [];
-//     }
-// }
-
-//     }
-// }
