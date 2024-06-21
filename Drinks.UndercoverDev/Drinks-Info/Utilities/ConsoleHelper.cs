@@ -11,5 +11,11 @@ namespace Drinks_Info.Utilities
             AnsiConsole.Write(new Markup($"\n[bold]{message}[/]"));
             Thread.Sleep(1000);
         }
+
+        public static void PrintTable(Table table)
+        {
+            AnsiConsole.Write(table);
+            Thread.Sleep(1000);
+        }
     }
 }
