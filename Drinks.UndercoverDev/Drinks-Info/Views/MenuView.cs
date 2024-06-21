@@ -1,3 +1,4 @@
+using Drinks_Info.Controller;
 using Drinks_Info.Models;
 using Drinks_Info.Services;
 using Drinks_Info.Utilities;
@@ -8,11 +9,11 @@ namespace Drinks_Info.Views
     public class MenuView
     {
         private readonly ApiService? _apiService;
-        private readonly DrinkService? _drinkService;
+        private readonly DrinkController _drinkController;
 
-        public MenuView(ApiService apiService, DrinkService drinkService)
+        public MenuView(DrinkController drinkController,ApiService apiService)
         {
-            _drinkService = drinkService;
+            _drinkController = drinkController;
             _apiService = apiService;
         }
 
@@ -27,7 +28,13 @@ namespace Drinks_Info.Views
 
             ConsoleHelper.PrintMessage("[green]Categories of drinks fetched successfully![/]\n\n");
 
-            categories.Add(new Category{StrCategory = "Exit"});
+            var categorySelected = ShowDrinksByCategory(categories);
+            await _drinkController.DrinksMenuAsync(categorySelected.StrCategory);
+        }
+
+        public static Category ShowDrinksByCategory(List<Category> categories)
+        {
+            categories.Insert(0, new Category { StrCategory = "Exit" });
 
             var categorySelector = new SelectionPrompt<Category>
             {
@@ -41,6 +48,8 @@ namespace Drinks_Info.Views
 
             if (categorySelected.StrCategory == "Exit")
                 Exit();
+
+            return categorySelected;
         }
 
         public static void Exit()
