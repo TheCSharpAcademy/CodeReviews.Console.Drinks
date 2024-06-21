@@ -3,8 +3,6 @@ using Drinks_Info.Services;
 using Drinks_Info.Views;
 
 var apiService = new ApiService();
-var drinkService = new DrinkService();
-var menuView = new MenuView(apiService, drinkService);
-var controller = new DrinkController(menuView);
+var controller = new DrinkController(apiService);
 
 await controller.RunAppAsync();
