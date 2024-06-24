@@ -24,18 +24,22 @@ namespace Drinks_Info.Views
             var drinkDetails = await _apiService.GetDrinkDetailsAsync(drinkSelected.Result);
 
             if (drinkDetails.StrDrink == null)
+            {
                 ConsoleHelper.PrintMessage("[red]Drink not found[/]");
-
-            ConsoleHelper.PrintMessage("[green]Drink details fetched successfully![/]\n\n");
-
-            ShowDrinkDetailTable(drinkDetails);
-
-            ConsoleHelper.PrintMessage("[green]Enter 'Y' to go Back or Enter any character to go back to the main menu[/]\n\n");
-            var keyPressed = Utils.GetUserResponse();
-            if ("y" == keyPressed.ToLower())
-                await _drinkController.DrinksMenuAsync(drinkDetails.StrCategory);
+            }
             else
-                await _drinkController.MainMenuViewAsync();
+            {
+                ConsoleHelper.PrintMessage("[green]Drink details fetched successfully![/]\n\n");
+
+                ShowDrinkDetailTable(drinkDetails);
+
+                ConsoleHelper.PrintMessage("[green]Enter 'Y' to go Back or Enter any character to go back to the main menu[/]\n\n");
+                var keyPressed = Utils.GetUserResponse();
+                if ("y" == keyPressed.ToLower())
+                    await _drinkController.DrinksMenuAsync(drinkDetails.StrCategory);
+                else
+                    await _drinkController.MainMenuViewAsync();
+            }
         }
 
         public static void ShowDrinkDetailTable(DrinkDetails drinkDetails)

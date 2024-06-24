@@ -24,12 +24,16 @@ namespace Drinks_Info.Views
             var drinks = await _apiService.GetDrinksByCategoryAsync(categoryName);
 
             if (drinks.Count == 0)
+            {
                 ConsoleHelper.PrintMessage("[red]No drinks found[/]");
+            }
+            else
+            {
+                ConsoleHelper.PrintMessage("[green]Drinks fetched successfully![/]\n\n");
 
-            ConsoleHelper.PrintMessage("[green]Drinks fetched successfully![/]\n\n");
-
-            var drinkName = ShowDrinks(drinks);
-            await _drinkController.DrinkDetailsAsync(drinkName);
+                var drinkName = ShowDrinks(drinks);
+                await _drinkController.DrinkDetailsAsync(drinkName);
+            }
         }
 
         public async Task<string> ShowDrinks(List<Drink> drinks)

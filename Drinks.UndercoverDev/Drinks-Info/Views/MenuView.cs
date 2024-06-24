@@ -19,17 +19,22 @@ namespace Drinks_Info.Views
 
         public async Task ShowMainMenuAsync()
         {
-            ConsoleHelper.PrintMessage("[yellow]Fetching drink categories...[/]");
+            ConsoleHelper.PrintMessage("[yellow]Fetching drink categories...[/]\n");
 
             var categories = await _apiService.GetCategoriesAsync();
 
             if (categories.Count == 0)
-                ConsoleHelper.PrintMessage("[red]No Categories found[/]");
+            {
+                ConsoleHelper.PrintMessage("[red]No Categories found[/]\n\n");
+            }
+            else
+            {
 
-            ConsoleHelper.PrintMessage("[green]Categories of drinks fetched successfully![/]\n\n");
+                ConsoleHelper.PrintMessage("[green]Categories of drinks fetched successfully![/]\n\n");
 
-            var categorySelected = ShowDrinksByCategory(categories);
-            await _drinkController.DrinksMenuAsync(categorySelected.StrCategory);
+                var categorySelected = ShowDrinksByCategory(categories);
+                await _drinkController.DrinksMenuAsync(categorySelected.StrCategory);
+            }
         }
 
         public static Category ShowDrinksByCategory(List<Category> categories)
