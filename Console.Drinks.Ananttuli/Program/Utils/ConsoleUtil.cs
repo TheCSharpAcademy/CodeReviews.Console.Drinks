@@ -4,7 +4,7 @@ namespace Program.Utils;
 
 public class ConsoleUtil
 {
-    public const string MenuBackButtonText = "[red]<- Back[red]";
+    public const string MenuBackButtonText = "[red]<- Back[/]";
 
     public static ConsoleKeyInfo PressAnyKeyToClear(string message = "Press any key to continue")
     {

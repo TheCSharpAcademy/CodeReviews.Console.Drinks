@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace DrinksApi;
 
 public class Util
@@ -10,5 +12,42 @@ public class Util
         }
 
         return item;
+    }
+
+    public static string? TryParseJsonStringOrNull(JsonElement element, string propertyName)
+    {
+        bool success = element.TryGetProperty(
+            $"{propertyName}",
+            out JsonElement value
+        );
+
+        if (success)
+        {
+            return value.ToString().Trim();
+        }
+
+        return null;
+    }
+
+    public static List<string> TryParseMultipleJsonValues(
+        JsonElement element,
+        string propertyName,
+        int min = 1,
+        int max = 5
+    )
+    {
+        List<string> values = [];
+
+        for (int i = min; i <= max; i++)
+        {
+            var value = TryParseJsonStringOrNull(element, $"{propertyName}{i}");
+
+            if (value != null)
+            {
+                values.Add(value);
+            }
+        }
+
+        return values;
     }
 }

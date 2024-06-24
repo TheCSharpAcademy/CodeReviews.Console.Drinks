@@ -89,10 +89,10 @@ public class Program
         }
 
         var selectedDrink = AnsiConsole.Prompt(
-            new SelectionPrompt<DrinkListItemDto>()
+            new SelectionPrompt<DrinkFilterListItemDto>()
                 .Title($"{category.StrCategory}\nDRINKS\n")
                 .AddChoices([
-                    new DrinkListItemDto("-1", Utils.ConsoleUtil.MenuBackButtonText, ""),
+                    new DrinkFilterListItemDto("", Utils.ConsoleUtil.MenuBackButtonText, ""),
                     ..drinksInCategory
                 ])
                 .EnableSearch()
@@ -106,9 +106,24 @@ public class Program
         await ShowDrinkInfo(selectedDrink);
     }
 
-    public static async Task ShowDrinkInfo(DrinkListItemDto drink)
+    public static async Task ShowDrinkInfo(DrinkFilterListItemDto drink)
     {
+        var (success, drinkInfo) = await Api.FetchDrinkInfo(drink.IdDrink);
 
+        if (drinkInfo == null || !success)
+        {
+            return;
+        }
+
+        PrintDrinkInfo(drinkInfo);
+
+        Utils.ConsoleUtil.PressAnyKeyToClear();
+    }
+
+    public static void PrintDrinkInfo(DrinkDto drink)
+    {
+        var panel = new Panel("");
+        panel.Header = new PanelHeader(drink.Name ?? "");
     }
 }
 
