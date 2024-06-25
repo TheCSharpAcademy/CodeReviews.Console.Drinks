@@ -37,7 +37,7 @@ public class CategoriesController
             new SelectionPrompt<DrinkFilterListItemDto>()
                 .Title($"\n{category.StrCategory}   -   DRINKS\n")
                 .AddChoices([
-                    new DrinkFilterListItemDto("", Utils.ConsoleUtil.MenuBackButtonText, ""),
+                    new DrinkFilterListItemDto("", Utils.ConsoleUtil.MenuBackButtonText),
                     ..drinksInCategory
                 ])
                 .EnableSearch()

@@ -4,8 +4,7 @@ namespace DrinksApi.Drinks;
 
 public record class DrinkFilterListItemDto(
     [property: JsonPropertyName("idDrink")] string IdDrink,
-    [property: JsonPropertyName("strDrink")] string Name,
-    [property: JsonPropertyName("strDrinkThumb")] string ThumbnailUrl
+    [property: JsonPropertyName("strDrink")] string Name
     )
 {
     public override string ToString()
