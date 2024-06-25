@@ -104,8 +104,6 @@ public class Api(Client httpClient)
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"ERROR: Failed to fetch drink ID {drinkId}. {ex.Message}");
-
             return new Response<DrinkDto?>(
                 false,
                 null,
