@@ -23,7 +23,8 @@ public class Util
 
         if (success)
         {
-            return value.ToString().Trim();
+            var cleanedValue = value.ToString().Trim();
+            return cleanedValue.Length > 0 ? cleanedValue : null;
         }
 
         return null;

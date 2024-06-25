@@ -122,8 +122,52 @@ public class Program
 
     public static void PrintDrinkInfo(DrinkDto drink)
     {
-        var panel = new Panel("");
-        panel.Header = new PanelHeader(drink.Name ?? "");
+        var table = new Table();
+
+        var sublistPrefix = "-  ";
+
+        var ingredientText = string.Join(
+            "\n",
+            drink.Ingredients?
+                .Where(ingredient => ingredient != null)
+                .Select(ingredient => $"{sublistPrefix}{ingredient}") ?? []
+        );
+
+        var measurementText = string.Join(
+            "\n",
+            drink.Measurements?
+                .Where(measurement => measurement != null)
+                .Select(measurement => $"{sublistPrefix}{measurement}") ?? []
+        );
+
+        var dataPoints = new List<(string, string?)> {
+            ("Name", drink.Name),
+            ("Id", drink.Id),
+            ("Type", drink.Type),
+            ("Glass", drink.Glass),
+            ("Ingredients", ingredientText),
+            ("Measurements", measurementText),
+        };
+
+        table.AddColumns(["", ""]);
+
+        foreach (var (key, value) in dataPoints)
+        {
+            if (value == null)
+            {
+                continue;
+            }
+
+            table.AddRow([key, value]);
+        }
+
+        table.Columns[0].Padding(2, 0);
+        table.Columns[1].Padding(2, 0);
+        table.ShowRowSeparators = true;
+        table.Border(TableBorder.Rounded);
+        table.HideHeaders();
+
+        AnsiConsole.Write(table);
     }
 }
 

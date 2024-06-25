@@ -86,15 +86,17 @@ public class Api(Client httpClient)
 
             var parsed = JsonDocument.Parse(jsonResponse);
 
-            JsonElement root = parsed.RootElement;
+            var drinks = parsed.RootElement.GetProperty("drinks").EnumerateArray().ToList();
 
-            var id = Util.TryParseJsonStringOrNull(root, "idDrink");
-            var name = Util.TryParseJsonStringOrNull(root, "strDrink");
-            var type = Util.TryParseJsonStringOrNull(root, "strAlcoholic");
-            var glass = Util.TryParseJsonStringOrNull(root, "strGlass");
+            var drinkInfo = drinks[0];
 
-            List<string> ingredients = Util.TryParseMultipleJsonValues(root, "strIngredient", 1, 15);
-            List<string> measures = Util.TryParseMultipleJsonValues(root, "strMeasure", 1, 15);
+            var id = Util.TryParseJsonStringOrNull(drinkInfo, "idDrink");
+            var name = Util.TryParseJsonStringOrNull(drinkInfo, "strDrink");
+            var type = Util.TryParseJsonStringOrNull(drinkInfo, "strAlcoholic");
+            var glass = Util.TryParseJsonStringOrNull(drinkInfo, "strGlass");
+
+            List<string> ingredients = Util.TryParseMultipleJsonValues(drinkInfo, "strIngredient", 1, 15);
+            List<string> measures = Util.TryParseMultipleJsonValues(drinkInfo, "strMeasure", 1, 15);
 
             DrinkDto drink = new DrinkDto(id, name, type, glass, ingredients, measures);
 
@@ -102,6 +104,8 @@ public class Api(Client httpClient)
         }
         catch (Exception ex)
         {
+            Console.WriteLine($"ERROR: Failed to fetch drink ID {drinkId}. {ex.Message}");
+
             return new Response<DrinkDto?>(
                 false,
                 null,
