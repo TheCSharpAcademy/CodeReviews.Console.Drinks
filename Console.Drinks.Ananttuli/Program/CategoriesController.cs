@@ -12,7 +12,7 @@ public class CategoriesController
 
         var selectedCategory = AnsiConsole.Prompt(
             new SelectionPrompt<CategoryDto>()
-                .Title("CATEGORIES")
+                .Title("\nCATEGORIES")
                 .AddChoices([
                     backButton,
                     ..categories
@@ -35,7 +35,7 @@ public class CategoriesController
     {
         var selectedDrink = AnsiConsole.Prompt(
             new SelectionPrompt<DrinkFilterListItemDto>()
-                .Title($"{category.StrCategory}\nDRINKS\n")
+                .Title($"\n{category.StrCategory}   -   DRINKS\n")
                 .AddChoices([
                     new DrinkFilterListItemDto("", Utils.ConsoleUtil.MenuBackButtonText, ""),
                     ..drinksInCategory

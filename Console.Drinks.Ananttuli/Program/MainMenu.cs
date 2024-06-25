@@ -11,7 +11,7 @@ public class MainMenu
     {
         return AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title("DRINKS MENU")
+                .Title("\nDRINKS MENU")
                 .AddChoices([OpenMenu, Exit])
         );
 
