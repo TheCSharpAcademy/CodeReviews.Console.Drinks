@@ -44,10 +44,10 @@ namespace jollejonas.Drinks.Services
                 new SelectionPrompt<string>()
                     .Title("Select a drink")
                     .PageSize(10)
-                    .AddChoices(drinks.Select(d => d.strDrink).ToArray())
+                    .AddChoices(drinks.Select(d => d.StrDrink).ToArray())
             );
 
-            string selectedDrinkId = drinks.First(d => d.strDrink == menuSelection).idDrink;
+            string selectedDrinkId = drinks.First(d => d.StrDrink == menuSelection).IdDrink;
 
             return selectedDrinkId;
         }
@@ -73,49 +73,49 @@ namespace jollejonas.Drinks.Services
                 return;
             }
 
-            AnsiConsole.MarkupLine($"[bold]{drink.strDrink}[/]");
-            AnsiConsole.MarkupLine($"[bold]Category:[/] {drink.strCategory}");
-            AnsiConsole.MarkupLine($"[bold]Alcoholic:[/] {drink.strAlcoholic}");
-            AnsiConsole.MarkupLine($"[bold]Glass:[/] {drink.strGlass}");
+            AnsiConsole.MarkupLine($"[bold]{drink.StrDrink}[/]");
+            AnsiConsole.MarkupLine($"[bold]Category:[/] {drink.StrCategory}");
+            AnsiConsole.MarkupLine($"[bold]Alcoholic:[/] {drink.StrAlcoholic}");
+            AnsiConsole.MarkupLine($"[bold]Glass:[/] {drink.StrGlass}");
             Console.WriteLine();
-            AnsiConsole.MarkupLine($"[bold]Instructions:[/] {drink.strInstructions}");
+            AnsiConsole.MarkupLine($"[bold]Instructions:[/] {drink.StrInstructions}");
 
             var ingredients = new[]
             {
-               drink.strIngredient1,
-                drink.strIngredient2,
-                drink.strIngredient3,
-                drink.strIngredient4,
-                drink.strIngredient5,
-                drink.strIngredient6,
-                drink.strIngredient7,
-                drink.strIngredient8,
-                drink.strIngredient9,
-                drink.strIngredient10,
-                drink.strIngredient11,
-                drink.strIngredient12,
-                drink.strIngredient13,
-                drink.strIngredient14,
-                drink.strIngredient15
+               drink.StrIngredient1,
+                drink.StrIngredient2,
+                drink.StrIngredient3,
+                drink.StrIngredient4,
+                drink.StrIngredient5,
+                drink.StrIngredient6,
+                drink.StrIngredient7,
+                drink.StrIngredient8,
+                drink.StrIngredient9,
+                drink.StrIngredient10,
+                drink.StrIngredient11,
+                drink.StrIngredient12,
+                drink.StrIngredient13,
+                drink.StrIngredient14,
+                drink.StrIngredient15
             };
         
             var measures = new[]
             {
-                drink.strMeasure1,
-                drink.strMeasure2,
-                drink.strMeasure3,
-                drink.strMeasure4,
-                drink.strMeasure5,
-                drink.strMeasure6,
-                drink.strMeasure7,
-                drink.strMeasure8,
-                drink.strMeasure9,
-                drink.strMeasure10,
-                drink.strMeasure11,
-                drink.strMeasure12,
-                drink.strMeasure13,
-                drink.strMeasure14,
-                drink.strMeasure15
+                drink.StrMeasure1,
+                drink.StrMeasure2,
+                drink.StrMeasure3,
+                drink.StrMeasure4,
+                drink.StrMeasure5,
+                drink.StrMeasure6,
+                drink.StrMeasure7,
+                drink.StrMeasure8,
+                drink.StrMeasure9,
+                drink.StrMeasure10,
+                drink.StrMeasure11,
+                drink.StrMeasure12,
+                drink.StrMeasure13,
+                drink.StrMeasure14,
+                drink.StrMeasure15
             };
 
             Console.WriteLine();
