@@ -1,8 +1,10 @@
-﻿
+﻿using System.Text.Json.Serialization;
+
 namespace jollejonas.Drinks.Models
 {
     public class Category
     {
-        public string strCategory { get; set; }
+        [JsonPropertyName("strCategory")]
+        public string StrCategory { get; set; }
     }
 }
