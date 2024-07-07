@@ -5,9 +5,9 @@ using Spectre.Console;
 var drinksService = new DrinksService();
 while (true)
 {
-    string selectedCategory = drinksService.SelectCategory().Result;
-    string selectedDrink = drinksService.SelectDrink(selectedCategory).Result;
-    Drink drink = drinksService.GetDrink(selectedDrink).Result;
+    string? selectedCategory = drinksService.SelectCategoryAsync().Result;
+    string? selectedDrink = drinksService.SelectDrinkAsync(selectedCategory).Result;
+    Drink? drink = drinksService.GetDrinkAsync(selectedDrink).Result;
 
     if (drink != null)
     {
