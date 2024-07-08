@@ -1,8 +1,10 @@
-# Drinks Menu Application
+# Drinks Menu Application 
 
-## Drinks Menu Application
+## Description
 
-### Abstract
+Simple Web API to fetch information about a categorized list of drinks.
+
+## Abstract
 
 The Drinks Menu Application is designed to streamline the process of accessing and presenting a restaurant's drinks menu, which is sourced from an external vendor's API. The application allows restaurant employees to:
 
