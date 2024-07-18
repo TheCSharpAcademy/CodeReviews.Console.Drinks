@@ -1,8 +1,12 @@
-﻿class Program
+﻿namespace Drinks.kjanos89
 {
-    static void Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Hello, World!");
+        static void Main(string[] args)
+        {
+            Input input = new();
+        }
     }
 }
+
 
