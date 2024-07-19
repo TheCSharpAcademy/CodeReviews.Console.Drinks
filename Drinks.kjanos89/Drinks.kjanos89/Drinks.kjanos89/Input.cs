@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Drinks.kjanos89
+﻿namespace Drinks.kjanos89
 {
     public class Input
     {
@@ -26,6 +20,18 @@ namespace Drinks.kjanos89
         public void GetDrinks(string choice)
         {
             controller.GetDrinks(choice);
+            Console.WriteLine("Choose a drink from the list below or press '0' to go back to the Categories menu:");
+            string drinkChoice = Console.ReadLine();
+            if(drinkChoice=="0")
+            {
+                GetCategories();
+            }
+            while (!validation.IsValidId(drinkChoice))
+            {
+                Console.WriteLine("Try again..");
+                choice = Console.ReadLine();
+            }
+            controller.GetIngredients(drinkChoice);
         }
     }
 }

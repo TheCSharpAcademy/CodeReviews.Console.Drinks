@@ -11,5 +11,14 @@
             }
             return true;
         }
+        public bool IsValidId(string str)
+        {
+            if (String.IsNullOrEmpty(str)) return false;
+            foreach (char c in str)
+            {
+                if (!Char.IsDigit(c)) return false;
+            }
+            return true;
+        }
     }
 }
