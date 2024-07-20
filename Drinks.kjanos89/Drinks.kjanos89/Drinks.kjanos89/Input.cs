@@ -32,6 +32,9 @@
                 choice = Console.ReadLine();
             }
             controller.GetIngredients(drinkChoice);
+            Console.WriteLine("Press any key to return to the main menu.");
+            Console.ReadLine();
+            GetCategories();
         }
     }
 }
