@@ -6,6 +6,7 @@
         Validation validation=new Validation();
         public void GetCategories()
         {
+            Console.Clear();
             controller.GetCategories();
             Console.WriteLine("Choose a category from the list below:");
             string choice=Console.ReadLine();
@@ -19,6 +20,7 @@
 
         public void GetDrinks(string choice)
         {
+            Console.Clear();
             controller.GetDrinks(choice);
             Console.WriteLine("Choose a drink from the list below or press '0' to go back to the Categories menu:");
             string drinkChoice = Console.ReadLine();

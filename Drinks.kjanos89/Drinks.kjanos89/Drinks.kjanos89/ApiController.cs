@@ -47,6 +47,7 @@ namespace Drinks.kjanos89
         }
         public void GetIngredients(string drink)
         {
+            Console.Clear();
             var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
             var request = new RestRequest($"lookup.php?i={drink}");
             var response = client.ExecuteAsync(request);
@@ -83,7 +84,7 @@ namespace Drinks.kjanos89
                     }
                 }
 
-                Menu.ShowData(prepList, drinkDetail.strDrink);
+                Menu.ShowData(prepList, drinkDetail.StrDrink);
 
             }
 
