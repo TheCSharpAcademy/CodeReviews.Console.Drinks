@@ -1,24 +1,23 @@
-﻿namespace Drinks.kjanos89
+﻿namespace Drinks.kjanos89;
+
+public class Validation
 {
-    public class Validation
+    public bool IsValidString(string str)
     {
-        public bool IsValidString(string str)
+        if(String.IsNullOrEmpty(str)) return false;
+        foreach (char c in str)
         {
-            if(String.IsNullOrEmpty(str)) return false;
-            foreach (char c in str)
-            {
-                if(!Char.IsLetter(c) && c!='/'&&c!=' ') return false;
-            }
-            return true;
+            if(!Char.IsLetter(c) && c!='/'&&c!=' ') return false;
         }
-        public bool IsValidId(string str)
+        return true;
+    }
+    public bool IsValidId(string str)
+    {
+        if (String.IsNullOrEmpty(str)) return false;
+        foreach (char c in str)
         {
-            if (String.IsNullOrEmpty(str)) return false;
-            foreach (char c in str)
-            {
-                if (!Char.IsDigit(c)) return false;
-            }
-            return true;
+            if (!Char.IsDigit(c)) return false;
         }
+        return true;
     }
 }

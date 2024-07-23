@@ -1,8 +1,7 @@
-﻿namespace Drinks.kjanos89.Models
+﻿namespace Drinks.kjanos89.Models;
+
+public class Drink
 {
-    public class Drink
-    {
-        public string IdDrink {  get; set; }
-        public string StrDrink { get; set; }
-    }
+    public string IdDrink {  get; set; }
+    public string StrDrink { get; set; }
 }

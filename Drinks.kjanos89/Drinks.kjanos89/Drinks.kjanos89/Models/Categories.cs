@@ -1,12 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace Drinks.kjanos89.Models
+namespace Drinks.kjanos89.Models;
+
+public class Categories
 {
-    public class Categories
-    {
-
-        [JsonProperty("drinks")]
-        public List<Category> CategoryList { get; set; }
-
-    }
+    [JsonProperty("drinks")]
+    public List<Category> CategoryList { get; set; }
 }
