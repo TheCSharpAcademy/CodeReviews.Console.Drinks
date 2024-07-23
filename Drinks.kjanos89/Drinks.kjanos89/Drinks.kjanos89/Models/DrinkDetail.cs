@@ -2,12 +2,13 @@
 
 namespace Drinks.kjanos89.Models
 {
-    internal class DrinkDetailObject
+    public class DrinkDetailObject
     {
         [JsonProperty("drinks")]
         public List<DrinkDetail> DrinkDetailList { get; set; }
     }
-    internal class DrinkDetail
+
+    public class DrinkDetail
     {
         public string StrDrink { get; set; }
         public object StrDrinkAlternate { get; set; }

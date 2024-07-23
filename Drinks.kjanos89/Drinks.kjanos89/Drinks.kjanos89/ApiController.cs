@@ -8,6 +8,9 @@ namespace Drinks.kjanos89
 {
     public class ApiController
     {
+        public List<string> categoryNames = new List<string>();
+        public List<string> drinkIds = new List<string>();
+
         public void GetCategories()
         {
             var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
@@ -18,8 +21,8 @@ namespace Drinks.kjanos89
                 string rawResponse = response.Result.Content;
                 var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
                 List<Category> categories = serialize.CategoryList;
+                categoryNames = categories.Select(c => c.CategoryName).ToList();
                 Menu.ShowData(categories, "Categories");
-
             }
             else
             {
@@ -27,7 +30,7 @@ namespace Drinks.kjanos89
             }
         }
 
-        internal void GetDrinks(string choice)
+        public void GetDrinks(string choice)
         {
             var client = new RestClient("http://www.thecocktaildb.com/api/json/v1/1/");
             var request = new RestRequest($"filter.php?c={HttpUtility.UrlEncode(choice)}");
@@ -37,14 +40,15 @@ namespace Drinks.kjanos89
                 string rawResponse = response.Result.Content;
                 var serialize = JsonConvert.DeserializeObject<DrinksClass>(rawResponse);
                 List<Drink> drinks = serialize.DrinkList;
+                drinkIds = drinks.Select(d => d.IdDrink).ToList();
                 Menu.ShowData(drinks, "Drinks");
-
             }
             else
             {
                 Console.WriteLine("Something went wrong.");
             }
         }
+
         public void GetIngredients(string drink)
         {
             Console.Clear();
@@ -55,20 +59,15 @@ namespace Drinks.kjanos89
             if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 string rawResponse = response.Result.Content;
-
                 var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse);
-
                 List<DrinkDetail> returnedList = serialize.DrinkDetailList;
-
                 DrinkDetail drinkDetail = returnedList[0];
 
                 List<object> prepList = new();
-
                 string formattedName = "";
 
                 foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
                 {
-
                     if (prop.Name.Contains("str"))
                     {
                         formattedName = prop.Name.Substring(3);
@@ -85,9 +84,16 @@ namespace Drinks.kjanos89
                 }
 
                 Menu.ShowData(prepList, drinkDetail.StrDrink);
-
             }
+            else
+            {
+                Console.WriteLine("Something went wrong.");
+            }
+        }
 
+        public List<string> GetDrinkIds()
+        {
+            return drinkIds;
         }
     }
 }
