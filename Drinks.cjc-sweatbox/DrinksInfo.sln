@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrinksInfo", "DrinksInfo\DrinksInfo.csproj", "{69AB4F7F-B516-4A51-BCA4-317DCCE1A830}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrinksInfo.ConsoleApp", "DrinksInfo.ConsoleApp\DrinksInfo.ConsoleApp.csproj", "{88A0C79E-3DB8-4E49-A563-F3BBE11E02F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{26839339-D32A-4AA1-8A08-34F9FBF2ED42}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+		..\.gitignore = ..\.gitignore
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69AB4F7F-B516-4A51-BCA4-317DCCE1A830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69AB4F7F-B516-4A51-BCA4-317DCCE1A830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69AB4F7F-B516-4A51-BCA4-317DCCE1A830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69AB4F7F-B516-4A51-BCA4-317DCCE1A830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88A0C79E-3DB8-4E49-A563-F3BBE11E02F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88A0C79E-3DB8-4E49-A563-F3BBE11E02F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88A0C79E-3DB8-4E49-A563-F3BBE11E02F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88A0C79E-3DB8-4E49-A563-F3BBE11E02F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {70CD919F-DE6A-420A-A003-4BEFB1C1999D}
+	EndGlobalSection
+EndGlobal
