@@ -2,7 +2,7 @@
 using Drinks.UI;
 using Spectre.Console;
 
-var service = new APIService("https://www.thecocktaildb.com/api/json/v1/1");
+var service = new ApiService("https://www.thecocktaildb.com/api/json/v1/1");
 UI.Clear();
 
 while (true)

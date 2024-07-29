@@ -3,10 +3,10 @@ using RestSharp;
 
 namespace Drinks.Service;
 
-public class APIService {
+public class ApiService {
     private readonly RestClient client;
 
-    public APIService(string baseUrl)
+    public ApiService(string baseUrl)
     {
         var options = new RestClientOptions(baseUrl);
         client = new RestClient(options);
