@@ -31,7 +31,7 @@ public class DrinkTable
         details.Tags ?? "-",
         details.Category ?? "-",
         details.Alcoholic ?? "-",
-        details.IBA ?? "-",
+        details.Iba ?? "-",
         details.Glass ?? "-"
     );
     AnsiConsole.Write(table);

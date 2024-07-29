@@ -1,10 +1,8 @@
-﻿using Spectre.Console;
-
-namespace Drinks.kwm0304;
+﻿namespace Drinks.kwm0304;
 
 public class Program
 {
-  static async Task Main(string[] args)
+  static async Task Main()
   {
     using HttpClient client = new();
     while (true)
