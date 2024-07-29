@@ -1,47 +1,34 @@
-﻿using Drinks.Models;
-using RestSharp;
+﻿using Drinks.Service;
+using Drinks.UI;
 using Spectre.Console;
 
-var options = new RestClientOptions("https://www.thecocktaildb.com/api/json/v1/1");
-var client = new RestClient(options);
-var request = new RestRequest("/list.php?c=list");
+var service = new APIService("https://www.thecocktaildb.com/api/json/v1/1");
+UI.Clear();
 
-var drinkCategories = client.Get<Categories>(request);
+while (true)
+{
+    var drinkCategories = service.GetDrinkCategories();
 
-var category = AnsiConsole.Prompt(
-    new SelectionPrompt<string>()
-        .Title("Choose a drink [green]category[/]")
-        .PageSize(10)
-        .MoreChoicesText("[grey](Move up and down to reveal more categories)[/]")
-        .AddChoices(drinkCategories.Drinks.Select(d => d.StrCategory)));
+    var category = UI.SelectCategory(drinkCategories);
 
-var categoryEndpoint = "/filter.php?c=" + category;
+    var drinks = service.GetDrinksByCategory(category);
 
-request = new RestRequest(categoryEndpoint);
+    var drink = UI.SelectDrink(category, drinks);
 
-var drinks = client.Get<DrinksList>(request);
+    var information = service.GetDrinkInfo(drink);
 
-var drink = AnsiConsole.Prompt(
-    new SelectionPrompt<string>()
-    .Title("Select a [green]drink[/] from the category '" + category + "'.")
-    .PageSize(10)
-    .MoreChoicesText("[grey](Move up and down to reveal more drinks)[/]")
-    .AddChoices(drinks.Drinks.Select(d => d.StrDrink))
-);
+    var drinkInfo = information.Drinks.First();
 
-var drinkEndpoint = "/search.php?s=" + drink;
+    UI.ShowDrinkInfo(drinkInfo);
 
-request = new RestRequest(drinkEndpoint);
+    var continueSearch = AnsiConsole.Prompt(
+        new SelectionPrompt<string>()
+            .Title("Do you want to search for another drink?")
+            .AddChoices("Yes", "No"));
 
-var information = client.Get<DrinkInfoList>(request);
-
-var drinkInfo = information.Drinks.First();
-
-var table = new Table();
-
-string[] columns = ["Drink name", "Drink category", "Alcoholic?", "Glass", "Instructions"];
-table.AddColumns(columns);
-
-table.AddRow(drinkInfo.StrDrink, drinkInfo.StrCategory, drinkInfo.StrAlcoholic, drinkInfo.StrGlass, drinkInfo.StrInstructions);
-
-AnsiConsole.Write(table);
+    if (continueSearch == "No")
+    {
+        break;
+    }
+    UI.Clear();
+}

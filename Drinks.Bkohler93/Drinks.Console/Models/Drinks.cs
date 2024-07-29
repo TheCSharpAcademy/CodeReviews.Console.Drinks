@@ -1,7 +1,7 @@
 public class DrinksList {
-    public List<Drink> Drinks { get; set; }
+    public required List<Drink> Drinks { get; set; }
 }
 
 public class Drink {
-    public string StrDrink { get; set; }
+    public required string StrDrink { get; set; }
 }
