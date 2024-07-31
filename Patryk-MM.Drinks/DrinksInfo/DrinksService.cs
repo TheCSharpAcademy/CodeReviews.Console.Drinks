@@ -2,7 +2,6 @@
 using DrinksInfo.Models;
 using Newtonsoft.Json;
 using RestSharp;
-using System.Net;
 using System.Reflection;
 using System.Web;
 
@@ -16,7 +15,7 @@ public class DrinksService {
 
         List<Category> categories = new List<Category>();
 
-        if (response.Result.StatusCode == HttpStatusCode.OK) {
+        if (response.Result.StatusCode == System.Net.HttpStatusCode.OK) {
             string rawResponse = response.Result.Content;
             var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
 
@@ -36,7 +35,7 @@ public class DrinksService {
 
         List<Drink> drinks = new List<Drink>();
 
-        if (response.Result.StatusCode == HttpStatusCode.OK) {
+        if (response.Result.StatusCode == System.Net.HttpStatusCode.OK) {
             string rawResponse = response.Result.Content;
             var serialize = JsonConvert.DeserializeObject<Models.Drinks>(rawResponse);
 
@@ -78,7 +77,7 @@ public class DrinksService {
                     });
                 }
             }
-            TableVisualizationEngine.ShowTable(prepList, drinkDetail.strDrink);
+            TableVisualizationEngine.ShowTable(prepList, drinkDetail.StrDrink);
         }
     }
 }
