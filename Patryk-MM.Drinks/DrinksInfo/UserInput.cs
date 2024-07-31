@@ -1,11 +1,11 @@
 ﻿namespace DrinksInfo;
 public class UserInput
 { 
-    DrinksService drinksService = new();
+    DrinksService _drinksService = new();
 
     internal void GetCategoriesInput()
     {
-        var categories = drinksService.GetCategories();
+        var categories = _drinksService.GetCategories();
 
         Console.WriteLine("Choose category:");
 
@@ -17,7 +17,7 @@ public class UserInput
             Console.ReadLine();
         }
 
-        if (!categories.Any(x => x.strCategory == category))
+        if (!categories.Any(x => x.StrCategory == category))
         {
             Console.WriteLine("Category doesn't exist.");
             GetCategoriesInput();
@@ -28,7 +28,7 @@ public class UserInput
 
     private void GetDrinksInput(string category)
     {
-        var drinks = drinksService.GetDrinksByCategory(category);
+        var drinks = _drinksService.GetDrinksByCategory(category);
 
         Console.WriteLine("Choose a drink or go back to category menu by typing 0:");
 
@@ -42,13 +42,13 @@ public class UserInput
             Console.ReadLine();
         }
 
-        if (!drinks.Any(x => x.idDrink == drink))
+        if (!drinks.Any(x => x.IdDrink == drink))
         {
             Console.WriteLine("Drink doesn't exist.");
             GetDrinksInput(category);
         }
 
-        drinksService.GetDrink(drink);
+        _drinksService.GetDrink(drink);
 
         Console.WriteLine("Press any key to go back to categories menu");
         Console.ReadKey();
