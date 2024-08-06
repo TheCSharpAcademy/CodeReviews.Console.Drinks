@@ -1,5 +1,5 @@
 
-# Flashcards
+# Drinks App
 - A console app that connect to an external API through HTTP requests and fetches information about drinks.
 - Developed using C# with HTTP calls to a cocktail database.
 
