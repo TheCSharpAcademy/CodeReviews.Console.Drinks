@@ -35,7 +35,7 @@ public class DrinksService {
 
         List<Drink> drinks = new List<Drink>();
 
-        if (response.Result.StatusCode == System.Net.HttpStatusCode.OK) {
+        if (response.Result.IsSuccessStatusCode) {
             string rawResponse = response.Result.Content;
             var serialize = JsonConvert.DeserializeObject<Models.Drinks>(rawResponse);
 
@@ -53,7 +53,7 @@ public class DrinksService {
         var request = new RestRequest($"lookup.php?i={drink}");
         var response = client.ExecuteAsync(request);
 
-        if (response.Result.StatusCode == HttpStatusCode.OK) {
+        if (response.Result.IsSuccessStatusCode) {
             string rawResponse = response.Result.Content;
             var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse);
 
