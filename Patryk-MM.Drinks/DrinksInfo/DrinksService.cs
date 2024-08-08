@@ -15,7 +15,7 @@ public class DrinksService {
 
         List<Category> categories = new List<Category>();
 
-        if (response.Result.StatusCode == System.Net.HttpStatusCode.OK) {
+        if (response.Result.IsSuccessStatusCode) {
             string rawResponse = response.Result.Content;
             var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
 

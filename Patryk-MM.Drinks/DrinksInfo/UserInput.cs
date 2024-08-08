@@ -11,11 +11,11 @@ public class UserInput
 
         string category = Console.ReadLine();
 
-        while (!Validator.IsStringValid(category))
-        {
-            Console.WriteLine("\nInvalid category");
-            Console.ReadLine();
+        while (!Validator.IsStringValid(category)) {
+            Console.WriteLine("\nInvalid category, please enter a valid category:");
+            category = Console.ReadLine();
         }
+
 
         if (!categories.Any(x => x.StrCategory == category))
         {
@@ -34,13 +34,19 @@ public class UserInput
 
         string drink = Console.ReadLine();
 
-        if (drink == "0") GetCategoriesInput();
-
-        while (!Validator.IsIdValid(drink))
-        {
-            Console.WriteLine("Invalid Id");
-            Console.ReadLine();
+        if (drink == "0") {
+            GetCategoriesInput();
         }
+
+        while (!Validator.IsIdValid(drink)) {
+            Console.WriteLine("Invalid Id, please enter a valid ID:");
+            drink = Console.ReadLine();
+
+            if (drink == "0") {
+                GetCategoriesInput();
+            }
+        }
+
 
         if (!drinks.Any(x => x.IdDrink == drink))
         {
