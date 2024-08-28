@@ -1,2 +1,17 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Drinks.tonyissa.UI;
+
+bool outBool = true;
+
+while (outBool)
+{
+    try
+    {
+        UserInterface.PrintMainMenu();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.ToString());
+        Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey();
+    }
+}
