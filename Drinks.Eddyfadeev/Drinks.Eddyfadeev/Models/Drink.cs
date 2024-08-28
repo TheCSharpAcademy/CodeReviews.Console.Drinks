@@ -1,8 +1,8 @@
-﻿using Drinks.Interfaces.Model;
-using Drinks.Mappers;
+﻿using Drinks.Eddyfadeev.Interfaces.Model;
+using Drinks.Eddyfadeev.Mappers;
 using Newtonsoft.Json;
 
-namespace Drinks.Models;
+namespace Drinks.Eddyfadeev.Models;
 
 [JsonConverter(typeof(DrinkMapper))]
 internal class Drink : IDrink

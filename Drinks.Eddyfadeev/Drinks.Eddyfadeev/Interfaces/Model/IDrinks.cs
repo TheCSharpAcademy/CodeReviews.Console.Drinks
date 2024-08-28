@@ -1,6 +1,6 @@
-﻿using Drinks.Models;
+﻿using Drinks.Eddyfadeev.Models;
 
-namespace Drinks.Interfaces.Model;
+namespace Drinks.Eddyfadeev.Interfaces.Model;
 
 /// <summary>
 /// Represents an interface for a collection of drinks.

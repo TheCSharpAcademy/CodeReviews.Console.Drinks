@@ -1,4 +1,4 @@
-﻿namespace Drinks.Interfaces.HttpManager;
+﻿namespace Drinks.Eddyfadeev.Interfaces.HttpManager;
 
 /// <summary>
 /// Represents an interface for making HTTP requests and getting responses.

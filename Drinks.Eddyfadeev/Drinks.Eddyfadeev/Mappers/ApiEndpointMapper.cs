@@ -1,10 +1,10 @@
-﻿using Drinks.Enums;
-using Drinks.Interfaces.Mappers;
-using Drinks.Models;
-using Drinks.View;
+﻿using Drinks.Eddyfadeev.Enums;
+using Drinks.Eddyfadeev.Interfaces.Mappers;
+using Drinks.Eddyfadeev.Models;
+using Drinks.Eddyfadeev.View;
 using Microsoft.Extensions.Options;
 
-namespace Drinks.Mappers;
+namespace Drinks.Eddyfadeev.Mappers;
 
 /// <summary>
 /// Represents a mapper that provides methods to map API endpoints to their relative paths.

@@ -1,4 +1,4 @@
-﻿namespace Drinks.Interfaces.Model;
+﻿namespace Drinks.Eddyfadeev.Interfaces.Model;
 
 /// <summary>
 /// Represents an interface for a drink.

@@ -1,6 +1,6 @@
 ﻿using Spectre.Console;
 
-namespace Drinks.Services;
+namespace Drinks.Eddyfadeev.Services;
 
 /// <summary>
 /// The UserChoiceService class provides methods for retrieving user input from the console.

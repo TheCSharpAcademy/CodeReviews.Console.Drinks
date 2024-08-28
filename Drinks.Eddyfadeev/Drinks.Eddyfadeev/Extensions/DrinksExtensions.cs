@@ -1,6 +1,6 @@
-﻿using Drinks.Models;
+﻿using Drinks.Eddyfadeev.Models;
 
-namespace Drinks.Extensions;
+namespace Drinks.Eddyfadeev.Extensions;
 
 /// <summary>
 /// Provides extension methods for the Drinks class.

@@ -1,10 +1,10 @@
 ﻿using System.Net.Http.Headers;
-using Drinks.Interfaces.HttpManager;
-using Drinks.Interfaces.Resolvers;
-using Drinks.Models;
-using Drinks.Extensions;
+using Drinks.Eddyfadeev.Extensions;
+using Drinks.Eddyfadeev.Interfaces.HttpManager;
+using Drinks.Eddyfadeev.Interfaces.Resolvers;
+using Drinks.Eddyfadeev.Models;
 
-namespace Drinks.HttpManager;
+namespace Drinks.Eddyfadeev.HttpManager;
 
 /// <summary>
 /// The HttpManager class is responsible for making HTTP requests and getting responses.

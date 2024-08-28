@@ -1,8 +1,8 @@
-﻿using Drinks.Enums;
-using Drinks.Interfaces.Handlers;
-using Drinks.Interfaces.View;
+﻿using Drinks.Eddyfadeev.Enums;
+using Drinks.Eddyfadeev.Interfaces.Handlers;
+using Drinks.Eddyfadeev.Interfaces.View;
 
-namespace Drinks.View.Commands.MainMenuCommands;
+namespace Drinks.Eddyfadeev.View.Commands.MainMenuCommands;
 
 internal class OpenSearchCommand : ICommand
 {

@@ -1,7 +1,7 @@
-﻿using Drinks.View;
+﻿using Drinks.Eddyfadeev.View;
 using Spectre.Console;
 
-namespace Drinks.Handlers;
+namespace Drinks.Eddyfadeev.Handlers;
 
 /// <summary>
 /// Class containing a method to handle dynamic entries retrieved from the API call.

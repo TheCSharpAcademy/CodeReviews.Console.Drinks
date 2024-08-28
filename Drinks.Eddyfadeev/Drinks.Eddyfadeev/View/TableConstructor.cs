@@ -1,8 +1,8 @@
-﻿using Drinks.Interfaces.View;
-using Drinks.Models;
+﻿using Drinks.Eddyfadeev.Interfaces.View;
+using Drinks.Eddyfadeev.Models;
 using Spectre.Console;
 
-namespace Drinks.View;
+namespace Drinks.Eddyfadeev.View;
 
 /// <summary>
 /// Represents a class for constructing tables to display information about drinks.

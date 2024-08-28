@@ -1,10 +1,10 @@
-﻿using Drinks.Interfaces.Handlers;
-using Drinks.Interfaces.View;
-using Drinks.Interfaces.View.Factory;
-using Drinks.Extensions;
+﻿using Drinks.Eddyfadeev.Extensions;
+using Drinks.Eddyfadeev.Interfaces.Handlers;
+using Drinks.Eddyfadeev.Interfaces.View;
+using Drinks.Eddyfadeev.Interfaces.View.Factory;
 using Spectre.Console;
 
-namespace Drinks.Handlers;
+namespace Drinks.Eddyfadeev.Handlers;
 
 /// <summary>
 /// Represents a handler for menu entries.

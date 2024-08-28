@@ -1,21 +1,21 @@
-﻿using Drinks.Enums;
-using Drinks.Handlers;
-using Drinks.Interfaces.Handlers;
-using Drinks.Interfaces.HttpManager;
-using Drinks.Interfaces.Mappers;
-using Drinks.Interfaces.Resolvers;
-using Drinks.Interfaces.View;
-using Drinks.Interfaces.View.Factory;
-using Drinks.Mappers;
-using Drinks.Models;
-using Drinks.Resolvers;
-using Drinks.View;
-using Drinks.View.Factory;
-using Drinks.View.Factory.Initializers;
+﻿using Drinks.Eddyfadeev.Enums;
+using Drinks.Eddyfadeev.Handlers;
+using Drinks.Eddyfadeev.Interfaces.Handlers;
+using Drinks.Eddyfadeev.Interfaces.HttpManager;
+using Drinks.Eddyfadeev.Interfaces.Mappers;
+using Drinks.Eddyfadeev.Interfaces.Resolvers;
+using Drinks.Eddyfadeev.Interfaces.View;
+using Drinks.Eddyfadeev.Interfaces.View.Factory;
+using Drinks.Eddyfadeev.Mappers;
+using Drinks.Eddyfadeev.Models;
+using Drinks.Eddyfadeev.Resolvers;
+using Drinks.Eddyfadeev.View;
+using Drinks.Eddyfadeev.View.Factory;
+using Drinks.Eddyfadeev.View.Factory.Initializers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Drinks.Services;
+namespace Drinks.Eddyfadeev.Services;
 
 internal static class ServicesConfigurator
 {

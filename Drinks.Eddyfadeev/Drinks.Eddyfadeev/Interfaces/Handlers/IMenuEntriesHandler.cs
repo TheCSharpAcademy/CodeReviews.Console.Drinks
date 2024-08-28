@@ -1,4 +1,4 @@
-﻿namespace Drinks.Interfaces.Handlers;
+﻿namespace Drinks.Eddyfadeev.Interfaces.Handlers;
 
 /// <summary>
 /// Represents an interface for handling menu entries.

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Drinks.Extensions;
+namespace Drinks.Eddyfadeev.Extensions;
 
 /// <summary>
 /// Contains a string extension method to convert a JSON string to a Drinks object.

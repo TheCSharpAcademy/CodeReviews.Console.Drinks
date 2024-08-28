@@ -1,7 +1,7 @@
-﻿using Drinks.Interfaces.View;
-using Drinks.Interfaces.View.Factory;
+﻿using Drinks.Eddyfadeev.Interfaces.View;
+using Drinks.Eddyfadeev.Interfaces.View.Factory;
 
-namespace Drinks.View.Factory;
+namespace Drinks.Eddyfadeev.View.Factory;
 
 /// <inheritdoc cref="IMenuCommandFactory{TMenu}"/>
 internal class MenuCommandFactory<TMenu> : IMenuCommandFactory<TMenu> where TMenu : Enum

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Drinks.Enums;
+namespace Drinks.Eddyfadeev.Enums;
 
 /// <summary>
 /// Filter menu entries for the user to choose from.

@@ -1,7 +1,7 @@
-﻿using Drinks.View;
+﻿using Drinks.Eddyfadeev.View;
 using Spectre.Console;
 
-namespace Drinks.Services;
+namespace Drinks.Eddyfadeev.Services;
 
 public static class HelpService
 {

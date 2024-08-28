@@ -1,11 +1,11 @@
-﻿using Drinks.Enums;
-using Drinks.Interfaces.HttpManager;
-using Drinks.Interfaces.View;
-using Drinks.Models;
-using Drinks.Services;
+﻿using Drinks.Eddyfadeev.Enums;
+using Drinks.Eddyfadeev.Interfaces.HttpManager;
+using Drinks.Eddyfadeev.Interfaces.View;
+using Drinks.Eddyfadeev.Models;
+using Drinks.Eddyfadeev.Services;
 using Spectre.Console;
 
-namespace Drinks.View.Commands;
+namespace Drinks.Eddyfadeev.View.Commands;
 
 internal abstract class BaseCommand<T> : ICommand
 {
@@ -23,9 +23,9 @@ internal abstract class BaseCommand<T> : ICommand
     
     public abstract void Execute();
     
-    private protected abstract Models.Drinks FetchQuery(T input);
+    private protected abstract Eddyfadeev.Models.Drinks FetchQuery(T input);
     
-    private protected abstract string[] FetchPropertyArray(Models.Drinks drinks);
+    private protected abstract string[] FetchPropertyArray(Eddyfadeev.Models.Drinks drinks);
     
     private protected Drink FetchDrink(string drinkName) =>
         HttpManager

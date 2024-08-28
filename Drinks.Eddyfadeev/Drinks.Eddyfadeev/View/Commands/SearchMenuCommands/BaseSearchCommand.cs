@@ -1,10 +1,10 @@
-﻿using Drinks.Handlers;
-using Drinks.Interfaces.HttpManager;
-using Drinks.Interfaces.View;
-using Drinks.Extensions;
+﻿using Drinks.Eddyfadeev.Extensions;
+using Drinks.Eddyfadeev.Handlers;
+using Drinks.Eddyfadeev.Interfaces.HttpManager;
+using Drinks.Eddyfadeev.Interfaces.View;
 using Spectre.Console;
 
-namespace Drinks.View.Commands.SearchMenuCommands;
+namespace Drinks.Eddyfadeev.View.Commands.SearchMenuCommands;
 
 internal abstract class BaseSearchCommand : BaseCommand<string>
 {
@@ -43,6 +43,6 @@ internal abstract class BaseSearchCommand : BaseCommand<string>
     
     private protected abstract string GetUserInput(); 
     
-    private protected override string[] FetchPropertyArray(Models.Drinks drinks) =>
+    private protected override string[] FetchPropertyArray(Eddyfadeev.Models.Drinks drinks) =>
         drinks.GetPropertyArray(d => d.DrinkName);
 }

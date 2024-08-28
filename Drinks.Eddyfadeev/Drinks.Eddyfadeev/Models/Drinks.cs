@@ -1,7 +1,7 @@
-﻿using Drinks.Interfaces.Model;
+﻿using Drinks.Eddyfadeev.Interfaces.Model;
 using Newtonsoft.Json;
 
-namespace Drinks.Models;
+namespace Drinks.Eddyfadeev.Models;
 
 internal class Drinks: IDrinks
 {

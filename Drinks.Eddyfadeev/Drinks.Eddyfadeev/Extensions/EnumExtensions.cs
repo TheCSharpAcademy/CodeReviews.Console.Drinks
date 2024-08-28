@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Reflection;
 
-namespace Drinks.Extensions;
+namespace Drinks.Eddyfadeev.Extensions;
 
 internal static class EnumExtensions
 {

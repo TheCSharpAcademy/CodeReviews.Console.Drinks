@@ -1,10 +1,10 @@
-﻿using Drinks.Enums;
-using Drinks.Interfaces.HttpManager;
-using Drinks.Interfaces.View;
-using Drinks.Services;
+﻿using Drinks.Eddyfadeev.Enums;
+using Drinks.Eddyfadeev.Interfaces.HttpManager;
+using Drinks.Eddyfadeev.Interfaces.View;
+using Drinks.Eddyfadeev.Services;
 using Spectre.Console;
 
-namespace Drinks.View.Commands.MainMenuCommands;
+namespace Drinks.Eddyfadeev.View.Commands.MainMenuCommands;
 
 internal sealed class GetRandomDrinkCommand : ICommand
 {

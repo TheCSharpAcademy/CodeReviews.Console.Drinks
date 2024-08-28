@@ -1,4 +1,4 @@
-﻿namespace Drinks.Enums;
+﻿namespace Drinks.Eddyfadeev.Enums;
 
 /// <summary>
 /// The <see cref="ApiEndpoints"/> class defines constants for various API endpoints used in the application.

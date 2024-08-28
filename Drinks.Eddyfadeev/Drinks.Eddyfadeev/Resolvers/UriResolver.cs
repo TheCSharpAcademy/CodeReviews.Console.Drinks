@@ -1,10 +1,10 @@
-﻿using Drinks.Interfaces.Mappers;
-using Drinks.Interfaces.Resolvers;
-using Drinks.Models;
-using Drinks.View;
+﻿using Drinks.Eddyfadeev.Interfaces.Mappers;
+using Drinks.Eddyfadeev.Interfaces.Resolvers;
+using Drinks.Eddyfadeev.Models;
+using Drinks.Eddyfadeev.View;
 using Microsoft.Extensions.Options;
 
-namespace Drinks.Resolvers;
+namespace Drinks.Eddyfadeev.Resolvers;
 
 /// <summary>
 /// The UriResolver class is responsible for resolving URIs for API endpoints.

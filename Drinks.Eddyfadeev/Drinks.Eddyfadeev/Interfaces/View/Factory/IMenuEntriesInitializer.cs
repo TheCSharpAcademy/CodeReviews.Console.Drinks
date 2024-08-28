@@ -1,4 +1,4 @@
-﻿namespace Drinks.Interfaces.View.Factory;
+﻿namespace Drinks.Eddyfadeev.Interfaces.View.Factory;
 
 /// <summary>
 /// Represents an interface for initializing menu entries for a specific menu type.

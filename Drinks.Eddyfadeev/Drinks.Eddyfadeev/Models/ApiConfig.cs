@@ -1,4 +1,4 @@
-﻿namespace Drinks.Models;
+﻿namespace Drinks.Eddyfadeev.Models;
 
 internal class ApiConfig
 {

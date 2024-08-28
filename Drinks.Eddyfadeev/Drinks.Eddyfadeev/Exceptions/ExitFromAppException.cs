@@ -1,6 +1,6 @@
-﻿using Drinks.View;
+﻿using Drinks.Eddyfadeev.View;
 
-namespace Drinks.Exceptions;
+namespace Drinks.Eddyfadeev.Exceptions;
 
 /// <summary>
 /// The class is used to throw an exception when the application is exiting.

@@ -1,4 +1,4 @@
-﻿namespace Drinks.Interfaces.View.Factory;
+﻿namespace Drinks.Eddyfadeev.Interfaces.View.Factory;
 
 /// <summary>
 /// Represents a factory for creating menu commands.

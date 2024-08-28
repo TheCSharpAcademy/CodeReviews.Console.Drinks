@@ -1,9 +1,9 @@
-﻿using Drinks.Enums;
-using Drinks.Interfaces.HttpManager;
-using Drinks.Interfaces.View;
-using Drinks.Extensions;
+﻿using Drinks.Eddyfadeev.Enums;
+using Drinks.Eddyfadeev.Extensions;
+using Drinks.Eddyfadeev.Interfaces.HttpManager;
+using Drinks.Eddyfadeev.Interfaces.View;
 
-namespace Drinks.View.Commands.FilterMenuCommands;
+namespace Drinks.Eddyfadeev.View.Commands.FilterMenuCommands;
 
 internal class FilterByAlcoNonAlcoCommand : BaseFilterCommand
 {
@@ -11,12 +11,12 @@ internal class FilterByAlcoNonAlcoCommand : BaseFilterCommand
     {
     }
 
-    private protected override Models.Drinks FetchQuery(string input) => 
+    private protected override Eddyfadeev.Models.Drinks FetchQuery(string input) => 
         HttpManager.GetResponse(ApiEndpoints.Filter.ByAlcoholic, input);
 
-    private protected override string[] FetchPropertyArray(Models.Drinks drinks) =>
+    private protected override string[] FetchPropertyArray(Eddyfadeev.Models.Drinks drinks) =>
         drinks.GetPropertyArray(cat => cat.IsAlcoholic);
 
-    private protected override Models.Drinks GetListOfFilters() =>
+    private protected override Eddyfadeev.Models.Drinks GetListOfFilters() =>
         HttpManager.GetResponse(ApiEndpoints.Lists.AlcoholicOptions);
 }

@@ -1,8 +1,8 @@
-﻿using Drinks.Models;
+﻿using Drinks.Eddyfadeev.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Drinks.Mappers;
+namespace Drinks.Eddyfadeev.Mappers;
 
 /// <summary>
 /// The DrinkMapper class is responsible for converting JSON objects to instances of the Drink class and vice versa.

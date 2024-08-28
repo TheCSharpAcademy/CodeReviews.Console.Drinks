@@ -1,9 +1,9 @@
-﻿using Drinks.Handlers;
-using Drinks.Interfaces.HttpManager;
-using Drinks.Interfaces.View;
-using Drinks.Extensions;
+﻿using Drinks.Eddyfadeev.Extensions;
+using Drinks.Eddyfadeev.Handlers;
+using Drinks.Eddyfadeev.Interfaces.HttpManager;
+using Drinks.Eddyfadeev.Interfaces.View;
 
-namespace Drinks.View.Commands.FilterMenuCommands;
+namespace Drinks.Eddyfadeev.View.Commands.FilterMenuCommands;
 
 internal abstract class BaseFilterCommand : BaseCommand<string>
 {
@@ -31,9 +31,9 @@ internal abstract class BaseFilterCommand : BaseCommand<string>
         DisplayDrinkDetail(drink);
     }
     
-    private protected abstract Models.Drinks GetListOfFilters();
+    private protected abstract Eddyfadeev.Models.Drinks GetListOfFilters();
     
-    private static string? GetUserDrinkChoice(Models.Drinks drinks)
+    private static string? GetUserDrinkChoice(Eddyfadeev.Models.Drinks drinks)
     {
         var drinkNames = drinks.GetPropertyArray(d => d.DrinkName);
         

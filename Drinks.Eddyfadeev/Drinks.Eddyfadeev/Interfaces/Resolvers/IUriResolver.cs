@@ -1,4 +1,4 @@
-﻿namespace Drinks.Interfaces.Resolvers;
+﻿namespace Drinks.Eddyfadeev.Interfaces.Resolvers;
 
 /// <summary>
 /// Provides the interface for resolving URI for API endpoints.

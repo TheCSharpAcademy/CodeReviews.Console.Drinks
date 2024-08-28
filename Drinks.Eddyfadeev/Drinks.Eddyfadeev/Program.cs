@@ -1,11 +1,11 @@
-﻿using Drinks.Enums;
-using Drinks.Exceptions;
-using Drinks.Interfaces.Handlers;
-using Drinks.Services;
+﻿using Drinks.Eddyfadeev.Enums;
+using Drinks.Eddyfadeev.Exceptions;
+using Drinks.Eddyfadeev.Interfaces.Handlers;
+using Drinks.Eddyfadeev.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console;
 
-namespace Drinks;
+namespace Drinks.Eddyfadeev;
 
 internal static class Program
 {

@@ -1,12 +1,12 @@
-﻿using Drinks.Enums;
-using Drinks.Exceptions;
-using Drinks.Interfaces.Handlers;
-using Drinks.Interfaces.HttpManager;
-using Drinks.Interfaces.View;
-using Drinks.Interfaces.View.Factory;
-using Drinks.View.Commands.MainMenuCommands;
+﻿using Drinks.Eddyfadeev.Enums;
+using Drinks.Eddyfadeev.Exceptions;
+using Drinks.Eddyfadeev.Interfaces.Handlers;
+using Drinks.Eddyfadeev.Interfaces.HttpManager;
+using Drinks.Eddyfadeev.Interfaces.View;
+using Drinks.Eddyfadeev.Interfaces.View.Factory;
+using Drinks.Eddyfadeev.View.Commands.MainMenuCommands;
 
-namespace Drinks.View.Factory.Initializers;
+namespace Drinks.Eddyfadeev.View.Factory.Initializers;
 
 internal class MainMenuEntriesInitializer : IMenuEntriesInitializer<MainMenuEntries> 
 {

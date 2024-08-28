@@ -1,8 +1,8 @@
-﻿using Drinks.Extensions;
-using Drinks.Interfaces.View;
+﻿using Drinks.Eddyfadeev.Extensions;
+using Drinks.Eddyfadeev.Interfaces.View;
 using Spectre.Console;
 
-namespace Drinks.View;
+namespace Drinks.Eddyfadeev.View;
 
 /// <summary>
 /// Represents a class for retrieving menu entries for a specific menu type.

@@ -1,4 +1,4 @@
-﻿namespace Drinks.View;
+﻿namespace Drinks.Eddyfadeev.View;
 
 internal static class Messages
 {
