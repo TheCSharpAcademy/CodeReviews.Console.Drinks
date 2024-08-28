@@ -11,7 +11,7 @@ internal class FilterByAlcoNonAlcoCommand : BaseFilterCommand
     {
     }
 
-    private protected override Eddyfadeev.Models.Drinks FetchQuery(string input) => 
+    private protected override Models.Drinks FetchQuery(string input) => 
         HttpManager.GetResponse(ApiEndpoints.Filter.ByAlcoholic, input);
 
     private protected override string[] FetchPropertyArray(Eddyfadeev.Models.Drinks drinks) =>

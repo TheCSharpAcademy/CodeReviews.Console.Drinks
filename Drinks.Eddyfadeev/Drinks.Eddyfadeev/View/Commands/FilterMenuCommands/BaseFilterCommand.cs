@@ -1,5 +1,4 @@
-﻿using Drinks.Eddyfadeev.Extensions;
-using Drinks.Eddyfadeev.Handlers;
+﻿using Drinks.Eddyfadeev.Handlers;
 using Drinks.Eddyfadeev.Interfaces.HttpManager;
 using Drinks.Eddyfadeev.Interfaces.View;
 
@@ -31,26 +30,9 @@ internal abstract class BaseFilterCommand : BaseCommand<string>
         DisplayDrinkDetail(drink);
     }
     
-    private protected abstract Eddyfadeev.Models.Drinks GetListOfFilters();
+    private protected abstract Models.Drinks GetListOfFilters();
     
-    private static string? GetUserDrinkChoice(Eddyfadeev.Models.Drinks drinks)
-    {
-        var drinkNames = drinks.GetPropertyArray(d => d.DrinkName);
-        
-        return GetUserChoice(drinkNames, Messages.NoDrinksFound);
-    }
-    
-    private static string? GetUserChoice(string[] options, string emptyMessage)
-    {
-        if (options.Length == 0)
-        {
-            HandleNoResults(emptyMessage);
-            return null;
-        }
-
-        var userChoice = DynamicEntriesHandler.HandleDynamicEntries(options);
-        return IsBackOption(userChoice) ? null : userChoice;
-    }
+    private protected abstract string[] FetchPropertyArray(Models.Drinks drinks);
     
     private string? GetUserFilterChoice()
     {

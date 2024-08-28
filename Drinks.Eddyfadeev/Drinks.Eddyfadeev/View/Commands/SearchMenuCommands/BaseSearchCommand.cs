@@ -1,13 +1,13 @@
-﻿using Drinks.Eddyfadeev.Extensions;
-using Drinks.Eddyfadeev.Handlers;
-using Drinks.Eddyfadeev.Interfaces.HttpManager;
+﻿using Drinks.Eddyfadeev.Interfaces.HttpManager;
 using Drinks.Eddyfadeev.Interfaces.View;
-using Spectre.Console;
+using Drinks.Eddyfadeev.Services;
 
 namespace Drinks.Eddyfadeev.View.Commands.SearchMenuCommands;
 
 internal abstract class BaseSearchCommand : BaseCommand<string>
 {
+    private protected abstract string UserPrompt { get; }
+    
     protected BaseSearchCommand(IHttpManger httpManager, ITableConstructor tableConstructor) : base(httpManager, tableConstructor)
     {
     }
@@ -18,18 +18,9 @@ internal abstract class BaseSearchCommand : BaseCommand<string>
         {
             var userInput = GetUserInput();
             var drinks = FetchQuery(userInput);
-
-            var propertyArray = FetchPropertyArray(drinks);
-
-            if (propertyArray.Length == 0)
-            {
-                AnsiConsole.MarkupLine(Messages.NoDrinksFound);
-                continue;
-            }
-
-            var userChoice = DynamicEntriesHandler.HandleDynamicEntries(propertyArray);
-
-            if (IsBackOption(userChoice))
+            
+            var userChoice = GetUserDrinkChoice(drinks);
+            if (userChoice == null)
             {
                 continue;
             }
@@ -41,8 +32,6 @@ internal abstract class BaseSearchCommand : BaseCommand<string>
         }
     }
     
-    private protected abstract string GetUserInput(); 
-    
-    private protected override string[] FetchPropertyArray(Eddyfadeev.Models.Drinks drinks) =>
-        drinks.GetPropertyArray(d => d.DrinkName);
+    private string GetUserInput() => 
+        UserChoiceService.GetUserInput<string>(UserPrompt);
 }

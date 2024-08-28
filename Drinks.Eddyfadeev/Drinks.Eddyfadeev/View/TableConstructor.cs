@@ -27,6 +27,8 @@ internal sealed class TableConstructor : ITableConstructor
 
         return table;
     }
+    
+    private static Table CreateTable() => new ();
 
     private static void ConfigureMainTable(Table table)
     {
@@ -38,9 +40,7 @@ internal sealed class TableConstructor : ITableConstructor
 
     private static void AddMainTableTitle(Table table, Drink drink) => 
         table.Title(drink.DrinkName);
-
-    private static Table CreateTable() => new ();
-
+    
     private static Table InitializeSubTable(string title, int columns)
     {
         var table = CreateTable();
