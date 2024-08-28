@@ -5,23 +5,63 @@ namespace Drinks.tonyissa.UI;
 
 internal static class UserInterface
 {
-    public static async Task PrintMainMenu()
+    private static int GetInputLoop(int count)
     {
-        Console.Clear();
-        Console.WriteLine("Welcome to my drinks helper!");
-        Console.WriteLine("Please enter a drink category to get started\n");
-        var categories = await WebController.GetCategories();
+        while (true)
+        {
+            var input = Console.ReadLine() ?? "";
 
-        var table = new Table() { Title = new TableTitle("Categories Menu") };
+            if (ValidateInput(input, count))
+            {
+                return int.Parse(input);
+            }
 
-        table.AddColumn("ID");
-        table.AddColumn("Categories");
+            Console.WriteLine("Invalid input, please try again");
+        }
+    }
 
-        for (int i = 0; i < categories.Count; i++) {
-            table.AddRow($"{i + 1}", categories[i].strCategory);
+    private static bool ValidateInput(string input, int count)
+    {
+        if (!int.TryParse(input, out var selection))
+        {
+            return false;
+        }
+        if (selection > count || selection < 0)
+        {
+            return false;
         }
 
-        AnsiConsole.Write(table);
-        Console.ReadKey();
+        return true;
+    }
+
+    public static async Task PrintMainMenu()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("Welcome to my drinks helper!\n");
+            var categories = await WebController.GetCategories();
+
+            var table = new Table() { Title = new TableTitle("Categories Menu") };
+            table.AddColumn("ID");
+            table.AddColumn("Categories");
+
+            for (int i = 0; i < categories.Count; i++)
+            {
+                table.AddRow($"{i + 1}", categories[i].strCategory);
+            }
+
+            AnsiConsole.Write(table);
+            Console.WriteLine("\nPlease enter a drink category to get started, or enter 0 to quit:");
+
+            var selection = GetInputLoop(categories.Count);
+
+            if (selection == 0)
+            {
+                return;
+            }
+
+            Console.ReadKey();
+        }
     }
 }

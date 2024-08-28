@@ -1,18 +1,17 @@
 ﻿using Drinks.tonyissa.UI;
 
-bool outBool = true;
-
-while (outBool)
+await StartLoop();
+async static Task StartLoop()
 {
     try
     {
-        Console.Clear();
         await UserInterface.PrintMainMenu();
     }
     catch (Exception ex)
     {
         Console.WriteLine(ex.ToString());
-        Console.WriteLine("\nPress any key to continue...");
+        Console.WriteLine("\nUnhandled exception. Press any key to continue...");
         Console.ReadKey();
+        await StartLoop();
     }
 }

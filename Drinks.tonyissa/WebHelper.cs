@@ -11,7 +11,6 @@ internal static class WebController
     private static readonly Dictionary<string, string> ApiUrlMap = new()
     {
         { "lookup", "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="},
-        { "random", "https://www.thecocktaildb.com/api/json/v1/1/random.php"},
         { "categories", "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c="},
         { "list-categories", "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list"}
     };
