@@ -6,7 +6,8 @@ while (outBool)
 {
     try
     {
-        UserInterface.PrintMainMenu();
+        Console.Clear();
+        await UserInterface.PrintMainMenu();
     }
     catch (Exception ex)
     {
