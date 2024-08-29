@@ -2,4 +2,4 @@
 
 internal record class Category(string strCategory);
 
-internal record class CategoryResponse(List<Category> drinks);
+internal record class CategoryListResponse(List<Category> drinks);

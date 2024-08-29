@@ -1,7 +1,8 @@
 ﻿using Drinks.tonyissa.UI;
 
 await StartLoop();
-async static Task StartLoop()
+
+static async Task StartLoop()
 {
     try
     {

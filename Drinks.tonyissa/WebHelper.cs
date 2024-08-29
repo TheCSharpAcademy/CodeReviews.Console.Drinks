@@ -11,7 +11,7 @@ internal static class WebController
     private static readonly Dictionary<string, string> ApiUrlMap = new()
     {
         { "lookup", "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="},
-        { "categories", "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c="},
+        { "category", "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c="},
         { "list-categories", "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list"}
     };
 
@@ -35,8 +35,17 @@ internal static class WebController
     {
         var ApiUrl = ApiUrlMap["list-categories"];
         await using var categoriesStream = await FetchRequestAsync(ApiUrl);
-        var categories = await JsonSerializer.DeserializeAsync<CategoryResponse>(categoriesStream);
+        var categories = await JsonSerializer.DeserializeAsync<CategoryListResponse>(categoriesStream);
 
-        return categories?.drinks ?? [];
+        return categories == null ? throw new HttpRequestException("No categories found") : categories.drinks;
+    }
+
+    public static async Task<List<CategoryDrink>> GetSingularCategory(string strCategory)
+    {
+        var ApiUrl = ApiUrlMap["category"];
+        await using var categoryStream = await FetchRequestAsync(ApiUrl + strCategory);
+        var category = await JsonSerializer.DeserializeAsync<CategoryDrinkListResponse>(categoryStream);
+
+        return category == null ? throw new HttpRequestException("Category not found") : category.drinks;
     }
 }
