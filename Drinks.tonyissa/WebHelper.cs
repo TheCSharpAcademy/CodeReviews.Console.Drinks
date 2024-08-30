@@ -10,8 +10,8 @@ internal static class WebController
 
     private static readonly Dictionary<string, string> ApiUrlMap = new()
     {
-        { "lookup", "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="},
-        { "category", "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c="},
+        { "get-drink", "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="},
+        { "get-category", "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c="},
         { "list-categories", "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list"}
     };
 
@@ -42,10 +42,19 @@ internal static class WebController
 
     public static async Task<List<CategoryDrink>> GetSingularCategory(string strCategory)
     {
-        var ApiUrl = ApiUrlMap["category"];
+        var ApiUrl = ApiUrlMap["get-category"];
         await using var categoryStream = await FetchRequestAsync(ApiUrl + strCategory);
         var category = await JsonSerializer.DeserializeAsync<CategoryDrinkListResponse>(categoryStream);
 
         return category == null ? throw new HttpRequestException("Category not found") : category.drinks;
+    }
+
+    public static async Task<DrinkDetail> GetDrinkFromCategoryId(string id)
+    {
+        var ApiUrl = ApiUrlMap["get-drink"];
+        await using var drinkDetailStream = await FetchRequestAsync(ApiUrl + id);
+        var drinkDetail = await JsonSerializer.DeserializeAsync<DrinkDetailResponse>(drinkDetailStream);
+
+        return drinkDetail == null ? throw new HttpRequestException("Drink not found") : drinkDetail.drinks[0];
     }
 }

@@ -44,8 +44,7 @@ internal static class UserInterface
             var categories = await WebController.GetCategories();
 
             var table = new Table() { Title = new TableTitle("Categories Menu") };
-            table.AddColumn("ID");
-            table.AddColumn("Categories");
+            table.AddColumns("ID", "Categories");
 
             for (int i = 0; i < categories.Count; i++)
             {
@@ -71,8 +70,7 @@ internal static class UserInterface
         var category = await WebController.GetSingularCategory(drinkName);
 
         var table = new Table() { Title = new TableTitle("Category drinks") };
-        table.AddColumn("ID");
-        table.AddColumn("Drinks");
+        table.AddColumns("ID", "Drinks");
 
         for (int i = 0; i < category.Count; i++)
         {
@@ -88,6 +86,12 @@ internal static class UserInterface
             return;
         }
 
+        await PrintDrinkInformation(category[selection - 1].idDrink);
+    }
 
+    public static async Task PrintDrinkInformation(string id)
+    {
+        Console.Clear();
+        var drinkInfo = await WebController.GetDrinkFromCategoryId(id);
     }
 }
