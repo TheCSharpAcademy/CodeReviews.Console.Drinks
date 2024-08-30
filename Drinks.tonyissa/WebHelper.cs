@@ -49,12 +49,12 @@ internal static class WebController
         return category == null ? throw new HttpRequestException("Category not found") : category.drinks;
     }
 
-    public static async Task<DrinkDetail> GetDrinkFromCategoryId(string id)
+    public static async Task<DrinkDetailObject> GetDrinkFromId(string id)
     {
         var ApiUrl = ApiUrlMap["get-drink"];
         await using var drinkDetailStream = await FetchRequestAsync(ApiUrl + id);
         var drinkDetail = await JsonSerializer.DeserializeAsync<DrinkDetailResponse>(drinkDetailStream);
 
-        return drinkDetail == null ? throw new HttpRequestException("Drink not found") : drinkDetail.drinks[0];
+        return drinkDetail == null ? throw new HttpRequestException("Drink not found") : new DrinkDetailObject(drinkDetail.drinks[0]);
     }
 }

@@ -55,10 +55,7 @@ internal static class UserInterface
             Console.WriteLine("\nPlease enter a drink category to get started, or enter 0 to quit:");
             var selection = GetInputLoop(categories.Count);
 
-            if (selection == 0)
-            {
-                return;
-            }
+            if (selection == 0) return;
 
             await PrintCategory(categories[selection - 1].strCategory);
         }
@@ -81,10 +78,7 @@ internal static class UserInterface
         Console.WriteLine("\nPlease select a drink, or enter 0 to go back:");
         var selection = GetInputLoop(category.Count);
 
-        if (selection == 0)
-        {
-            return;
-        }
+        if (selection == 0) return;
 
         await PrintDrinkInformation(category[selection - 1].idDrink);
     }
@@ -92,6 +86,24 @@ internal static class UserInterface
     public static async Task PrintDrinkInformation(string id)
     {
         Console.Clear();
-        var drinkInfo = await WebController.GetDrinkFromCategoryId(id);
+        var drinkObject = await WebController.GetDrinkFromId(id);
+
+        var ingredientsTable = new Table() { Caption = new TableTitle(drinkObject.strInstructions) };
+        ingredientsTable.AddColumns("Ingredients");
+
+
+
+        var informationTable = new Table();
+        informationTable.AddColumns("");
+
+
+        var table = new Table() { Title = new TableTitle(drinkObject.strDrink), Caption = new TableTitle(drinkObject.strCategory) };
+        table.AddColumns("How to make", "Information");
+        table.AddRow(ingredientsTable);
+
+
+        AnsiConsole.Write(table);
+        Console.WriteLine("\nPress any key to go back...");
+        Console.ReadKey();
     }
 }
