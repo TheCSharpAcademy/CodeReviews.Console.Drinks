@@ -88,19 +88,29 @@ internal static class UserInterface
         Console.Clear();
         var drinkObject = await WebController.GetDrinkFromId(id);
 
-        var ingredientsTable = new Table() { Caption = new TableTitle(drinkObject.strInstructions) };
+        var ingredientsTable = new Table() 
+        { 
+            Title = new TableTitle(drinkObject.strInstructions ?? ""), 
+            Caption = new TableTitle($"Serve in: {drinkObject.strGlass ?? "unknown"}") 
+        };
         ingredientsTable.AddColumns("Ingredients");
 
-
+        foreach (var item in drinkObject.strIngredients)
+        {
+            ingredientsTable.AddRow(item.Measure + item.Ingredient);
+        }
 
         var informationTable = new Table();
-        informationTable.AddColumns("");
+        informationTable.AddColumns("Tags", "IBA", "Type");
+        informationTable.AddRow(drinkObject.strTags ?? "None", drinkObject.strIBA ?? "unknown", drinkObject.strAlcoholic ?? "Not listed");
 
-
-        var table = new Table() { Title = new TableTitle(drinkObject.strDrink), Caption = new TableTitle(drinkObject.strCategory) };
+        var table = new Table() 
+        { 
+            Title = new TableTitle(drinkObject.strDrink), 
+            Caption = new TableTitle(drinkObject.strCategory) 
+        };
         table.AddColumns("How to make", "Information");
-        table.AddRow(ingredientsTable);
-
+        table.AddRow(ingredientsTable, informationTable);
 
         AnsiConsole.Write(table);
         Console.WriteLine("\nPress any key to go back...");

@@ -9,12 +9,12 @@ public class DrinkIngredientObject(string ingredient, string measure)
 public class DrinkDetailObject
 {
     public string strDrink;
-    public string strTags;
+    public string? strTags;
     public string strCategory;
-    public string strIBA;
-    public string strAlcoholic;
-    public string strGlass;
-    public string strInstructions;
+    public string? strIBA;
+    public string? strAlcoholic;
+    public string? strGlass;
+    public string? strInstructions;
     public List<DrinkIngredientObject> strIngredients = [];
 
     public DrinkDetailObject(DrinkDetail drinkDetail)
