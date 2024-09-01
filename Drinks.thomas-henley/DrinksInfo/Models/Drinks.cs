@@ -5,11 +5,14 @@ namespace DrinksInfo.Models;
 public class Drinks
 {
     [JsonProperty("drinks")]
-    public List<Drink> DrinksList { get; set; }
+    public required List<Drink> DrinksList { get; set; }
 }
 
 public class Drink
 {
-    public string idDrink { get; set; }
-    public string strDrink { get; set; }
+    [JsonProperty("idDrink")]
+    public required string Id { get; set; }
+    
+    [JsonProperty("strDrink")]
+    public required string Name { get; set; }
 }

@@ -3,61 +3,160 @@
 namespace DrinksInfo.Models;
 
 internal class DrinkDetailObject
-    {
-        [JsonProperty("drinks")]
-        public List<DrinkDetail> DrinkDetailList { get; set; }
-    }
+{
+    [JsonProperty("drinks")]
+    public required List<DrinkDetail> DrinkDetailList { get; set; }
+}
 
 internal class DrinkDetail
 {
-    public string strDrink { get; set; }
-    public object strDrinkAlternate { get; set; }
-    public object strTags { get; set; }
-    public object strVideo { get; set; }
-    public string strCategory { get; set; }
-    public object strIBA { get; set; }
-    public string strAlcoholic { get; set; }
-    public string strGlass { get; set; }
-    public string strInstructions { get; set; }
-    public object strInstructionsES { get; set; }
-    public string strInstructionsDE { get; set; }
-    public object strInstructionsFR { get; set; }
-    public string strInstructionsIT { get; set; }
-    public object strInstructionsZHHANS { get; set; }
-    public object strInstructionsZHHANT { get; set; }
-    public string strDrinkThumb { get; set; }
-    public string strIngredient1 { get; set; }
-    public string strIngredient2 { get; set; }
-    public string strIngredient3 { get; set; }
-    public string strIngredient4 { get; set; }
-    public object strIngredient5 { get; set; }
-    public object strIngredient6 { get; set; }
-    public object strIngredient7 { get; set; }
-    public object strIngredient8 { get; set; }
-    public object strIngredient9 { get; set; }
-    public object strIngredient10 { get; set; }
-    public object strIngredient11 { get; set; }
-    public object strIngredient12 { get; set; }
-    public object strIngredient13 { get; set; }
-    public object strIngredient14 { get; set; }
-    public object strIngredient15 { get; set; }
-    public string strMeasure1 { get; set; }
-    public string strMeasure2 { get; set; }
-    public string strMeasure3 { get; set; }
-    public string strMeasure4 { get; set; }
-    public object strMeasure5 { get; set; }
-    public object strMeasure6 { get; set; }
-    public object strMeasure7 { get; set; }
-    public object strMeasure8 { get; set; }
-    public object strMeasure9 { get; set; }
-    public object strMeasure10 { get; set; }
-    public object strMeasure11 { get; set; }
-    public object strMeasure12 { get; set; }
-    public object strMeasure13 { get; set; }
-    public object strMeasure14 { get; set; }
-    public object strMeasure15 { get; set; }
-    public object strImageSource { get; set; }
-    public object strImageAttribution { get; set; }
-    public string strCreativeCommonsConfirmed { get; set; }
-    public string dateModified { get; set; }
+    [JsonProperty("strDrink")]
+    public string? Name { get; set; }
+
+    [JsonProperty("strDrinkAlternate")]
+    public string? AlternateName { get; set; }
+
+    [JsonProperty("strTags")]
+    public string? Tags { get; set; }
+
+    [JsonProperty("strVideo")]
+    public string? Video { get; set; }
+
+    [JsonProperty("strCategory")]
+    public string? Category { get; set; }
+
+    [JsonProperty("strIBA")]
+    public string? Iba { get; set; }
+
+    [JsonProperty("strAlcoholic")]
+    public string? Alcoholic { get; set; }
+
+    [JsonProperty("strGlass")]
+    public string? Glass { get; set; }
+
+    [JsonProperty("strInstructions")]
+    public string? Instructions { get; set; }
+
+    [JsonProperty("strInstructionsES")]
+    public string? InstructionsEs { get; set; }
+
+    [JsonProperty("strInstructionsDE")]
+    public string? InstructionsDe { get; set; }
+
+    [JsonProperty("strInstructionsFR")]
+    public string? InstructionsFr { get; set; }
+
+    [JsonProperty("strInstructionsIT")]
+    public string? InstructionsIt { get; set; }
+
+    [JsonProperty("strInstructionsZHHANS")]
+    public string? InstructionsZhhans { get; set; }
+
+    [JsonProperty("strInstructionsZHHANT")]
+    public string? InstructionsZhhant { get; set; }
+
+    [JsonProperty("strDrinkThumb")]
+    public string? DrinkThumb { get; set; }
+
+    [JsonProperty("strIngredient1")]
+    public string? Ingredient1 { get; set; }
+
+    [JsonProperty("strIngredient2")]
+    public string? Ingredient2 { get; set; }
+
+    [JsonProperty("strIngredient3")]
+    public string? Ingredient3 { get; set; }
+
+    [JsonProperty("strIngredient4")]
+    public string? Ingredient4 { get; set; }
+
+    [JsonProperty("strIngredient5")]
+    public string? Ingredient5 { get; set; }
+
+    [JsonProperty("strIngredient6")]
+    public string? Ingredient6 { get; set; }
+
+    [JsonProperty("strIngredient7")]
+    public string? Ingredient7 { get; set; }
+
+    [JsonProperty("strIngredient8")]
+    public string? Ingredient8 { get; set; }
+
+    [JsonProperty("strIngredient9")]
+    public string? Ingredient9 { get; set; }
+
+    [JsonProperty("strIngredient10")]
+    public string? Ingredient10 { get; set; }
+
+    [JsonProperty("strIngredient11")]
+    public string? Ingredient11 { get; set; }
+
+    [JsonProperty("strIngredient12")]
+    public string? Ingredient12 { get; set; }
+
+    [JsonProperty("strIngredient13")]
+    public string? Ingredient13 { get; set; }
+
+    [JsonProperty("strIngredient14")]
+    public string? Ingredient14 { get; set; }
+
+    [JsonProperty("strIngredient15")]
+    public string? Ingredient15 { get; set; }
+
+    [JsonProperty("strMeasure1")]
+    public string? Measure1 { get; set; }
+
+    [JsonProperty("strMeasure2")]
+    public string? Measure2 { get; set; }
+
+    [JsonProperty("strMeasure3")]
+    public string? Measure3 { get; set; }
+
+    [JsonProperty("strMeasure4")]
+    public string? Measure4 { get; set; }
+
+    [JsonProperty("strMeasure5")]
+    public string? Measure5 { get; set; }
+
+    [JsonProperty("strMeasure6")]
+    public string? Measure6 { get; set; }
+
+    [JsonProperty("strMeasure7")]
+    public string? Measure7 { get; set; }
+
+    [JsonProperty("strMeasure8")]
+    public string? Measure8 { get; set; }
+
+    [JsonProperty("strMeasure9")]
+    public string? Measure9 { get; set; }
+
+    [JsonProperty("strMeasure10")]
+    public string? Measure10 { get; set; }
+
+    [JsonProperty("strMeasure11")]
+    public string? Measure11 { get; set; }
+
+    [JsonProperty("strMeasure12")]
+    public string? Measure12 { get; set; }
+
+    [JsonProperty("strMeasure13")]
+    public string? Measure13 { get; set; }
+
+    [JsonProperty("strMeasure14")]
+    public string? Measure14 { get; set; }
+
+    [JsonProperty("strMeasure15")]
+    public string? Measure15 { get; set; }
+
+    [JsonProperty("strImageSource")]
+    public string? ImageSource { get; set; }
+
+    [JsonProperty("strImageAttribution")]
+    public string? ImageAttribution { get; set; }
+
+    [JsonProperty("strCreativeCommonsConfirmed")]
+    public string? CreativeCommonsConfirmed { get; set; }
+
+    [JsonProperty("dateModified")]
+    public string? DateModified { get; set; }
 }

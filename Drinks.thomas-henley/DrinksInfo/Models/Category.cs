@@ -4,10 +4,11 @@ namespace DrinksInfo.Models;
 
 public class Category
 {
-    public string strCategory { get; set; }
+    [JsonProperty("strCategory")]
+    public required string Name { get; set; }
 }
 
 public class Categories
 {
-    [JsonProperty("drinks")] public List<Category> CategoriesList { get; set; }
+    [JsonProperty("drinks")] public required List<Category> CategoriesList { get; set; }
 }

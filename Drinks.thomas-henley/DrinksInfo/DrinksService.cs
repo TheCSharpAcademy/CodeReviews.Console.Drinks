@@ -2,6 +2,8 @@
 using Newtonsoft.Json;
 using RestSharp;
 
+namespace DrinksInfo;
+
 public class DrinksService
 {
     public List<Category> GetCategories()
@@ -13,9 +15,9 @@ public class DrinksService
         if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             var rawResponse = response.Result.Content;
-            var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
+            var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse!);
 
-            var returnedList = serialize.CategoriesList;
+            var returnedList = serialize!.CategoriesList;
             return returnedList;
         }
         else
@@ -39,9 +41,9 @@ public class DrinksService
         if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             var rawResponse = response.Result.Content;
-            var serialize = JsonConvert.DeserializeObject<Drinks>(rawResponse);
+            var serialize = JsonConvert.DeserializeObject<Drinks>(rawResponse!);
             
-            List<Drink> returnedList = serialize.DrinksList;
+            List<Drink> returnedList = serialize!.DrinksList;
             return returnedList;
         }
         else

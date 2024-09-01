@@ -1,4 +1,6 @@
-﻿UserInput userInput = new();
+﻿using DrinksInfo;
+
+UserInput userInput = new();
 
 do
 {

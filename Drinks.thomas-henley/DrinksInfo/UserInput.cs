@@ -3,6 +3,8 @@ using DrinksInfo.Models;
 using Newtonsoft.Json;
 using RestSharp;
 
+namespace DrinksInfo;
+
 public class UserInput
 {
     private readonly DrinksService _drinksService = new();
@@ -30,28 +32,22 @@ public class UserInput
         if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
             var rawResponse = response.Result.Content;
-            var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse);
+            var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse ?? string.Empty);
 
-            var returnedList = serialize.DrinkDetailList;
+            var returnedList = serialize!.DrinkDetailList;
 
-            DrinkDetail drinkDetail = returnedList[0];
-            Dictionary<string, object> prepList = new();
-            string formattedName = "";
+            var drinkDetail = returnedList[0];
+            Dictionary<string, object?> prepList = new();
 
             foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
             {
-                if (prop.Name.Contains("str"))
-                {
-                    formattedName = prop.Name.Substring(3);
-                }
-
                 if (!string.IsNullOrEmpty(prop.GetValue(drinkDetail)?.ToString()))
                 {
-                    prepList[formattedName] = prop.GetValue(drinkDetail);
+                    prepList[prop.Name] = prop.GetValue(drinkDetail);
                 }
             }
             
-            TableVisualizationEngine.ShowDrinkDetail(prepList, drinkDetail.strDrink);
+            TableVisualizationEngine.ShowDrinkDetail(prepList, drinkDetail.Name ?? "Missing Name");
         }
         else
         {
