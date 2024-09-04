@@ -25,7 +25,9 @@ public class UserInput
 			if(!categories.Any(x => x.StrCategory == category)) 
 			{
 				System.Console.WriteLine("Category doesn't exist.");
-				continue;
+				System.Console.WriteLine("Press Any Key to Continue...");
+				System.Console.ReadKey();
+                continue;
 			}
 			
 			GetDrinksInput(category);
