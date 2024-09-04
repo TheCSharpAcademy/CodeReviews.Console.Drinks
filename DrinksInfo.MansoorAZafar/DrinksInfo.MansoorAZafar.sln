@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrinksInfoProgram", "DrinksInfoProgram\DrinksInfoProgram.csproj", "{89FBA4E7-4A33-4524-8BA4-A1F1D2CDA8E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrinksInfoLibrary", "DrinksInfoLibrary\DrinksInfoLibrary.csproj", "{3910DA09-6C63-4AF1-AD31-1B2E2C9B2F38}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89FBA4E7-4A33-4524-8BA4-A1F1D2CDA8E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89FBA4E7-4A33-4524-8BA4-A1F1D2CDA8E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89FBA4E7-4A33-4524-8BA4-A1F1D2CDA8E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89FBA4E7-4A33-4524-8BA4-A1F1D2CDA8E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3910DA09-6C63-4AF1-AD31-1B2E2C9B2F38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3910DA09-6C63-4AF1-AD31-1B2E2C9B2F38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3910DA09-6C63-4AF1-AD31-1B2E2C9B2F38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3910DA09-6C63-4AF1-AD31-1B2E2C9B2F38}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
