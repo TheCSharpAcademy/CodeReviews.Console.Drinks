@@ -23,7 +23,7 @@ public class DrinkProperties
     [property: JsonPropertyName("strCategory")]
     public string? Category { get; set; }
     [property: JsonPropertyName("strIBA")]
-    public string? IBA { get; set; }
+    public string? Iba { get; set; }
     [property: JsonPropertyName("strAlcoholic")]
     public string? Alcocholic { get; set; }
     [property: JsonPropertyName("strGlass")]
@@ -39,11 +39,11 @@ public class DrinkProperties
     [property: JsonPropertyName("strInstructionsIT")]
     public string? InstructionsIT { get; set; }
     [property: JsonPropertyName("strInstructionsZHHANS")]
-    public string? InstructionsZHHANS { get; set; }
+    public string? InstructionsZhhans { get; set; }
     [property: JsonPropertyName("strInstructionsZHHANT")]
-    public string? InstructionsZHHANT { get; set; }
+    public string? InstructionsZhhant { get; set; }
     [property: JsonPropertyName("strDrinkThumb")]
-    public string? ImageURL { get; set; }
+    public string? ImageUrl { get; set; }
     [property: JsonPropertyName("strIngredient1")]
     public string? Ingredient1 { get; set; }
     [property: JsonPropertyName("strIngredient2")]
