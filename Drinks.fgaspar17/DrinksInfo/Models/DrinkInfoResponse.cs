@@ -22,12 +22,12 @@ public class DrinkProperties
     public string? Video { get; set; }
     [property: JsonPropertyName("strCategory")]
     public string? Category { get; set; }
-    [property: JsonPropertyName("strIBA")]
-    public string? Iba { get; set; }
     [property: JsonPropertyName("strAlcoholic")]
     public string? Alcocholic { get; set; }
     [property: JsonPropertyName("strGlass")]
     public string? Glass { get; set; }
+    [property: JsonPropertyName("strIBA")]
+    public string? Iba { get; set; }
     [property: JsonPropertyName("strInstructions")]
     public string? Instructions { get; set; }
     [property: JsonPropertyName("strInstructionsES")]
@@ -38,12 +38,10 @@ public class DrinkProperties
     public string? InstructionsFR { get; set; }
     [property: JsonPropertyName("strInstructionsIT")]
     public string? InstructionsIT { get; set; }
-    [property: JsonPropertyName("strInstructionsZHHANS")]
-    public string? InstructionsZhhans { get; set; }
     [property: JsonPropertyName("strInstructionsZHHANT")]
     public string? InstructionsZhhant { get; set; }
-    [property: JsonPropertyName("strDrinkThumb")]
-    public string? ImageUrl { get; set; }
+    [property: JsonPropertyName("strInstructionsZHHANS")]
+    public string? InstructionsZhhans { get; set; }
     [property: JsonPropertyName("strIngredient1")]
     public string? Ingredient1 { get; set; }
     [property: JsonPropertyName("strIngredient2")]
@@ -112,4 +110,6 @@ public class DrinkProperties
     public string? CreativeCommonsConfirmed { get; set; }
     [property: JsonPropertyName("dateModified")]
     public string? DateModified { get; set; }
+    [property: JsonPropertyName("strDrinkThumb")]
+    public string? ImageUrl { get; set; }
 }
