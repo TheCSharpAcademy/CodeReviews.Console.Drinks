@@ -1,5 +1,5 @@
 # Drinks
-A console-based application to get information from drinks.
+A console-based application to get information about drinks.
 
 ## Given Requirements:
 
@@ -29,7 +29,7 @@ Then they'll have the chance to choose a drink and see information about it.
 ## Challenges
 
   - Consuming an API.
-  - Managing HTTP Client to avoid sockets exhaustion.
+  - Managing the HTTP Client to avoid sockets exhaustion.
   - JSON serialization/deserialization.
 
 ## Lessons Learned
@@ -37,13 +37,12 @@ Then they'll have the chance to choose a drink and see information about it.
   - Working with JSON in .NET.
   - Singleton pattern to create one instance.
   - HTTP Client requests.
-  - Async, await and Tasks.
+  - Async, await, and Tasks.
 
 ## Areas to Improve
 
-  - Separating business logic to the services classes; I feel like the view is doing business logic when it shouldn't.
-  - Database design to build scalable applications.
-  - SQL Server queries and administration to improve skills with a popular database.
+  - Working with async.
+  - API knowledge.
 
 ##  Resources used
 
