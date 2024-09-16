@@ -5,6 +5,7 @@ using drinks_info.Models;
 using Drinks_Info.Lawang.Models;
 using Newtonsoft.Json;
 using RestSharp;
+using Spectre.Console;
 
 namespace Drinks_Info.Lawang;
 
@@ -18,7 +19,11 @@ public class DrinkService
 
         try
         {
-            var response = await client.GetAsync(request);
+            var response = await AnsiConsole.Status().StartAsync("[bold]Retrieving Categories From API...[/]", async ctx =>
+            {
+                return await client.GetAsync(request);
+            });
+
             var rawResponse = response.Content;
             if (rawResponse != null)
             {
@@ -48,10 +53,14 @@ public class DrinkService
 
         try
         {
-            var response = client.GetAsync(request);
-            if (response.Result.StatusCode == HttpStatusCode.OK)
+            Console.Clear();
+            var response = AnsiConsole.Status().Start($"Retrieving [green]{category}[/] from API..", ctx =>
             {
-                var rawResponse = response.Result.Content;
+                return client.Get(request);
+            });
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var rawResponse = response.Content;
                 if (rawResponse != null)
                 {
                     var serialize = JsonConvert.DeserializeObject<Drinks>(rawResponse);
@@ -80,7 +89,11 @@ public class DrinkService
 
         try
         {
-            var response = client.Get(request);
+            Console.Clear();
+            var response = AnsiConsole.Status().Start($"[green bold]Retrieving the drink with Id {drink}[/]", ctx =>
+            {
+                return client.Get(request);
+            });
             if (response.StatusCode == HttpStatusCode.OK)
             {
 
@@ -106,10 +119,10 @@ public class DrinkService
                         if (!string.IsNullOrEmpty(prop.GetValue(drinkDetail)?.ToString()))
                         {
                             prepList.Add(new Detail
-                                {
-                                    Key = formattedName,
-                                    Value = prop.GetValue(drinkDetail)
-                                }
+                            {
+                                Key = formattedName,
+                                Value = prop.GetValue(drinkDetail)
+                            }
                             );
                         }
                     }

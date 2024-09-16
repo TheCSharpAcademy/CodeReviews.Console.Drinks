@@ -57,7 +57,7 @@ public class UserInput
     public void GetInputCategory(string category)
     {
         var listOfDrink = drinkService.GetDrinksByCategory(category);
-        AnsiConsole.Markup("[yellow bold]Choose a drink or press '0' to go back to category menu: [/]");
+        AnsiConsole.Markup("[yellow bold]Choose a Drink ID or press '0' to go back to category menu: [/]");
 
         string? input = Console.ReadLine()?.Trim();
         bool exit = false;
