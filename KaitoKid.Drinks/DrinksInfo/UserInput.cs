@@ -65,7 +65,7 @@ namespace DrinksInfo
                 if(drink == "0") GetCategoriesInput();
             }
 
-            if (!drinks.Any(x => x.idDrink == drink))
+            if (!drinks.Any(x => x.IdDrink == drink))
             {
                 Console.WriteLine("Drink doesn't exist. Enter again.");
                 Thread.Sleep(1000);

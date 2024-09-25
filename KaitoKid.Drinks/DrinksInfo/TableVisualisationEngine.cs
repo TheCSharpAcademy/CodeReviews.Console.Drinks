@@ -53,7 +53,7 @@ namespace DrinksInfo
             List<string> categoryList = new();
             foreach(var category in categories)
             {
-                categoryList.Add($"[springgreen2]{category.strCategory}[/]");
+                categoryList.Add($"[springgreen2]{category.StrCategory}[/]");
             }
 
             categoryList.Add("[yellow1]View Favorite Drink[/]");

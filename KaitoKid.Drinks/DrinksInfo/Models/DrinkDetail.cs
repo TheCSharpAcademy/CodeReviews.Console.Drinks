@@ -10,7 +10,7 @@ namespace DrinksInfo.Models
         public string StrTags { get; set; }
         public string StrVideo { get; set; }
         public string StrCategory { get; set; }
-        public string StrIBA { get; set; }
+        public string StrIba { get; set; }
         public string StrAlcoholic { get; set; }
         public string StrGlass { get; set; }
         public string StrInstructions { get; set; }
