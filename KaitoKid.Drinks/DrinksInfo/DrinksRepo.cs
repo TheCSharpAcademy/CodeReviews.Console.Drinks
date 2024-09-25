@@ -1,6 +1,6 @@
-﻿using System.Data.SQLite;
+﻿global using System.Configuration;
+using System.Data.SQLite;
 using Dapper;
-using System.Configuration;
 using Spectre.Console;
 
 namespace DrinksInfo
