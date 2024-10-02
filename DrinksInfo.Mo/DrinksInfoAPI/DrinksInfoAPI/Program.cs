@@ -1,6 +1,6 @@
 ﻿class Program
 {
-    static async Task Main(string[] args)
+    static async Task Main()
     {
         DrinkService drinkService = new DrinkService();
 
