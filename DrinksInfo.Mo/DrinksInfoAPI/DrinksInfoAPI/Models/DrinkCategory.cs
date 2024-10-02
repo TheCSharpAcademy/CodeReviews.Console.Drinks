@@ -1,4 +1,7 @@
-﻿public class DrinkCategory
+﻿using System.Text.Json.Serialization;
+
+public class DrinkCategory
 {
-    public string? strCategory { get; set; }
+    [JsonPropertyName("strCategory")]
+    public string? StrCategory { get; set; }
 }

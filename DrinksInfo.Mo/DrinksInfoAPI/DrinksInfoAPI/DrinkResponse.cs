@@ -1,4 +1,7 @@
-﻿public class DrinkResponse
+﻿using System.Text.Json.Serialization;
+
+public class DrinkResponse
 {
-    public List<Drink> drinks { get; set; }
+    [JsonPropertyName("drinks")]
+    public List<Drink> Drinks { get; set; }
 }

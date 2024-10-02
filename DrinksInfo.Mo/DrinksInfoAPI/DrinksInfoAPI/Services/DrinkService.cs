@@ -14,7 +14,7 @@ public class DrinkService
     {
         var response = await _httpClient.GetStringAsync("https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list");
         var categoryResponse = JsonSerializer.Deserialize<DrinkCategoryResponse>(response);
-        return categoryResponse.drinks;
+        return categoryResponse.Drinks;
     }
 
 
@@ -23,12 +23,12 @@ public class DrinkService
         var response = await _httpClient.GetStringAsync($"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={category}");
         var drinkResponse = JsonSerializer.Deserialize<DrinkResponse>(response);
 
-        if (drinkResponse == null || drinkResponse.drinks == null || drinkResponse.drinks.Count == 0)
+        if (drinkResponse == null || drinkResponse.Drinks == null || drinkResponse.Drinks.Count == 0)
         {
             return null;
         }
 
-        return drinkResponse.drinks;
+        return drinkResponse.Drinks;
     }
 
     public async Task<DrinkDetails> GetDrinkDetailsAsync(string drinkId)
@@ -36,7 +36,7 @@ public class DrinkService
         var response = await _httpClient.GetStringAsync($"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={drinkId}");
         var drinkResponse = JsonSerializer.Deserialize<DrinkResponse>(response);
 
-        var drink = drinkResponse.drinks.FirstOrDefault();
+        var drink = drinkResponse.Drinks.FirstOrDefault();
         if (drink == null)
         {
             return null;
@@ -44,14 +44,14 @@ public class DrinkService
 
        DrinkDetails drinkDetails = new DrinkDetails
         {
-            idDrink = drink.idDrink,
-            strDrink = drink.strDrink,
-            strCategory = drink.strCategory,
-            strInstructions = drink.strInstructions,
-            strDrinkThumb = drink.strDrinkThumb,
-            strIngredient1 = drink.strIngredient1,
-            strIngredient2 = drink.strIngredient2,
-            strIngredient3 = drink.strIngredient3
+            IdDrink = drink.IdDrink,
+            StrDrink = drink.StrDrink,
+            StrCategory = drink.StrCategory,
+            StrInstructions = drink.StrInstructions,
+            StrDrinkThumb = drink.StrDrinkThumb,
+            StrIngredient1 = drink.StrIngredient1,
+            StrIngredient2 = drink.StrIngredient2,
+            StrIngredient3 = drink.StrIngredient3
         };
 
         return drinkDetails;

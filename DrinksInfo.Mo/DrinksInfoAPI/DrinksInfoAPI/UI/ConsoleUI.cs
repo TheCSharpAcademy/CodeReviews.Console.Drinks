@@ -7,7 +7,7 @@
         Console.WriteLine("-----------------------------------");
         for (int i = 0; i < categories.Count; i++)
         {
-            Console.WriteLine($"| {i + 1}. {categories[i].strCategory}                  |");
+            Console.WriteLine($"| {i + 1}. {categories[i].StrCategory}                  |");
         }
         Console.WriteLine("-----------------------------------");
     }
@@ -38,7 +38,7 @@
 
         for (int i = 0; i < drinks.Count; i++)
         {
-            Console.WriteLine($"| {i + 1}. {drinks[i].strDrink}              |");
+            Console.WriteLine($"| {i + 1}. {drinks[i].StrDrink}              |");
         }
 
         Console.WriteLine("-----------------------------------");
@@ -60,50 +60,51 @@
     public static void DisplayDrinkDetails(DrinkDetails drinkDetails)
     {
         Console.WriteLine("-----------------------------------");
-        if (!string.IsNullOrEmpty(drinkDetails.idDrink))
-            Console.WriteLine($"ID: {drinkDetails.idDrink}");
-        if (!string.IsNullOrEmpty(drinkDetails.strDrink))
-            Console.WriteLine($"Name: {drinkDetails.strDrink}");
-        if (!string.IsNullOrEmpty(drinkDetails.strTags))
-            Console.WriteLine($"Tags: {drinkDetails.strTags}");
-        if (!string.IsNullOrEmpty(drinkDetails.strCategory))
-            Console.WriteLine($"Category: {drinkDetails.strCategory}");
-        if (!string.IsNullOrEmpty(drinkDetails.strIBA))
-            Console.WriteLine($"IBA: {drinkDetails.strIBA}");
-        if (!string.IsNullOrEmpty(drinkDetails.strAlcoholic))
-            Console.WriteLine($"Alcohol Content: {drinkDetails.strAlcoholic}");
-        if (!string.IsNullOrEmpty(drinkDetails.strGlass))
-            Console.WriteLine($"Glass Type: {drinkDetails.strGlass}");
-        if (!string.IsNullOrEmpty(drinkDetails.strInstructions))
-            Console.WriteLine($"Instructions: {drinkDetails.strInstructions}");
-        if (!string.IsNullOrEmpty(drinkDetails.strInstructionsDE))
-            Console.WriteLine($"Instructions (DE): {drinkDetails.strInstructionsDE}");
-        if (!string.IsNullOrEmpty(drinkDetails.strInstructionsIT))
-            Console.WriteLine($"Instructions (IT): {drinkDetails.strInstructionsIT}");
-        if (!string.IsNullOrEmpty(drinkDetails.strDrinkThumb))
-            Console.WriteLine($"Thumbnail: {drinkDetails.strDrinkThumb}");
-        if (!string.IsNullOrEmpty(drinkDetails.strIngredient1))
-            Console.WriteLine($"Ingredient 1: {drinkDetails.strIngredient1}");
-        if (!string.IsNullOrEmpty(drinkDetails.strIngredient2))
-            Console.WriteLine($"Ingredient 2: {drinkDetails.strIngredient2}");
-        if (!string.IsNullOrEmpty(drinkDetails.strIngredient3))
-            Console.WriteLine($"Ingredient 3: {drinkDetails.strIngredient3}");
-        if (!string.IsNullOrEmpty(drinkDetails.strIngredient4))
-            Console.WriteLine($"Ingredient 4: {drinkDetails.strIngredient4}");
-        if (!string.IsNullOrEmpty(drinkDetails.strMeasure1))
-            Console.WriteLine($"Measure 1: {drinkDetails.strMeasure1}");
-        if (!string.IsNullOrEmpty(drinkDetails.strMeasure2))
-            Console.WriteLine($"Measure 2: {drinkDetails.strMeasure2}");
-        if (!string.IsNullOrEmpty(drinkDetails.strMeasure3))
-            Console.WriteLine($"Measure 3: {drinkDetails.strMeasure3}");
-        if (!string.IsNullOrEmpty(drinkDetails.strImageSource))
-            Console.WriteLine($"Image Source: {drinkDetails.strImageSource}");
-        if (!string.IsNullOrEmpty(drinkDetails.strImageAttribution))
-            Console.WriteLine($"Image Attribution: {drinkDetails.strImageAttribution}");
-        if (!string.IsNullOrEmpty(drinkDetails.strCreativeCommonsConfirmed))
-            Console.WriteLine($"Creative Commons Confirmed: {drinkDetails.strCreativeCommonsConfirmed}");
-        if (!string.IsNullOrEmpty(drinkDetails.dateModified))
-            Console.WriteLine($"Date Modified: {drinkDetails.dateModified}");
+        if (!string.IsNullOrEmpty(drinkDetails.IdDrink))
+            Console.WriteLine($"ID: {drinkDetails.IdDrink}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrDrink))
+            Console.WriteLine($"Name: {drinkDetails.StrDrink}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrTags))
+            Console.WriteLine($"Tags: {drinkDetails.StrTags}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrCategory))
+            Console.WriteLine($"Category: {drinkDetails.StrCategory}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrIBA))
+            Console.WriteLine($"IBA: {drinkDetails.StrIBA}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrAlcoholic))
+            Console.WriteLine($"Alcohol Content: {drinkDetails.StrAlcoholic}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrGlass))
+            Console.WriteLine($"Glass Type: {drinkDetails.StrGlass}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrInstructions))
+            Console.WriteLine($"Instructions: {drinkDetails.StrInstructions}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrInstructionsDE))
+            Console.WriteLine($"Instructions (DE): {drinkDetails.StrInstructionsDE}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrInstructionsIT))
+            Console.WriteLine($"Instructions (IT): {drinkDetails.StrInstructionsIT}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrDrinkThumb))
+            Console.WriteLine($"Thumbnail: {drinkDetails.StrDrinkThumb}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrIngredient1))
+            Console.WriteLine($"Ingredient 1: {drinkDetails.StrIngredient1}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrIngredient2))
+            Console.WriteLine($"Ingredient 2: {drinkDetails.StrIngredient2}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrIngredient3))
+            Console.WriteLine($"Ingredient 3: {drinkDetails.StrIngredient3}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrIngredient4))
+            Console.WriteLine($"Ingredient 4: {drinkDetails.StrIngredient4}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrMeasure1))
+            Console.WriteLine($"Measure 1: {drinkDetails.StrMeasure1}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrMeasure2))
+            Console.WriteLine($"Measure 2: {drinkDetails.StrMeasure2}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrMeasure3))
+            Console.WriteLine($"Measure 3: {drinkDetails.StrMeasure3}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrImageSource))
+            Console.WriteLine($"Image Source: {drinkDetails.StrImageSource}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrImageAttribution))
+            Console.WriteLine($"Image Attribution: {drinkDetails.StrImageAttribution}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrCreativeCommonsConfirmed))
+            Console.WriteLine($"Creative Commons Confirmed: {drinkDetails.StrCreativeCommonsConfirmed}");
+        if (!string.IsNullOrEmpty(drinkDetails.DateModified))
+            Console.WriteLine($"Date Modified: {drinkDetails.DateModified}");
+
 
         Console.WriteLine("-----------------------------------");
     }
