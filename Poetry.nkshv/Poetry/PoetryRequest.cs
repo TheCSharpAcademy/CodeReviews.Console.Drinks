@@ -12,7 +12,8 @@ class PoetryRequest
 
     public static async Task GetAuthor(string name)
     {
-
+        
+        name = name.Trim();
         string url = BuildUrlAuthor(name);
 
         try
@@ -47,6 +48,7 @@ class PoetryRequest
 
     public static async Task GetTitle(string name)
     {
+        name = name.Trim();
         string url = BuildUrlTitle(name);
         try
         {
@@ -89,6 +91,7 @@ class PoetryRequest
 
     public static async Task GetPoemByExcerpt(string excerpt) //Table + prompt might be too much
     {
+        excerpt = excerpt.Trim();
         string url = $"{baseURL}/lines/{excerpt}";
         try
         {
