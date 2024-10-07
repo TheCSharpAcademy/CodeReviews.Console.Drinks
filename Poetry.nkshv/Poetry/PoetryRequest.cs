@@ -25,9 +25,9 @@ class PoetryRequest
             //Choosing Poem
             var Authorchoice = AnsiConsole.Prompt(
                 new SelectionPrompt<PoemTitle>()
-                    .Title("\n[green]Choose a Poem Title: [/]")
+                    .Title($"\n[green]Choose a Poem Title: [/]")
                     .AddChoices(titles)
-                    .UseConverter(poem => EscapeMarkup(poem.Title))
+                    .UseConverter(poem => EscapeMarkup($"{poem.Title}"))
             );
 
             string title = Authorchoice.Title;
@@ -61,16 +61,42 @@ class PoetryRequest
                 AnsiConsole.MarkupLine("[red]No poems found.[/]");
             }
 
-            var titleChoice = AnsiConsole.Prompt(
-                new SelectionPrompt<Poem>()
-                    .Title("\n[green]Choose a Poem Title:[/]")
-                    .PageSize(10)
-                    .AddChoices(poems)
-                    .UseConverter(p => EscapeMarkup($"{p.Author} - {p.Title} ({p.LineCount} lines.)"))
-            );
+                var goBackPoem = new Poem
+                {
+                    Author = "",
+                    Title = "Go Back To Menu",
+                    LineCount = "0",
+                    Lines = new List<string>()
+                };
 
-            //Displaying selected Poem
-            ReadPoem(titleChoice);
+            while (true)
+            {
+                var titleChoice = AnsiConsole.Prompt(
+                    new SelectionPrompt<Poem>()
+                        .Title($"\n[green]Choose a Poem Title:[/]")
+                        .PageSize(10)
+                        .AddChoices(goBackPoem)
+                        .AddChoices(poems)
+                        .UseConverter(p =>
+                        {
+                            //mock poem
+                            if (p.Title == "Go Back To Menu")
+                            {
+                                return "Go Back To Menu";
+                            }
+                            //actual poem
+                            return EscapeMarkup($"{p.Author} - {p.Title} ({p.LineCount} lines)");
+                        })
+                );
+                
+                if (titleChoice == goBackPoem)
+                {
+                    Console.WriteLine("Going back to menu...");
+                    break;
+                }
+                //Displaying selected Poem
+                ReadPoem(titleChoice);
+            }
         }
         catch
         {
@@ -100,6 +126,7 @@ class PoetryRequest
             List<Poem> poem = JsonConvert.DeserializeObject<List<Poem>>(responseString);
             int poemCount = 0;
 
+            AnsiConsole.MarkupLine("\n[green]Searching... \n[/]");
             var selectedPoems = poem
                .Select(p => new PoemExcerpts
                {
@@ -130,8 +157,7 @@ class PoetryRequest
 
     public static async Task ListAuthors()
     {
-        var allAuthors = new Table();
-        allAuthors.AddColumn("Author");
+        var allAuthors = new List<string>();
 
         string url = $"{baseURL}/author";
         try
@@ -143,9 +169,30 @@ class PoetryRequest
             Console.WriteLine("Listing Authors...\n");
             foreach (var a in authors.Authors)
             {
-                allAuthors.AddRow(a);
+                allAuthors.Add(a);
             }
-            AnsiConsole.Render(allAuthors);
+            //AnsiConsole.Render(allAuthors);
+
+        while (true)
+        {
+            var selectedAuthor = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("\n[green]Choose an Author from the list: [/]")
+                    .PageSize(10)
+                    .MoreChoicesText("[grey](Move up and down to reveal more authors, or type to filter)[/]")
+                    .AddChoices("[green]Go Back To Menu [/]")
+                    .AddChoices(allAuthors)
+            );
+
+            if (selectedAuthor == "[green]Go Back To Menu [/]")
+            {
+                Console.WriteLine("Returning to the main menu...");
+                break;
+            }
+
+            await GetAuthor(selectedAuthor);
+        }
+
         }
         catch
         {
