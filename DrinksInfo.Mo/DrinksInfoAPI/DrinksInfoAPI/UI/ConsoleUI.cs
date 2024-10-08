@@ -68,8 +68,8 @@
             Console.WriteLine($"Tags: {drinkDetails.StrTags}");
         if (!string.IsNullOrEmpty(drinkDetails.StrCategory))
             Console.WriteLine($"Category: {drinkDetails.StrCategory}");
-        if (!string.IsNullOrEmpty(drinkDetails.StrIBA))
-            Console.WriteLine($"IBA: {drinkDetails.StrIBA}");
+        if (!string.IsNullOrEmpty(drinkDetails.StrIba))
+            Console.WriteLine($"IBA: {drinkDetails.StrIba}");
         if (!string.IsNullOrEmpty(drinkDetails.StrAlcoholic))
             Console.WriteLine($"Alcohol Content: {drinkDetails.StrAlcoholic}");
         if (!string.IsNullOrEmpty(drinkDetails.StrGlass))
