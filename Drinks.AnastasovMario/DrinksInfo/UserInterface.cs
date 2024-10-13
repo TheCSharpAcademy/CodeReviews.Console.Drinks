@@ -21,6 +21,7 @@ namespace DrinksInfo
 
     public static void ShowDrinksByCategory(string categoryName, List<Drink> drinks)
     {
+      Console.Clear();
       var table = new Table();
       table.Title(categoryName);
       table.AddColumn("Id");
@@ -36,6 +37,7 @@ namespace DrinksInfo
 
     public static void ShowDrinkInformation(DrinkInfo drink)
     {
+      Console.Clear();
       var table = new Table();
       table.Title(drink.Name);
       table.AddColumn("Id");
