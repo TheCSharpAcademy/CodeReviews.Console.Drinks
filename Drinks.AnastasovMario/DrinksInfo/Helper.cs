@@ -1,4 +1,6 @@
-﻿namespace DrinksInfo
+﻿using Spectre.Console;
+
+namespace DrinksInfo
 {
   public static class Helper
   {
@@ -9,10 +11,10 @@
       Console.Clear();
     }
 
-    public static void ErrorMessage(string errorMessge)
+    public static void HandleException(Exception ex)
     {
-      Console.Clear();
-      Console.WriteLine(errorMessge);
+      AnsiConsole.WriteException(ex);
+      ContinueMessage();
     }
   }
 }

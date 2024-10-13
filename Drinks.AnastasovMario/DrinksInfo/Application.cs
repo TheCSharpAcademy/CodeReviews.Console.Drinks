@@ -11,11 +11,11 @@ namespace DrinksInfo
 
     public Application()
     {
-      _drinksService = new DrinksService();
+      _drinksService = new DrinksService(new HttpClient());
     }
     public async Task GetCategories()
     {
-      await _drinksService.GetCategories();
+      await _drinksService.RunAsync();
     }
   }
 }
