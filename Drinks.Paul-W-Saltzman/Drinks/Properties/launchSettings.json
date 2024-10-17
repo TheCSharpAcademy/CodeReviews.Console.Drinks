@@ -1,8 +1,0 @@
-﻿{
-  "profiles": {
-    "Drinks": {
-      "commandName": "Project",
-      "workingDirectory": "$(ProjectDir)"
-    }
-  }
-}
