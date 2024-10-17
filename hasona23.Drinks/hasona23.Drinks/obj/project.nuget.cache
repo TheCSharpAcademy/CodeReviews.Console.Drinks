@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ZIW4LikiaGU=",
+  "dgSpecHash": "g/ya56joNvA=",
   "success": true,
   "projectFilePath": "D:\\C#\\cli\\hasona23.drinks\\hasona23.Drinks\\hasona23.Drinks\\hasona23.Drinks.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\sona2\\.nuget\\packages\\spectre.console\\0.49.1\\spectre.console.0.49.1.nupkg.sha512"
+  ],
   "logs": []
 }

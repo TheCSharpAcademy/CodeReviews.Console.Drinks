@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("hasona23.Drinks")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e9c07cc01470ce9a7f4d99b5d888afdc5c5512e4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa64748b4a94347a61634addfd2186928c3050d9")]
 [assembly: System.Reflection.AssemblyProductAttribute("hasona23.Drinks")]
 [assembly: System.Reflection.AssemblyTitleAttribute("hasona23.Drinks")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
