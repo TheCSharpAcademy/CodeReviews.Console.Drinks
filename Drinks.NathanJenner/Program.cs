@@ -31,7 +31,7 @@ async Task<List<Drink>> GetDrinksInCategory(HttpClient client, string mainMenuSe
          "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=" + mainMenuSelection);
 
     Root root = JsonSerializer.Deserialize<Root>(json);
-    drinksList = root.drinks;
+    drinksList = root.Drinks;
     return drinksList;
 }
 
@@ -41,7 +41,7 @@ string DisplayListOfDrinks(List<Drink> drinksList)
             new SelectionPrompt<string>()
                 .Title("[green]Please select from the options below: [/]")
                 .PageSize(10)
-                .AddChoices(drinksList.Select(l => l.strDrink.ToString())));
+                .AddChoices(drinksList.Select(l => l.StrDrink.ToString())));
 
     return drinkSelection;
 }
@@ -50,14 +50,14 @@ async Task<List<Drink>> GetSelectedDrinkDetails(List<Drink> drinksList, string d
 {
     foreach (var drink in drinksList)
     {
-        if (drink.strDrink == drinkSelection)
+        if (drink.StrDrink == drinkSelection)
         {
             var client = new HttpClient();
             string drinkDetailsJson = await client.GetStringAsync(
-                "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drink.idDrink);
+                "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drink.IdDrink);
 
             Root root = JsonSerializer.Deserialize<Root>(drinkDetailsJson);
-            List<Drink> drinksDetails = root.drinks;
+            List<Drink> drinksDetails = root.Drinks;
             return drinksDetails;
         }
     }
@@ -77,7 +77,7 @@ void DisplayDetailsOfSelectedDrink(Drink drink)
         var value = property.GetValue(drink)?.ToString();
         if (!string.IsNullOrEmpty(value))
         {
-            if (property.Name.ToString() != "idDrink")
+            if (property.Name != "idDrink")
             {
                 string formattedName = property.Name.Substring(3);
                 table.AddRow(formattedName, value);
