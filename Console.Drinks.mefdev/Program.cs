@@ -30,10 +30,11 @@ class Program
 
     public async static Task ProcessDrinkMenu(ManageDrinks drinks)
     {
-        var categories = await drinks.ProcessCategories();
-        CategoryMenu.DisplayCategories(categories);
-        var categoryName = UserInput.GetCategoryName();
+        var categoryName = await new UserInput(drinks).GetCategoryName();
         var drinkList = await drinks.ProcessDrinksByCategory(categoryName);
         DrinkMenu.DisplayDrinks(drinkList);
+        string drinkId = new UserInput(drinks).GetDrinkId();
+        var dynamicDrinkDetails = await drinks.ProcessDrinksDetailsByDrinkId(drinkId);
+        await DrinkMenu.DisplayDrinkDetails(dynamicDrinkDetails);
     }
 }
