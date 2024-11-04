@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Text.Json;
+using System.Web;
 
 public class DrinkService
 {
@@ -20,7 +21,9 @@ public class DrinkService
 
     public async Task<List<Drink>> GetDrinksByCategoryAsync(string category)
     {
-        var response = await _httpClient.GetStringAsync($"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={category}");
+        string encodedCategory = HttpUtility.UrlEncode(category);
+
+        var response = await _httpClient.GetStringAsync($"https://www.thecocktaildb.com/api/json/v1/1/filter.php?c={encodedCategory}");
         var drinkResponse = JsonSerializer.Deserialize<DrinkResponse>(response);
 
         if (drinkResponse == null || drinkResponse.Drinks == null || drinkResponse.Drinks.Count == 0)

@@ -35,12 +35,24 @@
                 ConsoleUI.DisplayDrinkDetails(drinkDetails);
             }
 
-            Console.WriteLine("\nDo you want to search for another drink? (y/n): ");
-            string input = Console.ReadLine().ToLower();
-            if (input != "y")
+            while (true)
             {
-                Console.WriteLine("Exiting program...");
-                break;
+                Console.WriteLine("\nDo you want to search for another drink? (y/n): ");
+                string input = Console.ReadLine()?.ToLower();
+
+                if (input == "y")
+                {
+                    break;
+                }
+                else if (input == "n")
+                {
+                    Console.WriteLine("Exiting program...");
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter 'y' for yes or 'n' for no.");
+                }
             }
         }
     }
