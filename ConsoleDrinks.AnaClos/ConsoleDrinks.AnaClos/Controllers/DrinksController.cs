@@ -46,7 +46,7 @@ public class DrinksController
 
         foreach (var drink in listDrinks)
         {
-            var record = new TableRecordDto { Column1 = drink.idDrink.ToString(), Column2 = drink.strDrink };
+            var record = new TableRecordDto { Column1 = drink.IdDrink.ToString(), Column2 = drink.StrDrink };
             tableRecord.Add(record);
         }
 

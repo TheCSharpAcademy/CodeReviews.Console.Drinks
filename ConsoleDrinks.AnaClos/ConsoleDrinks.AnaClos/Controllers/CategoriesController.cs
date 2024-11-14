@@ -31,6 +31,6 @@ public class CategoriesController
 
     public List<string> GetCategoriesNames(List<Category> listCategories)
     {
-        return listCategories.Select(x=>x.strCategory).ToList();
+        return listCategories.Select(x=>x.StrCategory).ToList();
     }
 }

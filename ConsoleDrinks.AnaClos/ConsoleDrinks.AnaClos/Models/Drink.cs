@@ -4,8 +4,11 @@ namespace ConsoleDrinks.AnaClos.Models;
 
 public class Drink
 {
-    public string strDrink { get; set; }
-    public int idDrink { get; set; }
+    [JsonProperty("strDrink")]
+    public string StrDrink { get; set; }
+
+    [JsonProperty("idDrink")]
+    public int IdDrink { get; set; }
 }
 
 public class Drinks
