@@ -6,7 +6,6 @@ namespace ConsoleDrinks.AnaClos.Controllers;
 
 public class DrinksController
 {
-    public Drink[] drinks { get; set; }
     ServiceController serviceController;
 
     public DrinksController(ServiceController serviceController)
