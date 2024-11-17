@@ -57,4 +57,15 @@ public class DrinksFull
     public string strImageAttribution { get; set; }
     public string strCreativeCommonsConfirmed { get; set; }
     public string dateModified { get; set; }
+
+
+    public List<string> ingredientsAndMeasurementsList()
+    {
+        return
+        [
+            strMeasure1 + strIngredient1, strMeasure2 + strIngredient2, strMeasure3 + strIngredient3, strMeasure4 + strIngredient4, strMeasure5 + strIngredient5, strMeasure6 + strIngredient6, strMeasure7 + strIngredient7,
+            strMeasure8 + strIngredient8, strMeasure9 + strIngredient9, strMeasure10 + strIngredient10, strMeasure11 + strIngredient11, strMeasure12 + strIngredient12, strMeasure13 + strIngredient13, strMeasure14 + strIngredient14,
+            strMeasure15 + strIngredient15
+        ];
+    }
 }

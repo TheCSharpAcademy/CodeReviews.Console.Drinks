@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Drinks.TwilightSaw.Model.Response;
 
 namespace Drinks.TwilightSaw.Controller;
@@ -8,46 +7,43 @@ public class DrinksController(HttpClient client)
 {
     public async Task<List<Model.DrinksType>> GetDrinkTypeList()
     {
-        var response = await client.GetAsync(
-            "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list");
-        if (!response.IsSuccessStatusCode) throw new HttpRequestException("Error");
-
-        var content = await response.Content.ReadAsStringAsync();
-        var drinksTypes = JsonSerializer.Deserialize<DrinksTypeResponse>(content).drinks;
-        return drinksTypes;
+        var url = $"https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list";
+     
+        return await FetchDrinkData<Model.DrinksType, DrinksTypeResponse>(url, response => response.drinks);
     }
 
     public async Task<List<Model.DrinksShort>> GetDrinkList(string type)
     {
-        var response = await client.GetAsync(
-            $"https://www.thecocktaildb.com/api/json/v1/1/filter.php?c={type}");
-        if (!response.IsSuccessStatusCode) throw new HttpRequestException("Error");
+        var url = $"https://www.thecocktaildb.com/api/json/v1/1/filter.php?c={type}";
 
-        var content = await response.Content.ReadAsStringAsync();
-        var drinksShorts = JsonSerializer.Deserialize<DrinksShortResponse>(content).drinks;
-        return drinksShorts;
+        return await FetchDrinkData<Model.DrinksShort, DrinksShortResponse>(url, response => response.drinks);
     }
 
     public async Task<List<Model.DrinksFull>> GetDrinkFullList(string drink)
     {
-        var response = await client.GetAsync(
-            $"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={drink}");
-        if (!response.IsSuccessStatusCode) throw new HttpRequestException("Error");
-
-        var content = await response.Content.ReadAsStringAsync();
-        var drinksFull = JsonSerializer.Deserialize<DrinksFullResponse>(content).drinks;
-        return drinksFull;
+        var url = $"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={drink}";
+       
+        return await FetchDrinkData<Model.DrinksFull, DrinksFullResponse>(url, response => response.drinks);
     }
-    //IEnumerable?
     public async Task<List<Model.DrinksFull>> GetDrinkFullListId(string idDrink)
     {
+        var url = $"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={idDrink}";
 
-        var response = await client.GetAsync(
-            $"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={idDrink}");
-        if (!response.IsSuccessStatusCode) throw new HttpRequestException("Error");
+        return await FetchDrinkData<Model.DrinksFull, DrinksFullResponse>(url,
+            response => response.drinks);
+    }
+
+    public async Task<List<T>> FetchDrinkData<T, TResponse>(string url, Func<TResponse, List<T>> getDrinks)
+    {
+        var response = await client.GetAsync(url);
+
+        if (!response.IsSuccessStatusCode)
+            throw new HttpRequestException("Error: " + response.StatusCode);
 
         var content = await response.Content.ReadAsStringAsync();
-        var drinksFull = JsonSerializer.Deserialize<DrinksFullResponse>(content).drinks;
-        return drinksFull;
+
+        var result = JsonSerializer.Deserialize<TResponse>(content);
+
+        return getDrinks(result);
     }
 }
