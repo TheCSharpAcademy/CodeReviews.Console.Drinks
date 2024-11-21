@@ -1,2 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿
+
+UserInput userInput = new UserInput();
+
+
+userInput.GetCategoriesInput();
+
+Console.ReadKey();
