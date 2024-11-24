@@ -23,8 +23,6 @@ public class Drink
 
     public Dictionary<int, string?> Ingredients = new();
 
-    //public Dictionary<string?, string?> FullRecipe = new();
-
     [JsonProperty("strIngredient1")]
     public string? Ingredient1
     {
