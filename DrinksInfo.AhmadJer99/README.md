@@ -8,7 +8,9 @@ Their drinks menu is provided by an external company.
 
 - Console based application that utilizes external Api requests to get information for a drinks menu from an external website 
 - Developed using C# and the [TheCockTailDatabase](https://www.thecocktaildb.com/api.php) Api
-  
+
+# P.S some weird visual bugs may appear such as text duplication when in windowed mode of the console application, for optimal testing please keep the console in fullscreen!
+ 
 # Given Requirements:
 - Create a system that allows the restaurant employee to pull data from any drink in the database
 - you need is to create an user-friendly way to present the data to the users (the restaurant employees)
@@ -38,3 +40,4 @@ Their drinks menu is provided by an external company.
 - My organization of models and files and even class names can be improved.
 - I still need to work on the SOC area in most of my code.
 - Maybe there is a better way to handle the DrinkDetails model columns, I am not sure.
+
