@@ -26,11 +26,8 @@ public class TableVisualisation
             tableName = "";
         
         var validData = tableData.Select(item => new Ingredient { IngredientName = item }).ToList();
-        
         ConsoleTableBuilder.From(validData)
             .WithColumn(tableName)
             .ExportAndWriteLine();
     }
-
-
 }
