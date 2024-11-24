@@ -34,6 +34,12 @@ Their drinks menu is provided by an external company.
 - ![image](https://github.com/user-attachments/assets/f2415b56-8a8b-4267-8d58-007a32594f4e)
 
 - The application handles any invalid input in any menu and handles any null values from the Api requests.
+  
+# Lessons learned
+- I learnt how to do Http requests to external Api's through Microsoft documentation.
+- I learnt how to deserialize Json files into the correct models.
+- I learnt how to map and bind Json properties into my own structure and not allow the Json properties to structure my models, and i've done that using JsonPropert feature.
+- I learnt how to handle async method and how to make it sync.
 
 # Future Improvments
 - I can defintely still imrpove my OOP side, I think i could have done stuff more efficiently in the menus if I learned to utilize OOP correclty.
