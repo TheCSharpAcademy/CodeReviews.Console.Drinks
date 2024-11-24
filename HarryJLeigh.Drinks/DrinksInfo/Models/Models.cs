@@ -9,7 +9,7 @@ public class Categories
 
 public class Category
 {
-    public string strCategory { get; set; }
+    [JsonProperty("strCategory")] public string StrCategory { get; set; }
 }
 
 public class DrinksList
