@@ -2,31 +2,16 @@ using Newtonsoft.Json;
 
 namespace DrinksInfo.Models;
 
-public class Categories
+public class Ingredient
 {
-    [JsonProperty("drinks")] public List<Category> CategoriesList { get; set; }
-}
-
-public class Category
-{
-    [JsonProperty("strCategory")] public string StrCategory { get; set; }
-}
-
-public class DrinksList
-{
-    [JsonProperty("drinks")] public List<Drink> AllDrinks { get; set; }
-}
-
-public class Drink
-{
-    [JsonProperty("idDrink")] public int IdDrink { get; set; }
-    [JsonProperty("strDrink")] public string StrDrink { get; set; }
+    public string IngredientName { get; set; }
 }
 
 public class IngredientsList
 {
     [JsonProperty("drinks")] public List<Ingredients> AllIngredients { get; set; }
 }
+
 
 public class Ingredients
 {
@@ -45,9 +30,4 @@ public class Ingredients
     [JsonProperty("strIngredient13")] public string? Ingredient13 { get; set; }
     [JsonProperty("strIngredient14")] public string? Ingredient14 { get; set; }
     [JsonProperty("strIngredient15")] public string? Ingredient15 { get; set; }
-}
-
-public class Ingredient
-{
-    public string IngredientName { get; set; }
 }
