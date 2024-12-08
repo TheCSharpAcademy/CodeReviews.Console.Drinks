@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using System.Reflection;
 using System.Web;
 using Microsoft.VisualBasic;
@@ -92,7 +91,7 @@ public class DrinksService
                 }
             }
 
-            TableVisualisationEngine.ShowTable(prepList, drinkDetail.strDrink);
+            TableVisualisationEngine.ShowTable(prepList, drinkDetail.StrDrink);
         }
     }
 }
