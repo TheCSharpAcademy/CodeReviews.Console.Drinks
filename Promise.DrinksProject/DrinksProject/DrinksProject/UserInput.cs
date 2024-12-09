@@ -1,5 +1,4 @@
-﻿using System.Linq;
-namespace DrinksProject
+﻿namespace DrinksProject
 {
     public class UserInput
     {
