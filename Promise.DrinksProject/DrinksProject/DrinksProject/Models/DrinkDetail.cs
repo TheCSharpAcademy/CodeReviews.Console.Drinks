@@ -22,7 +22,7 @@ namespace DrinksProject.Models
         [JsonProperty("strCategory")]
         public string StrCategory { get; set; }
         [JsonProperty("strIBA")]
-        public string StrIBA { get; set; }
+        public string StrIba { get; set; }
         [JsonProperty("strAlcoholic")]
         public string StrAlcoholic { get; set; }
         [JsonProperty("strGlass")]
@@ -38,9 +38,9 @@ namespace DrinksProject.Models
         [JsonProperty("strInstructionsIT")]
         public string StrInstructionsIT { get; set; }
         [JsonProperty("strInstructionsZHHANS")]
-        public object StrInstructionsZHHANS { get; set; }
+        public object StrInstructionsZhhans { get; set; }
         [JsonProperty("strInstructionsZHHANT")]
-        public object StrInstructionsZHHANT { get; set; }
+        public object StrInstructionsZhhant { get; set; }
         [JsonProperty("strDrinkThumb")]
         public string StrDrinkThumb { get; set; }
         [JsonProperty("strIngredient1")]
