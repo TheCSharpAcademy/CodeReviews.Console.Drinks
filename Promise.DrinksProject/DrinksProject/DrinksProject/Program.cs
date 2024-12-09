@@ -1,4 +1,4 @@
-﻿using DrinksProject;
+﻿using DrinksProject.Service;
 
 HttpClient httpClient = new HttpClient();
 DrinksService _drinksService = new(httpClient);

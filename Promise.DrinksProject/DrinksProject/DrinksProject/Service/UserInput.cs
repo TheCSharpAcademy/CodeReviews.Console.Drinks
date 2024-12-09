@@ -1,9 +1,11 @@
-﻿namespace DrinksProject
+﻿using DrinksProject.Helpers;
+
+namespace DrinksProject.Service
 {
     public class UserInput
     {
         private readonly DrinksService _drinksService;
-      
+
         public UserInput(DrinksService drinksService)
         {
             _drinksService = drinksService;
@@ -21,7 +23,7 @@
                 Console.WriteLine("\nInvalid category");
                 category = Console.ReadLine();
             }
-            if(!categories.Any(x=> x.strCategory == category))
+            if (!categories.Any(x => x.strCategory == category))
             {
                 Console.WriteLine("Category does not exist");
                 GetCategoriesInput();
@@ -36,7 +38,7 @@
 
             string drink = Console.ReadLine();
 
-            if(drink == "0")
+            if (drink == "0")
                 GetCategoriesInput();
 
             while (!Validator.IsIdValid(drink))
@@ -44,7 +46,7 @@
                 Console.WriteLine("\nInvalid drink");
                 drink = Console.ReadLine();
             }
-            if(!drinks.Any(x=> x.idDrink == drink))
+            if (!drinks.Any(x => x.idDrink == drink))
             {
                 Console.WriteLine("Invalid drink Id. Drink does not exist.");
                 GetDrinks(category);
@@ -52,8 +54,8 @@
             _drinksService.GetDrinkById(drink);
 
             Console.WriteLine("Press any key to go back to categories menu.");
-            Console.ReadKey();  
-            if(!Console.KeyAvailable) GetCategoriesInput();
+            Console.ReadKey();
+            if (!Console.KeyAvailable) GetCategoriesInput();
         }
     }
 }

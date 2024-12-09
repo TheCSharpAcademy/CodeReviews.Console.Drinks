@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using DrinksProject.Helpers;
+using DrinksProject.Models;
+using Newtonsoft.Json;
 using System.Reflection;
 
-namespace DrinksProject
+namespace DrinksProject.Service
 {
     public class DrinksService
     {
@@ -20,10 +22,10 @@ namespace DrinksProject
         {
             var url = "list.php?c=list";
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            var response =    _httpClient.Send(request);
+            var response = _httpClient.Send(request);
             if (response.IsSuccessStatusCode)
             {
-                var content =  await response.Content.ReadAsStringAsync();
+                var content = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<Categories>(content);
 
                 _categories = result.CategoriesList;
@@ -38,7 +40,7 @@ namespace DrinksProject
         {
             var url = $"filter.php?c={category}";
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            var response =  _httpClient.Send(request);
+            var response = _httpClient.Send(request);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -66,7 +68,7 @@ namespace DrinksProject
                 List<object> prepList = new();
                 string formattedName = "";
 
-                foreach(PropertyInfo prop in drinkDetail.GetType().GetProperties())
+                foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
                 {
                     if (prop.Name.Contains("str"))
                     {

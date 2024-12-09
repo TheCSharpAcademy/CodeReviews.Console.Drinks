@@ -1,11 +1,11 @@
 ﻿using ConsoleTableExt;
 using System.Diagnostics.CodeAnalysis;
 
-namespace DrinksProject
+namespace DrinksProject.Helpers
 {
     public class TableVisualization
     {
-        public static void CreateTable<T>(List<T> data, [AllowNull] string tableName) where T: class
+        public static void CreateTable<T>(List<T> data, [AllowNull] string tableName) where T : class
         {
             Console.Clear();
             if (tableName == null)
