@@ -76,7 +76,7 @@ public class DrinksService
 
             foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
             {
-                if (prop.Name.Contains("str"))
+                if (prop.Name.Contains("Str"))
                 {
                     formattedName = prop.Name.Substring(3);
                 }
