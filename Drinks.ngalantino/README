@@ -1,10 +1,14 @@
-https://stackoverflow.com/questions/63362319/could-not-locate-net-core-project-assets-were-not-generated
 
-https://learn.microsoft.com/en-us/visualstudio/get-started/tutorial-projects-solutions?view=vs-2022 
 
-https://www.thecocktaildb.com/api.php
+<h2><a href="https://www.thecocktaildb.com/api.php">Drinks API</a></h2>
+</h3>An open, crowd-sourced database of drinks and cocktails from around the world.</h3>
 
-https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/console-webapiclient
+<p><h2><a href="https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/console-webapiclient">Make HTTP requests in a .NET console app using C#</a></h2>
+<h3>This tutorial builds an app that issues HTTP requests to a REST service on GitHub. The app reads information in JSON format and converts the JSON into C# objects. Converting from JSON to C# objects is known as deserialization.</h3>
 
-https://www.youtube.com/watch?v=fc7peZ-FHs4
+<p><h2><a href="https://www.youtube.com/watch?v=fc7peZ-FHs4">Video walkthrough</a></h2>
+<h3>Build Drinks Information System, pulling data from an external API and getting the user's input to choose drink categories and drink details.</h3>
+
+<p><h2><a href="https://stackoverflow.com/questions/23130382/split-string-by-character-count-and-store-in-string-array">String parsing helper method</a></h2>
+<h3>I borrowed some code from this Stack Overflow thread to address ConsoleTableExt limitation surrounding rows with multiple lines. I used a helper function to parse a string into substrings by character length.</h3>
 
