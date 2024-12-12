@@ -83,17 +83,64 @@ public class DrinksService
 
                 if (!string.IsNullOrEmpty(prop.GetValue(drinkDetail)?.ToString()))
                 {
+                    //prop.GetValue(drinkDetail)?.ToString().Length >= 90
+
+                    if (prop.GetValue(drinkDetail)?.ToString().Length >= 80)
+                    {
+                        List<string> multipleLineValue = GetNextChars(prop.GetValue(drinkDetail)?.ToString(), 80);
+
+                        // Add first line.
+                        prepList.Add(new
+                        {
+                            Key = formattedName,
+                            Value = multipleLineValue[0].ToString()
+                        });
+                        // Add each additional line.
+                        for (int i = 1; i < multipleLineValue.Count; i++)
+                        {
+                            // Remove \r and \n escape characters.
+                            string line = multipleLineValue[i].ToString().Replace("\r", "").Replace("\n", "");
+                            prepList.Add(new
+                            {
+                                Key = "",
+                                Value = line
+                            });
+                        }
+                    }
+                    else
+                    {
+                        prepList.Add(new
+                        {
+                            Key = formattedName,
+                            Value = prop.GetValue(drinkDetail).ToString().Replace("\r", "").Replace("\n", "")
+                        });
+                    }
+
                     prepList.Add(new
                     {
-                        Key = formattedName,
-                        Value = prop.GetValue(drinkDetail)
+                        Key = "",
+                        Value = ""
                     });
+
                 }
             }
 
             TableVisualisationEngine.ShowTable(prepList, drinkDetail.StrDrink);
         }
     }
+
+    // Function to break long string into list of substrings.
+    private static List<string> GetNextChars(string str, int iterateCount)
+    {
+        var words = new List<string>();
+
+        for (int i = 0; i < str.Length; i += iterateCount)
+            if (str.Length - i >= iterateCount) words.Add(str.Substring(i, iterateCount));
+            else words.Add(str.Substring(i, str.Length - i));
+
+        return words;
+    }
+
 }
 
 // Youtube 13:43
