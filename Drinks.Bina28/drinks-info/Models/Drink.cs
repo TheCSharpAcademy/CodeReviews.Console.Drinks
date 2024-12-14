@@ -5,8 +5,8 @@ namespace Drinks.Bina28.drinks_info.Models;
 
 public class Drink
 {
-	public string idDrink { get; set; }
-	public string strDrink { get; set; }
+	public string IdDrink { get; set; }
+	public string StrDrink { get; set; }
 }
 
 public class Drinks
