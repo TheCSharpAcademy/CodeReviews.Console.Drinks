@@ -1,4 +1,4 @@
-﻿namespace DrinksInfoAPI.DreamFXX;
+﻿namespace DrinksInfo.DreamFXX;
 
 internal class Program
 {
