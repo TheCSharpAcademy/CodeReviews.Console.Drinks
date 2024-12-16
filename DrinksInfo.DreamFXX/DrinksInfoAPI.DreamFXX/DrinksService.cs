@@ -2,5 +2,9 @@
 
 public class DrinksService
 {
+    public void GetCategories()
+    {
+
+    }
     
 }

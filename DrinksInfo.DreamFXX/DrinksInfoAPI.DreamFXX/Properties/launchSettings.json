@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "DrinksInfo.DreamFXX": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\marti\\_CodeReviews.Console.Drinks\\DrinksInfo.DreamFXX\\DrinksInfoAPI.DreamFXX",
+      "nativeDebugging": true
+    }
+  }
+}
