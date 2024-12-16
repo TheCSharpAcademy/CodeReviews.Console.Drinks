@@ -1,17 +1,18 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using ConsoleTableExt;
 
 namespace DrinksInfo.DreamFXX;
 
 public class TableVisualizationEngine
 {
-    public static void ShowTable<T>(List<T> tableData, [AllowNull] string tableName) where T : class
+    public static void ShowTable<T>(List<T> tableData, string? tableName) where T : class
     {
         if (tableName == null) 
             tableName = "";
 
         Console.WriteLine("\n\n");
 
-        
-        
+        ConsoleTableBuilder.From(tableData).WithTitle(tableName).ExportAndWriteLine();
+        Console.WriteLine("\n\n");
+
     }
 }
