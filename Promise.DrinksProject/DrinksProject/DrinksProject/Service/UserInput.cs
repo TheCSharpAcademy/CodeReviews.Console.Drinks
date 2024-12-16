@@ -23,7 +23,7 @@ namespace DrinksProject.Service
                 Console.WriteLine("\nInvalid category");
                 category = Console.ReadLine();
             }
-            if (!categories.Any(x => x.strCategory == category))
+            if (!categories.Any(x => x.StrCategory == category))
             {
                 Console.WriteLine("Category does not exist");
                 GetCategoriesInput();
@@ -46,7 +46,7 @@ namespace DrinksProject.Service
                 Console.WriteLine("\nInvalid drink");
                 drink = Console.ReadLine();
             }
-            if (!drinks.Any(x => x.idDrink == drink))
+            if (!drinks.Any(x => x.IdDrink == drink))
             {
                 Console.WriteLine("Invalid drink Id. Drink does not exist.");
                 GetDrinks(category);
