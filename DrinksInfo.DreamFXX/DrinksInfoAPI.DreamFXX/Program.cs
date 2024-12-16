@@ -1,9 +1,9 @@
 ﻿namespace DrinksInfo.DreamFXX;
 
-internal class Program
+class Program
 {
     static void Main(string[] args)
     {
-        UserInput usrInput = new();
+        UserInput userInput = new();
     }
 }
