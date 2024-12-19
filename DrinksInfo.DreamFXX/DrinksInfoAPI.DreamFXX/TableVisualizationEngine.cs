@@ -8,13 +8,12 @@ public class TableVisualizationEngine
     {
         Console.Clear();
 
-        if (tableName == null) 
+        
+        if (tableName == null)
             tableName = "";
 
         Console.WriteLine("\n\n");
-
         ConsoleTableBuilder.From(tableData).WithTitle(tableName).ExportAndWriteLine();
         Console.WriteLine("\n\n");
-
     }
 }

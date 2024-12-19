@@ -4,8 +4,9 @@ public class UserInput
 {
     DrinksService drinksService = new();
 
-    internal void GetCategoriesList()
-    { 
+    internal void GetCategoriesInput()
+    {
         drinksService.GetCategories();
+        
     }
 }
