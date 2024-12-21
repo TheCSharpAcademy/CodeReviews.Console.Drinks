@@ -9,9 +9,7 @@ public class UserInput
 
     internal void GetCategoriesInput()
     {
-        drinksService.GetCategories();
-
-        Console.WriteLine("Choose a category");
+        var categories = drinksService.GetCategories();
 
         string? category = Console.ReadLine();
 
