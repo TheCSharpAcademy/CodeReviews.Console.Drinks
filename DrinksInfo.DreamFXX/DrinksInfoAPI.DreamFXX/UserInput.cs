@@ -30,7 +30,7 @@ public class UserInput
 
     private void GetDrinksInput(string category)
     {
-        var drinks = drinksService.GetDrinksbyCategory(category);
+        var drinks = drinksService.GetDrinksByCategory(category);
 
         Console.WriteLine("Choose a drink or go back to category menu by typing 0:");
 
