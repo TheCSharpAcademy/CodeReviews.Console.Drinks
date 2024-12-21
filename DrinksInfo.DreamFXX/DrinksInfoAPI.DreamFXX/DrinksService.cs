@@ -94,7 +94,7 @@ public class DrinksService
                 }
             }
 
-            TableVisualisationEngine.ShowTable(prepList, drinkDetail.strDrink);
+            TableVisualisationEngine.ShowTable(prepList, drinkDetail.StrDrink);
         }
     }
 }
