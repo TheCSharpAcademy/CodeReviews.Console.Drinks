@@ -14,7 +14,7 @@ internal class DrinkDetail
     public object StrTags { get; set; }
     public object StrVideo { get; set; }
     public string StrCategory { get; set; }
-    public object StrIBA { get; set; }
+    public object StrIba { get; set; }
     public string StrAlcoholic { get; set; }
     public string StrGlass { get; set; }
     public string StrInstructions { get; set; }
@@ -22,12 +22,12 @@ internal class DrinkDetail
     public string StrInstructionsDE { get; set; }
     public object StrInstructionsFR { get; set; }
     public string StrInstructionsIT { get; set; }
-    public object StrInstructionsZHHANS { get; set; }
-    public object StrInstructionsZHHANT { get; set; }
+    public object StrInstructionsZhhans { get; set; }
+    public object StrInstructionsZhhant { get; set; }
     public string StrDrinkThumb { get; set; }
     public string StrIngredient1 { get; set; }
     public string StrIngredient2 { get; set; }
-    public string SStrIngredient3 { get; set; }
+    public string StrIngredient3 { get; set; }
     public string StrIngredient4 { get; set; }
     public object StrIngredient5 { get; set; }
     public object StrIngredient6 { get; set; }
