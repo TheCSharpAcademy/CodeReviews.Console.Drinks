@@ -55,21 +55,13 @@ public class DrinkDetails
 
   public string ConcatenateIngredients()
   {
-    // Get all properties of the class
     PropertyInfo[] properties = GetType().GetProperties();
 
-    // Filter properties that start with "strIngredient"
     var ingredientProperties = properties
         .Where(p => p.Name.StartsWith("StrIngredient"));
-
-
-    // Get the values of the filtered properties
     var ingredientValues = ingredientProperties.Select(p => (string)p.GetValue(this, null));
 
-    // Remove null or empty values
     ingredientValues = ingredientValues.Where(i => !string.IsNullOrEmpty(i));
-
-    // Concatenate values with commas
     string result = string.Join(", ", ingredientValues);
 
     return result;
