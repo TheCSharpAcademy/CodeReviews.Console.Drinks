@@ -105,7 +105,7 @@ internal class UserInterface : ConsoleController
             return;
         }
 
-        Dictionary<string, int> drinkChoices = list.ToDictionary(d => d.strDrink, d => d.Id);
+        Dictionary<string, int> drinkChoices = list.ToDictionary(d => d.StrDrink, d => d.Id);
 
         var drinkId = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
@@ -158,7 +158,7 @@ internal class UserInterface : ConsoleController
         DrinkDetail drink = DrinkService.GetDrinkById(idDrinkChoice);
         Dictionary<string, string> validatedDrinkInformation = Validation.Drink(drink);
 
-        _drinkService.AddDrinkToHistory(validatedDrinkInformation["strDrink"], validatedDrinkInformation["idDrink"]);
+        _drinkService.AddDrinkToHistory(validatedDrinkInformation["StrDrink"], validatedDrinkInformation["IdDrink"]);
 
         UserInterface.DrawDrinkInfo(validatedDrinkInformation);
 
@@ -167,6 +167,8 @@ internal class UserInterface : ConsoleController
         if (nextAction == Enums.StandardMenu.AddToFavorites)
         {
             bool addToFavorites = _drinkService.AddDrinkToFavorites(drink);
+            if (!addToFavorites)
+                ErrorMessage("There has been error while adding the drink to the favorites. Maybe you already have this drink there?");
         }
     }
 
@@ -193,7 +195,7 @@ internal class UserInterface : ConsoleController
 
         foreach (var item in drink)
         {
-            if (item.Key.StartsWith("str"))
+            if (item.Key.StartsWith("Str"))
             {
                 string name = item.Key.Remove(0, 3);
                 table.AddRow(name, item.Value);

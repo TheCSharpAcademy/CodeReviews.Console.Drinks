@@ -7,6 +7,7 @@ using Drinks.iamnikitakostin.Controllers;
 using Drinks.iamnikitakostin.Data;
 using Drinks.iamnikitakostin.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using RestSharp;
 using Spectre.Console;
 
@@ -29,10 +30,18 @@ internal class DrinkService : ConsoleController
 
         if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
-            string rawResponse = response.Result.Content;
-            var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse);
+            var settings = new JsonSerializerSettings
+            {
+                ContractResolver = new DefaultContractResolver
+                {
+                    NamingStrategy = new CamelCaseNamingStrategy()
+                }
+            };
 
-            List<string> returnedList = serialize.CategoriesList.Select(category => category.strCategory).ToList();
+            string rawResponse = response.Result.Content;
+            var serialize = JsonConvert.DeserializeObject<Categories>(rawResponse, settings);
+
+            List<string> returnedList = serialize.CategoriesList.Select(category => category.StrCategory).ToList();
             return returnedList;
         } else
         {
@@ -47,10 +56,19 @@ internal class DrinkService : ConsoleController
 
         if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
+            var settings = new JsonSerializerSettings
+            {
+                ContractResolver = new DefaultContractResolver
+                {
+                    NamingStrategy = new CamelCaseNamingStrategy()
+                }
+            };
+
             string rawResponse = response.Result.Content;
-            var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse);
+            var serialize = JsonConvert.DeserializeObject<DrinkDetailObject>(rawResponse, settings);
+
             DrinkDetail drink = serialize.DrinkDetailList[0];
-            drink.IdInt = Int32.Parse(drink.idDrink);
+            drink.IdInt = Int32.Parse(drink.IdDrink);
             return drink;
         } else
         {
@@ -65,10 +83,18 @@ internal class DrinkService : ConsoleController
 
         if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
         {
-            string rawResponse = response.Result.Content;
-            var serialize = JsonConvert.DeserializeObject<Models.Drinks>(rawResponse);
+            var settings = new JsonSerializerSettings
+            {
+                ContractResolver = new DefaultContractResolver
+                {
+                    NamingStrategy = new CamelCaseNamingStrategy()
+                }
+            };
 
-            Dictionary<string, string> returnedDict = serialize.DrinksList.Select(drink => drink).ToDictionary(drink => drink.idDrink, drink => drink.strDrink);
+            string rawResponse = response.Result.Content;
+            var serialize = JsonConvert.DeserializeObject<Models.Drinks>(rawResponse, settings);
+
+            Dictionary<string, string> returnedDict = serialize.DrinksList.Select(drink => drink).ToDictionary(drink => drink.IdDrink, drink => drink.StrDrink);
 
             return returnedDict;
         } else
@@ -89,7 +115,13 @@ internal class DrinkService : ConsoleController
     {
         try
         {
+            bool doesExist = _context.FavoriteCocktails.Any(d => d.IdDrink == drink.IdDrink);
+
+            if (doesExist) 
+                return false;
+
             drink.DateModified = DateTime.Now;
+
             _context.FavoriteCocktails.Add(drink);
             _context.SaveChanges();
             return true;
