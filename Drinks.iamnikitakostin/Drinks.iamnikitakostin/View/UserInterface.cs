@@ -195,7 +195,7 @@ internal class UserInterface : ConsoleController
 
         foreach (var item in drink)
         {
-            if (item.Key.StartsWith("Str"))
+            if (item.Key.StartsWith("Str") && item.Value != null && item.Value != "")
             {
                 string name = item.Key.Remove(0, 3);
                 table.AddRow(name, item.Value);

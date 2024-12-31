@@ -4,6 +4,7 @@ using Drinks.iamnikitakostin.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Drinks.iamnikitakostin.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241231222421_Upd2")]
+    partial class Upd2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,7 +122,7 @@ namespace Drinks.iamnikitakostin.Migrations
                     b.Property<string>("StrInstructions")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StrInstructionsDe")
+                    b.Property<string>("StrInstructionsDf")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StrInstructionsEs")
