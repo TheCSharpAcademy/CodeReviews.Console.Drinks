@@ -36,4 +36,4 @@ cd drinks-info
 
 4. **Separation of Concerns**:
 
-   - Object-Oriented Programming
+   - Object-Oriented Programming.
