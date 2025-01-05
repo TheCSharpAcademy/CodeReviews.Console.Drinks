@@ -8,7 +8,7 @@ namespace DrinksInfo;
 
 internal class Program
 {
-    static async Task Main(string[] args)
+    static async Task Main()
     {
         var services = new ServiceCollection();
 
