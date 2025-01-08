@@ -67,7 +67,7 @@ namespace Drinks
             foreach (PropertyInfo prop in drinkDetail.GetType().GetProperties())
             {
                 if (prop.Name.Contains("str")) formattedName = prop.Name.Substring(3);
-                if (!string.IsNullOrEmpty(prop.GetValue(drinkDetail)?.ToString())) formattedDrinkDetail.Add(new DetailOutPut{ Name = formattedName, Value = prop.GetValue(drinkDetail).ToString() });
+                if (!string.IsNullOrEmpty(prop.GetValue(drinkDetail)?.ToString())) formattedDrinkDetail.Add(new DetailOutPut{Name = formattedName, Value = prop.GetValue(drinkDetail).ToString()});
             }
             return formattedDrinkDetail;
         }

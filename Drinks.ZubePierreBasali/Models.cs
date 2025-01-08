@@ -6,7 +6,7 @@ namespace Drinks
     {
         public string? strCategory { get; set; }
     }
-
+    
     internal class Categories
     {
         [JsonProperty("drinks")]
