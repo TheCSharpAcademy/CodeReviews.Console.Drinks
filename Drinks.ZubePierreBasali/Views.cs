@@ -1,4 +1,5 @@
 ﻿using Spectre.Console;
+using System.Linq.Expressions;
 
 namespace Drinks
 {
@@ -12,6 +13,7 @@ namespace Drinks
             Category category = new();
             Drinks drinks = new();
             Drink drink = new();
+            DrinkDetailObject drinkDetailObject = new();
             DrinkDetail drinkDetail = new();
             
             do
