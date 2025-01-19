@@ -94,7 +94,7 @@ namespace DrinksInfo
                     }
                 }
 
-                TableVisualization.ShowTable(prepList, drinkDetail.strDrink);
+                TableVisualization.ShowTable(prepList, drinkDetail.StrDrink);
             }
         }
     }
