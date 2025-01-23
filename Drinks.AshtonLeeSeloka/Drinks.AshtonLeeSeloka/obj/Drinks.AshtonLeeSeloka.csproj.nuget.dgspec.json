@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\AshtonSeloka\\Downloads\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka.csproj": {}
+    "C:\\Users\\AshtonSeloka\\source\\TheCSharpAcademy\\For Review\\Intermediate Console\\CodeReviews.Console.Drinks\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka.csproj": {}
   },
   "projects": {
-    "C:\\Users\\AshtonSeloka\\Downloads\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka.csproj": {
+    "C:\\Users\\AshtonSeloka\\source\\TheCSharpAcademy\\For Review\\Intermediate Console\\CodeReviews.Console.Drinks\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AshtonSeloka\\Downloads\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka.csproj",
+        "projectUniqueName": "C:\\Users\\AshtonSeloka\\source\\TheCSharpAcademy\\For Review\\Intermediate Console\\CodeReviews.Console.Drinks\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka.csproj",
         "projectName": "Drinks.AshtonLeeSeloka",
-        "projectPath": "C:\\Users\\AshtonSeloka\\Downloads\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka.csproj",
+        "projectPath": "C:\\Users\\AshtonSeloka\\source\\TheCSharpAcademy\\For Review\\Intermediate Console\\CodeReviews.Console.Drinks\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka.csproj",
         "packagesPath": "C:\\Users\\AshtonSeloka\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AshtonSeloka\\Downloads\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka\\obj\\",
+        "outputPath": "C:\\Users\\AshtonSeloka\\source\\TheCSharpAcademy\\For Review\\Intermediate Console\\CodeReviews.Console.Drinks\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

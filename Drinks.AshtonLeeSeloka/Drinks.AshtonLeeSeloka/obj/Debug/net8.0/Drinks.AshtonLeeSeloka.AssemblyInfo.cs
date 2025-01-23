@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Drinks.AshtonLeeSeloka")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9d68551270f7469b47759ade5fad032c85fd2771")]
 [assembly: System.Reflection.AssemblyProductAttribute("Drinks.AshtonLeeSeloka")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Drinks.AshtonLeeSeloka")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -6,7 +6,7 @@ namespace HttpRequests.Views;
 
 public class DrinkViews
 {
-	public Drink displayCategories(List<Drink>? categories) 
+	public Drink DisplayCategories(List<Drink>? categories) 
 	{
 		Console.Clear();
 		var selection = AnsiConsole.Prompt(
