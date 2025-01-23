@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "tK5ReoR7nBw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\AshtonSeloka\\Downloads\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka\\Drinks.AshtonLeeSeloka.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\AshtonSeloka\\.nuget\\packages\\spectre.console\\0.49.1\\spectre.console.0.49.1.nupkg.sha512",
+    "C:\\Users\\AshtonSeloka\\.nuget\\packages\\system.configuration.configurationmanager\\9.0.0\\system.configuration.configurationmanager.9.0.0.nupkg.sha512",
+    "C:\\Users\\AshtonSeloka\\.nuget\\packages\\system.diagnostics.eventlog\\9.0.0\\system.diagnostics.eventlog.9.0.0.nupkg.sha512",
+    "C:\\Users\\AshtonSeloka\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.0\\system.security.cryptography.protecteddata.9.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
