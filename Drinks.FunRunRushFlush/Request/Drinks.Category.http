@@ -1,0 +1,11 @@
+
+
+# GET  https://www.thecocktaildb.com/api/json/v1/1/filter.php?c="Coffee/Tea"
+
+# GET  https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list
+
+
+# GET https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Coffee%20/%20Tea
+
+
+GET https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
