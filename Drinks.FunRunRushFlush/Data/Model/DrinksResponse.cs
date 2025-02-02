@@ -3,7 +3,6 @@
 namespace Drinks.FunRunRushFlush.Data.Model;
 
 //https://json2csharp.com/
-// DrinksResponse myDeserializedClass = JsonConvert.DeserializeObject<DrinksResponse>(myJsonResponse);
 
 public record DrinksResponse(
     [property: JsonPropertyName("drinks")] List<Drink> Drinks

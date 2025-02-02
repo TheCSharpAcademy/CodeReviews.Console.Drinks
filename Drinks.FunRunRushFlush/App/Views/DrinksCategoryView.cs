@@ -1,9 +1,6 @@
 ﻿using Drinks.FunRunRushFlush.Data.Model;
 using Drinks.FunRunRushFlush.Services.Interfaces;
 using Spectre.Console;
-using System.Reflection;
-using System.Reflection.PortableExecutable;
-using System.Runtime.InteropServices;
 
 namespace Drinks.FunRunRushFlush.App.Views;
 
