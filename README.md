@@ -1,7 +1,7 @@
 # Drink Info App
 
-The **Drink Info App** is an interactive console application
-designed to help you explore different drink categories and find details about specific drinks.
+The **Drink Info App** is an interactive console application designed 
+to help you explore different drink categories and find details about specific drinks.
 
 Inspired by the [C# Academy Drinks Project](https://thecsharpacademy.com/project/15/drinks).
 
@@ -14,7 +14,8 @@ Inspired by the [C# Academy Drinks Project](https://thecsharpacademy.com/project
 - **Interactive Console UI:** User-friendly selection via Spectre.Console.
 - **Drink Categories:** Browse available drink categories.
 - **Drink Selection:** View drinks within a selected category.
-- **Detailed Drink Info:** Get information on ingredients, preparation, and other details.
+- **Detailed Drink Info:** Get information on ingredients, preparation,
+ and other details.
 
 ## How It Works
 
